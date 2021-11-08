@@ -10,16 +10,16 @@
     <ImageView
         android:id="@+id/introImage1"
         android:layout_width="wrap_content"
+        android:src="@drawable/walkthrough_image_first"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lnContent"
+        />
 
     <LinearLayout
+        android:id="@+id/lnContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
@@ -28,7 +28,8 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introImage1">
+        app:layout_constraintTop_toBottomOf="@+id/introImage1"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/textViewTitle"

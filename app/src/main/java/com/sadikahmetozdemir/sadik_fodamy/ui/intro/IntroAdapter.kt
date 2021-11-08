@@ -31,6 +31,7 @@ class IntroAdapter(val list:ArrayList<IntroModel>): RecyclerView.Adapter<IntroVi
 
     }
 
+
 }
 class IntroViewHolder(val binding: ItemIntroBinding):RecyclerView.ViewHolder(binding.root){
 
@@ -40,6 +41,7 @@ class IntroViewHolder(val binding: ItemIntroBinding):RecyclerView.ViewHolder(bin
         intro.drawableId?.let {  binding.introImage1.setImageDrawable(ContextCompat.getDrawable(binding.root.context,intro.drawableId))
         }?: kotlin.run {
             binding.introImage1.visibility=View.GONE
+
         }
 
 
