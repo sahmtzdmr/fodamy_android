@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">sadik_fodamy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_page">İlerle</string>
+    <string name="welcome">Welcome to Fodamy Network!</string>
+    <string name="firstInfo"> Fodamy is the best place to find your favorite recipes in all around the world.</string>
+    <string name="title2">Finding recipes were not that easy.</string>
+    <string name="title3">Add new recipe.</string>
+    <string name="button_start">Başla!</string>
+    <string name="title4">Share recipes with others.</string>
 </resources>
