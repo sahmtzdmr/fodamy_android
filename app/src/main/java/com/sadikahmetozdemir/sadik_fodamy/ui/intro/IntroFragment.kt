@@ -72,6 +72,11 @@ class IntroFragment : Fragment() {
                 drawableId = R.drawable.walkthrough_image_3,
                 tittle = getString(R.string.title3),
                 description = getString(R.string.firstInfo)
+            ), IntroModel(
+                drawableId = R.drawable.walkthrough_image_4,
+                tittle =getString(R.string.title4),
+                description =getString(R.string.firstInfo)
+
             )
         )
     }
