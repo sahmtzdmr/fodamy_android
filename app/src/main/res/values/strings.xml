@@ -9,4 +9,11 @@
     <string name="title3">Add new recipe.</string>
     <string name="button_start">Başla!</string>
     <string name="title4">Share recipes with others.</string>
+    <string name="register">Üye Ol</string>>
+    <string name="name">Kullanıcı Adı</string>
+    <string name="email">E-mail Adresi</string>
+    <string name="password">Şifre</string>
+    <string name="sign_check">Hesabın mı var?</string>
+    <string name="sign_in">Giriş yap</string>
+
 </resources>

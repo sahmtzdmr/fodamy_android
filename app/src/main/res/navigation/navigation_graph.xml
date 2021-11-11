@@ -19,12 +19,23 @@
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.intro.IntroFragment"
         android:label="IntroFragment" >
         <action
-            android:id="@+id/action_introFragment_to_tutorialFragment"
-            app:destination="@id/tutorialFragment" />
+            android:id="@+id/action_introFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
-        android:id="@+id/tutorialFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.intro.TutorialFragment"
-        android:label="fragment_tutorial"
-        tools:layout="@layout/fragment_tutorial" />
+        android:id="@+id/signUpFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.login.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
 </navigation>
