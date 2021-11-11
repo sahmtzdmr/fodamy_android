@@ -17,5 +17,14 @@
     <fragment
         android:id="@+id/introFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.intro.IntroFragment"
-        android:label="IntroFragment" />
+        android:label="IntroFragment" >
+        <action
+            android:id="@+id/action_introFragment_to_tutorialFragment"
+            app:destination="@id/tutorialFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tutorialFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.intro.TutorialFragment"
+        android:label="fragment_tutorial"
+        tools:layout="@layout/fragment_tutorial" />
 </navigation>

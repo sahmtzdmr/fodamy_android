@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.get
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentIntroBinding
@@ -49,11 +50,15 @@ class IntroFragment : Fragment() {
         dataBinding?.btNext?.setOnClickListener {
             if (dataBinding?.viewPager2?.currentItem != prepareIntroList().size - 1
             )
-                dataBinding?.viewPager2?.setCurrentItem(
-                    (dataBinding?.viewPager2?.currentItem ?: 0) + 1,
-                    true
-                )
+            {dataBinding?.viewPager2?.setCurrentItem(
+                (dataBinding?.viewPager2?.currentItem ?: 0) + 1,
+                true
+            )}
+            else{
+                findNavController().navigate(R.id.action_introFragment_to_tutorialFragment)
+            }
         }
+
 
     }
 
