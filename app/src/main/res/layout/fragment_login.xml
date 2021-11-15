@@ -19,27 +19,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-
-            android:id="@+id/editTextTextEmailAddress"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="52dp"
-            android:layout_marginEnd="15dp"
-            android:autofillHints="emailAddress"
-            android:drawableStart="@drawable/ic_mail_icon"
-            android:drawablePadding="10dp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:paddingStart="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textSignin" />
+            app:layout_constraintTop_toBottomOf="@id/textSignin">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="15dp"
+                android:autofillHints="emailAddress"
+                android:drawableStart="@drawable/ic_mail_icon"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,9 +69,11 @@
             android:paddingStart="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextTextEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLogin"
             style="@style/PrimaryButtonLarge.Fodamy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +81,7 @@
             android:text="@string/sign_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextPassword" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
         <TextView
             android:id="@+id/textSign"
