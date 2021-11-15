@@ -1,7 +1,10 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +29,7 @@ class LoginFragment : Fragment() {
     private val arrayList: ArrayList<UserModel>? = null
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +42,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         bindig?.textRegister?.setOnClickListener {
             goRegister()
         }
         bindig?.buttonLogin?.setOnClickListener {
+
+
+
             if (validateFile()) {
                 sendLoginRequest(
                     bindig?.editTextTextEmailAddress?.text.toString(),
@@ -76,6 +84,7 @@ class LoginFragment : Fragment() {
     }
 
     fun sendLoginRequest(email: String, password: String) {
+        val sharedPreferences=context?.getSharedPreferences("com.sadikahmetozdemir.sadik_fodamy",Context.MODE_PRIVATE)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -91,9 +100,20 @@ class LoginFragment : Fragment() {
                 if (response.isSuccessful) {
 
                     response.body()?.let {
-                        Log.d("sda", "onResponse:")
+                       var userID= it.user?.id?.let { it1 ->
+                           sharedPreferences?.edit()?.putInt("com.sadikahmetozdemir.sadik_fodamy",
+                               it1
+                           )
+                       }
+                        println(it.user?.id)
 
-                    }
+                        var userToken=sharedPreferences?.edit()?.putString("com.sadikahmetozdemir.sadik_fodamy",it.token)
+                        println(it.token)
+                        }
+
+
+
+
                 } else {
                     response.errorBody()?.let {
                         Log.d("sda", "onResponse:")
