@@ -16,6 +16,7 @@ import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentSignUpBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SignUpFragment : Fragment() {
     var binding: FragmentSignUpBinding? = null
-    private val BASE_URL = "https://fodamy.mobillium.com/"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +78,7 @@ class SignUpFragment : Fragment() {
         if (username.isEmpty()) {
             binding?.textInputLayoutUsername?.error = "Kullanıcı adı kısmı boş bırakılamaz."
             return false
-            binding?.editTextTextPersonName?.doAfterTextChanged {
 
-                binding?.textInputLayoutUsername?.error=null
-
-            }
         }
 
 
@@ -109,7 +106,7 @@ class SignUpFragment : Fragment() {
     ) {
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(SharedPreferanceStorage.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

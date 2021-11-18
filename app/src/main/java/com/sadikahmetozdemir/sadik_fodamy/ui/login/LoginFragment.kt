@@ -1,10 +1,8 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.Display
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +14,7 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLoginBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,10 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class LoginFragment : Fragment() {
-    var bindig: FragmentLoginBinding? = null
-    private val BASE_URL = "https://fodamy.mobillium.com/"
-    private val arrayList: ArrayList<UserModel>? = null
+    var binding: FragmentLoginBinding? = null
 
+    private val arrayList: ArrayList<UserModel>? = null
 
 
     override fun onCreateView(
@@ -35,25 +33,27 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        bindig = FragmentLoginBinding.inflate(inflater, container, false)
-        return bindig?.root
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        bindig?.textRegister?.setOnClickListener {
+        binding?.textRegister?.setOnClickListener {
             goRegister()
         }
-        bindig?.buttonLogin?.setOnClickListener {
+        binding?.textForgotPassword?.setOnClickListener {
+            goForgotPassword()
+        }
+        binding?.buttonLogin?.setOnClickListener {
 
 
-
-            if (validateFile()) {
+            if (validateFields()) {
                 sendLoginRequest(
-                    bindig?.editTextTextEmailAddress?.text.toString(),
-                    bindig?.editTextPassword?.text.toString()
+                    binding?.editTextTextEmailAddress?.text.toString(),
+                    binding?.editTextPassword?.text.toString()
                 )
             }
 
@@ -63,19 +63,24 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun validateFile(): Boolean {
-        val email = bindig?.editTextTextEmailAddress?.text.toString().trim()
-        val password = bindig?.editTextPassword?.text.toString().trim()
-        if (email.isEmpty()) {
-            bindig?.textInputLayoutEmail?.error = "Email alanı boş kalamaz."
+    private fun validateFields(): Boolean {
+        val email = binding?.editTextTextEmailAddress?.text.toString().trim()
+        val password = binding?.editTextPassword?.text.toString().trim()
+        if (email.isEmpty() && email.contains("@")) {
+            binding?.textInputLayoutEmail?.error = "Email alanı boş kalamaz."
+
             return false
         }
         if (password.isEmpty()) {
-            bindig?.textInputLayoutPassword?.error = "Şifre alanı boş kalamaz."
+            binding?.textInputLayoutPassword?.error = "Şifre alanı boş kalamaz."
             return false
         }
 
         return true
+    }
+
+    fun goForgotPassword() {
+        findNavController().navigate(R.id.action_loginFragment_to_forgotPassword)
     }
 
     fun goRegister() {
@@ -83,15 +88,18 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
     }
 
-    fun sendLoginRequest(email: String, password: String) {
-        val sharedPreferences=context?.getSharedPreferences("com.sadikahmetozdemir.sadik_fodamy",Context.MODE_PRIVATE)
+    fun sendLoginRequest(username: String, password: String) {
+        val sharedPreferences = context?.getSharedPreferences(
+            "com.sadikahmetozdemir.sadik_fodamy",
+            Context.MODE_PRIVATE
+        )
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(SharedPreferanceStorage.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(LoginAPI::class.java)
-        val call = service.loginRequest(LoginRequestModel("sadikaga", "fodamy45+"))
+        val call = service.loginRequest(LoginRequestModel(username, password))
         call.enqueue(object : Callback<LoginResponseModel> {
             override fun onResponse(
                 call: Call<LoginResponseModel>,
@@ -100,18 +108,18 @@ class LoginFragment : Fragment() {
                 if (response.isSuccessful) {
 
                     response.body()?.let {
-                       var userID= it.user?.id?.let { it1 ->
-                           sharedPreferences?.edit()?.putInt("com.sadikahmetozdemir.sadik_fodamy",
-                               it1
-                           )
-                       }
+                        var userID = it.user?.id?.let { it1 ->
+                            sharedPreferences?.edit()?.putInt(
+                                SharedPreferanceStorage.PREFS_USER_ID,
+                                it1
+                            )
+                        }
                         println(it.user?.id)
 
-                        var userToken=sharedPreferences?.edit()?.putString("com.sadikahmetozdemir.sadik_fodamy",it.token)
+                        var userToken = sharedPreferences?.edit()
+                            ?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)
                         println(it.token)
-                        }
-
-
+                    }
 
 
                 } else {
