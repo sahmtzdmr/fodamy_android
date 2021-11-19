@@ -55,7 +55,7 @@ class IntroFragment : Fragment() {
                 true
             )}
             else{
-                findNavController().navigate(R.id.action_introFragment_to_tutorialFragment)
+                findNavController().navigate(R.id.action_introFragment_to_signUpFragment)
             }
         }
 
