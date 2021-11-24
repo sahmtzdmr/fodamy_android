@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
@@ -18,6 +20,7 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,10 +64,12 @@ class LoginFragment : Fragment() {
 
 
             if (viewModel.validateFields(binding?.editTextTextEmailAddress?.text.toString(),binding?.editTextPassword?.text.toString())) {
-               viewModel.sendLoginRequest(
-                    binding?.editTextTextEmailAddress?.text.toString(),
-                    binding?.editTextPassword?.text.toString()
-                )
+               lifecycleScope.launch {
+                   viewModel.sendLoginRequest(
+                       binding?.editTextTextEmailAddress?.text.toString(),
+                       binding?.editTextPassword?.text.toString()
+                   )
+               }
             }
 
 
@@ -79,6 +84,10 @@ class LoginFragment : Fragment() {
         }
         viewModel.showPasswordError.observe(viewLifecycleOwner){ passwordError->
             binding?.textInputLayoutPassword?.error=passwordError
+        }
+
+        viewModel.showErrorMessage.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
         }
 
     }

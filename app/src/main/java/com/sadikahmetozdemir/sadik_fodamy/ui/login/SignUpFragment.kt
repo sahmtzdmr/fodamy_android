@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
@@ -19,6 +21,7 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,7 +63,7 @@ class SignUpFragment : Fragment() {
                     binding?.editTextTextEmailAddress?.text.toString(),
                     binding?.editTextPassword?.text.toString()
                 )
-            ) {
+            ) lifecycleScope.launch{
                 viewModel.sendRegisterRequest(
                     binding?.editTextTextPersonName?.text.toString(),
                     binding?.editTextTextEmailAddress?.text.toString(),
@@ -80,6 +83,9 @@ class SignUpFragment : Fragment() {
         }
         viewModel.showPasswordError.observe(viewLifecycleOwner) { passwordError ->
             binding?.textInputPassword?.error = passwordError
+        }
+        viewModel.showErrorMessage.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
         }
     }
 

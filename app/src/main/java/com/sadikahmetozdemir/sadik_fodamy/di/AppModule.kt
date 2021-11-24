@@ -2,19 +2,22 @@ package com.sadikahmetozdemir.sadik_fodamy.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class, FragmentComponent::class)
+@InstallIn(ViewModelComponent::class, FragmentComponent::class,ActivityRetainedComponent::class)
 object AppModule {
     @Provides
     fun provideSharedPrefs(
@@ -34,6 +37,9 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    @Provides
+    fun provideService(retrofitClient: Retrofit) = retrofitClient.create(LoginAPI::class.java)
 
 
 }
