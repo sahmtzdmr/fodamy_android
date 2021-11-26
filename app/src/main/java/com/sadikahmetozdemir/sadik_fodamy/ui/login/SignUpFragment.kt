@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
@@ -17,16 +20,18 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentSignUpBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
+    val viewModel by viewModels<SignUpViewModel>()
     var binding: FragmentSignUpBinding? = null
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,14 +51,20 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initObservers()
 
 
         binding?.textSignin?.setOnClickListener {
             goLogin()
         }
         binding?.buttonSignUp?.setOnClickListener {
-            if (validateFile()) {
-                sendRegisterRequest(
+            if (viewModel.validateFile(
+                    binding?.editTextTextPersonName?.text.toString(),
+                    binding?.editTextTextEmailAddress?.text.toString(),
+                    binding?.editTextPassword?.text.toString()
+                )
+            ) lifecycleScope.launch{
+                viewModel.sendRegisterRequest(
                     binding?.editTextTextPersonName?.text.toString(),
                     binding?.editTextTextEmailAddress?.text.toString(),
                     binding?.editTextPassword?.text.toString(), "sadik", "ahmet"
@@ -63,6 +74,21 @@ class SignUpFragment : Fragment() {
 
     }
 
+    fun initObservers() {
+        viewModel.showUsernameError.observe(viewLifecycleOwner) { usernameError ->
+            binding?.textInputLayoutUsername?.error = usernameError
+        }
+        viewModel.showEmailError.observe(viewLifecycleOwner) { emailError ->
+            binding?.textInputLayoutEmail?.error = emailError
+        }
+        viewModel.showPasswordError.observe(viewLifecycleOwner) { passwordError ->
+            binding?.textInputPassword?.error = passwordError
+        }
+        viewModel.showErrorMessage.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     fun goLogin() {
         findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
@@ -70,75 +96,6 @@ class SignUpFragment : Fragment() {
 
     }
 
-    private fun validateFile(): Boolean {
-        val username = binding?.editTextTextPersonName?.text.toString().trim()
-        val email = binding?.editTextTextEmailAddress?.text.toString().trim()
-        val password = binding?.editTextPassword?.text.toString().trim()
-
-        if (username.isEmpty()) {
-            binding?.textInputLayoutUsername?.error = "Kullanıcı adı kısmı boş bırakılamaz."
-            return false
-
-        }
 
 
-        if (email.isEmpty()) {
-            binding?.textInputLayoutEmail?.error="Email kısmı boş bırakılamaz."
-            return false
-        }
-        if (password.isEmpty()) {
-            binding?.textInputPassword?.error="Şifre kısmı boş bırakılamaz."
-            return false
-        }
-
-
-        return true
-
-
-    }
-
-    fun sendRegisterRequest(
-        username: String?,
-        email: String?,
-        password: String?,
-        name: String?,
-        surname: String?
-    ) {
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(SharedPreferanceStorage.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(LoginAPI::class.java)
-        val call = service.registerRequest(
-            RegisterRequestModel("asdfgh@mobillium.com", "123456", "sadikah", "sadik", "ozdemir")
-        )
-        call.enqueue(object : Callback<RegisterResponseModel> {
-            override fun onResponse(
-                call: Call<RegisterResponseModel>,
-                response: Response<RegisterResponseModel>
-            ) {
-                if (response.isSuccessful) {
-                    response.body().let {
-                        Log.d("sad", "onResponse: ")
-                    }
-
-
-                } else {
-                    response.errorBody().let {
-                        Log.d("sad", "onResponse: ")
-                    }
-                }
-
-            }
-
-            override fun onFailure(call: Call<RegisterResponseModel>, t: Throwable) {
-                t.printStackTrace()
-
-            }
-        })
-
-
-    }
 }
