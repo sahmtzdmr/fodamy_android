@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
+import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.Module
 import dagger.Provides
@@ -46,5 +47,7 @@ object AppModule {
     fun provideFeedService(retrofitClient: Retrofit) = retrofitClient.create(EditorChoiceRecipesAPI::class.java)
 
 
+    @Provides
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI)= FeedRepository(editorChoiceRecipesAPI)
 
 }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
         android:layout_width="wrap_content"
@@ -118,6 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_food_description" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/editor_choice_medal"
         android:layout_width="@dimen/medal_size"
         android:layout_height="@dimen/medal_size"
         android:layout_marginTop="15dp"

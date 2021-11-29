@@ -19,5 +19,11 @@
     <string name="e_mail">E-mail Adresi</string>
     <string name="repassword">Sıfırla</string>
     <string name="forgot_password">Şifrenizi mi unuttunuz?</string>
+    <string name="comment">%1$d Yorum</string>
+    <string name="like">%1$d Beğeni</string>
+    <string name="recipe">%1$d Tarif</string>
+    <string name="follower">%1$d Takipçi</string>
+
+
 
 </resources>

@@ -14,6 +14,7 @@ data class UserModel(
     var is_following:Boolean?,
     var favorites_count:Int?,
     var likes_count:Int?,
+    var image : ImagesModel?
 
 
 
