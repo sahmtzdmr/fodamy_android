@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui.home
+package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceAdapter
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class EditorChoiceFragment : Fragment() {
 
     val viewModel by viewModels<EditorChoiceViewModel>()
 

@@ -9,4 +9,7 @@ interface EditorChoiceRecipesAPI {
 
     @GET("api/editor-choices")
     suspend fun editorChoicesRecipesRequest(@Query ("page")pageInt: Int): EditorChoiseResponseModel
+
+    @GET("api/recipe/")
+    suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiseResponseModel
 }

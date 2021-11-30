@@ -51,6 +51,6 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.HomeFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment"
         android:label="HomeFragment" />
 </navigation>

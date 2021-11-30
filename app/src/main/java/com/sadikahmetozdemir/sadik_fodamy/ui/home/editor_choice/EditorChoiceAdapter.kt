@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui.home
+package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,15 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemIntroBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiseResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.intro.IntroViewHolder
 import javax.inject.Inject
 
-class HomeAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, HomeAdapter.ViewHolder>(recipeComparator) {
+class EditorChoiceAdapter @Inject constructor() :
+    PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

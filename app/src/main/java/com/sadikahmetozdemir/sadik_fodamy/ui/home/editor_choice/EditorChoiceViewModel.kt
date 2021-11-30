@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui.home
+package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @HiltViewModel
-class HomeViewModel@Inject constructor(private val feedRepository: FeedRepository) :ViewModel(){
+class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedRepository) :ViewModel(){
 
     var _recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
     val recipes: LiveData<PagingData<EditorChoiceModel>> get() = _recipes
