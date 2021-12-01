@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/lastAddedFragment">
+    app:startDestination="@id/homeTablayoutFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -57,4 +57,9 @@
         android:id="@+id/lastAddedFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment"
         android:label="LastAddedFragment" />
+    <fragment
+        android:id="@+id/homeTablayoutFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment"
+        android:label="fragment_home_tablayout"
+        tools:layout="@layout/fragment_home_tablayout" />
 </navigation>

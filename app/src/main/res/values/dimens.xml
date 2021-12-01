@@ -2,6 +2,8 @@
 <resources>
     <dimen name="margin_normal">20dp</dimen>
     <dimen name="medal_size">40dp</dimen>
+    <dimen name="tablayout_heigh">46dp</dimen>
+
 
 
 </resources>
