@@ -21,6 +21,12 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             pagingSourceFactory = {RecipePagingSource(editorChoiceRecipesAPI)}
         ).flow
     }
+    fun lastAddedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
+        return Pager(
+            config = pagingConfig,
+            pagingSourceFactory = {LastAddedPagingSource(editorChoiceRecipesAPI)}
+        ).flow
+    }
     /**
      * let’s define page size, page size is the only required param, rest is optional
      */

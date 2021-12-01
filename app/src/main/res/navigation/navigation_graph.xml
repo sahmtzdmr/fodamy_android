@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/lastAddedFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -53,4 +53,8 @@
         android:id="@+id/homeFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/lastAddedFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment"
+        android:label="LastAddedFragment" />
 </navigation>
