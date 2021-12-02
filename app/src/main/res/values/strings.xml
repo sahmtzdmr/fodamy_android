@@ -23,6 +23,7 @@
     <string name="like">%1$d Beğeni</string>
     <string name="recipe">%1$d Tarif</string>
     <string name="follower">%1$d Takipçi</string>
+    <string name="Back">Geri</string>
 
 
 </resources>
