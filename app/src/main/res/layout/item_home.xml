@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
+
     <View
         android:id="@+id/seperator"
         android:layout_width="0dp"
@@ -59,6 +60,8 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nunito_bold"
         android:text="sadas"
+        android:textColor="@color/cinder"
+        android:textSize="13sp"
 
         app:layout_constraintStart_toEndOf="@id/barrier"
         app:layout_constraintTop_toBottomOf="@id/seperator" />
@@ -66,10 +69,10 @@
     <TextView
         android:id="@+id/tv_recipe"
         android:layout_width="wrap_content"
-        android:layout_marginTop="1dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:text="0 Tarif"
-
+        android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/barrier"
         app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
@@ -78,10 +81,11 @@
         android:id="@+id/tv_follower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:fontFamily="@font/nunito_semibold"
-        android:layout_marginStart="1dp"
         android:text="0 Takipçi"
+        android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/tv_recipe"
 
         app:layout_constraintTop_toBottomOf="@id/tv_username" />
@@ -102,6 +106,8 @@
         android:layout_marginTop="10.5dp"
         android:fontFamily="@font/nunito_bold"
         android:text="Makarna Tarifi"
+        android:textColor="@color/cinder"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@id/view_divider" />
 
@@ -110,6 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
+        android:fontFamily="@font/nunito_semibold"
         android:text="Hamur işi"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@id/tv_food_title" />
@@ -118,20 +125,23 @@
         android:id="@+id/food_image"
 
         android:layout_width="0dp"
-        android:layout_height="345dp"
+        android:layout_height="0dp"
         android:layout_marginTop="11dp"
-        android:scaleType="fitCenter"
-
+        android:scaleType="centerCrop"
         android:src="@drawable/walkthrough_image_3"
+        app:layout_constraintBottom_toTopOf="@id/tv_like"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/tv_food_description" />
+        app:layout_constraintTop_toBottomOf="@id/tv_food_description"
+        android:paddingBottom="12dp"/>
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/editor_choice_medal"
         android:layout_width="@dimen/medal_size"
         android:layout_height="@dimen/medal_size"
         android:layout_marginTop="15dp"
+        android:background="@drawable/medal_background"
         android:layout_marginEnd="15dp"
         android:src="@drawable/editors_pick_icon"
         app:layout_constraintEnd_toEndOf="@id/food_image"
@@ -143,6 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="14dp"
+
         android:text="0 comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft" />

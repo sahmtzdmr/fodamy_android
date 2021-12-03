@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +49,8 @@ class EditorChoiceFragment : Fragment() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
+
+
         }
         getRecipeData()
     }

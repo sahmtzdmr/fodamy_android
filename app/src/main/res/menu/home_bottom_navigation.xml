@@ -13,7 +13,7 @@
         android:title="Favoriler"
         /><item
         android:id="@+id/user"
-        android:icon="@drawable/home_user_icon"
+        android:icon="@drawable/ic_user_icon"
         android:title="Kullanıcı"
         /><item
         android:id="@+id/menu"
