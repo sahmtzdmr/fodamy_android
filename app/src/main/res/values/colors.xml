@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#EC381C</color>
     <color name="dot_color">#4DEC381C</color>
+    <color name="divider">#DEE2E6</color>
+    <color name="cinder">#212529</color>
 </resources>

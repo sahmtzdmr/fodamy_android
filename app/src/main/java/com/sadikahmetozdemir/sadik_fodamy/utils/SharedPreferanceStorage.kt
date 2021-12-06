@@ -7,4 +7,5 @@ object SharedPreferanceStorage {
     const val PREFS_USER_ID="user_id"
     const val FILL_REQUIRED_FIELDS="Lütfen gerekli alanları doldurun."
 
+
 }
