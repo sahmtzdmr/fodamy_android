@@ -50,14 +50,6 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment"
-        android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/lastAddedFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment"
-        android:label="LastAddedFragment" />
-    <fragment
         android:id="@+id/homeTablayoutFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment"
         android:label="fragment_home_tablayout"
