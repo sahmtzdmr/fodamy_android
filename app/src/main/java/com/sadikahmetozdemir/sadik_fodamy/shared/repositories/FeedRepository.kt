@@ -3,17 +3,15 @@ package com.sadikahmetozdemir.sadik_fodamy.shared.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.sadikahmetozdemir.sadik_fodamy.api.ApiErrorResponse
-import com.sadikahmetozdemir.sadik_fodamy.api.ApiResponse
-import com.sadikahmetozdemir.sadik_fodamy.api.ApiSuccessResponse
-import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.sadik_fodamy.api.*
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.utils.NETWORK_ERROR_MESSAGE
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 
 import javax.inject.Inject
 
-class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) {
+class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :EditorChoiceRecipesAPI) {
 
     fun feedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
@@ -27,11 +25,35 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             pagingSourceFactory = {LastAddedPagingSource(editorChoiceRecipesAPI)}
         ).flow
     }
-    /**
-     * let’s define page size, page size is the only required param, rest is optional
-     */
+
     fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(pageSize = 24)
+    }
+
+    suspend fun getRecipeDetail(recipeID:Int):Resource<EditorChoiceModel>{
+        return try {
+            val response=editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
+            when(val apiResponse=ApiResponse.create(response)){
+                is ApiSuccessResponse->{
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse ->{
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+
+
+            }
+        }catch (exception:IOException){
+            val apiException=ApiException.create(exception)
+            Resource.error(apiException,null)
+        }
+    }
+
+
+
+
+
     }
 
 
@@ -39,4 +61,3 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
 
 
 
-}

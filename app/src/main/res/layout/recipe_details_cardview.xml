@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Title"
+        android:text="@string/ingredients_title"
+        android:textColor="@color/cinder"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/nunito_bold"
         android:textSize="15sp"/>
@@ -53,8 +54,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_number"/>
     <TextView
+        android:layout_marginTop="11.5dp"
         android:id="@+id/tv_ingredients"
         android:layout_width="match_parent"
+        android:text="asdasdsad"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@id/view_divider"/>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentHomeTablayoutBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment
@@ -60,5 +61,6 @@ class HomeTablayoutFragment : Fragment() {
 
 
     }
+        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(5))
 }
 }

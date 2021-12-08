@@ -24,6 +24,12 @@
     <string name="recipe">%1$d Tarif</string>
     <string name="follower">%1$d Takipçi</string>
     <string name="Back">Geri</string>
+    <string name="follow">Takip Et</string>
+    <string name="add_comment">Yorum Ekle</string>
+    <string name="time">%1$d dakika önce</string>
+    <string name="ingredients_title"> Malzemeler</string>
+
+
 
 
 </resources>

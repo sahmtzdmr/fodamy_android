@@ -53,5 +53,22 @@
         android:id="@+id/homeTablayoutFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment"
         android:label="fragment_home_tablayout"
-        tools:layout="@layout/fragment_home_tablayout" />
+        tools:layout="@layout/fragment_home_tablayout" >
+        <action
+            android:id="@+id/to_recipe_detail"
+            app:destination="@id/recipeDetailFragment"/>
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailFragment"
+        android:label="RecipeDetailFragment" >
+        <argument
+            android:name="recipeId"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+
+    </fragment>
 </navigation>
