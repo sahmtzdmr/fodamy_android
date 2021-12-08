@@ -116,6 +116,7 @@ class RecipeDetailFragment : Fragment() {
             ivFood.load(url = recipeDetail.images?.get(0)?.url)
             ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
             ivEditorChoiceMedal.isVisible = (recipeDetail.isEditorChoice == true)
+            layoutDirections.ivCard.setImageResource(R.drawable.ic_clock_icon)
         }
 
 

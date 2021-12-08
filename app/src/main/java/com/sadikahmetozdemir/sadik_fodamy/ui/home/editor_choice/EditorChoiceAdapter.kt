@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.ItemDetailsClickedListener
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.gone
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
@@ -22,8 +23,10 @@ import javax.inject.Inject
 
 class EditorChoiceAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
-
-
+private lateinit var itemDetailsClickedListener: ItemDetailsClickedListener
+fun setListener(itemDetailsClickedListener: ItemDetailsClickedListener){
+    this.itemDetailsClickedListener=itemDetailsClickedListener
+}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,6 +44,18 @@ class EditorChoiceAdapter @Inject constructor() :
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
+            binding?.foodImage.setOnClickListener {
+
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentItem = getItem(position)
+                    currentItem?.let {
+                        it.id?.let { it1 -> itemDetailsClickedListener.onItemClicked(it1) }
+                    }
+                }
+
+
+            }
 
         }
 

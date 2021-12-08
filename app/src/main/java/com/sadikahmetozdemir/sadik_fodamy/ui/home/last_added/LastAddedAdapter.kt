@@ -11,6 +11,7 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.ItemDetailsClickedListener
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceAdapter
 import javax.inject.Inject
 
@@ -19,10 +20,14 @@ class LastAddedAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, LastAddedAdapter.ViewHolder>(
         recipeComparator
     ) {
+    private lateinit var itemDetailsClickedListener: ItemDetailsClickedListener
+    fun setListener(itemDetailsClickedListener: ItemDetailsClickedListener) {
+        this.itemDetailsClickedListener = itemDetailsClickedListener
+    }
 
 
     override fun onBindViewHolder(holder: LastAddedAdapter.ViewHolder, position: Int) {
-        val currentItem=getItem(position)
+        val currentItem = getItem(position)
         currentItem?.let {
             holder.bind(it)
         }
@@ -31,12 +36,29 @@ class LastAddedAdapter @Inject constructor() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastAddedAdapter.ViewHolder {
+
+
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder((binding))
     }
 
-    inner class ViewHolder(val binding: ItemHomeBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding?.foodImage.setOnClickListener {
+
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentItem = getItem(position)
+                    currentItem?.let {
+                        it.id?.let { it1 -> itemDetailsClickedListener.onItemClicked(it1) }
+                    }
+                }
+
+
+            }
+        }
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
@@ -67,16 +89,13 @@ class LastAddedAdapter @Inject constructor() :
                     .load(item.images?.get(0)?.url)
                     .into(foodImage)
 
-                editorChoiceMedal.isVisible=(item.isEditorChoice==true)
-
-
+                editorChoiceMedal.isVisible = (item.isEditorChoice == true)
 
 
             }
 
         }
     }
-
 
 
     companion object {

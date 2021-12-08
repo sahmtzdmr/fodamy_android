@@ -61,6 +61,6 @@ class HomeTablayoutFragment : Fragment() {
 
 
     }
-        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(5))
+
 }
 }

@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLastAddedBinding
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.ItemDetailsClickedListener
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LastAddedFragment : Fragment() {
+class LastAddedFragment : Fragment(),ItemDetailsClickedListener {
     val viewModel by viewModels<LastAddedViewModel>()
 
     @Inject
@@ -32,6 +35,7 @@ class LastAddedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLastAddedBinding.inflate(layoutInflater)
+        lastAddedAdapter.setListener(this)
         return binding?.root
     }
 
@@ -56,6 +60,9 @@ class LastAddedFragment : Fragment() {
 
     }
 
+    override fun onItemClicked(recipeID: Int) {
+        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+    }
 
 
 }
