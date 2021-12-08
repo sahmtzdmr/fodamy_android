@@ -1,16 +1,19 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBinding
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.login.LoginViewModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RecipeDetailCommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +34,7 @@ class RecipeDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding= FragmentRecipeDetailBinding.inflate(layoutInflater)
+        binding = FragmentRecipeDetailBinding.inflate(layoutInflater)
         return binding?.root
     }
 
@@ -42,6 +45,11 @@ class RecipeDetailFragment : Fragment() {
 
     }
 
+    private fun getRecipeDetailComment(recipeID: Int) {
+
+        viewModel.getRecipeDetailComment(recipeID)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let { itArguments ->
@@ -49,6 +57,7 @@ class RecipeDetailFragment : Fragment() {
 
         }
         args?.recipeId?.let { getRecipeDetail(it) }
+        args?.recipeId?.let { getRecipeDetailComment(it) }
 
 
 
@@ -61,11 +70,13 @@ class RecipeDetailFragment : Fragment() {
 
         viewModel.recipeDetail.observe(viewLifecycleOwner) { recipeDetail ->
 
-           if (recipeDetail != null) {
-               renderRecipeDetail(recipeDetail)
-           }
+            recipeDetail?.let { renderRecipeDetail(it) }
 
 
+        }
+        viewModel.recipeDetailComment.observe(viewLifecycleOwner) { recipeDetailComment ->
+
+            recipeDetailComment?.let { renderRecipeDetailComment(recipeDetailComment) }
 
         }
 
@@ -77,7 +88,7 @@ class RecipeDetailFragment : Fragment() {
         binding?.apply {
             tvFoodTitle.text = recipeDetail.title
             tvFoodDescription.text = recipeDetail.category?.name
-            tvTime.text=recipeDetail.difference.toString()
+            tvTime.text = recipeDetail.difference.toString()
             tvComment.text =
                 binding?.root?.context?.getString(R.string.comment)
                     ?.let { String.format(it, recipeDetail.comment_count) }
@@ -97,21 +108,34 @@ class RecipeDetailFragment : Fragment() {
                     recipeDetail.user?.following_count
                 )
             }
-            layoutIngredients.tvIngredients.text=recipeDetail.ingredients
-            layoutIngredients.tvNumber.text= recipeDetail.number_of_person?.text.toString()
-            layoutDirections.tvTittle.text="Yapılışı"
-            layoutDirections.tvNumber.text=recipeDetail.time_of_recipe?.text.toString()
-            layoutDirections.tvIngredients.text=recipeDetail.directions
+            layoutIngredients.tvIngredients.text = recipeDetail.ingredients
+            layoutIngredients.tvNumber.text = recipeDetail.number_of_person?.text.toString()
+            layoutDirections.tvTittle.text = "Yapılışı"
+            layoutDirections.tvNumber.text = recipeDetail.time_of_recipe?.text.toString()
+            layoutDirections.tvIngredients.text = recipeDetail.directions
+            ivFood.load(url = recipeDetail.images?.get(0)?.url)
+            ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
+            ivEditorChoiceMedal.isVisible = (recipeDetail.isEditorChoice == true)
+        }
 
 
+    }
+
+    fun renderRecipeDetailComment(commentResponseModel: CommentResponseModel) {
 
 
-
+        binding?.apply {
+            tvTittleComment.text = "Yorumlar"
+            ivUserComment.loadCircleCrop(url = commentResponseModel.data.get(0).user?.image?.url.toString())
+            tvUsernameComment.text=commentResponseModel.data.get(0).user?.username
+            tvRecipeComment.text=commentResponseModel.data.get(0).user?.recipe_count.toString()
+            tvFollowerComment.text=commentResponseModel.data.get(0).user?.followed_count.toString()
+            tvTimeComment.text=commentResponseModel.data.get(0).difference.toString()
+            tvUserComment.text=commentResponseModel.data.get(0).text
 
 
 
         }
-
     }
 
 

@@ -1,7 +1,9 @@
 package com.sadikahmetozdemir.sadik_fodamy.api
 
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiseResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RecipeDetailCommentResponseModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,5 +22,5 @@ interface EditorChoiceRecipesAPI {
     suspend fun recipeDetailsRequest(@Path ("recipe_id")recipeID: Int):Response<EditorChoiceModel>
 
     @GET("api/recipe/{recipe_id}/comment" )
-    suspend fun recipeDetailsCommentRequest(@Path ("recipe_id")recipeID: Int):Response<EditorChoiceModel>
+    suspend fun recipeDetailsCommentRequest(@Path ("recipe_id")recipeID: Int):Response<CommentResponseModel>
 }

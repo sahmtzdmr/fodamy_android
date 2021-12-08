@@ -5,7 +5,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.sadikahmetozdemir.sadik_fodamy.api.*
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
-import com.sadikahmetozdemir.sadik_fodamy.utils.NETWORK_ERROR_MESSAGE
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 
@@ -33,6 +32,25 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :Edi
     suspend fun getRecipeDetail(recipeID:Int):Resource<EditorChoiceModel>{
         return try {
             val response=editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
+            when(val apiResponse=ApiResponse.create(response)){
+                is ApiSuccessResponse->{
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse ->{
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+
+
+            }
+        }catch (exception:IOException){
+            val apiException=ApiException.create(exception)
+            Resource.error(apiException,null)
+        }
+    }
+    suspend fun getRecipeDetailComment(recipeID:Int):Resource<CommentResponseModel>{
+        return try {
+            val response=editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
             when(val apiResponse=ApiResponse.create(response)){
                 is ApiSuccessResponse->{
                     Resource.success((apiResponse.body))

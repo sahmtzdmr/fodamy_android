@@ -322,12 +322,13 @@
                         app:layout_constraintGuide_end="14dp" />
 
                     <TextView
-                        android:id="@+id/tv_tittle"
+                        android:id="@+id/tv_tittle_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/nunito_bold"
                         android:text="Title"
+                        android:textColor="@color/cinder"
                         android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -339,7 +340,7 @@
                         android:layout_marginTop="11.5dp"
                         android:background="@color/divider"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_tittle" />
+                        app:layout_constraintTop_toBottomOf="@id/tv_tittle_comment" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_user_comment"
@@ -403,17 +404,21 @@
                         app:layout_goneMarginStart="3dp" />
 
                     <TextView
+                        android:id="@+id/tv_time_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
                         android:text="3 dakika önce"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/iv_user_comment" />
+
                     <TextView
+                        android:id="@+id/tv_user_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_user_comment"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_time_comment"
+                        android:layout_marginTop="8dp"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -436,11 +441,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_start"
-                app:layout_constraintTop_toBottomOf="@id/button_add_comment"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_add_comment"
                 app:menu="@menu/home_bottom_navigation" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

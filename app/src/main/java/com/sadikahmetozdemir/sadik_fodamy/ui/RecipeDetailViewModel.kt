@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -17,6 +16,7 @@ class RecipeDetailViewModel @Inject constructor(
     private val repository: FeedRepository
 ) : ViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
+    val recipeDetailComment=MutableLiveData<CommentResponseModel?>()
 
 
      fun getRecipeDetail(
@@ -29,6 +29,27 @@ class RecipeDetailViewModel @Inject constructor(
                     recipeDetail.postValue(response.data)
 
                     println(recipeDetail.value)
+
+
+                }
+                Status.ERROR -> {
+
+                }
+            }
+        }
+
+
+    }
+    fun getRecipeDetailComment(
+        recipeID: Int
+    ) {
+        viewModelScope.launch {
+            val response = repository.getRecipeDetailComment(recipeID)
+            when (response?.status) {
+                Status.SUCCESS -> {
+                    recipeDetailComment.postValue(response.data)
+
+
 
 
                 }
