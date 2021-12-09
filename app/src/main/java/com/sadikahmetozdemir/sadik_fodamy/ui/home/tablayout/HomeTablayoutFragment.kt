@@ -37,7 +37,6 @@ class HomeTablayoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val adapter=TablayoutViewPagerAdapter(childFragmentManager)
         adapter.addFragment(EditorChoiceFragment(),"Editör Seçimi")
         adapter.addFragment(LastAddedFragment(),"Son Eklenenler")
@@ -63,4 +62,8 @@ class HomeTablayoutFragment : Fragment() {
     }
 
 }
+    fun openRecipeDetail(recipeID:Int){
+
+        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+    }
 }

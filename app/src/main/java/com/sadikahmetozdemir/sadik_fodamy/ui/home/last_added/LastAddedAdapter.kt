@@ -2,17 +2,15 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
-import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.ItemDetailsClickedListener
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceAdapter
 import javax.inject.Inject
 
 
@@ -20,10 +18,8 @@ class LastAddedAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, LastAddedAdapter.ViewHolder>(
         recipeComparator
     ) {
-    private lateinit var itemDetailsClickedListener: ItemDetailsClickedListener
-    fun setListener(itemDetailsClickedListener: ItemDetailsClickedListener) {
-        this.itemDetailsClickedListener = itemDetailsClickedListener
-    }
+
+    var _itemClicked: ((Int) -> Unit)? = null
 
 
     override fun onBindViewHolder(holder: LastAddedAdapter.ViewHolder, position: Int) {
@@ -46,22 +42,15 @@ class LastAddedAdapter @Inject constructor() :
 
     inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
-            binding?.foodImage.setOnClickListener {
-
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val currentItem = getItem(position)
-                    currentItem?.let {
-                        it.id?.let { it1 -> itemDetailsClickedListener.onItemClicked(it1) }
-                    }
-                }
 
 
-            }
         }
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
+                binding?.foodImage.setOnClickListener {
+                    item.id?.let { it1 -> _itemClicked?.invoke(it1) }
+                }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
                 tvFoodDescription.text = item.category?.name
