@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
 
     fun getLastAdded(){
         viewModelScope.launch {
-            feedRepository.lastAddedRequest().distinctUntilChanged().collectLatest {
+            feedRepository.lastAddedRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest {
                 recipes.value=it
             }
         }

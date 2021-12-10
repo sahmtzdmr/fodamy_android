@@ -32,7 +32,7 @@ init {
 
     fun getEditorChoice(){
         viewModelScope.launch {
-           feedRepository.feedRequest().distinctUntilChanged().collectLatest{
+           feedRepository.feedRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest{
                _recipes.value=it
 
            }

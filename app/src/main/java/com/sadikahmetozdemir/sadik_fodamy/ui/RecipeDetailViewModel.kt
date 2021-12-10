@@ -17,6 +17,7 @@ class RecipeDetailViewModel @Inject constructor(
 ) : ViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment=MutableLiveData<CommentResponseModel?>()
+    var showErrorMessage=MutableLiveData<String?>()
 
 
      fun getRecipeDetail(
@@ -33,7 +34,7 @@ class RecipeDetailViewModel @Inject constructor(
 
                 }
                 Status.ERROR -> {
-
+                 //   showErrorMessage.postValue(response.message.toString())
                 }
             }
         }
@@ -54,6 +55,8 @@ class RecipeDetailViewModel @Inject constructor(
 
                 }
                 Status.ERROR -> {
+
+              //      showErrorMessage.postValue(response.message.toString())
 
                 }
             }
