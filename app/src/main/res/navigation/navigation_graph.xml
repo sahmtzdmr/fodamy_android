@@ -69,6 +69,23 @@
             app:argType="integer"
             android:defaultValue="0"
             />
+        <action
+            android:id="@+id/to_recipe_images"
+            app:destination="@id/recipeImageFragment"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/recipeImageFragment"
+    android:name="com.sadikahmetozdemir.sadik_fodamy.ui.RecipeImagePopUpFragment"
+    android:label="RecipeImagePopUpFragment" >
+        <argument
+            android:name="editorChoiseModel"
+            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+
+
 
     </fragment>
 </navigation>

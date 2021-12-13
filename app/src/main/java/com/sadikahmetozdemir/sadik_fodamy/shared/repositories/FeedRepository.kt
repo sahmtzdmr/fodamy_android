@@ -72,7 +72,8 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :Edi
 
 
 
-    }
+
+}
 
 
 

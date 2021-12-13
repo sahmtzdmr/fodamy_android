@@ -14,6 +14,7 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBindin
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RecipeDetailCommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragmentDirections
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
@@ -135,6 +136,9 @@ class RecipeDetailFragment : Fragment() {
             toolbar.tvBack.setOnClickListener {
                 findNavController().popBackStack()
             }
+            ivFood.setOnClickListener {
+                openRecipeImages(recipeDetail)
+            }
 
 
         }
@@ -160,6 +164,11 @@ class RecipeDetailFragment : Fragment() {
 
 
         }
+    }
+    fun openRecipeImages(recipeID:EditorChoiceModel){
+
+        findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
+
     }
 
 
