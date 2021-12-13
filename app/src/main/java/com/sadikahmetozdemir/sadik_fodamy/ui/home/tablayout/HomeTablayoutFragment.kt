@@ -48,6 +48,7 @@ class HomeTablayoutFragment : Fragment() {
     fun openRecipeDetail(recipeID:Int){
 
         findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+
     }
     fun renderToolbar(){
         binding?.toolbar?.apply {
