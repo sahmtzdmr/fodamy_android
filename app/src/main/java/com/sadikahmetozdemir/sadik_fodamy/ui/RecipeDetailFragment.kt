@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
@@ -128,6 +129,12 @@ class RecipeDetailFragment : Fragment() {
             val turkishLocale = Locale.forLanguageTag("tr")
             toolbar.tvFoodDetailTitle.text=recipeDetail.category?.name?.uppercase(turkishLocale)
             toolbar.ivLogout.visibility=View.GONE
+            toolbar.ivBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            toolbar.tvBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
 
 
         }
