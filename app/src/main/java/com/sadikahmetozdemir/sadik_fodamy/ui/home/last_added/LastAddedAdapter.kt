@@ -2,16 +2,15 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
-import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceAdapter
 import javax.inject.Inject
 
 
@@ -20,9 +19,11 @@ class LastAddedAdapter @Inject constructor() :
         recipeComparator
     ) {
 
+    var _itemClicked: ((Int) -> Unit)? = null
+
 
     override fun onBindViewHolder(holder: LastAddedAdapter.ViewHolder, position: Int) {
-        val currentItem=getItem(position)
+        val currentItem = getItem(position)
         currentItem?.let {
             holder.bind(it)
         }
@@ -31,15 +32,25 @@ class LastAddedAdapter @Inject constructor() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastAddedAdapter.ViewHolder {
+
+
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder((binding))
     }
 
-    inner class ViewHolder(val binding: ItemHomeBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+
+
+        }
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
+                binding?.foodImage.setOnClickListener {
+                    item.id?.let { it1 -> _itemClicked?.invoke(it1) }
+                }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
                 tvFoodDescription.text = item.category?.name
@@ -67,16 +78,13 @@ class LastAddedAdapter @Inject constructor() :
                     .load(item.images?.get(0)?.url)
                     .into(foodImage)
 
-                editorChoiceMedal.isVisible=(item.isEditorChoice==true)
-
-
+                editorChoiceMedal.isVisible = (item.isEditorChoice == true)
 
 
             }
 
         }
     }
-
 
 
     companion object {

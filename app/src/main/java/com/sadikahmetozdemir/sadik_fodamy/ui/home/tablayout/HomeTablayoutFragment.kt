@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentHomeTablayoutBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment
@@ -36,15 +37,31 @@ class HomeTablayoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       setUpViewPager()
+        renderToolbar()
+        dividerTabLayout()
 
-        val adapter=TablayoutViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(EditorChoiceFragment(),"Editör Seçimi")
-        adapter.addFragment(LastAddedFragment(),"Son Eklenenler")
-        binding?.viewpagerTablayout?.adapter=adapter
-        binding?.tablayout?.setupWithViewPager(binding?.viewpagerTablayout)
-        binding?.toolbar?.ivBack?.visibility=View.GONE
-        binding?.toolbar?.tvBack?.visibility=View.GONE
 
+
+
+}
+    fun openRecipeDetail(recipeID:Int){
+
+        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+    }
+    fun renderToolbar(){
+        binding?.toolbar?.apply {
+            ivBack.visibility=View.GONE
+            tvBack.visibility=View.GONE
+            tvFoodDetailTitle.visibility=View.GONE
+            ivShare.visibility=View.GONE
+        }
+
+
+
+
+    }
+    fun dividerTabLayout(){
 
         val root: View? = binding?.tablayout?.getChildAt(0)
         if (root is LinearLayout) {
@@ -59,6 +76,15 @@ class HomeTablayoutFragment : Fragment() {
 
 
 
+        }
     }
-}
+    fun setUpViewPager(){
+        val adapter=TablayoutViewPagerAdapter(childFragmentManager)
+        adapter.addFragment(EditorChoiceFragment(),"Editör Seçimi")
+        adapter.addFragment(LastAddedFragment(),"Son Eklenenler")
+        binding?.viewpagerTablayout?.adapter=adapter
+        binding?.tablayout?.setupWithViewPager(binding?.viewpagerTablayout)
+
+
+    }
 }

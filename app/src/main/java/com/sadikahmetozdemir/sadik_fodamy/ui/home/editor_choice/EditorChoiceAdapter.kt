@@ -1,20 +1,14 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
-import android.graphics.drawable.Drawable
-import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.gone
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 
@@ -23,7 +17,7 @@ import javax.inject.Inject
 class EditorChoiceAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
 
-
+var itemClicked:((Int)->Unit)?=null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -42,10 +36,15 @@ class EditorChoiceAdapter @Inject constructor() :
         RecyclerView.ViewHolder(binding.root) {
         init {
 
+
         }
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
+
+                binding?.foodImage.setOnClickListener {
+                    item.id?.let { it1 -> itemClicked?.invoke(it1) }
+                }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
                 tvFoodDescription.text = item.category?.name

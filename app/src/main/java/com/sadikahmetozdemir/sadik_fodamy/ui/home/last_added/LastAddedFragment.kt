@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLastAddedBinding
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,7 +22,6 @@ class LastAddedFragment : Fragment() {
     @Inject
     lateinit var lastAddedAdapter: LastAddedAdapter
     var binding: FragmentLastAddedBinding? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,14 @@ class LastAddedFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         }
+        lastAddedAdapter._itemClicked =
+            {
+                (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)
+
+
+
+
+            }
         getLastAddedData()
 
 
@@ -55,7 +65,6 @@ class LastAddedFragment : Fragment() {
         }
 
     }
-
 
 
 }

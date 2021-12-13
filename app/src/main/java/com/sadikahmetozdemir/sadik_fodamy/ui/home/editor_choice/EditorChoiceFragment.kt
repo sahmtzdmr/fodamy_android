@@ -6,14 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EditorChoiceFragment : Fragment() {
+class EditorChoiceFragment : Fragment(){
+
 
     val viewModel by viewModels<EditorChoiceViewModel>()
 
@@ -36,6 +39,7 @@ class EditorChoiceFragment : Fragment() {
 
         return binding.root
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +54,10 @@ class EditorChoiceFragment : Fragment() {
                     false
                 )
 
+
+        }
+        editorChoiceAdapter.itemClicked={
+            (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)
 
         }
         getRecipeData()
@@ -71,4 +79,6 @@ class EditorChoiceFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
