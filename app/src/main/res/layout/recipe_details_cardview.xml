@@ -56,11 +56,13 @@
     <TextView
         android:layout_marginTop="11.5dp"
         android:id="@+id/tv_ingredients"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:text="asdasdsad"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/view_divider"/>
+        app:layout_constraintTop_toBottomOf="@id/view_divider"
+        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0"/>
 
 
 

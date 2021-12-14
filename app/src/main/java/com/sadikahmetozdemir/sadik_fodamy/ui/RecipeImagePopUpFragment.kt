@@ -41,6 +41,7 @@ class RecipeImagePopUpFragment : Fragment() {
                 urlList.add(it1)
             }
             binding?.imageViewpager2?.adapter=RecipeImageAdapter(urlList)
+            binding?.imageViewpager2.let { it?.let { it1 -> binding?.indicator?.setViewPager2(it1) } }
             binding?.ivClose?.setOnClickListener {
                 findNavController().popBackStack()
             }
