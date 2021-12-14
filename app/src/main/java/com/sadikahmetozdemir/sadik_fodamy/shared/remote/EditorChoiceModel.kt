@@ -1,8 +1,11 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.remote
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class EditorChoiceModel(
     var id: Int?,
     var title: String?,
@@ -21,4 +24,4 @@ data class EditorChoiceModel(
 
 
 
-)
+):Parcelable

@@ -1,5 +1,9 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.local
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UserModel(
     var id: Int?,
     var email: String?,
@@ -18,4 +22,4 @@ data class UserModel(
 
 
 
-)
+):Parcelable

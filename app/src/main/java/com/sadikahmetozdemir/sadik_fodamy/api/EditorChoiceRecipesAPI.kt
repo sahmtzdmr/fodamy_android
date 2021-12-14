@@ -23,4 +23,6 @@ interface EditorChoiceRecipesAPI {
 
     @GET("api/recipe/{recipe_id}/comment" )
     suspend fun recipeDetailsCommentRequest(@Path ("recipe_id")recipeID: Int):Response<CommentResponseModel>
+
+
 }
