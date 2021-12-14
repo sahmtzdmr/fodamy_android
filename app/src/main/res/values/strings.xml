@@ -28,6 +28,7 @@
     <string name="add_comment">Yorum Ekle</string>
     <string name="time">%1$d dakika önce</string>
     <string name="ingredients_title"> Malzemeler</string>
+    <string name="see_all">TÜMÜNÜ GÖR</string>
 
 
 </resources>
