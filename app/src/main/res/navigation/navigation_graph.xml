@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/homeTablayoutFragment">
+    app:startDestination="@id/favoritesFragment2">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -88,4 +88,8 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment2"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" />
 </navigation>

@@ -21,35 +21,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:background="@drawable/favorites_userimage_background"
-        android:id="@+id/iv_favorites_user_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/walkthrough_image_3"
-        app:layout_constraintEnd_toStartOf="@id/tv_favorites_username"
-        app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
-        app:layout_constraintTop_toTopOf="@id/iv_favorites_food" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_image"
+            android:background="@drawable/favorites_userimage_background"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:elevation="4dp"
+            android:src="@drawable/walkthrough_image_first"
+            app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
+            app:layout_constraintTop_toTopOf="@id/iv_favorites_food"
+             />
 
-    <TextView
-        android:id="@+id/tv_favorites_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="12dp"
-
-        android:background="@drawable/username_background"
-        android:fontFamily="@font/nunito_bold"
-        android:gravity="center"
-        android:text="username"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="11sp"
-        app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
-        app:layout_constraintTop_toTopOf="@id/iv_favorites_food"
-
-        />
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/username_background"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="3dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+            app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
+            app:layout_constraintTop_toTopOf="@id/iv_user_image"
+            android:text="username" />
 
     <TextView
         android:id="@+id/tv_favorites_food_title"
