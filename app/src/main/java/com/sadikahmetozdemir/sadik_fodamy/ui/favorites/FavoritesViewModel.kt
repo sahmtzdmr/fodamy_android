@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
@@ -28,7 +29,9 @@ init {
         viewModelScope.launch {
             repository.favoriteRecipesRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest {
 
-            recipes.value=it
+            recipes.value=it.filter {
+                it.recipes.size>0
+            }
             }
         }
 

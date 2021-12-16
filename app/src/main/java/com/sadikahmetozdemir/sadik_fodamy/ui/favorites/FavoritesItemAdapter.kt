@@ -33,6 +33,13 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
     inner class ViewHolder(val binding: ItemFavoritesBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(item:FavoritesCategoryModel){
+            val childAdapter:FavoritesChildAdapter= FavoritesChildAdapter(item.recipes)
+            binding.favoritesRecylerview.apply {
+                setHasFixedSize(true)
+                adapter=childAdapter
+            }
+
+
 
             binding.apply {
 

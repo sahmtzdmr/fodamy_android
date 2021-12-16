@@ -17,6 +17,7 @@
         android:id="@+id/iv_favorites_food"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/walkthrough_image_3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
