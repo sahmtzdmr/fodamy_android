@@ -39,10 +39,11 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getFavoriteItemsCategory()
 
-        binding?.favoritesRecylerview.apply {
+        binding?.recyclerViewMain?.apply {
 
-            this?.setHasFixedSize(true)
-            this?.adapter =favoritesItemAdapter
+            setHasFixedSize(true)
+            adapter =favoritesItemAdapter
+
 
 
 

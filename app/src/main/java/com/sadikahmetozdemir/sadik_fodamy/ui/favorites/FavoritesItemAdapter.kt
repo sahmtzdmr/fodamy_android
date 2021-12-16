@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sadikahmetozdemir.sadik_fodamy.databinding.FavoritesItemCardviewBinding
+
+import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
@@ -25,26 +26,21 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
         parent: ViewGroup,
         viewType: Int
     ): FavoritesItemAdapter.ViewHolder {
-        val binding=FavoritesItemCardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding=ItemFavoritesBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder((binding))
     }
 
-    inner class ViewHolder(val binding: FavoritesItemCardviewBinding):RecyclerView.ViewHolder(binding.root){
-
-
-
+    inner class ViewHolder(val binding: ItemFavoritesBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(item:FavoritesCategoryModel){
 
-
             binding.apply {
 
-            tvUserName.text=item.recipes.get(0).user?.username
-              //  ivUserImage.loadCircleCrop(url = item.image.url)
-             //   ivFavoritesFood.load(url =item.image.url )
-               // tvFavoritesFoodTitle.text=item.recipes.title
-             //   tvFavoritesComment.text=item.recipes.comment_count.toString()
-               // tvFavoritesLike.text=item.recipes.like_count.toString()
+            ivTitleDrawable.loadCircleCrop(url = item.image?.url)
+                tvFoodName.text=item.name
+
+
+
 
 
             }

@@ -1,88 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.favorites.FavoritesFragment"
+    android:background="@color/seperator">
+    <include
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        layout="@layout/custom_toolbar"
+        android:id="@+id/toolbar"
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="15dp" />
+        />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_title_drawable"
-            android:layout_width="@dimen/drawable_size"
-            android:layout_height="@dimen/drawable_size"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/walkthrough_image_3"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/view_divider"/>
-
-        <TextView
-            android:id="@+id/tv_food_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="@dimen/margin_start"
-            android:fontFamily="@font/nunito_bold"
-            android:text="Ana Yemekler"
-            android:textColor="@color/cinder"
-            android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@id/iv_title_drawable"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/view_divider"
-            />
-
-        <TextView
-            android:id="@+id/tv_see_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="@dimen/margin_start"
-            android:layout_marginEnd="@dimen/margin_start"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/see_all"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/view_divider"
-            />
-        <View
-            android:id="@+id/view_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_title_drawable"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/favorites_recylerview"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/view_divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/favorites_item_cardview"
-            android:layout_marginBottom="15dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/item_favorites"
+        tools:itemCount="4"
+        />
 
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

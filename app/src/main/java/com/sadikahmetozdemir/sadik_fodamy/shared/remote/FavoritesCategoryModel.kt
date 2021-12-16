@@ -9,5 +9,5 @@ data class FavoritesCategoryModel(
     var id: Int,
     var name: String,
     var recipes:List<EditorChoiceModel>,
-    var image: ImagesModel
+    var image: ImagesModel?
 ):Parcelable
