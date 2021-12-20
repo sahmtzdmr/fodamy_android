@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesBinding
@@ -38,6 +39,10 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getFavoriteItemsCategory()
+        binding?.toolbar?.ivBack?.visibility=View.GONE
+        binding?.toolbar?.tvFoodDetailTitle?.visibility=View.GONE
+        binding?.toolbar?.ivShare?.visibility=View.GONE
+        binding?.toolbar?.tvBack?.visibility=View.GONE
 
         binding?.recyclerViewMain?.apply {
 
@@ -47,6 +52,10 @@ class FavoritesFragment : Fragment() {
 
 
 
+
+        }
+        favoritesItemAdapter.itemClicked={
+            findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(it.id,it.name))
 
         }
     }

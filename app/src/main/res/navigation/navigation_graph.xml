@@ -92,5 +92,27 @@
         android:id="@+id/favoritesFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites"
+
+        >
+        <action
+            android:id="@+id/action_favoritesFragment_to_favoritesCategoriesFragment"
+            app:destination="@id/favoritesCategoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesCategoriesFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesCategoriesFragment"
+        android:label="fragment_favorites_categories"
+        tools:layout="@layout/fragment_favorites_categories" >
+        <argument
+            android:name="categoryID"
+            app:argType="integer"
+            android:defaultValue="0"/>
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue=""/>
+
+
+    </fragment>
 </navigation>

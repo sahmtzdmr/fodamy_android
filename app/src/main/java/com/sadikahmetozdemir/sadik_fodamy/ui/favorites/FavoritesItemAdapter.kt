@@ -15,6 +15,8 @@ import javax.inject.Inject
 
 class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCategoryModel,FavoritesItemAdapter.ViewHolder> (
     recipeComparator){
+
+    var itemClicked: ((FavoritesCategoryModel) -> Unit)? = null
     override fun onBindViewHolder(holder: FavoritesItemAdapter.ViewHolder, position: Int) {
        val currentItem=getItem(position)
         currentItem.let {
@@ -43,8 +45,15 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
 
             binding.apply {
 
+                tvSeeAll.setOnClickListener{
+              //      var categoryID=item.id
+                    itemClicked?.invoke(item)
+                }
+
             ivTitleDrawable.loadCircleCrop(url = item.image?.url)
                 tvFoodName.text=item.name
+
+
 
 
 

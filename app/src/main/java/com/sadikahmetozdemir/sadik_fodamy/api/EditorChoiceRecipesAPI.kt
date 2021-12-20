@@ -26,5 +26,7 @@ interface EditorChoiceRecipesAPI {
     suspend fun favoriteRecipesRequest(@Query("page")pageInt: Int) :FavoritesResponseModel
 
 
+    @GET("api/category/{category_id}/recipe")
 
+    suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID:Int,@Query("page")pageInt: Int):EditorChoiseResponseModel
 }

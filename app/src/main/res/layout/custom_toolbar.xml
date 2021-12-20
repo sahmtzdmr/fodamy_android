@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="8dp"
+                app:layout_goneMarginStart="41dp"
                 android:src="@drawable/fodamy_logo_home"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_logout"
@@ -49,15 +50,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:textAlignment="center"
                 android:id="@+id/tv_food_detail_title"
-                android:layout_width="wrap_content"
+                app:layout_goneMarginStart="50dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="asdasd"
                 android:textAllCaps="false"
                 android:textColor="@color/cardview_light_background"
                 android:textSize="13sp"
-                android:paddingEnd="44dp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_logout"
                 app:layout_constraintStart_toEndOf="@id/tv_back"

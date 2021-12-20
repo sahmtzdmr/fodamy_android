@@ -4,14 +4,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 
-class FavoritesPagingSource (private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
-    PagingSource<Int, FavoritesCategoryModel>() {
+
+class FavoriteCategoriesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI,private var categoryID:Int) :
+    PagingSource<Int, EditorChoiceModel>() {
     private val STARTING_PAGE_INDEX = 1
 
 
-    override fun getRefreshKey(state: PagingState<Int, FavoritesCategoryModel>): Int? {
+
+    override fun getRefreshKey(state: PagingState<Int, EditorChoiceModel>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
@@ -19,18 +20,19 @@ class FavoritesPagingSource (private var editorChoiceRecipesAPI: EditorChoiceRec
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, FavoritesCategoryModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EditorChoiceModel> {
+
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = editorChoiceRecipesAPI.favoriteRecipesRequest(currentPage)
-            val favoriteItems = response.data
+            val response = editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(categoryID,currentPage)
+            val dataFavoriteCategories = response.data
 
             LoadResult.Page(
-                data = favoriteItems,
+                data = dataFavoriteCategories,
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage.minus(
                     STARTING_PAGE_INDEX
                 ),
-                nextKey = if (favoriteItems.isEmpty()) null else currentPage.plus(
+                nextKey = if (dataFavoriteCategories.isEmpty()) null else currentPage.plus(
                     STARTING_PAGE_INDEX
                 )
             )

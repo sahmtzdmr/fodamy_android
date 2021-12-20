@@ -74,6 +74,14 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :Edi
         ).flow
     }
 
+    fun favoriteCategoriesRequest(categoryID:Int,pagingConfig :PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
+        return Pager(
+            config = pagingConfig,
+            pagingSourceFactory = {FavoriteCategoriesPagingSource(editorChoiceRecipesAPI,categoryID)}
+        ).flow
+    }
+
+
 
 
 
