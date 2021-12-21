@@ -7,6 +7,8 @@
     <dimen name="margin_line">16dp</dimen>
     <dimen name="margin_start">15dp</dimen>
     <dimen name="margin_comment">15.5dp</dimen>
+    <dimen name="drawable_size">24dp</dimen>
+    <dimen name="favorites_title_margin">10dp</dimen>
 
 
 </resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="7.5dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+
+        >
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_favorites_food"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/walkthrough_image_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_image"
+            android:background="@drawable/favorites_userimage_background"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:elevation="4dp"
+            android:src="@drawable/walkthrough_image_first"
+            app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
+            app:layout_constraintTop_toTopOf="@id/iv_favorites_food"
+             />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/username_background"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingStart="15dp"
+            android:paddingEnd="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="3dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+            app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
+            app:layout_constraintTop_toTopOf="@id/iv_user_image"
+            android:text="username" />
+
+    <TextView
+        android:id="@+id/tv_favorites_food_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/favorites_title_margin"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Köfte Tarifi"
+        android:textColor="@color/cinder"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_favorites_food" />
+    <TextView
+        android:id="@+id/tv_favorites_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 Yorum"
+        android:fontFamily="@font/nunito_semibold"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_favorites_food_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/favorites_title_margin"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_favorites_like"
+        android:text="0 Beğeni"
+        app:layout_constraintStart_toEndOf="@id/tv_favorites_comment"
+        app:layout_constraintTop_toBottomOf="@id/tv_favorites_food_title"
+        android:layout_marginStart="3dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginBottom="7dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
