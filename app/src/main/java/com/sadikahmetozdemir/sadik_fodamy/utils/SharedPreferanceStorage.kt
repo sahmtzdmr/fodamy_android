@@ -6,6 +6,7 @@ object SharedPreferanceStorage {
     const val BASE_URL="https://fodamy.mobillium.com/"
     const val PREFS_USER_ID="user_id"
     const val FILL_REQUIRED_FIELDS="Lütfen gerekli alanları doldurun."
+    var isTutorialCompleted:Boolean=false
 
 
 }

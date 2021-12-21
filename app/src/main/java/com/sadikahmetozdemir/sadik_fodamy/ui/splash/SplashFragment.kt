@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -43,7 +44,12 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch(Dispatchers.Main){
             delay(1000)
-            findNavController().navigate(R.id.action_splashFragment_to_introFragment)
+            if (SharedPreferanceStorage.isTutorialCompleted==true)
+            { findNavController().navigate(SplashFragmentDirections.toHomeFragment())}
+            else{
+
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToIntroFragment())
+            }
 
         }
 

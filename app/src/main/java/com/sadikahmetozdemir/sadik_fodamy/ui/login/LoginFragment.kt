@@ -73,6 +73,7 @@ class LoginFragment : Fragment() {
             }
 
 
+
         }
 
 
@@ -88,6 +89,11 @@ class LoginFragment : Fragment() {
 
         viewModel.showErrorMessage.observe(viewLifecycleOwner){
             Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
+        }
+        viewModel.user.observe(viewLifecycleOwner){
+
+            findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+
         }
 
     }

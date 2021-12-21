@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentIntroBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.IntroModel
+import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 
 class IntroFragment : Fragment() {
     private var dataBinding: FragmentIntroBinding? = null
@@ -53,9 +54,11 @@ class IntroFragment : Fragment() {
             {dataBinding?.viewPager2?.setCurrentItem(
                 (dataBinding?.viewPager2?.currentItem ?: 0) + 1,
                 true
-            )}
+            )
+            SharedPreferanceStorage.isTutorialCompleted=true
+            }
             else{
-                findNavController().navigate(R.id.action_introFragment_to_signUpFragment)
+                findNavController().navigate(IntroFragmentDirections.toHomeFragment())
             }
         }
 
