@@ -17,6 +17,8 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
     recipeComparator){
 
     var itemClicked: ((FavoritesCategoryModel) -> Unit)? = null
+    var childItemClicked: ((Int)->Unit)?=null
+
     override fun onBindViewHolder(holder: FavoritesItemAdapter.ViewHolder, position: Int) {
        val currentItem=getItem(position)
         currentItem.let {
@@ -41,6 +43,10 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
                 adapter=childAdapter
             }
 
+            childAdapter._itemClicked={
+                childItemClicked?.invoke(it)
+            }
+
 
 
             binding.apply {
@@ -48,10 +54,12 @@ class FavoritesItemAdapter @Inject constructor():PagingDataAdapter<FavoritesCate
                 tvSeeAll.setOnClickListener{
               //      var categoryID=item.id
                     itemClicked?.invoke(item)
+
                 }
 
             ivTitleDrawable.loadCircleCrop(url = item.image?.url)
                 tvFoodName.text=item.name
+
 
 
 

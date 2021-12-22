@@ -58,6 +58,10 @@ class FavoritesFragment : Fragment() {
             findNavController().navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(it.id,it.name))
 
         }
+        favoritesItemAdapter.childItemClicked={
+            findNavController().navigate(FavoritesFragmentDirections.toRecipeDetail(it))
+        }
+
     }
     fun getFavoriteItemsCategory(){
         viewmodel.recipes.observe(viewLifecycleOwner){

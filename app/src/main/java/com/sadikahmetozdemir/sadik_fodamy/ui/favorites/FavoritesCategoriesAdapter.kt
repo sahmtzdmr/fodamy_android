@@ -20,6 +20,9 @@ class FavoritesCategoriesAdapter @Inject constructor() :
     ) {
 
 
+    var itemClickedToImages:((EditorChoiceModel)->Unit)?=null
+
+
 
     override fun onBindViewHolder(holder: FavoritesCategoriesAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -63,13 +66,23 @@ class FavoritesCategoriesAdapter @Inject constructor() :
                 )
                 tvLike.text =
                     String.format(binding.root.context.getString(R.string.like), item.like_count)
+                foodImage.setOnClickListener {
+                    itemClickedToImages?.invoke(item)
+
+
+                }
+
+
+                }
 
 
 
-            }
+
+
 
 
         }
+
 
     }
 

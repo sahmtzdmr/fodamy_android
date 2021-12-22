@@ -107,12 +107,18 @@
         <action
             android:id="@+id/action_favoritesFragment_to_favoritesCategoriesFragment"
             app:destination="@id/favoritesCategoriesFragment" />
+        <action
+            android:id="@+id/toRecipeDetail"
+            app:destination="@id/recipeDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/favoritesCategoriesFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesCategoriesFragment"
         android:label="fragment_favorites_categories"
         tools:layout="@layout/fragment_favorites_categories" >
+        <action
+            android:id="@+id/to_recipe_images"
+            app:destination="@id/recipeImageFragment"/>
         <argument
             android:name="categoryID"
             app:argType="integer"

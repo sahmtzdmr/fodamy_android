@@ -2,6 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import android.content.SharedPreferences
 import android.util.Log
+import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
@@ -52,6 +53,10 @@ class SignUpViewModel @Inject constructor(
             //binding?.textInputLayoutEmail?.error = "Email kısmı boş bırakılamaz."
             showEmailError.postValue("Email kısmı boş bırakılamaz.")
             return false
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            showEmailError.postValue("Geçerli bir email giriniz.")
         }
         if (password.isEmpty()) {
             //binding?.textInputPassword?.error = "Şifre kısmı boş bırakılamaz."
