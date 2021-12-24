@@ -29,6 +29,8 @@
     <string name="time">%1$d dakika önce</string>
     <string name="ingredients_title"> Malzemeler</string>
     <string name="see_all">TÜMÜNÜ GÖR</string>
+    <string name="alert_text">Giriş yapmanız gereklidir.</string>
+    <string name="cancel">Vazgeç</string>
 
 
 </resources>

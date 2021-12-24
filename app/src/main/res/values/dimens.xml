@@ -9,6 +9,7 @@
     <dimen name="margin_comment">15.5dp</dimen>
     <dimen name="drawable_size">24dp</dimen>
     <dimen name="favorites_title_margin">10dp</dimen>
+    <dimen name="alert_iv_size">60dp</dimen>
 
 
 </resources>

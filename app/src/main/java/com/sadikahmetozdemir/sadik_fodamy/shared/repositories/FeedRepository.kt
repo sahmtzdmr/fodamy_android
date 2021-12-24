@@ -81,6 +81,29 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :Edi
         ).flow
     }
 
+    suspend fun userRecipeLikeRequest(recipeID: Int): Resource<LikeModel>{
+        return try {
+            val response=editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID)
+            when(val apiResponse=ApiResponse.create(response)){
+                is ApiSuccessResponse->{
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse ->{
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+
+
+            }
+        }catch (exception:IOException){
+            val apiException=ApiException.create(exception)
+            Resource.error(apiException,null)
+        }
+
+
+
+    }
+
 
 
 

@@ -61,7 +61,7 @@ class FavoritesCategoriesFragment : Fragment() {
 
         }
         favoritesCategoriesAdapter.itemClickedToImages = {
-            
+
             findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(it))
 
 

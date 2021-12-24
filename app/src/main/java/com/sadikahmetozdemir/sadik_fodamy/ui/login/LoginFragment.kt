@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
@@ -33,6 +34,7 @@ class LoginFragment : Fragment() {
 
     val viewModel by viewModels<LoginViewModel>()
     var binding: FragmentLoginBinding? = null
+
 
     private val arrayList: ArrayList<UserModel>? = null
     @Inject  lateinit var prefs:SharedPreferences
@@ -65,11 +67,13 @@ class LoginFragment : Fragment() {
 
             if (viewModel.validateFields(binding?.editTextTextEmailAddress?.text.toString(),binding?.editTextPassword?.text.toString())) {
                lifecycleScope.launch {
+
                    viewModel.sendLoginRequest(
                        binding?.editTextTextEmailAddress?.text.toString(),
                        binding?.editTextPassword?.text.toString()
                    )
                }
+
             }
 
 
@@ -91,8 +95,9 @@ class LoginFragment : Fragment() {
             Toast.makeText(requireContext(),it,Toast.LENGTH_SHORT).show()
         }
         viewModel.user.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "Başarıyla giriş yapıldı", Toast.LENGTH_SHORT).show()
 
-            findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+        findNavController().popBackStack()
 
         }
 

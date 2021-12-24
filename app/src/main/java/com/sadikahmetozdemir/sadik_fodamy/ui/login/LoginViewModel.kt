@@ -35,6 +35,7 @@ class LoginViewModel @Inject constructor(
     val showErrorMessage = MutableLiveData<String?>()
     val user = MutableLiveData<UserModel>()
 
+
     init {
 
     }
@@ -87,13 +88,16 @@ class LoginViewModel @Inject constructor(
                     println(it.token)
                     it.user?.let { ituser ->
                         user.postValue(ituser)
+
                     }
+
 
 
                 }
             }
             Status.ERROR -> {
                 showErrorMessage.postValue(response.message)
+
             }
         }
         return response

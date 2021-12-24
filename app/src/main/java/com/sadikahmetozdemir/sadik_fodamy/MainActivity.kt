@@ -6,6 +6,8 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.gone
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,21 +22,20 @@ class MainActivity : AppCompatActivity() {
         var bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.splashFragment -> bottomNavigationView.visibility = View.GONE
-                R.id.loginFragment -> bottomNavigationView.visibility = View.GONE
-                R.id.signUpFragment -> bottomNavigationView.visibility = View.GONE
-                R.id.introFragment->bottomNavigationView.visibility=View.GONE
-                R.id.forgotPassword->bottomNavigationView.visibility=View.GONE
-                R.id.recipeImageFragment->bottomNavigationView.visibility=View.GONE
-
-
-                else -> bottomNavigationView.visibility=View.VISIBLE
-
-            }
+           if (shouldShowBottomNav(destination.id)){
+                bottomNavigationView.visible()
+           }
+            else
+                bottomNavigationView.gone()
 
 
         }
+
+
+    }
+    private fun shouldShowBottomNav(id: Int):Boolean{
+        return listOf(R.id.homeTablayoutFragment,R.id.favoritesCategoriesFragment).contains(id)
+
 
 
     }

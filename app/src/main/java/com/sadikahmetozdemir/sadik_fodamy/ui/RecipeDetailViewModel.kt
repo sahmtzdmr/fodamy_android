@@ -1,5 +1,6 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,8 @@ class RecipeDetailViewModel @Inject constructor(
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment=MutableLiveData<CommentResponseModel?>()
     var showErrorMessage=MutableLiveData<String?>()
+    val recipeLiked=MutableLiveData<RecipeDetailEvent>()
+
 
 
      fun getRecipeDetail(
@@ -28,6 +31,7 @@ class RecipeDetailViewModel @Inject constructor(
             when (response?.status) {
                 Status.SUCCESS -> {
                     recipeDetail.postValue(response.data)
+
 
                     println(recipeDetail.value)
 
@@ -64,5 +68,29 @@ class RecipeDetailViewModel @Inject constructor(
 
 
     }
+    fun recipeLike(recipeID: Int){
+        viewModelScope.launch {
+            //login kontrol
 
+
+            val response=repository.userRecipeLikeRequest(recipeID)
+            when(response?.status)
+            {
+                Status.SUCCESS->{
+                    recipeLiked.postValue(response.data?.message?.let { RecipeDetailEvent.IsLiked(it) })
+                    getRecipeDetail(recipeID)
+
+
+                }
+                Status.ERROR ->{
+                    Log.d(TAG, "recipeLike: sadasd")                }
+            }
+        }
+
+
+    }
+
+    companion object {
+        private const val TAG = "RecipeDetailViewModel"
+    }
 }
