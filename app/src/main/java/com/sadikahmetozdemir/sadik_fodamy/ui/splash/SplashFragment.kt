@@ -43,9 +43,11 @@ class SplashFragment  : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch(Dispatchers.Main){
             delay(1000)
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN,"").isNullOrBlank())
+
+            if (sharedPreferences.getString(SharedPreferanceStorage.IS_FIRST_ATTACH,"").isNullOrBlank())
 
             {   findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToIntroFragment())
+                sharedPreferences.edit().putString(SharedPreferanceStorage.IS_FIRST_ATTACH,"is_first_attach").apply()
               }
             else{
                 findNavController().navigate(SplashFragmentDirections.toHomeFragment())

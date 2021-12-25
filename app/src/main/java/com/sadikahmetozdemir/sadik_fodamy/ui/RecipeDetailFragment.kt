@@ -94,16 +94,20 @@ class RecipeDetailFragment : Fragment() {
 
 
         }
-        viewModel.recipeLiked.observe(viewLifecycleOwner) { event ->
+        viewModel.event.observe(viewLifecycleOwner) { event ->
 
             when (event) {
-                is RecipeDetailEvent.IsLiked -> binding?.ivLike?.imageTintList =
-                    ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.primary
+                is RecipeDetailEvent.IsLiked -> {
+                    binding?.ivLike?.imageTintList =
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.primary
+                            )
                         )
-                    )
+                }
+                is RecipeDetailEvent.OpenDialog -> findNavController().navigate(event.direction)
+
             }
 
 
@@ -163,6 +167,18 @@ class RecipeDetailFragment : Fragment() {
             ivFood.setOnClickListener {
                 openRecipeImages(recipeDetail)
             }
+            if(recipeDetail.is_liked==true){
+               ivLike.imageTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.primary
+                        )
+                    )
+
+            }
+            
+
             ivLike.setOnClickListener {
                 recipeDetail.id?.let { it1 ->
                     viewModel.recipeLike(it1)

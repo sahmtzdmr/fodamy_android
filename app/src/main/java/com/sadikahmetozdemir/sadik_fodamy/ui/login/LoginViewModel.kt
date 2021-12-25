@@ -76,15 +76,15 @@ class LoginViewModel @Inject constructor(
         when (response?.status) {
             Status.SUCCESS -> {
                 response?.data?.let {
-                    var userID = it.user?.id?.let { it1 ->
+                   it.user?.id?.let { it1 ->
                         sharedPreferences?.edit()?.putInt(
                             SharedPreferanceStorage.PREFS_USER_ID,
                             it1
                         )?.apply()
                     }
+
                     println(it.user?.id)
-                    var userToken = sharedPreferences?.edit()
-                        ?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.apply()
+                    sharedPreferences?.edit()?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.commit()
                     println(it.token)
                     it.user?.let { ituser ->
                         user.postValue(ituser)

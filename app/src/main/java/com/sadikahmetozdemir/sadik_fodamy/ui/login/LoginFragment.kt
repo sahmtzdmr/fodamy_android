@@ -72,6 +72,7 @@ class LoginFragment : Fragment() {
                        binding?.editTextTextEmailAddress?.text.toString(),
                        binding?.editTextPassword?.text.toString()
                    )
+                   findNavController().popBackStack()
                }
 
             }

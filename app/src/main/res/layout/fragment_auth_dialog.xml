@@ -35,16 +35,18 @@
         android:id="@+id/bt_cancel"
         style="@style/AlertButton.Fodamy"
         android:layout_width="0dp"
+        app:cornerRadius="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_line"
         android:text="@string/cancel"
-        android:backgroundTint="@color/indicator_color"
+        android:backgroundTint="@color/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/bt_login"
         app:layout_constraintTop_toBottomOf="@id/tv_alert_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bt_login"
+        app:cornerRadius="0dp"
         style="@style/PrimaryButtonLarge.Fodamy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
