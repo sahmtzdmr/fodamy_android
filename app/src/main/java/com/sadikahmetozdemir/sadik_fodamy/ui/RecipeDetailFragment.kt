@@ -21,6 +21,7 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import dagger.hilt.android.AndroidEntryPoint
+import org.w3c.dom.Text
 import java.util.*
 
 @AndroidEntryPoint
@@ -108,6 +109,20 @@ class RecipeDetailFragment : Fragment() {
                 }
                 is RecipeDetailEvent.OpenDialog -> findNavController().navigate(event.direction)
 
+                is RecipeDetailEvent.IsFollowed -> {
+                    binding?.btFollow?.backgroundTintList=
+                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.primary))
+                    binding?.btFollow?.setText(R.string.following)
+                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+
+
+                }
+
+                is RecipeDetailEvent.IsUnfollowed -> { binding?.btFollow?.backgroundTintList=
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+                    binding?.btFollow?.setText(R.string.follow)
+                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))}
+
             }
 
 
@@ -158,6 +173,20 @@ class RecipeDetailFragment : Fragment() {
             val turkishLocale = Locale.forLanguageTag("tr")
             toolbar.tvFoodDetailTitle.text = recipeDetail.category?.name?.uppercase(turkishLocale)
             toolbar.ivLogout.visibility = View.GONE
+            recipeDetail.user?.is_following?.let { setUpFollowButton(it) }
+            btFollow.setOnClickListener {
+                if(recipeDetail.user?.is_following == false){
+                    recipeDetail.user!!.id.let {
+                        it?.let { it1 -> viewModel.userFollow(it1) } }
+
+                }
+                else{
+                    recipeDetail.user?.id.let {
+                        it?.let { it1 -> viewModel.userUnfollow(it1) }
+                    }
+                }
+
+            }
 
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
@@ -177,16 +206,17 @@ class RecipeDetailFragment : Fragment() {
                         )
                     )
 
-            }
-            else{  ivLike.imageTintList =
-                ColorStateList.valueOf(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.cinder
+            } else {
+                ivLike.imageTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.cinder
+                        )
                     )
-                )
 
             }
+
 
 
             ivLike.setOnClickListener {
@@ -205,7 +235,23 @@ class RecipeDetailFragment : Fragment() {
             }
 
 
+
         }
+
+
+    }
+    fun setUpFollowButton(isFollowed : Boolean){
+
+        if (isFollowed){
+            binding?.btFollow?.backgroundTintList=
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.primary))
+            binding?.btFollow?.setText(R.string.following)
+            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+        }
+       else{ binding?.btFollow?.backgroundTintList=
+            ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+            binding?.btFollow?.setText(R.string.follow)
+            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))}
 
 
     }

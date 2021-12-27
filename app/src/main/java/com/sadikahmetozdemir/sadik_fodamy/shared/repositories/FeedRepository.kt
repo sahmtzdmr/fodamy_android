@@ -10,18 +10,19 @@ import java.io.IOException
 
 import javax.inject.Inject
 
-class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :EditorChoiceRecipesAPI) {
+class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) {
 
     fun feedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = {RecipePagingSource(editorChoiceRecipesAPI)}
+            pagingSourceFactory = { RecipePagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
+
     fun lastAddedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = {LastAddedPagingSource(editorChoiceRecipesAPI)}
+            pagingSourceFactory = { LastAddedPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
 
@@ -29,112 +30,167 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI :Edi
         return PagingConfig(pageSize = 24)
     }
 
-    suspend fun getRecipeDetail(recipeID:Int):Resource<EditorChoiceModel>{
+    suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel> {
         return try {
-            val response=editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
-            when(val apiResponse=ApiResponse.create(response)){
-                is ApiSuccessResponse->{
+            val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
                 }
-                is ApiErrorResponse ->{
+                is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
 
 
             }
-        }catch (exception:IOException){
-            val apiException=ApiException.create(exception)
-            Resource.error(apiException,null)
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
         }
     }
-    suspend fun getRecipeDetailComment(recipeID:Int):Resource<CommentResponseModel>{
+
+    suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel> {
         return try {
-            val response=editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
-            when(val apiResponse=ApiResponse.create(response)){
-                is ApiSuccessResponse->{
+            val response = editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
                 }
-                is ApiErrorResponse ->{
+                is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
 
 
             }
-        }catch (exception:IOException){
-            val apiException=ApiException.create(exception)
-            Resource.error(apiException,null)
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
         }
     }
+
     fun favoriteRecipesRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<FavoritesCategoryModel>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = {FavoritesPagingSource(editorChoiceRecipesAPI)}
+            pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
 
-    fun favoriteCategoriesRequest(categoryID:Int,pagingConfig :PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
+    fun favoriteCategoriesRequest(
+        categoryID: Int,
+        pagingConfig: PagingConfig = getDefaultPageConfig()
+    ): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = {FavoriteCategoriesPagingSource(editorChoiceRecipesAPI,categoryID)}
+            pagingSourceFactory = {
+                FavoriteCategoriesPagingSource(
+                    editorChoiceRecipesAPI,
+                    categoryID
+                )
+            }
         ).flow
     }
 
-    suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel>{
+    suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel> {
         return try {
-            val response=editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID)
-            when(val apiResponse=ApiResponse.create(response)){
-                is ApiSuccessResponse->{
+            val response = editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
                 }
-                is ApiErrorResponse ->{
+                is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
 
 
             }
-        }catch (exception:IOException){
-            val apiException=ApiException.create(exception)
-            Resource.error(apiException,null)
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
         }
 
 
-
     }
-    suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel>{
+
+    suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel> {
         return try {
-            val response=editorChoiceRecipesAPI.userRecipeDislikeRequest(recipeID)
-            when(val apiResponse=ApiResponse.create(response)){
-                is ApiSuccessResponse->{
+            val response = editorChoiceRecipesAPI.userRecipeDislikeRequest(recipeID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
                 }
-                is ApiErrorResponse ->{
+                is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
 
 
             }
-        }catch (exception:IOException){
-            val apiException=ApiException.create(exception)
-            Resource.error(apiException,null)
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
         }
-
 
 
     }
 
+    suspend fun userFollowRequest(followedID: Int): Resource<BaseModel> {
+        return try {
+            val response = editorChoiceRecipesAPI.userFollowing(followedID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse -> {
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
 
 
+            }
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
+        }
 
 
+    }
+    suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel> {
+        return try {
+            val response = editorChoiceRecipesAPI.userUnfollowing(followedID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse -> {
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
 
 
+            }
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
+        }
+
+
+    }
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

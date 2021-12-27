@@ -35,5 +35,13 @@ interface EditorChoiceRecipesAPI {
     @DELETE("api/recipe/{recipe_id}/like")
     suspend fun userRecipeDislikeRequest(@Path("recipe_id") recipeID: Int) : Response<BaseModel>
 
+    @POST("api/user/{followedId}/following")
+    suspend fun userFollowing(@Path("followedId") followedID:Int):Response<BaseModel>
+
+    @DELETE ("api/user/{followedId}/following")
+    suspend fun userUnfollowing(@Path("followedId") followedID: Int): Response<BaseModel>
+
+
+
 
 }
