@@ -52,7 +52,7 @@
             <TextView
                 android:textAlignment="center"
                 android:id="@+id/tv_food_detail_title"
-                app:layout_goneMarginStart="50dp"
+                app:layout_goneMarginStart="40dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_extrabold"

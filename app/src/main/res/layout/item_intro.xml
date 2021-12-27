@@ -9,13 +9,15 @@
 
     <ImageView
         android:id="@+id/introImage1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:src="@drawable/walkthrough_image_first"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/lnContent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
         />
 
     <LinearLayout

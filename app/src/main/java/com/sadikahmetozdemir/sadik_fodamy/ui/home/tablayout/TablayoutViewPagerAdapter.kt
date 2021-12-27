@@ -20,6 +20,7 @@ class TablayoutViewPagerAdapter(manager: FragmentManager):FragmentPagerAdapter(m
 
         return  fragmentList[position]
 
+
     }
 
 

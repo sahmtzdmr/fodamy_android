@@ -7,16 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentHomeTablayoutBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeTablayoutFragment : Fragment() {
     var binding:FragmentHomeTablayoutBinding?=null
+    val viewModel by viewModels<HomeTablayoutViewModel>()
 
 
 
@@ -41,6 +46,20 @@ class HomeTablayoutFragment : Fragment() {
         renderToolbar()
         dividerTabLayout()
 
+        viewModel.event.observe(viewLifecycleOwner){event->
+            when (event)
+
+            {
+                is HomeTablayoutEvent.ShowMassage -> {
+                    Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT)
+                        .show()
+                    println(event.message)
+                }
+            }
+
+
+        }
+
 
 
 
@@ -56,6 +75,11 @@ class HomeTablayoutFragment : Fragment() {
             tvBack.visibility=View.GONE
             tvFoodDetailTitle.visibility=View.GONE
             ivShare.visibility=View.GONE
+            ivLogout.setOnClickListener {
+
+                viewModel.logoutRequest()
+
+            }
         }
 
 

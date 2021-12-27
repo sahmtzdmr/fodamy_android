@@ -53,6 +53,28 @@ class AuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
             Resource.error(apiException,null)
         }
     }
+
+    suspend fun logoutRequest():Resource<LogoutModel>{
+        return try {
+            val response=loginAPI.logoutRequest()
+            when(val apiResponse=ApiResponse.create(response)){
+                is ApiSuccessResponse->{
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse ->{
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+
+
+            }
+        }catch (exception:IOException){
+            val apiException=ApiException.create(exception)
+            Resource.error(apiException,null)
+        }
+    }
+
+
 }
 
 

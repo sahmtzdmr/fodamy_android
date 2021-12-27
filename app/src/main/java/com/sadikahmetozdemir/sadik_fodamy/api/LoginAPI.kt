@@ -17,6 +17,8 @@ interface LoginAPI {
 
     @POST("api/auth/register")
     suspend fun registerRequest(@Body registerRequestModel: RegisterRequestModel): Response<RegisterResponseModel>
+    @POST("api/auth/logout")
+    suspend fun logoutRequest():Response<LogoutModel>
 
   
 

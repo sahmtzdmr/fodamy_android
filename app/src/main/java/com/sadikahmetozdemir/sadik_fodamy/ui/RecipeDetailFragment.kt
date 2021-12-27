@@ -1,11 +1,13 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import dagger.hilt.android.AndroidEntryPoint
+import org.w3c.dom.Text
 import java.util.*
 
 @AndroidEntryPoint
@@ -69,6 +72,7 @@ class RecipeDetailFragment : Fragment() {
 
 
         initObservers()
+
     }
 
     private fun initObservers() {
@@ -84,8 +88,43 @@ class RecipeDetailFragment : Fragment() {
             recipeDetailComment?.let { renderRecipeDetailComment(recipeDetailComment) }
 
         }
-        viewModel.showErrorMessage.observe(viewLifecycleOwner){
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        viewModel.showErrorMessage.observe(viewLifecycleOwner) {
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
+        viewModel.event.observe(viewLifecycleOwner) { event ->
+
+            when (event) {
+                is RecipeDetailEvent.IsLiked -> {
+                    binding?.ivLike?.imageTintList =
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.primary
+                            )
+                        )
+                }
+                is RecipeDetailEvent.OpenDialog -> findNavController().navigate(event.direction)
+
+                is RecipeDetailEvent.IsFollowed -> {
+                    binding?.btFollow?.backgroundTintList=
+                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.primary))
+                    binding?.btFollow?.setText(R.string.following)
+                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+
+
+                }
+
+                is RecipeDetailEvent.IsUnfollowed -> { binding?.btFollow?.backgroundTintList=
+                    ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+                    binding?.btFollow?.setText(R.string.follow)
+                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))}
+
+            }
+
 
         }
 
@@ -98,12 +137,16 @@ class RecipeDetailFragment : Fragment() {
             tvFoodTitle.text = recipeDetail.title
             tvFoodDescription.text = recipeDetail.category?.name
             tvTime.text = recipeDetail.difference.toString()
-            var commentText= binding?.root?.context?.getString(R.string.comment)
+            var commentText = binding?.root?.context?.getString(R.string.comment)
                 ?.let { String.format(it, recipeDetail.comment_count) }
-            tvComment.text =commentText?.spannableNum(0,recipeDetail.comment_count.toString().length)
+            tvComment.text =
+                commentText?.spannableNum(0, recipeDetail.comment_count.toString().length)
             tvLike.text =
                 binding?.root?.context?.getString(R.string.like)
-                    ?.let { String.format(it, recipeDetail.like_count).spannableNum(0,recipeDetail.like_count.toString().length) }
+                    ?.let {
+                        String.format(it, recipeDetail.like_count)
+                            .spannableNum(0, recipeDetail.like_count.toString().length)
+                    }
             tvUsername.text = recipeDetail.user?.username
             tvRecipe.text = binding?.root?.context?.getString(R.string.recipe)?.let {
                 String.format(
@@ -126,10 +169,25 @@ class RecipeDetailFragment : Fragment() {
             ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
             ivEditorChoiceMedal.isVisible = (recipeDetail.isEditorChoice == true)
             layoutDirections.ivCard.setImageResource(R.drawable.ic_clock_icon)
-            toolbar.logoFodamy.visibility=View.GONE
+            toolbar.logoFodamy.visibility = View.GONE
             val turkishLocale = Locale.forLanguageTag("tr")
-            toolbar.tvFoodDetailTitle.text=recipeDetail.category?.name?.uppercase(turkishLocale)
-            toolbar.ivLogout.visibility=View.GONE
+            toolbar.tvFoodDetailTitle.text = recipeDetail.category?.name?.uppercase(turkishLocale)
+            toolbar.ivLogout.visibility = View.GONE
+            recipeDetail.user?.is_following?.let { setUpFollowButton(it) }
+            btFollow.setOnClickListener {
+                if(recipeDetail.user?.is_following == false){
+                    recipeDetail.user!!.id.let {
+                        it?.let { it1 -> viewModel.userFollow(it1) } }
+
+                }
+                else{
+                    recipeDetail.user?.id.let {
+                        it?.let { it1 -> viewModel.userUnfollow(it1) }
+                    }
+                }
+
+            }
+
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -139,33 +197,87 @@ class RecipeDetailFragment : Fragment() {
             ivFood.setOnClickListener {
                 openRecipeImages(recipeDetail)
             }
+            if (recipeDetail.is_liked == true) {
+                ivLike.imageTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.primary
+                        )
+                    )
+
+            } else {
+                ivLike.imageTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.cinder
+                        )
+                    )
+
+            }
 
 
-        }
 
+            ivLike.setOnClickListener {
+                if (recipeDetail.is_liked == false) {
 
-    }
+                    recipeDetail.id?.let { it1 ->
+                        viewModel.recipeLike(it1)
+                    }
+                } else {
+                    recipeDetail.id?.let {
+                        viewModel.recipeDislike(it)
+                    }
 
-    fun renderRecipeDetailComment(commentResponseModel: CommentResponseModel) {
-
-        if(commentResponseModel.data.isNotEmpty()){
-            binding?.apply {
-                tvTittleComment.text = "Yorumlar"
-                ivUserComment.loadCircleCrop(url = commentResponseModel.data.get(0).user?.image?.url.toString())
-                tvUsernameComment.text=commentResponseModel.data.get(0).user?.username
-                tvRecipeComment.text=commentResponseModel.data.get(0).user?.recipe_count.toString()
-                tvFollowerComment.text=commentResponseModel.data.get(0).user?.followed_count.toString()
-                tvTimeComment.text=commentResponseModel.data.get(0).difference.toString()
-                tvUserComment.text=commentResponseModel.data.get(0).text
-
+                }
 
             }
 
 
 
         }
+
+
     }
-    fun openRecipeImages(recipeID:EditorChoiceModel){
+    fun setUpFollowButton(isFollowed : Boolean){
+
+        if (isFollowed){
+            binding?.btFollow?.backgroundTintList=
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.primary))
+            binding?.btFollow?.setText(R.string.following)
+            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+        }
+       else{ binding?.btFollow?.backgroundTintList=
+            ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.cardview_light_background))
+            binding?.btFollow?.setText(R.string.follow)
+            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(),R.color.primary))}
+
+
+    }
+
+    fun renderRecipeDetailComment(commentResponseModel: CommentResponseModel) {
+
+        if (commentResponseModel.data.isNotEmpty()) {
+            binding?.apply {
+                tvTittleComment.text = "Yorumlar"
+                ivUserComment.loadCircleCrop(url = commentResponseModel.data.get(0).user?.image?.url.toString())
+                tvUsernameComment.text = commentResponseModel.data.get(0).user?.username
+                tvRecipeComment.text =
+                    commentResponseModel.data.get(0).user?.recipe_count.toString()
+                tvFollowerComment.text =
+                    commentResponseModel.data.get(0).user?.followed_count.toString()
+                tvTimeComment.text = commentResponseModel.data.get(0).difference.toString()
+                tvUserComment.text = commentResponseModel.data.get(0).text
+
+
+            }
+
+
+        }
+    }
+
+    fun openRecipeImages(recipeID: EditorChoiceModel) {
 
         findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
 

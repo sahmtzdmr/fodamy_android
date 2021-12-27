@@ -20,7 +20,9 @@ data class EditorChoiceModel(
     var time_of_recipe:TimeOfRecipeModel?,
     var number_of_person:NumberOfPersonModel?,
     var category:CategoryModel?,
-    var images:List<ImagesModel>?
+    var images:List<ImagesModel>?,
+    var is_liked:Boolean?
+
 
 
 

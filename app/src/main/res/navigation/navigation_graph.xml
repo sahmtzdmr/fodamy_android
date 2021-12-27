@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/favoritesFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -12,15 +12,19 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_introFragment"
-            app:destination="@id/introFragment" />
+            app:destination="@id/introFragment"
+            />
+        <action
+            android:id="@id/toHomeFragment"
+            app:destination="@id/homeTablayoutFragment"/>
     </fragment>
     <fragment
         android:id="@+id/introFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.intro.IntroFragment"
         android:label="IntroFragment" >
         <action
-            android:id="@+id/action_introFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            android:id="@+id/toHomeFragment"
+            app:destination="@id/homeTablayoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -40,6 +44,11 @@
         <action
             android:id="@+id/action_loginFragment_to_forgotPassword"
             app:destination="@id/forgotPassword" />
+        <action
+            android:id="@+id/toHomeFragment"
+            app:destination="@id/homeTablayoutFragment"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/forgotPassword"
@@ -72,6 +81,10 @@
         <action
             android:id="@+id/to_recipe_images"
             app:destination="@id/recipeImageFragment"/>
+        <action
+            android:id="@+id/toAuthDialogFragment"
+            app:destination="@id/toAuthDialogFragment"
+            />
 
     </fragment>
     <fragment
@@ -98,12 +111,18 @@
         <action
             android:id="@+id/action_favoritesFragment_to_favoritesCategoriesFragment"
             app:destination="@id/favoritesCategoriesFragment" />
+        <action
+            android:id="@+id/toRecipeDetail"
+            app:destination="@id/recipeDetailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/favoritesCategoriesFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesCategoriesFragment"
         android:label="fragment_favorites_categories"
         tools:layout="@layout/fragment_favorites_categories" >
+        <action
+            android:id="@+id/to_recipe_images"
+            app:destination="@id/recipeImageFragment"/>
         <argument
             android:name="categoryID"
             app:argType="integer"
@@ -115,4 +134,12 @@
 
 
     </fragment>
+    <dialog
+        android:id="@+id/toAuthDialogFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.AuthDialogFragment"
+        android:label="AuthDialogFragment" >
+        <action
+            android:id="@+id/toLoginFragment"
+            app:destination="@id/loginFragment" />
+    </dialog>
 </navigation>

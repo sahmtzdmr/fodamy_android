@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_error_alert"
+        android:layout_width="@dimen/alert_iv_size"
+        android:layout_marginStart="133dp"
+        android:layout_marginEnd="132dp"
+        android:layout_height="@dimen/alert_iv_size"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_path_1090"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_alert_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_start"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="@string/alert_text"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/bt_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_error_alert" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_cancel"
+        style="@style/AlertButton.Fodamy"
+        android:layout_width="0dp"
+        app:cornerRadius="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_line"
+        android:text="@string/cancel"
+        android:backgroundTint="@color/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_login"
+        app:layout_constraintTop_toBottomOf="@id/tv_alert_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_login"
+        app:cornerRadius="0dp"
+        style="@style/PrimaryButtonLarge.Fodamy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_line"
+        app:layout_constraintStart_toEndOf="@id/bt_cancel"
+        app:layout_constraintTop_toBottomOf="@id/tv_alert_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/sign_in"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

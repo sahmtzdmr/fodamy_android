@@ -2,10 +2,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import android.content.SharedPreferences
 import android.util.Log
+import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Resource
@@ -31,6 +33,9 @@ class LoginViewModel @Inject constructor(
     val showEmailError = MutableLiveData<String>()
     val showPasswordError = MutableLiveData<String>()
     val showErrorMessage = MutableLiveData<String?>()
+    val user = MutableLiveData<UserModel>()
+
+
     init {
 
     }
@@ -47,7 +52,15 @@ class LoginViewModel @Inject constructor(
 
             showEmailError.postValue("Email alanı boş kalamaz.")
             return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+            showEmailError.postValue("Geçerli bir email giriniz.")
+
         }
+
+
+
+
         if (password.isEmpty()) {
             // binding?.textInputLayoutPassword?.error = "Şifre alanı boş kalamaz."
             showPasswordError.postValue("Şifre alanı boş kalamaz.")
@@ -57,73 +70,34 @@ class LoginViewModel @Inject constructor(
         return true
     }
 
-/*
-    fun sendLoginRequest(username: String, password: String) = viewModelScope.async {
 
-
-        val service = retrofit.create(LoginAPI::class.java)
-        val call = service.loginRequest(LoginRequestModel(username, password))
-        call.enqueue(object : Callback<LoginResponseModel> {
-            override fun onResponse(
-                call: Call<LoginResponseModel>,
-                response: Response<LoginResponseModel>
-            ) {
-                if (response.isSuccessful) {
-
-                    response.body()?.let {
-                        var userID = it.user?.id?.let { it1 ->
-                            sharedPreferences?.edit()?.putInt(
-                                SharedPreferanceStorage.PREFS_USER_ID,
-                                it1
-                            )?.apply()
-                        }
-                        println(it.user?.id)
-
-                        var userToken = sharedPreferences?.edit()
-                            ?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.apply()
-                        println(it.token)
-                    }
-
-
-                } else {
-                    response.errorBody()?.let {
-                        Log.d("sda", "onResponse:")
-
-                    }
-
-                }
-
-            }
-
-            override fun onFailure(call: Call<LoginResponseModel>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-
-        })
-
-
-    }
-*/
-    suspend fun sendLoginRequest(mail: String,password: String): Resource<LoginResponseModel>? {
-        val response =  repository.loginRequest(LoginRequestModel(mail,password))
-        when(response?.status){
-            Status.SUCCESS->{
+    suspend fun sendLoginRequest(mail: String, password: String): Resource<LoginResponseModel>? {
+        val response = repository.loginRequest(LoginRequestModel(mail, password))
+        when (response?.status) {
+            Status.SUCCESS -> {
                 response?.data?.let {
-                    var userID = it.user?.id?.let { it1 ->
+                   it.user?.id?.let { it1 ->
                         sharedPreferences?.edit()?.putInt(
                             SharedPreferanceStorage.PREFS_USER_ID,
                             it1
                         )?.apply()
                     }
+
                     println(it.user?.id)
-                    var userToken = sharedPreferences?.edit()
-                        ?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.apply()
+                    sharedPreferences?.edit()?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.commit()
                     println(it.token)
+                    it.user?.let { ituser ->
+                        user.postValue(ituser)
+
+                    }
+
+
+
                 }
             }
-            Status.ERROR->{
+            Status.ERROR -> {
                 showErrorMessage.postValue(response.message)
+
             }
         }
         return response

@@ -11,6 +11,13 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 
 class FavoritesChildAdapter(var categoryItem: List<EditorChoiceModel>) :
     RecyclerView.Adapter<FavoritesChildAdapter.CategoryViewHolder>() {
+
+
+
+
+
+
+    var _itemClicked:((Int)->Unit)?=null
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,6 +46,14 @@ class FavoritesChildAdapter(var categoryItem: List<EditorChoiceModel>) :
                 tvFavoritesFoodTitle.text=item.title
                 tvFavoritesComment.text=binding.root.context.getString(R.string.comment,item.comment_count)
                 tvFavoritesLike.text=item.like_count.toString()
+                ivFavoritesFood.setOnClickListener {
+                    item.id?.let{
+                        _itemClicked?.invoke(it)
+
+
+                    }
+                }
+
 
             }
 

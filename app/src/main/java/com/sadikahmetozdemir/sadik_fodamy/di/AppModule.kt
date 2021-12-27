@@ -2,9 +2,11 @@ package com.sadikahmetozdemir.sadik_fodamy.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.sadikahmetozdemir.sadik_fodamy.BuildConfig
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.utils.NetworkInterceptor
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.Module
 import dagger.Provides
@@ -13,6 +15,8 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -31,10 +35,11 @@ object AppModule {
     }
 
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(SharedPreferanceStorage.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
             .build()
     }
 
@@ -47,6 +52,19 @@ object AppModule {
 
     @Provides
     fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI)= FeedRepository(editorChoiceRecipesAPI)
+
+    @Provides
+    fun provideInterceptor(networkInterceptor: NetworkInterceptor):OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = if (BuildConfig.DEBUG)
+            HttpLoggingInterceptor.Level.BODY
+        else
+            HttpLoggingInterceptor.Level.NONE
+        return OkHttpClient.Builder()
+            .addInterceptor(networkInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
 
 
 }
