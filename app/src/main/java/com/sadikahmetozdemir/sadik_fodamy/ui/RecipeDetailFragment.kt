@@ -158,6 +158,7 @@ class RecipeDetailFragment : Fragment() {
             val turkishLocale = Locale.forLanguageTag("tr")
             toolbar.tvFoodDetailTitle.text = recipeDetail.category?.name?.uppercase(turkishLocale)
             toolbar.ivLogout.visibility = View.GONE
+
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -167,8 +168,8 @@ class RecipeDetailFragment : Fragment() {
             ivFood.setOnClickListener {
                 openRecipeImages(recipeDetail)
             }
-            if(recipeDetail.is_liked==true){
-               ivLike.imageTintList =
+            if (recipeDetail.is_liked == true) {
+                ivLike.imageTintList =
                     ColorStateList.valueOf(
                         ContextCompat.getColor(
                             requireContext(),
@@ -177,11 +178,27 @@ class RecipeDetailFragment : Fragment() {
                     )
 
             }
-            
+            else{  ivLike.imageTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.cinder
+                    )
+                )
+
+            }
+
 
             ivLike.setOnClickListener {
-                recipeDetail.id?.let { it1 ->
-                    viewModel.recipeLike(it1)
+                if (recipeDetail.is_liked == false) {
+
+                    recipeDetail.id?.let { it1 ->
+                        viewModel.recipeLike(it1)
+                    }
+                } else {
+                    recipeDetail.id?.let {
+                        viewModel.recipeDislike(it)
+                    }
 
                 }
 

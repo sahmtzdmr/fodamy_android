@@ -1,5 +1,6 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -103,6 +104,36 @@ class RecipeDetailViewModel @Inject constructor(
 
 
     }
+    fun recipeDislike(recipeID: Int) {
+        viewModelScope.launch {
+            println(sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN,"sdasda"))
+            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN,"").isNullOrBlank())
+            {
+                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+
+            }
+
+            val response = repository.userRecipeDislikeRequest(recipeID)
+            when (response?.status) {
+                Status.SUCCESS -> {
+
+                    event.postValue(response.data?.message?.let {
+
+                        RecipeDetailEvent.IsDisliked(it) })
+
+                    getRecipeDetail(recipeID)
+
+
+                }
+                Status.ERROR -> {
+                    Log.d(TAG, "recipeLike: sadasd")
+                }
+            }
+        }
+
+
+    }
+
 
 
 

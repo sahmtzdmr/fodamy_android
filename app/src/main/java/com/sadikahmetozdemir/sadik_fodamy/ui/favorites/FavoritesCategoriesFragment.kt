@@ -54,6 +54,10 @@ class FavoritesCategoriesFragment : Fragment() {
             toolbar.tvBack.setOnClickListener {
                 findNavController().popBackStack()
             }
+            toolbar.ivLogout.setOnClickListener {
+                viewModel.logoutRequest()
+                initObserve()
+            }
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -85,6 +89,16 @@ class FavoritesCategoriesFragment : Fragment() {
             favoritesCategoriesAdapter.submitData(
                 viewLifecycleOwner.lifecycle, it
             )
+        }
+    }
+
+    fun initObserve() {
+        viewModel.event.observe(viewLifecycleOwner){event->
+            when (event){
+                is FavoritesEvent.ShowMessage -> println(event.message)
+            }
+
+
         }
     }
 

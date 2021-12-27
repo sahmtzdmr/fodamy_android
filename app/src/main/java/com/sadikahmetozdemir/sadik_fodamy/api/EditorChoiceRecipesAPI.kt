@@ -2,10 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.api
 
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface EditorChoiceRecipesAPI {
 
@@ -32,6 +29,11 @@ interface EditorChoiceRecipesAPI {
     suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID:Int,@Query("page")pageInt: Int):EditorChoiseResponseModel
 
     @POST("api/recipe/{recipe_id}/like")
-    suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID:Int): Response<LikeModel>
+    suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID:Int): Response<BaseModel>
+
+
+    @DELETE("api/recipe/{recipe_id}/like")
+    suspend fun userRecipeDislikeRequest(@Path("recipe_id") recipeID: Int) : Response<BaseModel>
+
 
 }

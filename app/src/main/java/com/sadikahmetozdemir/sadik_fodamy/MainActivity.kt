@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun shouldShowBottomNav(id: Int):Boolean{
-        return listOf(R.id.homeTablayoutFragment,R.id.favoritesCategoriesFragment).contains(id)
+        return listOf(R.id.homeTablayoutFragment,R.id.favoritesCategoriesFragment,R.id.favoritesFragment).contains(id)
 
 
 
