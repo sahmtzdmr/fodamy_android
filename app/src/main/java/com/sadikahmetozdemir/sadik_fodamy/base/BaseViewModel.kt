@@ -1,0 +1,27 @@
+package com.sadikahmetozdemir.sadik_fodamy.base
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
+import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+
+abstract class BaseViewModel : ViewModel() {
+    val baseEvent=SingleLiveEvent<BaseViewEvent>()
+
+
+    fun navigate(directions: NavDirections) = viewModelScope.launch {
+        baseEvent.postValue(BaseViewEvent.NavigateTo(directions))
+    }
+
+    fun showMessage(message: String) = viewModelScope.launch {
+        if (message.isBlank())
+            return@launch
+        baseEvent.postValue(BaseViewEvent.ShowMessage(message))
+
+    }
+
+}
