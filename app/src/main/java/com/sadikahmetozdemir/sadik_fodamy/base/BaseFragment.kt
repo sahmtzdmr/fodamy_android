@@ -32,11 +32,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         viewModel = ViewModelProvider(this).get(viewModelClass)
-        println("viewmodelinişılayzıd")
-
     }
 
     override fun onCreateView(
@@ -47,10 +43,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
         if (isViewCreated) {
             return rootView
         }
-        // viewModel = ViewModelProvider(this).get(viewModelClass)
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-
-
         rootView = binding?.root
         return rootView
     }
@@ -62,12 +55,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel?.baseEvent?.observe(viewLifecycleOwner) {
                 onViewEvent(it)
-
-
             }
-
         }
-
     }
 
     private fun onViewEvent(event: BaseViewEvent) {

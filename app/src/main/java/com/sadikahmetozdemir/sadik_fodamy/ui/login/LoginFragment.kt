@@ -53,17 +53,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layou
             vm=viewModel
             textForgotPassword.setOnClickListener { viewModel?.goForgotPassword() }
             textRegister.setOnClickListener { viewModel?.goRegister() }
-
-            /*buttonLogin.setOnClickListener {
-                viewModel?.sendLoginRequest()
-            }*/
         }
     }
 
     fun initObservers() {
-     /*   viewModel?.showErrorMessage?.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        } */
         viewModel?.user?.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), "Başarıyla giriş yapıldı", Toast.LENGTH_SHORT).show()
         }

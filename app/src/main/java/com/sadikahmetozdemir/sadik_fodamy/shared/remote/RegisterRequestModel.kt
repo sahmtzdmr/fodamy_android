@@ -4,7 +4,4 @@ data class RegisterRequestModel(
     var email: String?,
     var password: String?,
     var username: String?,
-    var name: String?,
-    var surname: String?
-
 )

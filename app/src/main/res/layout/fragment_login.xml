@@ -108,7 +108,7 @@
             android:fontFamily="@font/nunito_semibold"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/buttonLogin"
             android:layout_marginTop="9dp"
             android:focusable="true" />
