@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TimeOfRecipeModel (var id:Int?,var text:Int?):Parcelable
+data class TimeOfRecipeModel(var id: Int?, var text: Int?) : Parcelable

@@ -1,28 +1,16 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import android.content.SharedPreferences
-import android.util.Log
-import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
-import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewEvent
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Resource
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -36,8 +24,8 @@ class LoginViewModel @Inject constructor(
 
     fun sendLoginRequest() = viewModelScope.launch {
         if (username.value.isNullOrBlank() || password.value.isNullOrBlank()) {
-          showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
-           return@launch
+            showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
+            return@launch
         } else {
             val response =
                 repository.loginRequest(
@@ -60,7 +48,6 @@ class LoginViewModel @Inject constructor(
                         println(it.token)
                         it.user?.let { ituser ->
                             user.postValue(ituser)
-
                         }
                     }
                     navigate(LoginFragmentDirections.toHomeFragment())
@@ -71,14 +58,14 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
-    fun goForgotPassword(){
+    fun goForgotPassword() {
         viewModelScope.launch {
             navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
         }
     }
-    fun goRegister(){
+    fun goRegister() {
         viewModelScope.launch {
-            navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment()) }
+            navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+        }
     }
 }
-

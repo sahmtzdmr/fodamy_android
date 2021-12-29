@@ -1,39 +1,21 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
-import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentSignUpBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 @AndroidEntryPoint
-class SignUpFragment : BaseFragment<FragmentSignUpBinding,SignUpViewModel >(R.layout.fragment_sign_up){
+class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel >(R.layout.fragment_sign_up) {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
@@ -44,13 +26,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding,SignUpViewModel >(R.la
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         binding?.apply {
-            vm=viewModel
+            vm = viewModel
             textSignin.setOnClickListener {
                 viewModel?.goLogin()
                 requireView().clearFocus()
             }
         }
-
     }
 
     fun initObservers() {
@@ -63,11 +44,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding,SignUpViewModel >(R.la
         viewModel?.showPasswordError?.observe(viewLifecycleOwner) { passwordError ->
             binding?.textInputPassword?.error = passwordError
         }
-        viewModel?.showErrorMessage?.observe(viewLifecycleOwner){
-            Toast.makeText(requireContext(),it, Toast.LENGTH_SHORT).show()
+        viewModel?.showErrorMessage?.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
-        viewModel?.user?.observe(viewLifecycleOwner){
-            Toast.makeText(requireContext(),"Başarıyla kayıt gerçekleşti",Toast.LENGTH_SHORT).show()
+        viewModel?.user?.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Başarıyla kayıt gerçekleşti", Toast.LENGTH_SHORT).show()
         }
     }
 }

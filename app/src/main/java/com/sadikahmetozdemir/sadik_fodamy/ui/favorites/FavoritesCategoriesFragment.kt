@@ -1,15 +1,14 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesCategoriesBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailFragmentDirections
@@ -26,9 +25,9 @@ class FavoritesCategoriesFragment : Fragment() {
     private var binding: FragmentFavoritesCategoriesBinding? = null
     private val args: FavoritesCategoriesFragmentArgs by navArgs()
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -45,7 +44,6 @@ class FavoritesCategoriesFragment : Fragment() {
             viewModel.getFavoriteCategoriesItem(categoryID)
         }
 
-
         binding?.apply {
             val turkishLocale = Locale.forLanguageTag("tr")
             toolbar.ivShare.visibility = View.GONE
@@ -61,27 +59,20 @@ class FavoritesCategoriesFragment : Fragment() {
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
             }
-
-
         }
         favoritesCategoriesAdapter.itemClickedToImages = {
 
             findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(it))
-
-
         }
-
 
         binding?.rvFavoriteDetails?.apply {
             setHasFixedSize(true)
             adapter = favoritesCategoriesAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
         }
 
         getFavoriteCategories()
-
     }
 
     fun getFavoriteCategories() {
@@ -93,14 +84,10 @@ class FavoritesCategoriesFragment : Fragment() {
     }
 
     fun initObserve() {
-        viewModel.event.observe(viewLifecycleOwner){event->
-            when (event){
+        viewModel.event.observe(viewLifecycleOwner) { event ->
+            when (event) {
                 is FavoritesEvent.ShowMessage -> println(event.message)
             }
-
-
         }
     }
-
-
 }

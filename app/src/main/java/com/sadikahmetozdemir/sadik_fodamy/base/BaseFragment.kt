@@ -12,8 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.findGenericSuperclass
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.showSnackBar
-
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
 import java.lang.IllegalStateException
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> constructor(
@@ -51,7 +50,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel?.baseEvent?.observe(viewLifecycleOwner) {
                 onViewEvent(it)
@@ -65,7 +63,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
                 findNavController().navigate(event.directions)
             }
             is BaseViewEvent.ShowMessage -> {
-                event.message.showSnackBar(requireView())
+                snackbar(event.message)
             }
         }
     }

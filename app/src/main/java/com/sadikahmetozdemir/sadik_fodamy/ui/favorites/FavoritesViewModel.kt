@@ -7,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutEvent
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -28,12 +26,11 @@ class FavoritesViewModel @Inject constructor(
 ) : ViewModel() {
 
     var recipes: MutableLiveData<PagingData<FavoritesCategoryModel>> = MutableLiveData()
-    var event=MutableLiveData<String>()
+    var event = MutableLiveData<String>()
 
     init {
         getFavoriteItems()
     }
-
 
     fun getFavoriteItems() {
         viewModelScope.launch {
@@ -45,9 +42,7 @@ class FavoritesViewModel @Inject constructor(
                     }
                 }
         }
-
     }
-
 
     fun logoutRequest() {
         viewModelScope.launch {
@@ -56,20 +51,14 @@ class FavoritesViewModel @Inject constructor(
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN)
                         .apply()
-                  event.postValue(response.data?.message)
+                    event.postValue(response.data?.message)
                 }
-
 
                 Status.ERROR -> {
 
                     event.postValue(response.data?.message)
-
                 }
             }
-
         }
-
-
     }
-
 }

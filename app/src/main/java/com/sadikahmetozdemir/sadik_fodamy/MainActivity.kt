@@ -1,8 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,23 +21,13 @@ class MainActivity : AppCompatActivity() {
         var bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-           if (shouldShowBottomNav(destination.id)){
+            if (shouldShowBottomNav(destination.id)) {
                 bottomNavigationView.visible()
-           }
-            else
+            } else
                 bottomNavigationView.gone()
-
-
         }
-
-
     }
-    private fun shouldShowBottomNav(id: Int):Boolean{
-        return listOf(R.id.homeTablayoutFragment,R.id.favoritesCategoriesFragment,R.id.favoritesFragment).contains(id)
-
-
-
+    private fun shouldShowBottomNav(id: Int): Boolean {
+        return listOf(R.id.homeTablayoutFragment, R.id.favoritesCategoriesFragment, R.id.favoritesFragment).contains(id)
     }
-
-
 }

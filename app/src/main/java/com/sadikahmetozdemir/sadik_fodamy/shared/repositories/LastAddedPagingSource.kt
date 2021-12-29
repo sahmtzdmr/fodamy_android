@@ -9,12 +9,10 @@ class LastAddedPagingSource(private var editorChoiceRecipesAPI: EditorChoiceReci
     PagingSource<Int, EditorChoiceModel>() {
     private val STARTING_PAGE_INDEX = 1
 
-
     override fun getRefreshKey(state: PagingState<Int, EditorChoiceModel>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-
         }
     }
 
@@ -33,10 +31,8 @@ class LastAddedPagingSource(private var editorChoiceRecipesAPI: EditorChoiceReci
                     STARTING_PAGE_INDEX
                 )
             )
-        }catch (expection:Exception){
+        } catch (expection: Exception) {
             LoadResult.Error(expection)
         }
-
-
     }
 }

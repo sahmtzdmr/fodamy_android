@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class FavoritesCategoryModel(
     var id: Int,
     var name: String,
-    var recipes:List<EditorChoiceModel>,
+    var recipes: List<EditorChoiceModel>,
     var image: ImagesModel?
-):Parcelable
+) : Parcelable
