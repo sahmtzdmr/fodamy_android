@@ -29,7 +29,6 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
             }
         getLastAddedData()
     }
-
     fun getLastAddedData() {
         viewModel?.recipes?.observe(viewLifecycleOwner) {
             lastAddedAdapter.submitData(viewLifecycleOwner.lifecycle, it)

@@ -8,23 +8,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentHomeTablayoutBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice.EditorChoiceFragment
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeTablayoutFragment : Fragment() {
-    var binding: FragmentHomeTablayoutBinding? = null
-    val viewModel by viewModels<HomeTablayoutViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding,HomeTablayoutViewModel>(R.layout.fragment_home_tablayout) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +34,7 @@ class HomeTablayoutFragment : Fragment() {
         setUpViewPager()
         renderToolbar()
         dividerTabLayout()
-
-        viewModel.event.observe(viewLifecycleOwner) { event ->
+        viewModel?.event?.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is HomeTablayoutEvent.ShowMassage -> {
                     Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT)
@@ -63,8 +55,7 @@ class HomeTablayoutFragment : Fragment() {
             tvFoodDetailTitle.visibility = View.GONE
             ivShare.visibility = View.GONE
             ivLogout.setOnClickListener {
-
-                viewModel.logoutRequest()
+                viewModel?.logoutRequest()
             }
         }
     }

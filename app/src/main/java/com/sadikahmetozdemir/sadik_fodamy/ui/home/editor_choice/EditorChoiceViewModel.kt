@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedRepository) : ViewModel() {
+class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedRepository) : BaseViewModel() {
 
     var _recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
     val recipes: LiveData<PagingData<EditorChoiceModel>> get() = _recipes

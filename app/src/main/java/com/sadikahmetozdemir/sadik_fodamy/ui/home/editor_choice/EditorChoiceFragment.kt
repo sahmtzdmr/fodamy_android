@@ -7,38 +7,29 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EditorChoiceFragment : Fragment() {
-
-    val viewModel by viewModels<EditorChoiceViewModel>()
-
+class EditorChoiceFragment :
+    BaseFragment<FragmentEditorChoiceBinding, EditorChoiceViewModel>(R.layout.fragment_editor_choice) {
     @Inject
     lateinit var editorChoiceAdapter: EditorChoiceAdapter
-    private var _binding: FragmentEditorChoiceBinding? = null
-    private val binding: FragmentEditorChoiceBinding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEditorChoiceBinding.inflate(layoutInflater)
-
-        return binding.root
+        binding = FragmentEditorChoiceBinding.inflate(layoutInflater)
+        return binding?.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.homeRecylerView.apply {
+        binding?.homeRecylerView?.apply {
             setHasFixedSize(true)
             adapter = editorChoiceAdapter
             layoutManager =
@@ -55,17 +46,11 @@ class EditorChoiceFragment : Fragment() {
     }
 
     fun getRecipeData() {
-        viewModel._recipes.observe(viewLifecycleOwner) {
-
+        viewModel?._recipes?.observe(viewLifecycleOwner) {
             editorChoiceAdapter.submitData(
                 viewLifecycleOwner.lifecycle,
                 it
             )
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
