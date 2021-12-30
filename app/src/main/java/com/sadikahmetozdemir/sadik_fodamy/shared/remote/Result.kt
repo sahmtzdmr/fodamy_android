@@ -8,6 +8,6 @@ data class Result(
     @field:SerializedName("code")
     val code: String = String(),
     @field:SerializedName("message")
-    val message: String= String(),
+    val message: String = String(),
 
 )

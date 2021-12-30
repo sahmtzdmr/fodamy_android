@@ -11,13 +11,12 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
-
 import javax.inject.Inject
 
 class EditorChoiceAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
 
-var itemClicked:((Int)->Unit)?=null
+    var itemClicked: ((Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,12 +30,9 @@ var itemClicked:((Int)->Unit)?=null
         }
     }
 
-
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-
-
         }
 
         fun bind(item: EditorChoiceModel) {
@@ -65,19 +61,12 @@ var itemClicked:((Int)->Unit)?=null
                 )
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
 
-               foodImage.load(url = item.images?.get(0)?.url)
+                foodImage.load(url = item.images?.get(0)?.url)
 
-
-                editorChoiceMedal.isVisible=(item.isEditorChoice==true)
-
-
-
-
+                editorChoiceMedal.isVisible = (item.isEditorChoice == true)
             }
-
         }
     }
-
 
     companion object {
         private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
@@ -94,5 +83,4 @@ var itemClicked:((Int)->Unit)?=null
                 oldItem == newItem
         }
     }
-
 }

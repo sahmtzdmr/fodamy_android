@@ -12,18 +12,15 @@ data class EditorChoiceModel(
     var ingredients: String?,
     var directions: String?,
     var difference: String?,
-    @SerializedName("is_editor_choice")   var isEditorChoice: Boolean?,
+    @SerializedName("is_editor_choice") var isEditorChoice: Boolean?,
     var is_owner: Boolean?,
     var like_count: Int?,
     var comment_count: Int?,
     var user: UserModel?,
-    var time_of_recipe:TimeOfRecipeModel?,
-    var number_of_person:NumberOfPersonModel?,
-    var category:CategoryModel?,
-    var images:List<ImagesModel>?,
-    var is_liked:Boolean?
+    var time_of_recipe: TimeOfRecipeModel?,
+    var number_of_person: NumberOfPersonModel?,
+    var category: CategoryModel?,
+    var images: List<ImagesModel>?,
+    var is_liked: Boolean?
 
-
-
-
-):Parcelable
+) : Parcelable

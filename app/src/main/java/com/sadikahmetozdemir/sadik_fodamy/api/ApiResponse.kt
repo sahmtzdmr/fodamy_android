@@ -6,7 +6,6 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.ERROR_MESSAGE
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {

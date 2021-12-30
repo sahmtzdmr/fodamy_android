@@ -10,17 +10,14 @@ data class UserModel(
     var username: String?,
     var name: String?,
     var surname: String?,
-    var is_banned:Int?,
-    var is_trusted:Int?,
-    var followed_count:Int?,
-    var following_count:Int?,
-    var recipe_count:Int?,
-    var is_following:Boolean?,
-    var favorites_count:Int?,
-    var likes_count:Int?,
-    var image : ImagesModel?
+    var is_banned: Int?,
+    var is_trusted: Int?,
+    var followed_count: Int?,
+    var following_count: Int?,
+    var recipe_count: Int?,
+    var is_following: Boolean?,
+    var favorites_count: Int?,
+    var likes_count: Int?,
+    var image: ImagesModel?
 
-
-
-
-):Parcelable
+) : Parcelable

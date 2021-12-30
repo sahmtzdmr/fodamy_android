@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.login.SignUpViewModel"/>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,6 +40,7 @@
                 android:layout_marginTop="52dp"
                 android:layout_marginEnd="15dp"
                 android:autofillHints="name"
+                android:text="@={vM.username}"
                 android:background="@color/cardview_light_background"
                 android:drawableStart="@drawable/ic_user_icon"
                 android:drawablePadding="10dp"
@@ -67,6 +74,7 @@
                 android:drawableStart="@drawable/ic_mail_icon"
                 android:drawablePadding="10dp"
                 android:ems="10"
+                android:text="@={vM.email}"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
@@ -96,6 +104,7 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/password"
+                android:text="@={vM.password}"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:paddingStart="10dp"
@@ -111,6 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:onClick="@{()->vM.sendRegisterRequest()}"
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -135,6 +145,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/sign_in"
+            android:onClick="@{()->vM.goLogin()}"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/textSign" />

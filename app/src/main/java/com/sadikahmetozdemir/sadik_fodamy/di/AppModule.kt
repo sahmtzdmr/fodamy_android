@@ -21,7 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-@InstallIn(ViewModelComponent::class, FragmentComponent::class,ActivityRetainedComponent::class)
+@InstallIn(ViewModelComponent::class, FragmentComponent::class, ActivityRetainedComponent::class)
 object AppModule {
     @Provides
     fun provideSharedPrefs(
@@ -31,7 +31,6 @@ object AppModule {
             "PREFS",
             Context.MODE_PRIVATE
         )
-
     }
 
     @Provides
@@ -47,14 +46,15 @@ object AppModule {
     fun provideAuthService(retrofitClient: Retrofit) = retrofitClient.create(LoginAPI::class.java)
 
     @Provides
-    fun provideFeedService(retrofitClient: Retrofit) = retrofitClient.create(EditorChoiceRecipesAPI::class.java)
-
-
-    @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI)= FeedRepository(editorChoiceRecipesAPI)
+    fun provideFeedService(retrofitClient: Retrofit) =
+        retrofitClient.create(EditorChoiceRecipesAPI::class.java)
 
     @Provides
-    fun provideInterceptor(networkInterceptor: NetworkInterceptor):OkHttpClient {
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI) =
+        FeedRepository(editorChoiceRecipesAPI)
+
+    @Provides
+    fun provideInterceptor(networkInterceptor: NetworkInterceptor): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY
@@ -65,6 +65,5 @@ object AppModule {
             .addInterceptor(loggingInterceptor)
             .build()
     }
-
-
 }
+

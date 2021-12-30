@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class CategoryModel(var id:Int?,
-var name:String?,
-):Parcelable
+class CategoryModel(
+    var id: Int?,
+    var name: String?,
+) : Parcelable

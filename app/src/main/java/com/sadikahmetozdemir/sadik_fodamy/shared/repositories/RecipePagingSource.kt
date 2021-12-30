@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import retrofit2.Response
 
 class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     PagingSource<Int, EditorChoiceModel>() {
@@ -14,11 +13,7 @@ class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipes
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-
         }
-
-
-
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EditorChoiceModel> {
@@ -33,10 +28,8 @@ class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipes
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage - 1,
                 nextKey = if (dataRecipes.isEmpty()) null else currentPage + 1
             )
-        }catch (exception:Exception){
-             LoadResult.Error(exception)
+        } catch (exception: Exception) {
+            LoadResult.Error(exception)
         }
-
-
     }
 }

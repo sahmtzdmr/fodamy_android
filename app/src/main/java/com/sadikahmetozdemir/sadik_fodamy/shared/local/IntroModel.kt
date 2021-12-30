@@ -5,9 +5,3 @@ data class IntroModel(
     val tittle: String? = null,
     val description: String? = null
 )
-
-
-
-
-
-

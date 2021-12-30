@@ -7,7 +7,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
-import com.sadikahmetozdemir.sadik_fodamy.databinding.FavoritesChildItemBinding
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesDetailBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
@@ -19,10 +18,7 @@ class FavoritesCategoriesAdapter @Inject constructor() :
         recipeComparator
     ) {
 
-
-    var itemClickedToImages:((EditorChoiceModel)->Unit)?=null
-
-
+    var itemClickedToImages: ((EditorChoiceModel) -> Unit)? = null
 
     override fun onBindViewHolder(holder: FavoritesCategoriesAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -68,24 +64,10 @@ class FavoritesCategoriesAdapter @Inject constructor() :
                     String.format(binding.root.context.getString(R.string.like), item.like_count)
                 foodImage.setOnClickListener {
                     itemClickedToImages?.invoke(item)
-
-
                 }
-
-
-                }
-
-
-
-
-
-
-
+            }
         }
-
-
     }
-
 
     companion object {
         private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
@@ -102,6 +84,4 @@ class FavoritesCategoriesAdapter @Inject constructor() :
                 oldItem == newItem
         }
     }
-
-
 }

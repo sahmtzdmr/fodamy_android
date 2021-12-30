@@ -5,18 +5,14 @@ import androidx.paging.PagingState
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 
-
-class FavoriteCategoriesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI,private var categoryID:Int) :
+class FavoriteCategoriesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI, private var categoryID: Int) :
     PagingSource<Int, EditorChoiceModel>() {
     private val STARTING_PAGE_INDEX = 1
-
-
 
     override fun getRefreshKey(state: PagingState<Int, EditorChoiceModel>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
-
         }
     }
 
@@ -24,7 +20,7 @@ class FavoriteCategoriesPagingSource(private var editorChoiceRecipesAPI: EditorC
 
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(categoryID,currentPage)
+            val response = editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(categoryID, currentPage)
             val dataFavoriteCategories = response.data
 
             LoadResult.Page(
@@ -36,10 +32,8 @@ class FavoriteCategoriesPagingSource(private var editorChoiceRecipesAPI: EditorC
                     STARTING_PAGE_INDEX
                 )
             )
-        }catch (expection:Exception){
+        } catch (expection: Exception) {
             LoadResult.Error(expection)
         }
-
-
     }
 }

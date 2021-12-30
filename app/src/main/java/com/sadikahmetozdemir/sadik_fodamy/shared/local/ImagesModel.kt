@@ -10,4 +10,4 @@ data class ImagesModel(
     var key: String?,
     var order: Int?,
     var url: String?
-):Parcelable
+) : Parcelable

@@ -2,7 +2,6 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +12,6 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import javax.inject.Inject
 
-
 class LastAddedAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, LastAddedAdapter.ViewHolder>(
         recipeComparator
@@ -21,30 +19,20 @@ class LastAddedAdapter @Inject constructor() :
 
     var _itemClicked: ((Int) -> Unit)? = null
 
-
     override fun onBindViewHolder(holder: LastAddedAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
         currentItem?.let {
             holder.bind(it)
         }
-
-
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LastAddedAdapter.ViewHolder {
-
 
         val binding =
             ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder((binding))
     }
-
     inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
-        init {
-
-
-        }
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
@@ -79,14 +67,9 @@ class LastAddedAdapter @Inject constructor() :
                     .into(foodImage)
 
                 editorChoiceMedal.isVisible = (item.isEditorChoice == true)
-
-
             }
-
         }
     }
-
-
     companion object {
         private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
             override fun areItemsTheSame(

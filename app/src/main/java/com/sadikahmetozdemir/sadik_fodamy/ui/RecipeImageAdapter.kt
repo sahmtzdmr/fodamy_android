@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.databinding.CustomImagePopupBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiseResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
-import retrofit2.Retrofit
 
 class RecipeImageAdapter(val list: ArrayList<String>) :
     RecyclerView.Adapter<RecipeImageAdapter.ImageViewHolder>() {
@@ -17,7 +14,7 @@ class RecipeImageAdapter(val list: ArrayList<String>) :
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-       holder.bind(list[position])
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
@@ -25,16 +22,10 @@ class RecipeImageAdapter(val list: ArrayList<String>) :
     }
 
     class ImageViewHolder(val binding: CustomImagePopupBinding) :
-        RecyclerView.ViewHolder(binding.root){
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipeImageURL: String) {
             binding.ivDetailFood.load(url = recipeImageURL)
-
-
         }
-        }
-
-
-
-
+    }
 }

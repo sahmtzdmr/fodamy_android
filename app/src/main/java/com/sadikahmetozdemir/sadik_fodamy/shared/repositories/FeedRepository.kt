@@ -7,8 +7,8 @@ import com.sadikahmetozdemir.sadik_fodamy.api.*
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
-
 import javax.inject.Inject
+
 
 class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) {
 
@@ -41,8 +41,6 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
@@ -61,8 +59,6 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
@@ -103,15 +99,11 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
             Resource.error(apiException, null)
         }
-
-
     }
 
     suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel> {
@@ -125,15 +117,11 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
             Resource.error(apiException, null)
         }
-
-
     }
 
     suspend fun userFollowRequest(followedID: Int): Resource<BaseModel> {
@@ -147,15 +135,11 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
             Resource.error(apiException, null)
         }
-
-
     }
     suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel> {
         return try {
@@ -168,32 +152,10 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                     Resource.error(apiResponse.errorMessage)
                 }
                 else -> Resource.error(Result())
-
-
             }
         } catch (exception: IOException) {
             val apiException = ApiException.create(exception)
             Resource.error(apiException, null)
         }
-
-
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
