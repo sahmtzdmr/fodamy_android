@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesCategoriesBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailFragmentDirections
@@ -17,12 +19,10 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesCategoriesFragment : Fragment() {
-    val viewModel by viewModels<FavoritesCategoriesViewModel>()
-
+class FavoritesCategoriesFragment : BaseFragment<FragmentFavoritesCategoriesBinding,FavoritesCategoriesViewModel>(
+    R.layout.fragment_favorites_categories) {
     @Inject
     lateinit var favoritesCategoriesAdapter: FavoritesCategoriesAdapter
-    private var binding: FragmentFavoritesCategoriesBinding? = null
     private val args: FavoritesCategoriesFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -37,11 +37,10 @@ class FavoritesCategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var item: EditorChoiceModel? = null
         var categoryID = args?.categoryID
 
         if (categoryID != null) {
-            viewModel.getFavoriteCategoriesItem(categoryID)
+            viewModel?.getFavoriteCategoriesItem(categoryID)
         }
 
         binding?.apply {
@@ -50,10 +49,10 @@ class FavoritesCategoriesFragment : Fragment() {
             toolbar.logoFodamy.visibility = View.GONE
             toolbar.tvFoodDetailTitle.text = args.title.uppercase(turkishLocale)
             toolbar.tvBack.setOnClickListener {
-                findNavController().popBackStack()
+              findNavController().popBackStack()
             }
             toolbar.ivLogout.setOnClickListener {
-                viewModel.logoutRequest()
+                viewModel?.logoutRequest()
                 initObserve()
             }
             toolbar.ivBack.setOnClickListener {
@@ -61,8 +60,7 @@ class FavoritesCategoriesFragment : Fragment() {
             }
         }
         favoritesCategoriesAdapter.itemClickedToImages = {
-
-            findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(it))
+            viewModel?.toRecipeDetail(it)
         }
 
         binding?.rvFavoriteDetails?.apply {
@@ -76,7 +74,7 @@ class FavoritesCategoriesFragment : Fragment() {
     }
 
     fun getFavoriteCategories() {
-        viewModel.recipes.observe(viewLifecycleOwner) {
+        viewModel?.recipes?.observe(viewLifecycleOwner) {
             favoritesCategoriesAdapter.submitData(
                 viewLifecycleOwner.lifecycle, it
             )
@@ -84,7 +82,7 @@ class FavoritesCategoriesFragment : Fragment() {
     }
 
     fun initObserve() {
-        viewModel.event.observe(viewLifecycleOwner) { event ->
+        viewModel?.event?.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is FavoritesEvent.ShowMessage -> println(event.message)
             }

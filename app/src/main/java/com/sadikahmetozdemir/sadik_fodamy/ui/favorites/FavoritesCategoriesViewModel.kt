@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
@@ -22,7 +23,7 @@ class FavoritesCategoriesViewModel @Inject constructor(
     private val repository: FeedRepository,
     private val authRepository: AuthRepository,
     private val sharedPreferences: SharedPreferences
-) : ViewModel() {
+) : BaseViewModel() {
 
     var recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
     var event = MutableLiveData<FavoritesEvent>()
@@ -50,5 +51,9 @@ class FavoritesCategoriesViewModel @Inject constructor(
                 Status.REDIRECT -> TODO()
             }
         }
+    }
+    fun toRecipeDetail(editorChoiceModel: EditorChoiceModel){
+        editorChoiceModel.id?.let { FavoritesCategoriesFragmentDirections.toRecipeDetail(it) }
+            ?.let { navigate(it) }
     }
 }

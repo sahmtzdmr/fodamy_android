@@ -7,21 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesFragment : Fragment() {
-    val viewModel by viewModels<FavoritesViewModel>()
-
+class FavoritesFragment : BaseFragment<FragmentFavoritesBinding,FavoritesViewModel>(R.layout.fragment_favorites) {
     @Inject
     lateinit var favoritesItemAdapter: FavoritesItemAdapter
-    var binding: FragmentFavoritesBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +36,7 @@ class FavoritesFragment : Fragment() {
         binding?.toolbar?.ivShare?.visibility = View.GONE
         binding?.toolbar?.tvBack?.visibility = View.GONE
         binding?.toolbar?.ivLogout?.setOnClickListener {
-            viewModel.logoutRequest()
+            viewModel?.logoutRequest()
         }
 
         binding?.recyclerViewMain?.apply {
@@ -50,12 +45,7 @@ class FavoritesFragment : Fragment() {
             adapter = favoritesItemAdapter
         }
         favoritesItemAdapter.itemClicked = {
-            findNavController().navigate(
-                FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(
-                    it.id,
-                    it.name
-                )
-            )
+           viewModel?.toCategories(it)
         }
         favoritesItemAdapter.childItemClicked = {
             findNavController().navigate(FavoritesFragmentDirections.toRecipeDetail(it))
@@ -63,13 +53,13 @@ class FavoritesFragment : Fragment() {
     }
 
     fun getFavoriteItemsCategory() {
-        viewModel.recipes.observe(viewLifecycleOwner) {
+        viewModel?.recipes?.observe(viewLifecycleOwner) {
             favoritesItemAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
 
     fun initObserve() {
-        viewModel.event.observe(viewLifecycleOwner) {
+        viewModel?.event?.observe(viewLifecycleOwner) {
             println(it)
         }
     }

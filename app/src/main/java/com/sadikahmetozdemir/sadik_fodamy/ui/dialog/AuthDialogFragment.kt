@@ -23,7 +23,6 @@ class AuthDialogFragment : DialogFragment() {
         binding?.btLogin?.setOnClickListener {
             findNavController().navigate(AuthDialogFragmentDirections.toLoginFragment())
         }
-
         return binding?.root
     }
 }

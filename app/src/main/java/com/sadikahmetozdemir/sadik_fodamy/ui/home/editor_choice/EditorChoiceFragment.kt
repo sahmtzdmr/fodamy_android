@@ -11,6 +11,7 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

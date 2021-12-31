@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.sadikahmetozdemir.sadik_fodamy.BR
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.findGenericSuperclass
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
 import java.lang.IllegalStateException
@@ -43,6 +44,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        binding?.setVariable(BR.vM,viewModel)
         rootView = binding?.root
         return rootView
     }

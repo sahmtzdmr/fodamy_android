@@ -33,6 +33,7 @@ class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding,HomeTabl
         super.onViewCreated(view, savedInstanceState)
         setUpViewPager()
         renderToolbar()
+        viewModel
         dividerTabLayout()
         viewModel?.event?.observe(viewLifecycleOwner) { event ->
             when (event) {
@@ -44,6 +45,7 @@ class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding,HomeTabl
             }
         }
     }
+    // tek tek viewmodellarda kullanıldığı için nasıl geçirilir araştır!
     fun openRecipeDetail(recipeID: Int) {
 
         findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
@@ -60,7 +62,6 @@ class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding,HomeTabl
         }
     }
     fun dividerTabLayout() {
-
         val root: View? = binding?.tablayout?.getChildAt(0)
         if (root is LinearLayout) {
             root.showDividers = LinearLayout.SHOW_DIVIDER_MIDDLE

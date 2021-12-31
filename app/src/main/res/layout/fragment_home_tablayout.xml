@@ -3,51 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutViewModel" />
+    </data>
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.tablayout.HomeTablayoutFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".ui.home.tablayout.HomeTablayoutFragment">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/cardview_light_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:tabGravity="fill"
-        app:tabSelectedTextColor="@color/primary"
-        app:tabIndicator="@drawable/tab_indicator"
-        app:tabIndicatorColor="@color/primary"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardview_light_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:tabGravity="fill"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabIndicatorColor="@color/primary"
+            app:tabMode="fixed"
 
-        app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/primary"
 
-        app:tabTextColor="@color/black" />
+            app:tabTextColor="@color/black" />
 
-    <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager.widget.ViewPager
 
-        android:id="@+id/viewpager_tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tablayout"
+            android:id="@+id/viewpager_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tablayout"
 
-        />
-
-
+            />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
@@ -17,17 +19,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
-    private val retrofit: Retrofit,
-    private val authRepository: AuthRepository,
     private val repository: FeedRepository,
     private val sharedPreferences: SharedPreferences,
     private val savedStateHandle: SavedStateHandle,
 
-    ) : ViewModel() {
+    ) : BaseViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
     var showErrorMessage = MutableLiveData<String?>()
-    val recipeLiked = MutableLiveData<RecipeDetailEvent>()
     val event = MutableLiveData<RecipeDetailEvent>()
     var recipeID: Int = savedStateHandle.get("recipeId") ?: 0
 
@@ -142,6 +141,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
+                        getRecipeDetail(recipeID)
                     }
                     Status.ERROR -> {
                         Log.d(TAG, "recipeLike: sadasd")
@@ -161,6 +161,7 @@ class RecipeDetailViewModel @Inject constructor(
                 val response = repository.userUnfollowRequest(followId)
                 when (response.status) {
                     Status.SUCCESS -> {
+
                         event.postValue(
                             response.data?.message.let {
                                 it?.let { it1 ->
@@ -170,6 +171,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
+                        getRecipeDetail(recipeID)
                     }
                     Status.ERROR -> {
                         Log.d(TAG, "recipeLike: sadasd")
@@ -178,8 +180,15 @@ class RecipeDetailViewModel @Inject constructor(
             }
         }
     }
+    fun openRecipeImages(recipeID: EditorChoiceModel) {
+
+        navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
+    }
 
     companion object {
         private const val TAG = "RecipeDetailViewModel"
+    }
+    fun bottomSheetUnfollow(){
+        navigate(RecipeDetailFragmentDirections.toBottomSheet())
     }
 }

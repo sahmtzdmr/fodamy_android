@@ -1,460 +1,471 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/seperator"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/custom_toolbar"
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailViewModel" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:background="@color/seperator"
+        android:orientation="vertical">
 
-    <ScrollView
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.RecipeDetailFragment">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_cardview1"
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                tools:context=".ui.RecipeDetailFragment">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_cardview1"
+
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_food"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/walkthrough_image_3"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_editor_choice_medal"
-                        android:layout_width="@dimen/medal_size"
-                        android:layout_height="@dimen/medal_size"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/medal_background"
-                        android:src="@drawable/editors_pick_icon"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1"
-                        app:layout_constraintTop_toTopOf="@id/iv_food" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_food"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/walkthrough_image_3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_food_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_start"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="Makarna Tarifi"
-                        android:textColor="@color/cinder"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_food" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_editor_choice_medal"
+                            android:layout_width="@dimen/medal_size"
+                            android:layout_height="@dimen/medal_size"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/medal_background"
+                            android:src="@drawable/editors_pick_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintTop_toTopOf="@id/iv_food" />
 
-                    <TextView
-                        android:id="@+id/tv_food_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_start"
-                        android:layout_marginTop="1dp"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:text="Hamur işi"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_food_title" />
+                        <TextView
+                            android:id="@+id/tv_food_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Makarna Tarifi"
+                            android:textColor="@color/cinder"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/iv_food" />
 
-                    <TextView
-                        android:id="@+id/tv_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
-                        android:layout_marginEnd="@dimen/margin_start"
-                        android:text="1 dakika önce"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_food" />
+                        <TextView
+                            android:id="@+id/tv_food_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_start"
+                            android:layout_marginTop="1dp"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="Hamur işi"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_food_title" />
 
-                    <View
-                        android:id="@+id/view_divider_horizontal"
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="21dp"
+                            android:layout_marginEnd="@dimen/margin_start"
+                            android:text="1 dakika önce"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/iv_food" />
+
+                        <View
+                            android:id="@+id/view_divider_horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="11.5dp"
+                            android:background="@color/divider"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_food_description" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_comment"
+                            android:src="@drawable/ic_comment_icon"
+                            app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view_divider_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tv_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="1 Yorum"
+                            app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/iv_comments" />
+
+                        <View
+                            android:id="@+id/view_divider_vertical"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:background="@color/divider"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_comment"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view_divider_horizontal" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_comment"
+                            android:src="@drawable/ic_hearth_dark"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
+
+                            app:layout_constraintTop_toTopOf="@id/view_divider_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tv_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="3 Beğeni"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
+                            app:layout_constraintTop_toBottomOf="@id/iv_like" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_cardview_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/material_cardview1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="11.5dp"
-                        android:background="@color/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_food_description" />
+                        android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_comments"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_comment"
-                        android:src="@drawable/ic_comment_icon"
-                        app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/view_divider_horizontal" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline1Left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="15dp" />
 
-                    <TextView
-                        android:id="@+id/tv_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="1 Yorum"
-                        app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_comments" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline1Right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="14dp" />
 
-                    <View
-                        android:id="@+id/view_divider_vertical"
-                        android:layout_width="1dp"
-                        android:layout_height="0dp"
-                        android:background="@color/divider"
-                        app:layout_constraintBottom_toBottomOf="@id/tv_comment"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/view_divider_horizontal" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_comment"
-                        android:src="@drawable/ic_hearth_dark"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
-
-                        app:layout_constraintTop_toTopOf="@id/view_divider_horizontal" />
-
-                    <TextView
-                        android:id="@+id/tv_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="3 Beğeni"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
-                        app:layout_constraintTop_toBottomOf="@id/iv_like" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_cardview_user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_cardview1">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline1Left"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_begin="15dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline1Right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_end="14dp" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_user"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/walkthrough_image_3"
-                        app:layout_constraintEnd_toStartOf="@id/barrier"
-                        app:layout_constraintStart_toStartOf="@id/guideline1Left"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_user"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:src="@drawable/walkthrough_image_3"
+                            app:layout_constraintEnd_toStartOf="@id/barrier"
+                            app:layout_constraintStart_toStartOf="@id/guideline1Left"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/barrier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:barrierDirection="start"
-                        app:constraint_referenced_ids="tv_username,tv_recipe"
-                        app:layout_constraintStart_toEndOf="@id/iv_user"
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:barrierDirection="start"
+                            app:constraint_referenced_ids="tv_username,tv_recipe"
+                            app:layout_constraintStart_toEndOf="@id/iv_user"
 
 
-                        app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="sadas"
-                        android:textColor="@color/cinder"
-                        android:textSize="13sp"
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="sadas"
+                            android:textColor="@color/cinder"
+                            android:textSize="13sp"
 
-                        app:layout_constraintStart_toEndOf="@id/barrier"
-                        app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toEndOf="@id/barrier"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tv_recipe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:text="0 Tarif"
-                        android:textSize="13sp"
-                        app:layout_constraintStart_toEndOf="@id/barrier"
-                        app:layout_constraintTop_toBottomOf="@id/tv_username" />
+                        <TextView
+                            android:id="@+id/tv_recipe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="0 Tarif"
+                            android:textSize="13sp"
+                            app:layout_constraintStart_toEndOf="@id/barrier"
+                            app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
-                    <TextView
-                        android:id="@+id/tv_follower"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="1dp"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:text="0 Takipçi"
-                        android:textSize="13sp"
-                        app:layout_constraintStart_toEndOf="@id/tv_recipe"
+                        <TextView
+                            android:id="@+id/tv_follower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginTop="1dp"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="0 Takipçi"
+                            android:textSize="13sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_recipe"
 
-                        app:layout_constraintTop_toBottomOf="@id/tv_username" />
-
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/bt_follow"
-                        style="@style/PrimaryButtonSmallBorder.Fodamy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/margin_comment"
-                        android:text="@string/follow"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_cardview_ingredients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_cardview_user">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <include
-                        android:id="@+id/layout_ingredients"
-                        layout="@layout/recipe_details_cardview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/bt_follow"
+                            style="@style/PrimaryButtonSmallBorder.Fodamy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_comment"
+                            android:text="@string/follow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_cardview_ingredients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/material_cardview_user">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_cardview_directions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_cardview_ingredients">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <include
-                        android:id="@+id/layout_directions"
-                        layout="@layout/recipe_details_cardview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_cardview_comments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_cardview_directions">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_begin="15dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guidelineRight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_end="14dp" />
-
-                    <TextView
-                        android:id="@+id/tv_tittle_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="Title"
-                        android:textColor="@color/cinder"
-                        android:textSize="15sp"
-                        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/view_divider"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="11.5dp"
-                        android:background="@color/divider"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_tittle_comment" />
+                        android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_user_comment"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/walkthrough_image_3"
-                        app:layout_constraintEnd_toStartOf="@id/barrier_comment"
-                        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                        app:layout_constraintTop_toBottomOf="@id/view_divider" />
+                        <include
+                            android:id="@+id/layout_ingredients"
+                            layout="@layout/recipe_details_cardview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
 
-                    <androidx.constraintlayout.widget.Barrier
-                        android:id="@+id/barrier_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:barrierDirection="start"
-                        app:constraint_referenced_ids="tv_username_comment,tv_recipe_comment"
-                        app:layout_constraintStart_toEndOf="@id/iv_user_comment"
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:id="@+id/tv_username_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/nunito_bold"
-                        android:text="sadas"
-                        android:textColor="@color/cinder"
-                        android:textSize="13sp"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_cardview_directions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/material_cardview_ingredients">
 
-                        app:layout_constraintStart_toEndOf="@id/barrier_comment"
-                        app:layout_constraintTop_toTopOf="@id/iv_user_comment" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_recipe_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:text="0 Tarif"
-                        android:textSize="13sp"
-                        app:layout_constraintStart_toEndOf="@id/barrier_comment"
-                        app:layout_constraintTop_toBottomOf="@id/tv_username_comment" />
-
-                    <TextView
-                        android:id="@+id/tv_follower_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="1dp"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:text="0 Takipçi"
-                        android:textSize="13sp"
-                        app:layout_constraintStart_toEndOf="@id/tv_recipe_comment"
-                        app:layout_constraintTop_toBottomOf="@id/tv_username_comment"
-
-                        app:layout_goneMarginStart="3dp" />
-
-                    <TextView
-                        android:id="@+id/tv_time_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="11dp"
-                        android:text="3 dakika önce"
-                        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                        app:layout_constraintTop_toBottomOf="@id/iv_user_comment" />
-
-                    <TextView
-                        android:id="@+id/tv_user_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
-                        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                        app:layout_constraintHorizontal_bias="0"
-                        app:layout_constraintTop_toBottomOf="@id/tv_time_comment" />
+                        <include
+                            android:id="@+id/layout_directions"
+                            layout="@layout/recipe_details_cardview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_add_comment"
-                style="@style/PrimaryButtonLarge.Fodamy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_start"
-                android:text="@string/add_comment"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_cardview_comments" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_cardview_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/material_cardview_directions">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineLeft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="15dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineRight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_tittle_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="Title"
+                            android:textColor="@color/cinder"
+                            android:textSize="15sp"
+                            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="11.5dp"
+                            android:background="@color/divider"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_tittle_comment" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_user_comment"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:src="@drawable/walkthrough_image_3"
+                            app:layout_constraintEnd_toStartOf="@id/barrier_comment"
+                            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                            app:layout_constraintTop_toBottomOf="@id/view_divider" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrier_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:barrierDirection="start"
+                            app:constraint_referenced_ids="tv_username_comment,tv_recipe_comment"
+                            app:layout_constraintStart_toEndOf="@id/iv_user_comment"
 
-</LinearLayout>
+
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_username_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/nunito_bold"
+                            android:text="sadas"
+                            android:textColor="@color/cinder"
+                            android:textSize="13sp"
+
+                            app:layout_constraintStart_toEndOf="@id/barrier_comment"
+                            app:layout_constraintTop_toTopOf="@id/iv_user_comment" />
+
+                        <TextView
+                            android:id="@+id/tv_recipe_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="0 Tarif"
+                            android:textSize="13sp"
+                            app:layout_constraintStart_toEndOf="@id/barrier_comment"
+                            app:layout_constraintTop_toBottomOf="@id/tv_username_comment" />
+
+                        <TextView
+                            android:id="@+id/tv_follower_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="1dp"
+                            android:layout_marginTop="1dp"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:text="0 Takipçi"
+                            android:textSize="13sp"
+                            app:layout_constraintStart_toEndOf="@id/tv_recipe_comment"
+                            app:layout_constraintTop_toBottomOf="@id/tv_username_comment"
+
+                            app:layout_goneMarginStart="3dp" />
+
+                        <TextView
+                            android:id="@+id/tv_time_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:text="3 dakika önce"
+                            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                            app:layout_constraintTop_toBottomOf="@id/iv_user_comment" />
+
+                        <TextView
+                            android:id="@+id/tv_user_comment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                            app:layout_constraintTop_toBottomOf="@id/tv_time_comment" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_add_comment"
+                    style="@style/PrimaryButtonLarge.Fodamy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_start"
+                    android:text="@string/add_comment"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/material_cardview_comments" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>
