@@ -88,6 +88,9 @@
         <action
             android:id="@+id/toBottomSheet"
             app:destination="@id/bottomSheetFragment" />
+        <action
+            android:id="@+id/toRecipeComments"
+            app:destination="@id/recipeCommentsFragment" />
 
 
     </fragment>
@@ -152,5 +155,16 @@
             android:id="@+id/toLoginFragment"
             app:destination="@id/loginFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/recipeCommentsFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.comment.RecipeCommentsFragment"
+        android:label="RecipeCommentsFragment">
+        <argument
+            android:name="recipeID"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+
+    </fragment>
 
 </navigation>

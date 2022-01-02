@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
@@ -14,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesFragment : BaseFragment<FragmentFavoritesBinding,FavoritesViewModel>(R.layout.fragment_favorites) {
+class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>(R.layout.fragment_favorites) {
     @Inject
     lateinit var favoritesItemAdapter: FavoritesItemAdapter
 
@@ -45,7 +43,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding,FavoritesViewMod
             adapter = favoritesItemAdapter
         }
         favoritesItemAdapter.itemClicked = {
-           viewModel?.toCategories(it)
+            viewModel?.toCategories(it)
         }
         favoritesItemAdapter.childItemClicked = {
             findNavController().navigate(FavoritesFragmentDirections.toRecipeDetail(it))

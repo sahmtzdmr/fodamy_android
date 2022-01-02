@@ -4,23 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesCategoriesBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesCategoriesFragment : BaseFragment<FragmentFavoritesCategoriesBinding,FavoritesCategoriesViewModel>(
-    R.layout.fragment_favorites_categories) {
+class FavoritesCategoriesFragment : BaseFragment<FragmentFavoritesCategoriesBinding, FavoritesCategoriesViewModel>(
+    R.layout.fragment_favorites_categories
+) {
     @Inject
     lateinit var favoritesCategoriesAdapter: FavoritesCategoriesAdapter
     private val args: FavoritesCategoriesFragmentArgs by navArgs()
@@ -49,7 +46,7 @@ class FavoritesCategoriesFragment : BaseFragment<FragmentFavoritesCategoriesBind
             toolbar.logoFodamy.visibility = View.GONE
             toolbar.tvFoodDetailTitle.text = args.title.uppercase(turkishLocale)
             toolbar.tvBack.setOnClickListener {
-              findNavController().popBackStack()
+                findNavController().popBackStack()
             }
             toolbar.ivLogout.setOnClickListener {
                 viewModel?.logoutRequest()

@@ -2,7 +2,6 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -62,7 +61,7 @@ class FavoritesViewModel @Inject constructor(
             }
         }
     }
-    fun toCategories(favoritesCategoryModel: FavoritesCategoryModel){
-        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id,favoritesCategoryModel.name ))
+    fun toCategories(favoritesCategoryModel: FavoritesCategoryModel) {
+        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id, favoritesCategoryModel.name))
     }
 }

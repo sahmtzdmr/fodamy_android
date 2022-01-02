@@ -17,7 +17,7 @@ import com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added.LastAddedFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding,HomeTablayoutViewModel>(R.layout.fragment_home_tablayout) {
+class HomeTablayoutFragment : BaseFragment<FragmentHomeTablayoutBinding, HomeTablayoutViewModel>(R.layout.fragment_home_tablayout) {
 
     override fun onCreateView(
         inflater: LayoutInflater,

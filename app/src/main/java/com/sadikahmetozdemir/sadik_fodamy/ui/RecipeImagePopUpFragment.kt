@@ -43,9 +43,4 @@ class RecipeImagePopUpFragment : Fragment() {
             }
         }
     }
-   /* private fun initObservers(){
-        viewModel.recipeImage.observe(viewLifecycleOwner){recipeImage->
-
-
-        }*/
 }

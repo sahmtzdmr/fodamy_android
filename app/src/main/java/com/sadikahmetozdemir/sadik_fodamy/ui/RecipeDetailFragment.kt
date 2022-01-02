@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding,RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
+class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
     private var args: RecipeDetailFragmentArgs? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -159,7 +159,7 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding,RecipeDeta
                 findNavController().popBackStack()
             }
             ivFood.setOnClickListener {
-               viewModel?.openRecipeImages(recipeDetail)
+                viewModel?.openRecipeImages(recipeDetail)
             }
             if (recipeDetail.is_liked == true) {
                 ivLike.imageTintList =
@@ -178,6 +178,15 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding,RecipeDeta
                         )
                     )
             }
+            ivComments.setOnClickListener {
+                recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }
+                    ?.let { it2 -> viewModel?.navigate(it2) }
+            }
+            tvComment.setOnClickListener {
+                recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }
+                    ?.let { it2 -> viewModel?.navigate(it2) }
+                TODO()
+            }
 
             ivLike.setOnClickListener {
                 if (recipeDetail.is_liked == false) {
@@ -191,13 +200,12 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding,RecipeDeta
                     }
                 }
             }
-            setFragmentResultListener("request_unfollow"){ requestKey, bundle ->
-              if(bundle.getBoolean("unfollow",false)){
-                  recipeDetail.user?.id.let {
-                      it?.let { it1 -> viewModel?.userUnfollow(it1) }
-                  }
-              }
-
+            setFragmentResultListener("request_unfollow") { requestKey, bundle ->
+                if (bundle.getBoolean("unfollow", false)) {
+                    recipeDetail.user?.id.let {
+                        it?.let { it1 -> viewModel?.userUnfollow(it1) }
+                    }
+                }
             }
         }
     }

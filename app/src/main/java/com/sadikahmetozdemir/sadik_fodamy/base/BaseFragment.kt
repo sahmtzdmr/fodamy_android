@@ -44,7 +44,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding?.setVariable(BR.vM,viewModel)
+        binding?.setVariable(BR.vM, viewModel)
         rootView = binding?.root
         return rootView
     }

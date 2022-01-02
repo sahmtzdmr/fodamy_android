@@ -6,7 +6,7 @@ import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 
 class RecipeCommentsPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI, private var categoryID: Int) :
-PagingSource<Int, EditorChoiceModel>() {
+    PagingSource<Int, EditorChoiceModel>() {
     private val STARTING_PAGE_INDEX = 1
 
     override fun getRefreshKey(state: PagingState<Int, EditorChoiceModel>): Int? {

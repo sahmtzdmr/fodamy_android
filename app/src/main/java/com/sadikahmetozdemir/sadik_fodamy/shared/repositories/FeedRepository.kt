@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
 
-
 class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) {
 
     fun feedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
@@ -172,5 +171,4 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             }
         ).flow
     }
-
 }

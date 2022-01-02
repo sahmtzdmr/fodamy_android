@@ -21,6 +21,7 @@ data class EditorChoiceModel(
     var number_of_person: NumberOfPersonModel?,
     var category: CategoryModel?,
     var images: List<ImagesModel>?,
-    var is_liked: Boolean?
+    var is_liked: Boolean?,
+    var text: String
 
 ) : Parcelable

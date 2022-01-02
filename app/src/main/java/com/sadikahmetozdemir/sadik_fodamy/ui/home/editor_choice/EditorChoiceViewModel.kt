@@ -2,7 +2,6 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn

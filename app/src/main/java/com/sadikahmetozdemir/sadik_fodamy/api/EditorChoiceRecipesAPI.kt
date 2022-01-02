@@ -37,6 +37,6 @@ interface EditorChoiceRecipesAPI {
     @DELETE("api/user/{followedId}/following")
     suspend fun userUnfollowing(@Path("followedId") followedID: Int): Response<BaseModel>
 
-    @GET ("api/recipe/{recipe_id}/comment")
-    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int,@Query("page") pageInt: Int): EditorChoiseResponseModel
+    @GET("api/recipe/{recipe_id}/comment")
+    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): EditorChoiseResponseModel
 }

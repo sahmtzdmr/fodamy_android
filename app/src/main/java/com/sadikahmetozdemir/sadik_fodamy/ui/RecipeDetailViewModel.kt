@@ -4,17 +4,13 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +19,7 @@ class RecipeDetailViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
     private val savedStateHandle: SavedStateHandle,
 
-    ) : BaseViewModel() {
+) : BaseViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
     var showErrorMessage = MutableLiveData<String?>()
@@ -188,7 +184,7 @@ class RecipeDetailViewModel @Inject constructor(
     companion object {
         private const val TAG = "RecipeDetailViewModel"
     }
-    fun bottomSheetUnfollow(){
+    fun bottomSheetUnfollow() {
         navigate(RecipeDetailFragmentDirections.toBottomSheet())
     }
 }
