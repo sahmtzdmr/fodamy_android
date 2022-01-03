@@ -1,8 +1,11 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.remote
-
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.sadikahmetozdemir.sadik_fodamy.shared.local.*
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.CategoryModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.ImagesModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.NumberOfPersonModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.TimeOfRecipeModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -22,6 +25,6 @@ data class EditorChoiceModel(
     var category: CategoryModel?,
     var images: List<ImagesModel>?,
     var is_liked: Boolean?,
-    var text: String
+    var text: String?
 
 ) : Parcelable

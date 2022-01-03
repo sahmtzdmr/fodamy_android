@@ -3,8 +3,16 @@ package com.sadikahmetozdemir.sadik_fodamy.shared.repositories
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.sadikahmetozdemir.sadik_fodamy.api.*
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.api.ApiErrorResponse
+import com.sadikahmetozdemir.sadik_fodamy.api.ApiResponse
+import com.sadikahmetozdemir.sadik_fodamy.api.ApiSuccessResponse
+import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.BaseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Resource
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Result
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
@@ -140,6 +148,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
+
     suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.userUnfollowing(followedID)
@@ -157,6 +166,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
+
     fun recipeCommentsRequest(
         categoryID: Int,
         pagingConfig: PagingConfig = getDefaultPageConfig()
@@ -170,5 +180,23 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
                 )
             }
         ).flow
+    }
+
+    suspend fun postRecipeCommentRequest(recipeID: Int,text:String): Resource<EditorChoiceModel> {
+        return try {
+            val response = editorChoiceRecipesAPI.postRecipeComments(recipeID,text)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse -> {
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+            }
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
+        }
     }
 }

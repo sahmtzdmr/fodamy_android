@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -76,14 +78,13 @@ class RecipeDetailViewModel @Inject constructor(
 
                     event.postValue(
                         response.data?.message?.let {
-
                             RecipeDetailEvent.IsLiked(it)
                         }
                     )
                     getRecipeDetail(recipeID)
                 }
                 Status.ERROR -> {
-                    Log.d(TAG, "recipeLike: sadasd")
+                    response.data?.message?.let { showMessage(it) }
                 }
             }
         }
@@ -177,12 +178,11 @@ class RecipeDetailViewModel @Inject constructor(
         }
     }
     fun openRecipeImages(recipeID: EditorChoiceModel) {
-
         navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
     }
 
     companion object {
-        private const val TAG = "RecipeDetailViewModel"
+        const val TAG = "RecipeDetailViewModel"
     }
     fun bottomSheetUnfollow() {
         navigate(RecipeDetailFragmentDirections.toBottomSheet())

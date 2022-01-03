@@ -163,6 +163,9 @@
             android:name="recipeID"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/toAuthDialogFragment"
+            app:destination="@id/toAuthDialogFragment" />
 
 
     </fragment>

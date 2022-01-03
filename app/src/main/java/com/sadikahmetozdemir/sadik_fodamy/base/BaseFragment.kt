@@ -1,5 +1,4 @@
 package com.sadikahmetozdemir.sadik_fodamy.base
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             ?.actualTypeArguments
             ?.getOrNull(1) as? Class<VM>
             ?: throw IllegalStateException("viewModelClass does not equal Class<VM>")
-    var viewModel: VM? = null
+    lateinit var viewModel:VM
     var binding: VDB? = null
     var rootView: View? = null
     private var isViewCreated = false
@@ -44,6 +43,11 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        if(::viewModel.isInitialized){
+            "  zonezero lead selim"
+
+        }
+        binding?.lifecycleOwner=this
         binding?.setVariable(BR.vM, viewModel)
         rootView = binding?.root
         return rootView
@@ -67,6 +71,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             is BaseViewEvent.ShowMessage -> {
                 snackbar(event.message)
             }
+            BaseViewEvent.NavigateBack ->{
+                findNavController().popBackStack()}
         }
     }
 }

@@ -36,6 +36,7 @@
     <string name="unfollow">Takibi Bırak</string>
     <string name="cancel_bottom_sheet">İptal</string>
     <string name="add_comments">Bir şey yaz…</string>
+    <string name="comments">YORUMLAR</string>
 
 
 </resources>

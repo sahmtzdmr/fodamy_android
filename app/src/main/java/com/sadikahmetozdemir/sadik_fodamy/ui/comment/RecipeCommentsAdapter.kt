@@ -34,7 +34,7 @@ class RecipeCommentsAdapter @Inject constructor() :
         fun bind(item: EditorChoiceModel) {
             binding.apply {
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
-                tvUsername.text = item.user?.name
+                tvUsername.text = item.user?.username
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
                     item.user?.recipe_count

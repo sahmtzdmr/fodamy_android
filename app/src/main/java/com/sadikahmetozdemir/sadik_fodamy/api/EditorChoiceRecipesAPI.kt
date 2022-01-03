@@ -1,7 +1,15 @@
 package com.sadikahmetozdemir.sadik_fodamy.api
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.BaseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiseResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesResponseModel
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface EditorChoiceRecipesAPI {
 
@@ -39,4 +47,7 @@ interface EditorChoiceRecipesAPI {
 
     @GET("api/recipe/{recipe_id}/comment")
     suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): EditorChoiseResponseModel
+
+    @POST("api/recipe/{recipe_id}/comment")
+    suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<EditorChoiceModel>
 }

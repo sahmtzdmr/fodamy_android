@@ -21,4 +21,5 @@ abstract class BaseViewModel : ViewModel() {
     fun popBackStack() {
         baseEvent.postValue(BaseViewEvent.NavigateBack)
     }
+
 }
