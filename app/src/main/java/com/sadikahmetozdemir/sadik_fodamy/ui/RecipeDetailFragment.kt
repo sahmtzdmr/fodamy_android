@@ -180,7 +180,8 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDet
             }
             ivComments.setOnClickListener {
                 recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }
-                    ?.let { it2 -> viewModel?.navigate(it2) }
+                    ?.let { it2 ->
+                        viewModel?.navigate(it2) }
             }
             tvComment.setOnClickListener {
                 recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }

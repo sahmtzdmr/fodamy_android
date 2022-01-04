@@ -14,13 +14,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentBottomSheetBinding
 
-class BottomSheetFragment : BottomSheetDialogFragment() {
+class UnfollowDialogFragment : BottomSheetDialogFragment() {
     var binding: FragmentBottomSheetBinding? = null
-    val viewModel by viewModels<BottomSheetViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    val viewModel by viewModels<UnfollowDialogViewModel>()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
@@ -46,7 +42,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun onUnfollowClicked() {
         setFragmentResult("request_unfollow", bundleOf("unfollow" to true))
-
         findNavController().popBackStack()
     }
 }

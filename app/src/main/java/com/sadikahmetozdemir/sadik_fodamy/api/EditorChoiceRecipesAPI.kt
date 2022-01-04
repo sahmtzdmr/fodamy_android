@@ -50,4 +50,7 @@ interface EditorChoiceRecipesAPI {
 
     @POST("api/recipe/{recipe_id}/comment")
     suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<EditorChoiceModel>
+
+    @DELETE ("api/recipe/{recipe_id}/comment/{comment_id}")
+    suspend fun deleteRecipeComments(@Path("recipe_id") recipeID: Int,@Path("comment_id") commentID:Int): Response<BaseModel>
 }

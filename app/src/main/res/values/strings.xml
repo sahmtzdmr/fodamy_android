@@ -37,6 +37,7 @@
     <string name="cancel_bottom_sheet">İptal</string>
     <string name="add_comments">Bir şey yaz…</string>
     <string name="comments">YORUMLAR</string>
+    <string name="delete">Sil</string>
 
 
 </resources>

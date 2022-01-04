@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 class RecipeCommentsAdapter @Inject constructor() :
     PagingDataAdapter<EditorChoiceModel, RecipeCommentsAdapter.ViewHolder>(recipeComparator) {
+    var itemClicked: ((Int) -> Unit)? = null
 
     override fun onBindViewHolder(holder: RecipeCommentsAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -31,6 +32,18 @@ class RecipeCommentsAdapter @Inject constructor() :
 
     inner class ViewHolder(val binding: ItemCommentBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+           binding.tvComment.setOnLongClickListener {
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    val currentItem = getItem(bindingAdapterPosition)
+                    currentItem?.let {
+                        it.id?.let { it1 -> itemClicked?.invoke(it1) }
+                    }
+                }
+                false
+            }
+
+        }
         fun bind(item: EditorChoiceModel) {
             binding.apply {
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
@@ -45,6 +58,7 @@ class RecipeCommentsAdapter @Inject constructor() :
                 )
                 tvTime.text = item.difference.toString()
                 tvComment.text = item.text
+
             }
         }
     }

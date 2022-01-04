@@ -199,4 +199,22 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
+    suspend fun deleteRecipeComment(recipeID: Int,commentID:Int): Resource<BaseModel> {
+        return try {
+            val response = editorChoiceRecipesAPI.deleteRecipeComments(recipeID,commentID)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse -> {
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+            }
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
+        }
+    }
+
 }

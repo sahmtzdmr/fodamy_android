@@ -96,7 +96,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.BottomSheetFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.UnfollowDialogFragment"
         android:label="fragment_bottom_sheet"
         tools:layout="@layout/fragment_bottom_sheet">
 
@@ -166,8 +166,16 @@
         <action
             android:id="@+id/toAuthDialogFragment"
             app:destination="@id/toAuthDialogFragment" />
+        <action
+            android:id="@+id/tocommentDialogFragment"
+            app:destination="@id/commentDialogFragment" />
 
 
     </fragment>
+    <dialog
+        android:id="@+id/commentDialogFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogFragment"
+        android:label="fragment_comment_dialog"
+        tools:layout="@layout/fragment_comment_dialog" />
 
 </navigation>

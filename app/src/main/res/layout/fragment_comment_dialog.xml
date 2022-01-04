@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.dialog.UnfollowDialogFragment">
+    android:layout_height="match_parent"
+    tools:context=".ui.dialog.CommentDialogFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
@@ -20,25 +20,37 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="8dp" />
 
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_unfollow"
-        style="@style/AlertButton.Fodamy"
-        android:letterSpacing="0"
+        android:id="@+id/bt_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/bottom_sheet"
+        android:background="@drawable/bottomsheet_custom_button"
+        app:backgroundTint="@color/bottom_sheet"
+        android:letterSpacing="0"
         android:text="@string/unfollow"
-        android:textColor="@color/primary"
+        android:textColor="@color/cancel"
         android:textSize="20sp"
-        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/bt_delete"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottomsheet_delete_button"
+        android:text="@string/delete"
+        app:backgroundTint="@color/bottom_sheet"
+        android:textSize="20sp"
+        android:textColor="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/bt_cancel"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/cardview_light_background"
-        app:strokeWidth="1dp" />
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/bt_edit" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -47,8 +59,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
-        android:letterSpacing="0"
         android:backgroundTint="@color/cardview_light_background"
+        android:letterSpacing="0"
         android:text="@string/cancel_bottom_sheet"
         android:textColor="@color/cancel"
         android:textSize="20sp"
@@ -56,8 +68,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/bt_unfollow" />
-
+        app:layout_constraintTop_toBottomOf="@id/bt_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
