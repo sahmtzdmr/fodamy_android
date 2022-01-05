@@ -1,10 +1,15 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.repositories
-
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiErrorResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiSuccessResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LogoutModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Resource
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Result
 import com.sadikahmetozdemir.sadik_fodamy.utils.NETWORK_ERROR_MESSAGE
 import java.io.IOException
 import javax.inject.Inject

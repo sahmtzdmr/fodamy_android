@@ -16,7 +16,6 @@ class AuthDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentAuthDialogBinding.inflate(layoutInflater)
         binding?.btCancel?.setOnClickListener {
             dismiss()
@@ -24,7 +23,6 @@ class AuthDialogFragment : DialogFragment() {
         binding?.btLogin?.setOnClickListener {
             findNavController().navigate(AuthDialogFragmentDirections.toLoginFragment())
         }
-
         return binding?.root
     }
 }

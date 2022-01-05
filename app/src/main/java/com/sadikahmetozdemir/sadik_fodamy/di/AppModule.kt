@@ -66,4 +66,3 @@ object AppModule {
             .build()
     }
 }
-

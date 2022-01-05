@@ -20,8 +20,6 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
         binding?.lastAddedRecylerView?.apply {
             setHasFixedSize(true)
             adapter = lastAddedAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
         lastAddedAdapter._itemClicked =
             {
@@ -29,7 +27,6 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
             }
         getLastAddedData()
     }
-
     fun getLastAddedData() {
         viewModel?.recipes?.observe(viewLifecycleOwner) {
             lastAddedAdapter.submitData(viewLifecycleOwner.lifecycle, it)

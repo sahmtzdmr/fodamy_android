@@ -1,6 +1,6 @@
 package com.sadikahmetozdemir.sadik_fodamy
 
-import org.junit.Assert.*
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 /**
