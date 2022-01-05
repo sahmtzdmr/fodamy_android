@@ -169,6 +169,9 @@
         <action
             android:id="@+id/tocommentDialogFragment"
             app:destination="@id/commentDialogFragment" />
+        <action
+            android:id="@+id/toCommentEditFragment"
+            app:destination="@id/commentEditFragment" />
 
 
     </fragment>
@@ -176,6 +179,23 @@
         android:id="@+id/commentDialogFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogFragment"
         android:label="fragment_comment_dialog"
-        tools:layout="@layout/fragment_comment_dialog" />
+        tools:layout="@layout/fragment_comment_dialog" >
+    </dialog>
+    <fragment
+        android:id="@+id/commentEditFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.comment.CommentEditFragment"
+        android:label="CommentEditFragment">
+
+
+        <argument
+            android:name="comment"
+            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+        <argument
+            android:name="recipeID"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+
 
 </navigation>

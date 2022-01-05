@@ -4,18 +4,13 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeCommentsBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.hideSoftKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,14 +20,13 @@ class RecipeCommentsFragment :
     BaseFragment<FragmentRecipeCommentsBinding, RecipeCommentsViewModel>(R.layout.fragment_recipe_comments) {
     @Inject
     lateinit var recipeCommentsAdapter: RecipeCommentsAdapter
-    var recipeComment: EditorChoiceModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel?.getRecipeCommentsItem()
-        recipeCommentsAdapter.itemClicked={
+        recipeCommentsAdapter.itemClicked = {
             viewModel.navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment())
-//            viewModel.deleteRecipeComments(it)
+            viewModel.comment.value = it
         }
         renderRecipeComment()
 
@@ -52,7 +46,6 @@ class RecipeCommentsFragment :
                     binding?.etComment?.setText("")
                 }
             }
-
         }
     }
 
@@ -83,12 +76,10 @@ class RecipeCommentsFragment :
                             )
                         )
                     }
-
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
                 }
-
             })
             ivSend.setOnClickListener {
                 viewModel?.postRecipeComment(binding?.etComment?.text.toString())
@@ -96,20 +87,21 @@ class RecipeCommentsFragment :
 
             setFragmentResultListener("request_delete") { requestKey, bundle ->
                 if (bundle.getBoolean("delete", false)) {
-
-                    recipeComment?.id?.let {
-                        viewModel.deleteRecipeComments(commentId = it)
-                    }
+                    viewModel.deleteRecipeComments()
+                    recipeCommentsAdapter.refresh()
                 }
             }
 
+            setFragmentResultListener("request_edit") { requestKey, bundle ->
+                if (bundle.getBoolean("edit", false)) {
+                    viewModel.toEdit()
+                }
+            }
         }
+
         binding?.recyclerViewComments?.apply {
             setHasFixedSize(true)
             adapter = recipeCommentsAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-
     }
 }

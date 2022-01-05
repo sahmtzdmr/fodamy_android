@@ -24,8 +24,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             ?.actualTypeArguments
             ?.getOrNull(1) as? Class<VM>
             ?: throw IllegalStateException("viewModelClass does not equal Class<VM>")
-    lateinit var viewModel:VM
-    var binding: VDB? = null
+    lateinit var viewModel: VM
+    lateinit var binding: VDB
     var rootView: View? = null
     private var isViewCreated = false
 
@@ -43,13 +43,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        if(::viewModel.isInitialized){
-            "  zonezero lead selim"
-
-        }
-        binding?.lifecycleOwner=this
-        binding?.setVariable(BR.vM, viewModel)
-        rootView = binding?.root
+        binding.lifecycleOwner = this
+        binding.setVariable(BR.vM, viewModel)
+        rootView = binding.root
         return rootView
     }
 
@@ -71,8 +67,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             is BaseViewEvent.ShowMessage -> {
                 snackbar(event.message)
             }
-            BaseViewEvent.NavigateBack ->{
-                findNavController().popBackStack()}
+            BaseViewEvent.NavigateBack -> {
+                findNavController().popBackStack()
+            }
         }
     }
 }

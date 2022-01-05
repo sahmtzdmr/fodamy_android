@@ -20,8 +20,6 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
         binding?.lastAddedRecylerView?.apply {
             setHasFixedSize(true)
             adapter = lastAddedAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
         lastAddedAdapter._itemClicked =
             {

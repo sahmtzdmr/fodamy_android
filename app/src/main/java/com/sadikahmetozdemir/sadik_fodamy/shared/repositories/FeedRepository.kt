@@ -182,9 +182,9 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         ).flow
     }
 
-    suspend fun postRecipeCommentRequest(recipeID: Int,text:String): Resource<EditorChoiceModel> {
+    suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<EditorChoiceModel> {
         return try {
-            val response = editorChoiceRecipesAPI.postRecipeComments(recipeID,text)
+            val response = editorChoiceRecipesAPI.postRecipeComments(recipeID, text)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
@@ -199,9 +199,9 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
-    suspend fun deleteRecipeComment(recipeID: Int,commentID:Int): Resource<BaseModel> {
+    suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel> {
         return try {
-            val response = editorChoiceRecipesAPI.deleteRecipeComments(recipeID,commentID)
+            val response = editorChoiceRecipesAPI.deleteRecipeComments(recipeID, commentID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body))
@@ -216,5 +216,21 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
-
+    suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): Resource<BaseModel> {
+        return try {
+            val response = editorChoiceRecipesAPI.editRecipeComments(recipeID, commentID, text)
+            when (val apiResponse = ApiResponse.create(response)) {
+                is ApiSuccessResponse -> {
+                    Resource.success((apiResponse.body))
+                }
+                is ApiErrorResponse -> {
+                    Resource.error(apiResponse.errorMessage)
+                }
+                else -> Resource.error(Result())
+            }
+        } catch (exception: IOException) {
+            val apiException = ApiException.create(exception)
+            Resource.error(apiException, null)
+        }
+    }
 }

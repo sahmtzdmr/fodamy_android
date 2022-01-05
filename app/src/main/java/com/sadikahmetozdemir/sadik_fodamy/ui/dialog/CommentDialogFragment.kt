@@ -2,7 +2,6 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,22 +21,33 @@ class CommentDialogFragment : BottomSheetDialogFragment() {
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentCommentDialogBinding.inflate(layoutInflater)
+        binding = FragmentCommentDialogBinding.inflate(layoutInflater)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btDelete?.setOnClickListener {
-            onDeleteClicked()
+        binding?.apply {
+            btDelete?.setOnClickListener {
+                onDeleteClicked()
+            }
+            btEdit.setOnClickListener {
+                onEditClicked()
+            }
         }
-
     }
-    private fun onDeleteClicked(){
+
+    private fun onDeleteClicked() {
         setFragmentResult("request_delete", bundleOf("delete" to true))
+        findNavController().popBackStack()
+    }
+
+    private fun onEditClicked() {
+        setFragmentResult("request_edit", bundleOf("edit" to true))
         findNavController().popBackStack()
     }
 }

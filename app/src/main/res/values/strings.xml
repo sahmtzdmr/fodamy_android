@@ -38,6 +38,8 @@
     <string name="add_comments">Bir şey yaz…</string>
     <string name="comments">YORUMLAR</string>
     <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="save">Kaydet</string>
 
 
 </resources>

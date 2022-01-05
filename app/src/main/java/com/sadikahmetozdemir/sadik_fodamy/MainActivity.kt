@@ -28,6 +28,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun shouldShowBottomNav(id: Int): Boolean {
-        return listOf(R.id.homeTablayoutFragment, R.id.favoritesCategoriesFragment, R.id.favoritesFragment,R.id.recipeDetailFragment).contains(id)
+        return listOf(R.id.homeTablayoutFragment, R.id.favoritesCategoriesFragment, R.id.favoritesFragment, R.id.recipeDetailFragment).contains(id)
     }
 }

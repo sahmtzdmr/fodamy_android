@@ -2,9 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -22,17 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
 @AndroidEntryPoint
-class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
-    private var args: RecipeDetailFragmentArgs? = null
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRecipeDetailBinding.inflate(layoutInflater)
-        return binding?.root
-    }
+class RecipeDetailFragment :
+    BaseFragment<FragmentRecipeDetailBinding, RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
 
+    private var args: RecipeDetailFragmentArgs? = null
     private fun getRecipeDetail(recipeID: Int) {
 
         viewModel?.getRecipeDetail(recipeID)
@@ -85,16 +76,36 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDet
 
                 is RecipeDetailEvent.IsFollowed -> {
                     binding?.btFollow?.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.primary))
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.primary
+                            )
+                        )
                     binding?.btFollow?.setText(R.string.following)
-                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                    binding?.btFollow?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.cardview_light_background
+                        )
+                    )
                 }
 
                 is RecipeDetailEvent.IsUnfollowed -> {
                     binding?.btFollow?.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.cardview_light_background
+                            )
+                        )
                     binding?.btFollow?.setText(R.string.follow)
-                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                    binding?.btFollow?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.primary
+                        )
+                    )
                 }
             }
         }
@@ -152,12 +163,6 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDet
                     viewModel?.bottomSheetUnfollow()
                 }
             }
-            toolbar.ivBack.setOnClickListener {
-                findNavController().popBackStack()
-            }
-            toolbar.tvBack.setOnClickListener {
-                findNavController().popBackStack()
-            }
             ivFood.setOnClickListener {
                 viewModel?.openRecipeImages(recipeDetail)
             }
@@ -178,17 +183,6 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDet
                         )
                     )
             }
-            ivComments.setOnClickListener {
-                recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }
-                    ?.let { it2 ->
-                        viewModel?.navigate(it2) }
-            }
-            tvComment.setOnClickListener {
-                recipeDetail.id?.let { it1 -> RecipeDetailFragmentDirections.toRecipeComments(recipeID = it1) }
-                    ?.let { it2 -> viewModel?.navigate(it2) }
-                TODO()
-            }
-
             ivLike.setOnClickListener {
                 if (recipeDetail.is_liked == false) {
 
@@ -210,20 +204,37 @@ class RecipeDetailFragment : BaseFragment<FragmentRecipeDetailBinding, RecipeDet
             }
         }
     }
+
     fun setUpFollowButton(isFollowed: Boolean) {
 
         if (isFollowed) {
             binding?.btFollow?.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.primary))
             binding?.btFollow?.setText(R.string.following)
-            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+            binding?.btFollow?.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.cardview_light_background
+                )
+            )
         } else {
             binding?.btFollow?.backgroundTintList =
-                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.cardview_light_background
+                    )
+                )
             binding?.btFollow?.setText(R.string.follow)
-            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+            binding?.btFollow?.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.primary
+                )
+            )
         }
     }
+
     fun renderRecipeDetailComment(commentResponseModel: CommentResponseModel) {
 
         if (commentResponseModel.data.isNotEmpty()) {

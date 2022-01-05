@@ -17,25 +17,11 @@ class EditorChoiceFragment :
     BaseFragment<FragmentEditorChoiceBinding, EditorChoiceViewModel>(R.layout.fragment_editor_choice) {
     @Inject
     lateinit var editorChoiceAdapter: EditorChoiceAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentEditorChoiceBinding.inflate(layoutInflater)
-        return binding?.root
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.homeRecylerView?.apply {
             setHasFixedSize(true)
             adapter = editorChoiceAdapter
-            layoutManager =
-                LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
         }
         editorChoiceAdapter.itemClicked = {
             (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)

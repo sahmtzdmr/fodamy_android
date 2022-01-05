@@ -180,6 +180,10 @@ class RecipeDetailViewModel @Inject constructor(
     fun openRecipeImages(recipeID: EditorChoiceModel) {
         navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
     }
+    fun toCommentsScreen() {
+        println("sadık")
+        navigate(RecipeDetailFragmentDirections.toRecipeComments(recipeID))
+    }
 
     companion object {
         const val TAG = "RecipeDetailViewModel"

@@ -19,10 +19,10 @@
 
         <include
             android:id="@+id/toolbar"
-            app:baseVM="@{vM}"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:baseVM="@{vM}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,6 +119,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_comment"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{()->vM.toCommentsScreen()}"
                             android:src="@drawable/ic_comment_icon"
                             app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
                             app:layout_constraintStart_toStartOf="parent"

@@ -36,7 +36,7 @@ class UnfollowDialogFragment : BottomSheetDialogFragment() {
             onUnfollowClicked()
         }
         binding?.btCancel?.setOnClickListener {
-            viewModel.popBackStack()
+            dismiss()
         }
     }
 
