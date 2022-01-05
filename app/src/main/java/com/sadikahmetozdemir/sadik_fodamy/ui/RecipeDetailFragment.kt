@@ -166,6 +166,7 @@ class RecipeDetailFragment : Fragment() {
 
             toolbar.ivBack.setOnClickListener {
                 findNavController().popBackStack()
+                println()
             }
             toolbar.tvBack.setOnClickListener {
                 findNavController().popBackStack()
