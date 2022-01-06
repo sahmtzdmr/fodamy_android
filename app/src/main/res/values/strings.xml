@@ -33,6 +33,13 @@
     <string name="cancel">Vazgeç</string>
     <string name="following">Takip Ediliyor</string>
     <string name="text_action">Tamam</string>
+    <string name="unfollow">Takibi Bırak</string>
+    <string name="cancel_bottom_sheet">İptal</string>
+    <string name="add_comments">Bir şey yaz…</string>
+    <string name="comments">YORUMLAR</string>
+    <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="save">Kaydet</string>
 
 
 </resources>

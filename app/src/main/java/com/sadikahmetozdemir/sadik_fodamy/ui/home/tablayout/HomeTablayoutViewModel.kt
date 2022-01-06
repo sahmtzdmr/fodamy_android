@@ -2,8 +2,8 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class HomeTablayoutViewModel @Inject constructor(
     private var authRepository: AuthRepository,
     private var sharedPreferences: SharedPreferences
-) : ViewModel() {
+) : BaseViewModel() {
     val event = MutableLiveData<HomeTablayoutEvent>()
 
     fun logoutRequest() {

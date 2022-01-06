@@ -2,11 +2,11 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
@@ -23,7 +23,7 @@ class FavoritesViewModel @Inject constructor(
     private val repository: FeedRepository,
     private val authRepository: AuthRepository,
     private val sharedPreferences: SharedPreferences
-) : ViewModel() {
+) : BaseViewModel() {
 
     var recipes: MutableLiveData<PagingData<FavoritesCategoryModel>> = MutableLiveData()
     var event = MutableLiveData<String>()
@@ -60,5 +60,8 @@ class FavoritesViewModel @Inject constructor(
                 }
             }
         }
+    }
+    fun toCategories(favoritesCategoryModel: FavoritesCategoryModel) {
+        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id, favoritesCategoryModel.name))
     }
 }

@@ -4,30 +4,27 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
-    private val retrofit: Retrofit,
-    private val authRepository: AuthRepository,
     private val repository: FeedRepository,
     private val sharedPreferences: SharedPreferences,
     private val savedStateHandle: SavedStateHandle,
 
-    ) : ViewModel() {
+) : BaseViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
     var showErrorMessage = MutableLiveData<String?>()
-    val recipeLiked = MutableLiveData<RecipeDetailEvent>()
     val event = MutableLiveData<RecipeDetailEvent>()
     var recipeID: Int = savedStateHandle.get("recipeId") ?: 0
 
@@ -81,14 +78,13 @@ class RecipeDetailViewModel @Inject constructor(
 
                     event.postValue(
                         response.data?.message?.let {
-
                             RecipeDetailEvent.IsLiked(it)
                         }
                     )
                     getRecipeDetail(recipeID)
                 }
                 Status.ERROR -> {
-                    Log.d(TAG, "recipeLike: sadasd")
+                    response.data?.message?.let { showMessage(it) }
                 }
             }
         }
@@ -142,6 +138,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
+                        getRecipeDetail(recipeID)
                     }
                     Status.ERROR -> {
                         Log.d(TAG, "recipeLike: sadasd")
@@ -161,6 +158,7 @@ class RecipeDetailViewModel @Inject constructor(
                 val response = repository.userUnfollowRequest(followId)
                 when (response.status) {
                     Status.SUCCESS -> {
+
                         event.postValue(
                             response.data?.message.let {
                                 it?.let { it1 ->
@@ -170,6 +168,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
+                        getRecipeDetail(recipeID)
                     }
                     Status.ERROR -> {
                         Log.d(TAG, "recipeLike: sadasd")
@@ -178,8 +177,18 @@ class RecipeDetailViewModel @Inject constructor(
             }
         }
     }
+    fun openRecipeImages(recipeID: EditorChoiceModel) {
+        navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
+    }
+    fun toCommentsScreen() {
+        println("sadık")
+        navigate(RecipeDetailFragmentDirections.toRecipeComments(recipeID))
+    }
 
     companion object {
-        private const val TAG = "RecipeDetailViewModel"
+        const val TAG = "RecipeDetailViewModel"
+    }
+    fun bottomSheetUnfollow() {
+        navigate(RecipeDetailFragmentDirections.toBottomSheet())
     }
 }

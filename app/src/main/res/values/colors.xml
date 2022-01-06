@@ -13,5 +13,9 @@
     <color name="seperator">#F1F2F3</color>
     <color name="cinder">#212529</color>
     <color name="indicator_color">#707070</color>
+    <color name="cancel">#007AFF</color>
+    <color name="bottom_sheet">#D9D9D9</color>
+    <color name="bottom_sheet_bg">#999999</color>
+    <color name="color_gray">#ADB5BD</color>
 
 </resources>

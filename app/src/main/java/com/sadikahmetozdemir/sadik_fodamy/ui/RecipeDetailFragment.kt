@@ -2,16 +2,14 @@ package com.sadikahmetozdemir.sadik_fodamy.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
@@ -19,37 +17,21 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Locale
 
 @AndroidEntryPoint
-class RecipeDetailFragment : Fragment() {
-    val viewModel by viewModels<RecipeDetailViewModel>()
+class RecipeDetailFragment :
+    BaseFragment<FragmentRecipeDetailBinding, RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
+
     private var args: RecipeDetailFragmentArgs? = null
-    var binding: FragmentRecipeDetailBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
-        binding = FragmentRecipeDetailBinding.inflate(layoutInflater)
-        return binding?.root
-    }
-
     private fun getRecipeDetail(recipeID: Int) {
 
-        viewModel.getRecipeDetail(recipeID)
+        viewModel?.getRecipeDetail(recipeID)
     }
 
     private fun getRecipeDetailComment(recipeID: Int) {
 
-        viewModel.getRecipeDetailComment(recipeID)
+        viewModel?.getRecipeDetailComment(recipeID)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,20 +47,20 @@ class RecipeDetailFragment : Fragment() {
 
     private fun initObservers() {
 
-        viewModel.recipeDetail.observe(viewLifecycleOwner) { recipeDetail ->
+        viewModel?.recipeDetail?.observe(viewLifecycleOwner) { recipeDetail ->
 
             recipeDetail?.let { renderRecipeDetail(it) }
         }
-        viewModel.recipeDetailComment.observe(viewLifecycleOwner) { recipeDetailComment ->
+        viewModel?.recipeDetailComment?.observe(viewLifecycleOwner) { recipeDetailComment ->
 
             recipeDetailComment?.let { renderRecipeDetailComment(recipeDetailComment) }
         }
-        viewModel.showErrorMessage.observe(viewLifecycleOwner) {
+        viewModel?.showErrorMessage?.observe(viewLifecycleOwner) {
             requireActivity().runOnUiThread {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel.event.observe(viewLifecycleOwner) { event ->
+        viewModel?.event?.observe(viewLifecycleOwner) { event ->
 
             when (event) {
                 is RecipeDetailEvent.IsLiked -> {
@@ -94,16 +76,36 @@ class RecipeDetailFragment : Fragment() {
 
                 is RecipeDetailEvent.IsFollowed -> {
                     binding?.btFollow?.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.primary))
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.primary
+                            )
+                        )
                     binding?.btFollow?.setText(R.string.following)
-                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                    binding?.btFollow?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.cardview_light_background
+                        )
+                    )
                 }
 
                 is RecipeDetailEvent.IsUnfollowed -> {
                     binding?.btFollow?.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.cardview_light_background
+                            )
+                        )
                     binding?.btFollow?.setText(R.string.follow)
-                    binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                    binding?.btFollow?.setTextColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.primary
+                        )
+                    )
                 }
             }
         }
@@ -155,24 +157,16 @@ class RecipeDetailFragment : Fragment() {
             btFollow.setOnClickListener {
                 if (recipeDetail.user?.is_following == false) {
                     recipeDetail.user!!.id.let {
-                        it?.let { it1 -> viewModel.userFollow(it1) }
+                        it?.let { it1 -> viewModel?.userFollow(it1) }
                     }
                 } else {
-                    recipeDetail.user?.id.let {
-                        it?.let { it1 -> viewModel.userUnfollow(it1) }
-                    }
+                    viewModel?.bottomSheetUnfollow()
                 }
             }
 
-            toolbar.ivBack.setOnClickListener {
-                findNavController().popBackStack()
-                println()
-            }
-            toolbar.tvBack.setOnClickListener {
-                findNavController().popBackStack()
-            }
-            ivFood.setOnClickListener {
-                openRecipeImages(recipeDetail)
+           
+          ivFood.setOnClickListener {
+                viewModel?.openRecipeImages(recipeDetail)
             }
             if (recipeDetail.is_liked == true) {
                 ivLike.imageTintList =
@@ -191,33 +185,55 @@ class RecipeDetailFragment : Fragment() {
                         )
                     )
             }
-
             ivLike.setOnClickListener {
                 if (recipeDetail.is_liked == false) {
 
                     recipeDetail.id?.let { it1 ->
-                        viewModel.recipeLike(it1)
+                        viewModel?.recipeLike(it1)
                     }
                 } else {
                     recipeDetail.id?.let {
-                        viewModel.recipeDislike(it)
+                        viewModel?.recipeDislike(it)
+                    }
+                }
+            }
+            setFragmentResultListener("request_unfollow") { requestKey, bundle ->
+                if (bundle.getBoolean("unfollow", false)) {
+                    recipeDetail.user?.id.let {
+                        it?.let { it1 -> viewModel?.userUnfollow(it1) }
                     }
                 }
             }
         }
     }
+
     fun setUpFollowButton(isFollowed: Boolean) {
 
         if (isFollowed) {
             binding?.btFollow?.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.primary))
             binding?.btFollow?.setText(R.string.following)
-            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+            binding?.btFollow?.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.cardview_light_background
+                )
+            )
         } else {
             binding?.btFollow?.backgroundTintList =
-                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.cardview_light_background))
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.cardview_light_background
+                    )
+                )
             binding?.btFollow?.setText(R.string.follow)
-            binding?.btFollow?.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+            binding?.btFollow?.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.primary
+                )
+            )
         }
     }
 
@@ -236,10 +252,5 @@ class RecipeDetailFragment : Fragment() {
                 tvUserComment.text = commentResponseModel.data.get(0).text
             }
         }
-    }
-
-    fun openRecipeImages(recipeID: EditorChoiceModel) {
-
-        findNavController().navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
     }
 }

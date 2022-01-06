@@ -1,5 +1,4 @@
 package com.sadikahmetozdemir.sadik_fodamy.base
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.sadikahmetozdemir.sadik_fodamy.BR
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.findGenericSuperclass
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
 import java.lang.IllegalStateException
@@ -24,8 +24,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             ?.actualTypeArguments
             ?.getOrNull(1) as? Class<VM>
             ?: throw IllegalStateException("viewModelClass does not equal Class<VM>")
-    var viewModel: VM? = null
-    var binding: VDB? = null
+    lateinit var viewModel: VM
+    lateinit var binding: VDB
     var rootView: View? = null
     private var isViewCreated = false
 
@@ -43,7 +43,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        rootView = binding?.root
+        binding.lifecycleOwner = this
+        binding.setVariable(BR.vM, viewModel)
+        rootView = binding.root
         return rootView
     }
 
@@ -64,6 +66,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             }
             is BaseViewEvent.ShowMessage -> {
                 snackbar(event.message)
+            }
+            BaseViewEvent.NavigateBack -> {
+                findNavController().popBackStack()
             }
         }
     }

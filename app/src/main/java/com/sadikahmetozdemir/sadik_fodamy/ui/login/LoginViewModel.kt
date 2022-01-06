@@ -19,8 +19,8 @@ class LoginViewModel @Inject constructor(
     private val repository: AuthRepository
 ) : BaseViewModel() {
     val user = MutableLiveData<UserModel>()
-    val username = MutableLiveData("sadiks")
-    val password = MutableLiveData("fodamy48+")
+    val username = MutableLiveData("")
+    val password = MutableLiveData("")
 
     fun sendLoginRequest() = viewModelScope.launch {
         if (username.value.isNullOrBlank() || password.value.isNullOrBlank()) {

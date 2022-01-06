@@ -1,6 +1,10 @@
 package com.sadikahmetozdemir.sadik_fodamy.api
 
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.*
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LogoutModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterResponseModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
