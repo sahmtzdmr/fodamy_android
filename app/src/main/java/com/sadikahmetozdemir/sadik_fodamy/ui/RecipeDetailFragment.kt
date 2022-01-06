@@ -163,7 +163,9 @@ class RecipeDetailFragment :
                     viewModel?.bottomSheetUnfollow()
                 }
             }
-            ivFood.setOnClickListener {
+
+           
+          ivFood.setOnClickListener {
                 viewModel?.openRecipeImages(recipeDetail)
             }
             if (recipeDetail.is_liked == true) {
