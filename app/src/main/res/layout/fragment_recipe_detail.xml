@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sadikahmetozdemir.sadik_fodamy.utils.extensions.StringExKt" />
+
         <variable
             name="vM"
             type="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailViewModel" />
@@ -57,10 +59,10 @@
                             android:layout_width="0dp"
                             android:layout_height="375dp"
                             android:scaleType="centerCrop"
-                            tools:src="@drawable/walkthrough_image_3"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/walkthrough_image_3" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_editor_choice_medal"
@@ -83,10 +85,10 @@
                             android:fontFamily="@font/nunito_bold"
                             android:text="@{vM.recipeDetail.title}"
                             android:textColor="@color/cinder"
-                            tools:text="Makarna Tarifi"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/iv_food" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_food"
+                            tools:text="Makarna Tarifi" />
 
                         <TextView
                             android:id="@+id/tv_food_description"
@@ -136,11 +138,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            tools:text="1 Yorum"
-                            android:text="@{@string/comment(vM.recipeDetail.comment_count)}"
+                            comment_count="@{vM.recipeDetail.comment_count}"
                             app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/iv_comments" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_comments"
+                            tools:text="1 Yorum" />
 
                         <View
                             android:id="@+id/view_divider_vertical"
@@ -168,11 +170,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            tools:text="3 Beğeni"
                             android:text="@{Integer.toString(vM.recipeDetail.like_count)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
-                            app:layout_constraintTop_toBottomOf="@id/iv_like" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_like"
+                            tools:text="3 Beğeni" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
