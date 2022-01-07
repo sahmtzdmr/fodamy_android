@@ -141,7 +141,6 @@ class RecipeDetailFragment :
             layoutDirections.tvNumber.text = "${recipeDetail.time_of_recipe?.text} dk"
             layoutDirections.tvIngredients.text = recipeDetail.directions
             ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
-            ivEditorChoiceMedal.isVisible = (recipeDetail.isEditorChoice == true)
             layoutDirections.ivCard.setImageResource(R.drawable.ic_clock_icon)
             toolbar.logoFodamy.visibility = View.GONE
             val turkishLocale = Locale.forLanguageTag("tr")
