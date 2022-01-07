@@ -114,34 +114,6 @@ class RecipeDetailFragment :
     fun renderRecipeDetail(recipeDetail: EditorChoiceModel) {
 
         binding?.apply {
-            tvFoodDescription.text = recipeDetail.category?.name
-            tvTime.text = recipeDetail.difference.toString()
-            tvLike.text =
-                binding?.root?.context?.getString(R.string.like)
-                    ?.let {
-                        String.format(it, recipeDetail.like_count)
-                            .spannableNum(0, recipeDetail.like_count.toString().length)
-                    }
-            tvUsername.text = recipeDetail.user?.username
-            tvRecipe.text = binding?.root?.context?.getString(R.string.recipe)?.let {
-                String.format(
-                    it,
-                    recipeDetail.user?.recipe_count
-                )
-            }
-            tvFollower.text = binding?.root?.context?.getString(R.string.follower)?.let {
-                String.format(
-                    it,
-                    recipeDetail.user?.following_count
-                )
-            }
-            layoutIngredients.tvIngredients.text = recipeDetail.ingredients
-            layoutIngredients.tvNumber.text = recipeDetail.number_of_person?.text.toString()
-            layoutDirections.tvTittle.text = "Yapılışı"
-            layoutDirections.tvNumber.text = "${recipeDetail.time_of_recipe?.text} dk"
-            layoutDirections.tvIngredients.text = recipeDetail.directions
-            ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
-            layoutDirections.ivCard.setImageResource(R.drawable.ic_clock_icon)
             toolbar.logoFodamy.visibility = View.GONE
             val turkishLocale = Locale.forLanguageTag("tr")
             toolbar.tvFoodDetailTitle.text = recipeDetail.category?.name?.uppercase(turkishLocale)

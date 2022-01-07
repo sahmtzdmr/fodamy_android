@@ -6,7 +6,8 @@
     <data>
 
         <import type="com.sadikahmetozdemir.sadik_fodamy.utils.extensions.StringExKt" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="vM"
@@ -100,9 +101,10 @@
                             android:layout_marginStart="@dimen/margin_start"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nunito_semibold"
-                            android:text="Hamur işi"
+                            android:text="@{vM.recipeDetail.category.name}"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_food_title" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_food_title"
+                            tools:text="Hamur işi" />
 
                         <TextView
                             android:id="@+id/tv_time"
@@ -110,9 +112,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="21dp"
                             android:layout_marginEnd="@dimen/margin_start"
-                            android:text="1 dakika önce"
+                            android:text="@{vM.recipeDetail.difference}"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/iv_food" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_food"
+                            tools:text="1 dakika önce" />
 
                         <View
                             android:id="@+id/view_divider_horizontal"
@@ -170,10 +173,10 @@
 
                         <TextView
                             android:id="@+id/tv_like"
+                            like_count="@{vM.recipeDetail.like_count}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="@{Integer.toString(vM.recipeDetail.like_count)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
                             app:layout_constraintTop_toBottomOf="@id/iv_like"
@@ -210,14 +213,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_user"
+                            circleImageLoader="@{vM.recipeDetail.user.image.url}"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginEnd="15dp"
-                            android:src="@drawable/walkthrough_image_3"
                             app:layout_constraintEnd_toStartOf="@id/barrier"
                             app:layout_constraintStart_toStartOf="@id/guideline1Left"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/walkthrough_image_3" />
 
 
                         <androidx.constraintlayout.widget.Barrier
@@ -238,15 +242,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="sadas"
+                            android:text="@{vM.recipeDetail.user.username}"
                             android:textColor="@color/cinder"
                             android:textSize="13sp"
-
                             app:layout_constraintStart_toEndOf="@id/barrier"
-                            app:layout_constraintTop_toTopOf="parent" />
+
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="sadas" />
 
                         <TextView
                             android:id="@+id/tv_recipe"
+                            recipe_count="@{vM.recipeDetail.user.recipe_count}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
@@ -257,16 +263,17 @@
 
                         <TextView
                             android:id="@+id/tv_follower"
+                            following_count="@{vM.recipeDetail.user.following_count}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1dp"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nunito_semibold"
-                            android:text="0 Takipçi"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/tv_recipe"
+                            app:layout_constraintTop_toBottomOf="@id/tv_username"
 
-                            app:layout_constraintTop_toBottomOf="@id/tv_username" />
+                            tools:text="0 Takipçi" />
 
 
                         <com.google.android.material.button.MaterialButton
@@ -296,6 +303,8 @@
                         android:layout_height="wrap_content">
 
                         <include
+                            app:model="@{vM.recipeDetail}"
+                            app:isRecipeType="@{true}"
                             android:id="@+id/layout_ingredients"
                             layout="@layout/recipe_details_cardview"
                             android:layout_width="wrap_content"
@@ -322,6 +331,8 @@
                         android:layout_height="wrap_content">
 
                         <include
+                            app:model="@{vM.recipeDetail}"
+                            app:isRecipeType="@{false}"
                             android:id="@+id/layout_directions"
                             layout="@layout/recipe_details_cardview"
                             android:layout_width="wrap_content"
