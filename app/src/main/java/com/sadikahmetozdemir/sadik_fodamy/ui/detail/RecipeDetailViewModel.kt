@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui
+package com.sadikahmetozdemir.sadik_fodamy.ui.detail
 
 import android.content.SharedPreferences
 import android.util.Log

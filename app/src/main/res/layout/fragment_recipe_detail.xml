@@ -7,7 +7,8 @@
 
         <variable
             name="vM"
-            type="com.sadikahmetozdemir.sadik_fodamy.ui.RecipeDetailViewModel" />
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailViewModel" />
+
 
     </data>
 
@@ -36,7 +37,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".ui.RecipeDetailFragment">
+                tools:context=".ui.detail.RecipeDetailFragment">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/material_cardview1"
@@ -52,10 +53,12 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_food"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            imageLoader="@{vM.recipeDetail.images.get(0).url}"
+                            android:layout_width="0dp"
+                            android:layout_height="375dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/walkthrough_image_3"
+                            tools:src="@drawable/walkthrough_image_3"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,8 +81,9 @@
                             android:layout_marginStart="@dimen/margin_start"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="Makarna Tarifi"
+                            android:text="@{vM.recipeDetail.title}"
                             android:textColor="@color/cinder"
+                            tools:text="Makarna Tarifi"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/iv_food" />
@@ -132,7 +136,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="1 Yorum"
+                            tools:text="1 Yorum"
+                            android:text="@{@string/comment(vM.recipeDetail.comment_count)}"
                             app:layout_constraintEnd_toStartOf="@id/view_divider_vertical"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/iv_comments" />
@@ -163,7 +168,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="3 Beğeni"
+                            tools:text="3 Beğeni"
+                            android:text="@{Integer.toString(vM.recipeDetail.like_count)}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
                             app:layout_constraintTop_toBottomOf="@id/iv_like" />

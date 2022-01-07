@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeCommentsBinding
@@ -23,7 +22,7 @@ class RecipeCommentsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel?.getRecipeCommentsItem()
+        viewModel.getRecipeCommentsItem()
         recipeCommentsAdapter.itemClicked = {
             viewModel.navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment())
             viewModel.comment.value = it
@@ -99,7 +98,7 @@ class RecipeCommentsFragment :
             }
         }
 
-        binding?.recyclerViewComments?.apply {
+        binding.recyclerViewComments.apply {
             setHasFixedSize(true)
             adapter = recipeCommentsAdapter
         }

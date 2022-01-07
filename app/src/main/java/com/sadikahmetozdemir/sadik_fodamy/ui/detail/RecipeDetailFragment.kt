@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui
+package com.sadikahmetozdemir.sadik_fodamy.ui.detail
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -17,7 +17,7 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
+import java.util.*
 
 @AndroidEntryPoint
 class RecipeDetailFragment :
@@ -26,12 +26,12 @@ class RecipeDetailFragment :
     private var args: RecipeDetailFragmentArgs? = null
     private fun getRecipeDetail(recipeID: Int) {
 
-        viewModel?.getRecipeDetail(recipeID)
+        viewModel.getRecipeDetail(recipeID)
     }
 
     private fun getRecipeDetailComment(recipeID: Int) {
 
-        viewModel?.getRecipeDetailComment(recipeID)
+        viewModel.getRecipeDetailComment(recipeID)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,20 +47,20 @@ class RecipeDetailFragment :
 
     private fun initObservers() {
 
-        viewModel?.recipeDetail?.observe(viewLifecycleOwner) { recipeDetail ->
+        viewModel.recipeDetail.observe(viewLifecycleOwner) { recipeDetail ->
 
             recipeDetail?.let { renderRecipeDetail(it) }
         }
-        viewModel?.recipeDetailComment?.observe(viewLifecycleOwner) { recipeDetailComment ->
+        viewModel.recipeDetailComment.observe(viewLifecycleOwner) { recipeDetailComment ->
 
             recipeDetailComment?.let { renderRecipeDetailComment(recipeDetailComment) }
         }
-        viewModel?.showErrorMessage?.observe(viewLifecycleOwner) {
+        viewModel.showErrorMessage.observe(viewLifecycleOwner) {
             requireActivity().runOnUiThread {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel?.event?.observe(viewLifecycleOwner) { event ->
+        viewModel.event.observe(viewLifecycleOwner) { event ->
 
             when (event) {
                 is RecipeDetailEvent.IsLiked -> {
@@ -114,13 +114,8 @@ class RecipeDetailFragment :
     fun renderRecipeDetail(recipeDetail: EditorChoiceModel) {
 
         binding?.apply {
-            tvFoodTitle.text = recipeDetail.title
             tvFoodDescription.text = recipeDetail.category?.name
             tvTime.text = recipeDetail.difference.toString()
-            var commentText = binding?.root?.context?.getString(R.string.comment)
-                ?.let { String.format(it, recipeDetail.comment_count) }
-            tvComment.text =
-                commentText?.spannableNum(0, recipeDetail.comment_count.toString().length)
             tvLike.text =
                 binding?.root?.context?.getString(R.string.like)
                     ?.let {
@@ -145,7 +140,6 @@ class RecipeDetailFragment :
             layoutDirections.tvTittle.text = "Yapılışı"
             layoutDirections.tvNumber.text = "${recipeDetail.time_of_recipe?.text} dk"
             layoutDirections.tvIngredients.text = recipeDetail.directions
-            ivFood.load(url = recipeDetail.images?.get(0)?.url)
             ivUser.loadCircleCrop(url = recipeDetail?.user?.image?.toString())
             ivEditorChoiceMedal.isVisible = (recipeDetail.isEditorChoice == true)
             layoutDirections.ivCard.setImageResource(R.drawable.ic_clock_icon)
@@ -164,7 +158,7 @@ class RecipeDetailFragment :
                 }
             }
 
-           
+
           ivFood.setOnClickListener {
                 viewModel?.openRecipeImages(recipeDetail)
             }
