@@ -13,6 +13,10 @@
             name="vM"
             type="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailViewModel" />
 
+        <variable
+            name="model"
+            type="com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel" />
+
 
     </data>
 
@@ -28,8 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:baseVM="@{vM}"
+            app:isVisible="@{true}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:model="@{vM.recipeDetail}" />
 
         <ScrollView
 
@@ -256,10 +262,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="0 Tarif"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/barrier"
-                            app:layout_constraintTop_toBottomOf="@id/tv_username" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_username"
+                            tools:text="0 Tarif" />
 
                         <TextView
                             android:id="@+id/tv_follower"
@@ -303,14 +309,14 @@
                         android:layout_height="wrap_content">
 
                         <include
-                            app:model="@{vM.recipeDetail}"
-                            app:isRecipeType="@{true}"
                             android:id="@+id/layout_ingredients"
                             layout="@layout/recipe_details_cardview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:isRecipeType="@{true}"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:model="@{vM.recipeDetail}" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -331,14 +337,14 @@
                         android:layout_height="wrap_content">
 
                         <include
-                            app:model="@{vM.recipeDetail}"
-                            app:isRecipeType="@{false}"
                             android:id="@+id/layout_directions"
                             layout="@layout/recipe_details_cardview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:isRecipeType="@{false}"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:model="@{vM.recipeDetail}" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -378,7 +384,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="Title"
+                            android:text="@string/comments_lower"
                             android:textColor="@color/cinder"
                             android:textSize="15sp"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
@@ -395,14 +401,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_user_comment"
+                            circleImageLoader="@{vM.recipeDetailComment.data.get(0).user.image.url}"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
                             android:layout_marginEnd="15dp"
-                            android:src="@drawable/walkthrough_image_3"
                             app:layout_constraintEnd_toStartOf="@id/barrier_comment"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                            app:layout_constraintTop_toBottomOf="@id/view_divider" />
+                            app:layout_constraintTop_toBottomOf="@id/view_divider"
+                            tools:src="@drawable/walkthrough_image_3" />
 
 
                         <androidx.constraintlayout.widget.Barrier
@@ -413,8 +420,6 @@
                             app:barrierDirection="start"
                             app:constraint_referenced_ids="tv_username_comment,tv_recipe_comment"
                             app:layout_constraintStart_toEndOf="@id/iv_user_comment"
-
-
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -423,43 +428,45 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="sadas"
+                            android:text="@{vM.recipeDetailComment.data.get(0).user.username}"
                             android:textColor="@color/cinder"
                             android:textSize="13sp"
-
                             app:layout_constraintStart_toEndOf="@id/barrier_comment"
-                            app:layout_constraintTop_toTopOf="@id/iv_user_comment" />
+                            app:layout_constraintTop_toTopOf="@id/iv_user_comment"
+                            tools:text="dsaddas" />
 
                         <TextView
                             android:id="@+id/tv_recipe_comment"
+                            recipe_count="@{vM.recipeDetailComment.data.get(0).user.recipe_count}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
-                            android:text="0 Tarif"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/barrier_comment"
-                            app:layout_constraintTop_toBottomOf="@id/tv_username_comment" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_username_comment"
+                            tools:text="0 Tarif" />
 
                         <TextView
                             android:id="@+id/tv_follower_comment"
+                            following_count="@{vM.recipeDetailComment.data.get(0).user.following_count}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1dp"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nunito_semibold"
-                            android:text="0 Takipçi"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/tv_recipe_comment"
                             app:layout_constraintTop_toBottomOf="@id/tv_username_comment"
-
-                            app:layout_goneMarginStart="3dp" />
+                            app:layout_goneMarginStart="3dp"
+                            tools:text="0 Takipçi" />
 
                         <TextView
                             android:id="@+id/tv_time_comment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="11dp"
-                            android:text="3 dakika önce"
+                           android:text="@{vM.recipeDetailComment.data.get(0).difference}"
+                            tools:text="3 dakika önce"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
                             app:layout_constraintTop_toBottomOf="@id/iv_user_comment" />
 
@@ -468,10 +475,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:text="@{vM.recipeDetailComment.data.get(0).text}"
                             app:layout_constraintEnd_toStartOf="@id/guidelineRight"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                            app:layout_constraintTop_toBottomOf="@id/tv_time_comment" />
+                            app:layout_constraintTop_toBottomOf="@id/tv_time_comment"
+                            tools:text="yapılan yorumlar" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

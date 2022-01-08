@@ -5,19 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+
 
 @AndroidEntryPoint
 class RecipeDetailFragment :
@@ -46,14 +41,9 @@ class RecipeDetailFragment :
     }
 
     private fun initObservers() {
-
         viewModel.recipeDetail.observe(viewLifecycleOwner) { recipeDetail ->
 
             recipeDetail?.let { renderRecipeDetail(it) }
-        }
-        viewModel.recipeDetailComment.observe(viewLifecycleOwner) { recipeDetailComment ->
-
-            recipeDetailComment?.let { renderRecipeDetailComment(recipeDetailComment) }
         }
         viewModel.showErrorMessage.observe(viewLifecycleOwner) {
             requireActivity().runOnUiThread {
@@ -114,10 +104,6 @@ class RecipeDetailFragment :
     fun renderRecipeDetail(recipeDetail: EditorChoiceModel) {
 
         binding?.apply {
-            toolbar.logoFodamy.visibility = View.GONE
-            val turkishLocale = Locale.forLanguageTag("tr")
-            toolbar.tvFoodDetailTitle.text = recipeDetail.category?.name?.uppercase(turkishLocale)
-            toolbar.ivLogout.visibility = View.GONE
             recipeDetail.user?.is_following?.let { setUpFollowButton(it) }
             btFollow.setOnClickListener {
                 if (recipeDetail.user?.is_following == false) {
@@ -199,23 +185,6 @@ class RecipeDetailFragment :
                     R.color.primary
                 )
             )
-        }
-    }
-
-    fun renderRecipeDetailComment(commentResponseModel: CommentResponseModel) {
-
-        if (commentResponseModel.data.isNotEmpty()) {
-            binding?.apply {
-                tvTittleComment.text = "Yorumlar"
-                ivUserComment.loadCircleCrop(url = commentResponseModel.data.get(0).user?.image?.url.toString())
-                tvUsernameComment.text = commentResponseModel.data.get(0).user?.username
-                tvRecipeComment.text =
-                    commentResponseModel.data.get(0).user?.recipe_count.toString()
-                tvFollowerComment.text =
-                    commentResponseModel.data.get(0).user?.followed_count.toString()
-                tvTimeComment.text = commentResponseModel.data.get(0).difference.toString()
-                tvUserComment.text = commentResponseModel.data.get(0).text
-            }
         }
     }
 }

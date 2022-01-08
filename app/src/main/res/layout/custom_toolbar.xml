@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="baseVM"
             type="com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel" />
+        <variable
+            name="model"
+            type="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+        <variable
+            name="isVisible"
+            type="Boolean" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -56,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
+                    android:visibility="@{isVisible ? View.GONE : View.VISIBLE}"
                     app:layout_goneMarginStart="41dp"
                     android:src="@drawable/fodamy_logo_home"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -66,15 +75,14 @@
                 <TextView
                     android:textAlignment="center"
                     android:id="@+id/tv_food_detail_title"
-                    app:layout_goneMarginStart="40dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:text="asdasd"
+                    tools:text="asdasd"
+                    toUpperCase="@{model.category.name}"
                     android:textAllCaps="false"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="13sp"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_logout"
                     app:layout_constraintStart_toEndOf="@id/tv_back"
@@ -86,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:paddingEnd="20dp"
                     android:src="@drawable/ic_logout_icon"
+                    android:visibility="@{isVisible ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
