@@ -6,16 +6,18 @@
     <data>
         <variable
             name="vM"
-            type="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutViewModel" />
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.tablayout.HomeTablayoutFragment">
+        tools:context=".ui.home.main.HomeTablayoutFragment">
 
         <include
+            app:baseVM="@{vM}"
+            app:isVisible="@{false}"
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
@@ -36,9 +38,8 @@
             app:tabIndicator="@drawable/tab_indicator"
             app:tabIndicatorColor="@color/primary"
             app:tabMode="fixed"
-
+            android:textSize="13sp"
             app:tabSelectedTextColor="@color/primary"
-
             app:tabTextColor="@color/black" />
 
         <androidx.viewpager.widget.ViewPager

@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeTablayoutFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragment"
         android:label="fragment_home_tablayout"
         tools:layout="@layout/fragment_home_tablayout">
         <action

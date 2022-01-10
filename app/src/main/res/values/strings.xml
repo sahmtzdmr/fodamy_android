@@ -46,6 +46,9 @@
     <string name="validate_username">Kullanıcı adı kısmı boş bırakılamaz.</string>
     <string name="validate_email">Email kısmı boş bırakılamaz.</string>
     <string name="validate_password">Parola kısmı boş bırakılamaz.</string>
+    <string name="editor_choice">EDİTÖR SEÇİMİ</string>
+    <string name="last_added">SON EKLENENLER</string>
+
 
 
 

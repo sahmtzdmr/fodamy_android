@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout
+package com.sadikahmetozdemir.sadik_fodamy.ui.home.main
 
 sealed class HomeTablayoutEvent {
 

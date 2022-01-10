@@ -222,10 +222,12 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
+                            android:layout_marginBottom="@dimen/margin_start"
                             android:layout_marginEnd="15dp"
                             app:layout_constraintEnd_toStartOf="@id/barrier"
                             app:layout_constraintStart_toStartOf="@id/guideline1Left"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             tools:src="@drawable/walkthrough_image_3" />
 
 
