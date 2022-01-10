@@ -24,7 +24,8 @@ class HomeTablayoutViewModel @Inject constructor(
             when (response?.status) {
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN).apply()
-                    response.data?.message?.let { showToast(it) }
+                    response.data?.message?.let {
+                        showToast(it) }
                 }
 
                 Status.ERROR -> {

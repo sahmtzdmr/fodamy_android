@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
@@ -23,11 +24,8 @@ class SignUpViewModel @Inject constructor(
     val username = MutableLiveData("")
     val email = MutableLiveData("")
     val password = MutableLiveData("")
-    val showUsernameError = MutableLiveData<String>()
-    val showEmailError = MutableLiveData<String>()
-    val showPasswordError = MutableLiveData<String>()
-    val showErrorMessage = MutableLiveData<String?>()
     val user = MutableLiveData<UserModel>()
+    val event=MutableLiveData<LoginEvent>()
 
     fun sendRegisterRequest() = viewModelScope.launch {
         if (!validateFile(
@@ -35,8 +33,7 @@ class SignUpViewModel @Inject constructor(
                 email.value.toString(),
                 password.value.toString()
             )
-        ) {
-            showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
+        ) { showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
             val response = repository.registerRequest(
@@ -46,21 +43,22 @@ class SignUpViewModel @Inject constructor(
                     password = password.value,
                 )
             )
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
-                    response?.data.let {
-                        it?.user?.id?.let {
+                    response.data.let {
+                        it?.user?.id?.let { it1 ->
                             sharedPreferences.edit()
-                                .putInt(SharedPreferanceStorage.PREFS_USER_ID, it)
+                                .putInt(SharedPreferanceStorage.PREFS_USER_ID, it1)
                                 ?.apply()
                         }
-                        it?.token.let {
+                        it?.token.let { it1 ->
                             sharedPreferences.edit()
-                                .putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it).apply()
+                                .putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it1).apply()
                         }
                         it?.user.let { ituser ->
                             user.postValue(ituser)
                         }
+                        response.message?.let { it1 -> showToast(it1) }
                     }
 
                     // Geri ekranına yollar
@@ -71,28 +69,26 @@ class SignUpViewModel @Inject constructor(
                         showMessage(it)
                     }
                 }
+                Status.LOADING ->{}
+                Status.REDIRECT ->{}
             }
         }
     }
 
     fun validateFile(username: String, email: String, password: String): Boolean {
         if (username.isEmpty()) {
-            // binding?.textInputLayoutUsername?.error = "Kullanıcı adı kısmı boş bırakılamaz."
-            showUsernameError.postValue("Kullanıcı adı kısmı boş bırakılamaz.")
+            event.postValue(LoginEvent.Username(R.string.validate_username))
             return false
         }
-        if (email.isEmpty()) {
-            // binding?.textInputLayoutEmail?.error = "Email kısmı boş bırakılamaz."
-            showEmailError.postValue("Email kısmı boş bırakılamaz.")
-            return false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showEmailError.postValue("Geçerli bir email giriniz.")
-        }
-        if (password.isEmpty()) {
-            // binding?.textInputPassword?.error = "Şifre kısmı boş bırakılamaz."
-            showPasswordError.postValue("Şifre kısmı boş bırakılamaz.")
-            return false
-        }
+       if (email.isEmpty()) {
+           return false
+       }
+       else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+           return false
+       }
+       if (password.isEmpty()) {
+           return false
+       }
 
         return true
     }

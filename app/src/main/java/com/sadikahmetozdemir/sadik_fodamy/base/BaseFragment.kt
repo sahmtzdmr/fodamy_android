@@ -54,7 +54,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
         super.onViewCreated(view, savedInstanceState)
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel?.baseEvent?.observe(viewLifecycleOwner) {
+            viewModel.baseEvent.observe(viewLifecycleOwner) {
                 onViewEvent(it)
             }
         }

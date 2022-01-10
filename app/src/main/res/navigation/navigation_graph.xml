@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPassword"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.login.ForgotPassword"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.login.ForgotPasswordFragment"
         android:label="ForgotPassword">
         <action
             android:id="@+id/action_forgotPassword_to_loginFragment"

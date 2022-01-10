@@ -66,7 +66,7 @@ class RecipeDetailViewModel @Inject constructor(
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
                 .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             }
 
             val response = repository.userRecipeLikeRequest(recipeID)
@@ -93,7 +93,8 @@ class RecipeDetailViewModel @Inject constructor(
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
                 .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
+
             }
 
             val response = repository.userRecipeDislikeRequest(recipeID)

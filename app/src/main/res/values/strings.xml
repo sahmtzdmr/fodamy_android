@@ -43,6 +43,9 @@
     <string name="description">Yapılışı</string>
     <string name="dk">dk</string>
     <string name="comments_lower">Yorumlar</string>
+    <string name="validate_username">Kullanıcı adı kısmı boş bırakılamaz.</string>
+    <string name="validate_email">Email kısmı boş bırakılamaz.</string>
+    <string name="validate_password">Parola kısmı boş bırakılamaz.</string>
 
 
 
