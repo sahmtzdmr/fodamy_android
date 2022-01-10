@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.sadikahmetozdemir.sadik_fodamy.utils.extensions.StringExKt" />
 
         <import type="android.view.View" />
@@ -291,11 +290,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_comment"
-                            android:onClick="@{()->vM.recipeDetail.user.is_following()? vM.bottomSheetUnfollow(): vM.userFollow(vM.recipeDetail.user.id)}"
+                            android:onClick="@{()->vM.recipeDetail.user.is_following() ? vM.bottomSheetUnfollow(): vM.userFollow(vM.recipeDetail.user.id)}"
                             android:text="@{vM.recipeDetail.user.is_following() ? @string/following : @string/follow}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.451"
                             tools:text="@string/follow" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui
+package com.sadikahmetozdemir.sadik_fodamy.ui.image
 
 import android.os.Bundle
 import android.view.LayoutInflater

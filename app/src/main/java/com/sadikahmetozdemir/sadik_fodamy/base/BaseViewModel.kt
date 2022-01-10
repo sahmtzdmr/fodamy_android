@@ -21,4 +21,9 @@ abstract class BaseViewModel : ViewModel() {
     fun popBackStack() {
         baseEvent.postValue(BaseViewEvent.NavigateBack)
     }
+    fun showToast(message: String) = viewModelScope.launch {
+        if (message.isBlank())
+            return@launch
+        baseEvent.postValue(BaseViewEvent.ShowToast(message))
+    }
 }

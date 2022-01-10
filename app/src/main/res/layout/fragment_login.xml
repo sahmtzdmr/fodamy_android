@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<data>
-    <variable
-        name="vM"
-        type="com.sadikahmetozdemir.sadik_fodamy.ui.login.LoginViewModel" />
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.login.LoginViewModel" />
 
 
-</data>
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,9 +50,9 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/name"
-                android:text="@={vM.username}"
                 android:inputType="textEmailAddress"
                 android:paddingStart="10dp"
+                android:text="@={vM.username}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,9 +79,9 @@
                 android:drawablePadding="10dp"
                 android:ems="10"
                 android:hint="@string/password"
-                android:text="@={vM.password}"
                 android:inputType="textPassword"
                 android:paddingStart="10dp"
+                android:text="@={vM.password}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
@@ -93,27 +93,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="@string/sign_in"
-            android:onClick="@{()->vM.sendLoginRequest()}"
             android:clickable="true"
+            android:onClick="@{()->vM.sendLoginRequest()}"
+            android:text="@string/sign_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
         <TextView
             android:id="@+id/textForgotPassword"
             android:layout_width="wrap_content"
-            android:text="@string/forgot_password"
-            android:clickable="true"
-            android:onClick="@{()->vM.goForgotPassword()}"
-            android:fontFamily="@font/nunito_semibold"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/buttonLogin"
             android:layout_marginTop="9dp"
-            android:focusable="true" />
-
-
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/nunito_semibold"
+            android:onClick="@{()->vM.goForgotPassword()}"
+            android:text="@string/forgot_password"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
 
 
         <TextView
@@ -132,7 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/nunito_bold"
+            android:onClick="@{()->vM.goRegister()}"
             android:text="@string/register"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"

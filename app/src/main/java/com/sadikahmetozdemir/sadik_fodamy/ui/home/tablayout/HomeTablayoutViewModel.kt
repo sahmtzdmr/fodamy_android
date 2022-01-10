@@ -24,12 +24,12 @@ class HomeTablayoutViewModel @Inject constructor(
             when (response?.status) {
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN).apply()
-                    event.postValue(response.data?.message?.let { HomeTablayoutEvent.ShowMassage(it) })
+                    response.data?.message?.let { showToast(it) }
                 }
 
                 Status.ERROR -> {
 
-                    event.postValue(response.data?.message?.let { HomeTablayoutEvent.ShowMassage(it) })
+                    response.data?.message?.let { showToast(it) }
                 }
             }
         }

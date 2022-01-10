@@ -3,6 +3,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -70,6 +71,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             BaseViewEvent.NavigateBack -> {
                 findNavController().popBackStack()
             }
+            is BaseViewEvent.ShowToast -> Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
         }
     }
 }

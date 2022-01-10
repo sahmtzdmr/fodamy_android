@@ -93,6 +93,7 @@
             app:destination="@id/recipeCommentsFragment" />
 
 
+
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
@@ -104,7 +105,7 @@
 
     <fragment
         android:id="@+id/recipeImageFragment"
-        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.RecipeImagePopUpFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.image.RecipeImagePopUpFragment"
         android:label="RecipeImagePopUpFragment">
         <argument
             android:name="editorChoiseModel"

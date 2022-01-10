@@ -96,6 +96,7 @@ fun isLike(imageView: ImageView, isLiked: Boolean) {
                 )
             )
     } else {
+        imageView.imageTintList=
         ColorStateList.valueOf(
             ContextCompat.getColor(
                 imageView.context,
