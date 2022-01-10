@@ -13,10 +13,6 @@
             name="vM"
             type="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailViewModel" />
 
-        <variable
-            name="model"
-            type="com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel" />
-
 
     </data>
 
@@ -66,6 +62,7 @@
                             imageLoader="@{vM.recipeDetail.images.get(0).url}"
                             android:layout_width="0dp"
                             android:layout_height="375dp"
+                            android:onClick="@{()->vM.openRecipeImages(vM.recipeDetail)}"
                             android:scaleType="centerCrop"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -168,10 +165,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_like"
+                            likeStyle="@{vM.recipeDetail.is_liked()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_comment"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{()->vM.recipeDetail.is_liked() ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
                             android:src="@drawable/ic_hearth_dark"
+                            android:tint="@{vM.recipeDetail.is_liked() ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
 
@@ -285,13 +287,16 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_follow"
                             style="@style/PrimaryButtonSmallBorder.Fodamy"
+                            buttonStyle="@{vM.recipeDetail.user.is_following()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_comment"
-                            android:text="@string/follow"
+                            android:onClick="@{()->vM.recipeDetail.user.is_following()? vM.bottomSheetUnfollow(): vM.userFollow(vM.recipeDetail.user.id)}"
+                            android:text="@{vM.recipeDetail.user.is_following() ? @string/following : @string/follow}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@string/follow" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -465,10 +470,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="11dp"
-                           android:text="@{vM.recipeDetailComment.data.get(0).difference}"
-                            tools:text="3 dakika önce"
+                            android:text="@{vM.recipeDetailComment.data.get(0).difference}"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-                            app:layout_constraintTop_toBottomOf="@id/iv_user_comment" />
+                            app:layout_constraintTop_toBottomOf="@id/iv_user_comment"
+                            tools:text="3 dakika önce" />
 
                         <TextView
                             android:id="@+id/tv_user_comment"

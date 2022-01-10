@@ -1,9 +1,15 @@
 package com.sadikahmetozdemir.sadik_fodamy.core.utils
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailEvent
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
@@ -52,6 +58,49 @@ fun setRecipeCount(textView: TextView, recipeCount: Int) {
 @BindingAdapter("toUpperCase")
 fun toUpperCase(textView: TextView, text: String?) {
     val turkishLocale = Locale.forLanguageTag("tr")
-    textView.text=text?.uppercase(turkishLocale)
+    textView.text = text?.uppercase(turkishLocale)
+}
 
+@SuppressLint("ResourceAsColor")
+@BindingAdapter("buttonStyle")
+fun ifFollowing(button: Button, isFollowing: Boolean) {
+    if (isFollowing) {
+
+        button.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(button.context, R.color.primary)
+        )
+        button.setTextColor(
+            ContextCompat.getColor(
+                button.context,
+                R.color.cardview_light_background
+            )
+        )
+
+    } else {
+        button.backgroundTintList =
+            ColorStateList.valueOf(
+                ContextCompat.getColor(button.context, R.color.cardview_light_background)
+            )
+        button.setTextColor(ContextCompat.getColor(button.context, R.color.primary))
+    }
+}
+
+@BindingAdapter("likeStyle")
+fun isLike(imageView: ImageView, isLiked: Boolean) {
+    if (isLiked) {
+        imageView.imageTintList =
+            ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    imageView.context,
+                    R.color.primary
+                )
+            )
+    } else {
+        ColorStateList.valueOf(
+            ContextCompat.getColor(
+                imageView.context,
+                R.color.cinder
+            )
+        )
+    }
 }
