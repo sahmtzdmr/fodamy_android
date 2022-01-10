@@ -1,29 +1,16 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.image
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeImagePopUpBinding
 
-class RecipeImagePopUpFragment : Fragment() {
-    var binding: FragmentRecipeImagePopUpBinding? = null
+class RecipeImagePopUpFragment :
+    BaseFragment<FragmentRecipeImagePopUpBinding, RecipeImageViewModel>(
+        R.layout.fragment_recipe_image_pop_up
+    ) {
     private var args: RecipeImagePopUpFragmentArgs? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRecipeImagePopUpBinding.inflate(layoutInflater)
-        return binding?.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,11 +26,8 @@ class RecipeImagePopUpFragment : Fragment() {
                 urlList.add(it1)
             }
 
-            binding?.imageViewpager2?.adapter = RecipeImageAdapter(urlList)
-            binding?.imageViewpager2.let { it?.let { it1 -> binding?.indicator?.setViewPager2(it1) } }
-            binding?.ivClose?.setOnClickListener {
-                findNavController().popBackStack()
-            }
+            binding.imageViewpager2.adapter = RecipeImageAdapter(urlList)
+            binding.imageViewpager2.let { it.let { it1 -> binding.indicator.setViewPager2(it1) } }
         }
     }
 }
