@@ -16,18 +16,18 @@ class EditorChoiceFragment :
     lateinit var editorChoiceAdapter: EditorChoiceAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.homeRecylerView?.apply {
+        binding.homeRecylerView.apply {
             setHasFixedSize(true)
             adapter = editorChoiceAdapter
         }
         editorChoiceAdapter.itemClicked = {
-            (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)
+            viewModel.openDetailScreen(it)
         }
         getRecipeData()
     }
 
     fun getRecipeData() {
-        viewModel?._recipes?.observe(viewLifecycleOwner) {
+        viewModel._recipes.observe(viewLifecycleOwner) {
             editorChoiceAdapter.submitData(
                 viewLifecycleOwner.lifecycle,
                 it

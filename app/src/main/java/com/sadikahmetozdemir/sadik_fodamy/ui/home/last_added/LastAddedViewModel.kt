@@ -7,6 +7,7 @@ import androidx.paging.cachedIn
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -28,5 +29,8 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
                 recipes.value = it
             }
         }
+    }
+    fun openDetailScreen(recipeID: Int){
+        navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
     }
 }

@@ -21,16 +21,19 @@ class HomeTablayoutViewModel @Inject constructor(
     fun logoutRequest() {
         viewModelScope.launch {
             val response = authRepository.logoutRequest()
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN).apply()
                     response.data?.message?.let {
                         showToast(it) }
                 }
-
                 Status.ERROR -> {
 
                     response.data?.message?.let { showToast(it) }
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
                 }
             }
         }

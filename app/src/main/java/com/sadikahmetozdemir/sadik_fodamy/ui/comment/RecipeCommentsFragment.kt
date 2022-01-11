@@ -49,11 +49,11 @@ class RecipeCommentsFragment :
     }
 
     fun renderRecipeComment() {
-        binding?.apply {
+        binding.apply {
             toolbar.ivLogout.visibility = View.GONE
             toolbar.ivShare.visibility = View.GONE
             toolbar.logoFodamy.visibility = View.GONE
-            toolbar.tvFoodDetailTitle.setText(R.string.comments)
+            toolbar.tvFoodDetailTitle.setText(getString(R.string.comments))
             etComment.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
@@ -81,7 +81,7 @@ class RecipeCommentsFragment :
                 }
             })
             ivSend.setOnClickListener {
-                viewModel?.postRecipeComment(binding?.etComment?.text.toString())
+                viewModel.postRecipeComment(binding.etComment.text.toString())
             }
 
             setFragmentResultListener("request_delete") { requestKey, bundle ->

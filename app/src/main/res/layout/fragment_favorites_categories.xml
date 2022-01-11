@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -17,6 +15,10 @@
         tools:context=".ui.favorites.FavoritesCategoriesFragment">
 
         <include
+            app:title="@{vM.title}"
+            app:setIcon="@{true}"
+            app:baseVM="@{vM}"
+            app:isVisible="@{true}"
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
@@ -28,6 +30,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_favorite_details"
             android:layout_width="0dp"
+            tools:listitem="@layout/item_home"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

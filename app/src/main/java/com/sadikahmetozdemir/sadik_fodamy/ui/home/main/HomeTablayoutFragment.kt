@@ -23,22 +23,7 @@ class HomeTablayoutFragment :
         setUpViewPager()
         renderToolbar()
         dividerTabLayout()
-        viewModel.event.observe(viewLifecycleOwner) { event ->
-            when (event) {
-                is HomeTablayoutEvent.ShowMassage -> {
-                    Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT)
-                        .show()
-                    println(event.message)
-                }
-            }
-        }
     }
-
-    fun openRecipeDetail(recipeID: Int) {
-
-        findNavController().navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
-    }
-
     private fun renderToolbar() {
         binding.toolbar.apply {
             ivLogout.setOnClickListener {

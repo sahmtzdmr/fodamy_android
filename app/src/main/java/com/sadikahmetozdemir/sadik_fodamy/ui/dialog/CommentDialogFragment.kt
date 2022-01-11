@@ -32,7 +32,7 @@ class CommentDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            btDelete?.setOnClickListener {
+            btDelete.setOnClickListener {
                 onDeleteClicked()
             }
             btEdit.setOnClickListener {

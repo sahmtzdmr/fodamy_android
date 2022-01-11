@@ -11,6 +11,7 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -52,6 +53,7 @@ class FavoritesViewModel @Inject constructor(
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN)
                         .apply()
                     event.postValue(response.data?.message)
+                    response.data?.message?.let { showToast(it) }
                 }
 
                 Status.ERROR -> {
@@ -63,5 +65,8 @@ class FavoritesViewModel @Inject constructor(
     }
     fun toCategories(favoritesCategoryModel: FavoritesCategoryModel) {
         navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id, favoritesCategoryModel.name))
+    }
+    fun openDetailScreen(recipeID: Int){
+        navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
     }
 }

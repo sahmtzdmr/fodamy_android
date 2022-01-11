@@ -19,37 +19,26 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getFavoriteItemsCategory()
-        initObserve()
-        binding?.toolbar?.ivBack?.visibility = View.GONE
-        binding?.toolbar?.tvFoodDetailTitle?.visibility = View.GONE
-        binding?.toolbar?.ivShare?.visibility = View.GONE
-        binding?.toolbar?.tvBack?.visibility = View.GONE
-        binding?.toolbar?.ivLogout?.setOnClickListener {
-            viewModel?.logoutRequest()
+        binding.toolbar.ivLogout.setOnClickListener {
+            viewModel.logoutRequest()
         }
 
-        binding?.recyclerViewMain?.apply {
-
+        binding.recyclerViewMain.apply {
             setHasFixedSize(true)
             adapter = favoritesItemAdapter
         }
         favoritesItemAdapter.itemClicked = {
-            viewModel?.toCategories(it)
+            viewModel.toCategories(it)
         }
         favoritesItemAdapter.childItemClicked = {
-            findNavController().navigate(FavoritesFragmentDirections.toRecipeDetail(it))
+           viewModel.openDetailScreen(it)
         }
     }
 
     fun getFavoriteItemsCategory() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             favoritesItemAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }
-
-    fun initObserve() {
-        viewModel?.event?.observe(viewLifecycleOwner) {
-            println(it)
-        }
-    }
 }
+

@@ -22,15 +22,17 @@
         android:orientation="vertical">
 
         <include
+            app:title="@{vM.recipeDetail.title}"
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:baseVM="@{vM}"
+            app:setIcon="@{false}"
             app:isVisible="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:model="@{vM.recipeDetail}" />
+            />
 
         <ScrollView
             android:layout_width="match_parent"

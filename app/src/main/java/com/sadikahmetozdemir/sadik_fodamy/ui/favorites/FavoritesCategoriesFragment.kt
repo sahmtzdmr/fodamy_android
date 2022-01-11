@@ -23,55 +23,30 @@ class FavoritesCategoriesFragment : BaseFragment<FragmentFavoritesCategoriesBind
     private val args: FavoritesCategoriesFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var categoryID = args?.categoryID
+        val categoryID = args.categoryID
+        viewModel.getFavoriteCategoriesItem(categoryID)
 
-        if (categoryID != null) {
-            viewModel?.getFavoriteCategoriesItem(categoryID)
-        }
 
-        binding?.apply {
-            val turkishLocale = Locale.forLanguageTag("tr")
-            toolbar.ivShare.visibility = View.GONE
-            toolbar.logoFodamy.visibility = View.GONE
-            toolbar.tvFoodDetailTitle.text = args.title.uppercase(turkishLocale)
-            toolbar.tvBack.setOnClickListener {
-                findNavController().popBackStack()
-            }
+        binding.apply {
             toolbar.ivLogout.setOnClickListener {
-                viewModel?.logoutRequest()
-                initObserve()
-            }
-            toolbar.ivBack.setOnClickListener {
-                findNavController().popBackStack()
+                viewModel.logoutRequest()
             }
         }
         favoritesCategoriesAdapter.itemClickedToImages = {
-            viewModel?.toRecipeDetail(it)
+            viewModel.toRecipeDetail(it)
         }
 
-        binding?.rvFavoriteDetails?.apply {
+        binding.rvFavoriteDetails.apply {
             setHasFixedSize(true)
             adapter = favoritesCategoriesAdapter
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
-
         getFavoriteCategories()
     }
-
     fun getFavoriteCategories() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             favoritesCategoriesAdapter.submitData(
                 viewLifecycleOwner.lifecycle, it
             )
-        }
-    }
-
-    fun initObserve() {
-        viewModel?.event?.observe(viewLifecycleOwner) { event ->
-            when (event) {
-                is FavoritesEvent.ShowMessage -> println(event.message)
-            }
         }
     }
 }

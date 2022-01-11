@@ -16,18 +16,18 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.lastAddedRecylerView?.apply {
+        binding.lastAddedRecylerView.apply {
             setHasFixedSize(true)
             adapter = lastAddedAdapter
         }
         lastAddedAdapter._itemClicked =
             {
-                (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)
+                viewModel.openDetailScreen(it)
             }
         getLastAddedData()
     }
     fun getLastAddedData() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             lastAddedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }

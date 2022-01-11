@@ -2,17 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="baseVM"
             type="com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel" />
-        <variable
-            name="model"
-            type="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+
         <variable
             name="isVisible"
             type="Boolean" />
-        <import type="android.view.View"/>
+
+        <variable
+            name="setIcon"
+            type="Boolean" />
+
+        <variable
+            name="title"
+            type="String" />
+        <variable
+            name="iconVisibility"
+            type="Boolean" />
+
+        <import type="android.view.View" />
 
     </data>
 
@@ -35,11 +47,11 @@
                     android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/back_icon_white"
                     android:clickable="true"
                     android:focusable="true"
-                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     android:onClick="@{()->baseVM.popBackStack()}"
+                    android:src="@drawable/back_icon_white"
+                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -48,13 +60,13 @@
                     android:id="@+id/tv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="@{()->baseVM.popBackStack()}"
+                    android:paddingStart="10dp"
                     android:text="@string/Back"
                     android:textColor="@color/cardview_light_background"
+                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_back"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -66,51 +78,56 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="8dp"
-                    android:visibility="@{isVisible ? View.GONE : View.VISIBLE}"
-                    app:layout_goneMarginStart="41dp"
                     android:src="@drawable/fodamy_logo_home"
+                    android:visibility="@{isVisible ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_logout"
                     app:layout_constraintStart_toEndOf="@id/tv_back"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginStart="41dp" />
 
                 <TextView
-                    android:textAlignment="center"
                     android:id="@+id/tv_food_detail_title"
+                    toUpperCase="@{title}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_extrabold"
-                    tools:text="asdasd"
-                    toUpperCase="@{model.category.name}"
+                    android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="13sp"
+                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_logout"
                     app:layout_constraintStart_toEndOf="@id/tv_back"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="asdasd" />
 
                 <ImageView
                     android:id="@+id/iv_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:paddingEnd="20dp"
-                    android:src="@drawable/ic_logout_icon"
+                    android:src="@{setIcon ? @drawable/ic_share_icon : @drawable/ic_logout_icon  }"
                     android:visibility="@{isVisible ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    checkVisibility="@{iconVisibility}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    checkVisibility="@{iconVisibility}"
                     android:paddingEnd="20dp"
+                    android:src="@{setIcon ? @drawable/ic_logout_icon : @drawable/ic_share_icon }"
+                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_share_icon" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
