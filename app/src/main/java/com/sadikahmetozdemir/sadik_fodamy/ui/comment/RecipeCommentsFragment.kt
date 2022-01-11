@@ -32,23 +32,23 @@ class RecipeCommentsFragment :
         getRecipeComments()
     }
 
-    fun getRecipeComments() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+    private fun getRecipeComments() {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             recipeCommentsAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-        viewModel?.event?.observe(viewLifecycleOwner) {
+        viewModel.event.observe(viewLifecycleOwner) {
             when (it) {
                 is RecipeCommentsEvent.Success -> {
                     requireView().clearFocus()
-                    binding?.root?.let { it1 -> context?.hideSoftKeyboard(it1) }
+                    binding.root.let { it1 -> context?.hideSoftKeyboard(it1) }
                     recipeCommentsAdapter.refresh()
-                    binding?.etComment?.setText("")
+                    binding.etComment.setText("")
                 }
             }
         }
     }
 
-    fun renderRecipeComment() {
+    private fun renderRecipeComment() {
         binding.apply {
             etComment.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -63,7 +63,6 @@ class RecipeCommentsFragment :
                             )
                         )
                     } else {
-                        ivSend.isEnabled = false
                         ivSend.backgroundTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
                                 requireContext(),
@@ -80,14 +79,14 @@ class RecipeCommentsFragment :
                 viewModel.postRecipeComment(binding.etComment.text.toString())
             }
 
-            setFragmentResultListener("request_delete") { requestKey, bundle ->
+            setFragmentResultListener("request_delete") { _, bundle ->
                 if (bundle.getBoolean("delete", false)) {
                     viewModel.deleteRecipeComments()
                     recipeCommentsAdapter.refresh()
                 }
             }
 
-            setFragmentResultListener("request_edit") { requestKey, bundle ->
+            setFragmentResultListener("request_edit") { _, bundle ->
                 if (bundle.getBoolean("edit", false)) {
                     viewModel.toEdit()
                 }
