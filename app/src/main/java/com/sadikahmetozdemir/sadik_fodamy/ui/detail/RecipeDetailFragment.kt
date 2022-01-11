@@ -15,7 +15,7 @@ class RecipeDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("request_unfollow") { requestKey, bundle ->
+        setFragmentResultListener("request_unfollow") { _, bundle ->
             if (bundle.getBoolean("unfollow", false)) {
                 viewModel.userUnfollow()
             }

@@ -33,7 +33,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         ).flow
     }
 
-    fun getDefaultPageConfig(): PagingConfig {
+    private fun getDefaultPageConfig(): PagingConfig {
         return PagingConfig(pageSize = 24)
     }
 

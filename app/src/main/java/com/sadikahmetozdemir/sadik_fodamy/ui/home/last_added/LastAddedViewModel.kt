@@ -23,7 +23,7 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
     init {
         getLastAdded()
     }
-    fun getLastAdded() {
+    private fun getLastAdded() {
         viewModelScope.launch {
             feedRepository.lastAddedRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest {
                 recipes.value = it

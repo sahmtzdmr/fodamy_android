@@ -5,7 +5,6 @@ import android.view.View
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentEditorChoiceBinding
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,8 +25,8 @@ class EditorChoiceFragment :
         getRecipeData()
     }
 
-    fun getRecipeData() {
-        viewModel._recipes.observe(viewLifecycleOwner) {
+    private fun getRecipeData() {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             editorChoiceAdapter.submitData(
                 viewLifecycleOwner.lifecycle,
                 it

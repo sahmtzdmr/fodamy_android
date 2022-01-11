@@ -68,7 +68,6 @@ class RecipeCommentsViewModel @Inject constructor(
 
     fun deleteRecipeComments() {
         viewModelScope.launch {
-            println(sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "sdasda"))
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
                 .isNullOrBlank()
             ) {

@@ -16,14 +16,14 @@ class RecipeCommentsPagingSource(private var editorChoiceRecipesAPI: EditorChoic
         }
     }
 
-    override suspend fun load(params: PagingSource.LoadParams<Int>): PagingSource.LoadResult<Int, EditorChoiceModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, EditorChoiceModel> {
 
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = editorChoiceRecipesAPI.getRecipeComments(categoryID, currentPage)
             val dataFavoriteCategories = response.data
 
-            PagingSource.LoadResult.Page(
+            LoadResult.Page(
                 data = dataFavoriteCategories,
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage.minus(
                     STARTING_PAGE_INDEX
@@ -32,8 +32,8 @@ class RecipeCommentsPagingSource(private var editorChoiceRecipesAPI: EditorChoic
                     STARTING_PAGE_INDEX
                 )
             )
-        } catch (expection: Exception) {
-            PagingSource.LoadResult.Error(expection)
+        } catch (exception: Exception) {
+            LoadResult.Error(exception)
         }
     }
 }

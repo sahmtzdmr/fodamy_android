@@ -49,8 +49,7 @@
     <string name="editor_choice">EDİTÖR SEÇİMİ</string>
     <string name="last_added">SON EKLENENLER</string>
     <string name="comment_added">Yorum Eklendi</string>
-
-
+    <string name="username">username</string>
 
 
 </resources>

@@ -20,8 +20,8 @@ class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipes
         val currentPage = params.key ?: STARTING_PAGE_INDEX
 
         return try {
-            val respone = editorChoiceRecipesAPI.editorChoicesRecipesRequest(currentPage)
-            val dataRecipes = respone.data
+            val response = editorChoiceRecipesAPI.editorChoicesRecipesRequest(currentPage)
+            val dataRecipes = response.data
 
             LoadResult.Page(
                 data = dataRecipes,

@@ -24,7 +24,7 @@ class TablayoutViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter
         titleList.add(title)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return titleList[position]
     }
 }

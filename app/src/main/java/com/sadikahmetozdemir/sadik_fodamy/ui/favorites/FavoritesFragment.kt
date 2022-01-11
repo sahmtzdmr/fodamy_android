@@ -1,10 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentFavoritesBinding
@@ -12,7 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>(R.layout.fragment_favorites) {
+class FavoritesFragment :
+    BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>(R.layout.fragment_favorites) {
     @Inject
     lateinit var favoritesItemAdapter: FavoritesItemAdapter
 
@@ -31,11 +29,11 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
             viewModel.toCategories(it)
         }
         favoritesItemAdapter.childItemClicked = {
-           viewModel.openDetailScreen(it)
+            viewModel.openDetailScreen(it)
         }
     }
 
-    fun getFavoriteItemsCategory() {
+    private fun getFavoriteItemsCategory() {
         viewModel.recipes.observe(viewLifecycleOwner) {
             favoritesItemAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }

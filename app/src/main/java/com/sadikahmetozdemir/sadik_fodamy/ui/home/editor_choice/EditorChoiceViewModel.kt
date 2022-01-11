@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -18,17 +17,17 @@ import javax.inject.Inject
 @HiltViewModel
 class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedRepository) : BaseViewModel() {
 
-    var _recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
-    val recipes: LiveData<PagingData<EditorChoiceModel>> get() = _recipes
+    var recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
+
 
     init {
         getEditorChoice()
     }
 
-    fun getEditorChoice() {
+    private fun getEditorChoice() {
         viewModelScope.launch {
             feedRepository.feedRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest {
-                _recipes.value = it
+                recipes.value = it
             }
         }
     }

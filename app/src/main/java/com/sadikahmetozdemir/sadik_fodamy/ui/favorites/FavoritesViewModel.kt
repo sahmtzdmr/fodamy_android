@@ -11,7 +11,6 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -33,13 +32,12 @@ class FavoritesViewModel @Inject constructor(
         getFavoriteItems()
     }
 
-    fun getFavoriteItems() {
+    private fun getFavoriteItems() {
         viewModelScope.launch {
             repository.favoriteRecipesRequest().distinctUntilChanged().cachedIn(viewModelScope)
-                .collectLatest {
-
+                .collectLatest { it ->
                     recipes.value = it.filter {
-                        it.recipes.size > 0
+                        it.recipes.isNotEmpty()
                     }
                 }
         }
@@ -48,7 +46,7 @@ class FavoritesViewModel @Inject constructor(
     fun logoutRequest() {
         viewModelScope.launch {
             val response = authRepository.logoutRequest()
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN)
                         .apply()
@@ -60,13 +58,24 @@ class FavoritesViewModel @Inject constructor(
 
                     event.postValue(response.data?.message)
                 }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
+                }
             }
         }
     }
+
     fun toCategories(favoritesCategoryModel: FavoritesCategoryModel) {
-        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id, favoritesCategoryModel.name))
+        navigate(
+            FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(
+                favoritesCategoryModel.id,
+                favoritesCategoryModel.name
+            )
+        )
     }
-    fun openDetailScreen(recipeID: Int){
+
+    fun openDetailScreen(recipeID: Int) {
         navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
     }
 }

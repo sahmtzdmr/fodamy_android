@@ -5,7 +5,6 @@ import android.view.View
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLastAddedBinding
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,13 +19,13 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
             setHasFixedSize(true)
             adapter = lastAddedAdapter
         }
-        lastAddedAdapter._itemClicked =
+        lastAddedAdapter.itemClicked =
             {
                 viewModel.openDetailScreen(it)
             }
         getLastAddedData()
     }
-    fun getLastAddedData() {
+    private fun getLastAddedData() {
         viewModel.recipes.observe(viewLifecycleOwner) {
             lastAddedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }

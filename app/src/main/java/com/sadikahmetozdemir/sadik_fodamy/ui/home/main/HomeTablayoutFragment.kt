@@ -4,9 +4,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentHomeTablayoutBinding
@@ -24,6 +22,7 @@ class HomeTablayoutFragment :
         renderToolbar()
         dividerTabLayout()
     }
+
     private fun renderToolbar() {
         binding.toolbar.apply {
             ivLogout.setOnClickListener {

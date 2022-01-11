@@ -10,9 +10,10 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
-class FavoritesItemAdapter @Inject constructor() : PagingDataAdapter<FavoritesCategoryModel, FavoritesItemAdapter.ViewHolder> (
-    recipeComparator
-) {
+class FavoritesItemAdapter @Inject constructor() :
+    PagingDataAdapter<FavoritesCategoryModel, FavoritesItemAdapter.ViewHolder>(
+        recipeComparator
+    ) {
 
     var itemClicked: ((FavoritesCategoryModel) -> Unit)? = null
     var childItemClicked: ((Int) -> Unit)? = null
@@ -28,20 +29,22 @@ class FavoritesItemAdapter @Inject constructor() : PagingDataAdapter<FavoritesCa
         parent: ViewGroup,
         viewType: Int
     ): FavoritesItemAdapter.ViewHolder {
-        val binding = ItemFavoritesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemFavoritesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder((binding))
     }
 
-    inner class ViewHolder(val binding: ItemFavoritesBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemFavoritesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: FavoritesCategoryModel) {
-            val childAdapter: FavoritesChildAdapter = FavoritesChildAdapter(item.recipes)
+            val childAdapter = FavoritesChildAdapter(item.recipes)
             binding.favoritesRecylerview.apply {
                 setHasFixedSize(true)
                 adapter = childAdapter
             }
 
-            childAdapter._itemClicked = {
+            childAdapter.itemClicked = {
                 childItemClicked?.invoke(it)
             }
 

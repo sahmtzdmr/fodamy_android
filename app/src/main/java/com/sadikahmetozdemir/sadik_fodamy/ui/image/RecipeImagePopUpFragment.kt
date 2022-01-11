@@ -17,17 +17,21 @@ class RecipeImagePopUpFragment :
         arguments?.let {
             args = RecipeImagePopUpFragmentArgs.fromBundle(it)
         }
-        args?.editorChoiseModel?.let {
+        args?.editorChoiseModel?.let { editorChoiceModel ->
 
             val urlList = arrayListOf<String>()
 
-            it.images?.get(0)?.url?.let { it1 ->
+            editorChoiceModel.images?.get(0)?.url?.let { it1 ->
                 urlList.add(it1)
                 urlList.add(it1)
             }
 
             binding.imageViewpager2.adapter = RecipeImageAdapter(urlList)
-            binding.imageViewpager2.let { it.let { it1 -> binding.indicator.setViewPager2(it1) } }
+            binding.imageViewpager2.let {
+                it.let { it1 ->
+                    binding.indicator.setViewPager2(it1)
+                }
+            }
         }
     }
 }

@@ -6,11 +6,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.sadikahmetozdemir.sadik_fodamy.R
-import com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailEvent
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
@@ -33,13 +31,6 @@ fun setLikeCount(textView: TextView, likeCount: Int) {
     textView.text = String.format(textView.context.getString(R.string.like), likeCount)
         .spannableNum(0, likeCount.toString().length)
 }
-
-@BindingAdapter("diffenrenceTime")
-fun setDifferenceTime(textView: TextView, difference: Int) {
-    textView.text = String.format(textView.context.getString(R.string.time), difference)
-
-}
-
 @BindingAdapter("circleImageLoader")
 fun setCircleImageLoader(imageView: ImageView, url: String?) {
 
@@ -97,18 +88,19 @@ fun isLike(imageView: ImageView, isLiked: Boolean) {
                 )
             )
     } else {
-        imageView.imageTintList=
-        ColorStateList.valueOf(
-            ContextCompat.getColor(
-                imageView.context,
-                R.color.cinder
+        imageView.imageTintList =
+            ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    imageView.context,
+                    R.color.cinder
+                )
             )
-        )
     }
 }
+
 @BindingAdapter("checkVisibility")
-fun checkVisibility(imageView: ImageView,check: Boolean){
-    if (check){
-        imageView.visibility=View.GONE
+fun checkVisibility(imageView: ImageView, check: Boolean) {
+    if (check) {
+        imageView.visibility = View.GONE
     }
 }

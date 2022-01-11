@@ -63,6 +63,6 @@ class FavoritesCategoriesViewModel @Inject constructor(
             ?.let { navigate(it) }
     }
     companion object{
-        private val TITLE="title"
+        private const val TITLE="title"
     }
 }

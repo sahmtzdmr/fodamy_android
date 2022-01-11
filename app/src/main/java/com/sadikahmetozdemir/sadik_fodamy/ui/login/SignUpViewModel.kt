@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
@@ -25,7 +24,6 @@ class SignUpViewModel @Inject constructor(
     val email = MutableLiveData("")
     val password = MutableLiveData("")
     val user = MutableLiveData<UserModel>()
-    val event=MutableLiveData<LoginEvent>()
 
     fun sendRegisterRequest() = viewModelScope.launch {
         if (!validateFile(
@@ -33,7 +31,8 @@ class SignUpViewModel @Inject constructor(
                 email.value.toString(),
                 password.value.toString()
             )
-        ) { showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
+        ) {
+            showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
             val response = repository.registerRequest(
@@ -60,8 +59,6 @@ class SignUpViewModel @Inject constructor(
                         }
                         response.message?.let { it1 -> showToast(it1) }
                     }
-
-                    // Geri ekranına yollar
                     navigate(SignUpFragmentDirections.toHomeFragment())
                 }
                 Status.ERROR -> {
@@ -69,26 +66,24 @@ class SignUpViewModel @Inject constructor(
                         showMessage(it)
                     }
                 }
-                Status.LOADING ->{}
-                Status.REDIRECT ->{}
+                Status.LOADING -> {}
+                Status.REDIRECT -> {}
             }
         }
     }
 
-    fun validateFile(username: String, email: String, password: String): Boolean {
+    private fun validateFile(username: String, email: String, password: String): Boolean {
         if (username.isEmpty()) {
-            event.postValue(LoginEvent.Username(R.string.validate_username))
             return false
         }
-       if (email.isEmpty()) {
-           return false
-       }
-       else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-           return false
-       }
-       if (password.isEmpty()) {
-           return false
-       }
+        if (email.isEmpty()) {
+            return false
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return false
+        }
+        if (password.isEmpty()) {
+            return false
+        }
 
         return true
     }
