@@ -50,10 +50,6 @@ class RecipeCommentsFragment :
 
     fun renderRecipeComment() {
         binding.apply {
-            toolbar.ivLogout.visibility = View.GONE
-            toolbar.ivShare.visibility = View.GONE
-            toolbar.logoFodamy.visibility = View.GONE
-            toolbar.tvFoodDetailTitle.setText(getString(R.string.comments))
             etComment.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }

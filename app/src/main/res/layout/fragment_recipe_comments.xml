@@ -17,6 +17,7 @@
         tools:context=".ui.comment.RecipeCommentsFragment">
 
         <include
+            app:title="@{@string/comments}"
             android:id="@+id/toolbar"
             app:baseVM="@{vM}"
             app:iconVisibility="@{true}"
