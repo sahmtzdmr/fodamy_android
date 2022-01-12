@@ -1,10 +1,10 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
-import android.content.SharedPreferences
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
+    private val dataHelperManager: DataHelperManager,
     private val repository: AuthRepository
 ) : BaseViewModel() {
 
@@ -46,13 +46,10 @@ class SignUpViewModel @Inject constructor(
                 Status.SUCCESS -> {
                     response.data.let {
                         it?.user?.id?.let { it1 ->
-                            sharedPreferences.edit()
-                                .putInt(SharedPreferanceStorage.PREFS_USER_ID, it1)
-                                ?.apply()
+                            dataHelperManager.saveID(it1)
                         }
-                        it?.token.let { it1 ->
-                            sharedPreferences.edit()
-                                .putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it1).apply()
+                        it?.token?.let { it1 ->
+                            dataHelperManager.saveToken(it1)
                         }
                         it?.user.let { ituser ->
                             user.postValue(ituser)

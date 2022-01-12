@@ -1,9 +1,9 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferences,
-    private val repository: AuthRepository
+    private val repository: AuthRepository,
+    private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     val user = MutableLiveData<UserModel>()
     val username = MutableLiveData("")
@@ -38,14 +38,11 @@ class LoginViewModel @Inject constructor(
                 Status.SUCCESS -> {
                     response.data?.let {
                         it.user?.id?.let { it1 ->
-                            sharedPreferences.edit()?.putInt(
-                                SharedPreferanceStorage.PREFS_USER_ID,
-                                it1
-                            )?.apply()
+                            dataHelperManager.saveID(it1)
                         }
-                        sharedPreferences.edit()
-                            ?.putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it.token)?.apply()
-                        println(it.token)
+                        it.token?.let { it1 ->
+                            dataHelperManager.saveToken(it1)
+                        }
                         it.user?.let { ituser ->
                             user.postValue(ituser)
                         }
@@ -65,11 +62,13 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
     fun goForgotPassword() {
         viewModelScope.launch {
             navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
         }
     }
+
     fun goRegister() {
         viewModelScope.launch {
             navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())

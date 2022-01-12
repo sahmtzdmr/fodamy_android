@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.comment
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -8,10 +7,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeCommentsViewModel @Inject constructor(
     private val repository: FeedRepository,
-    private val sharedPreferences: SharedPreferences,
+    private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle
 ) :
     BaseViewModel() {
@@ -42,9 +41,7 @@ class RecipeCommentsViewModel @Inject constructor(
 
     fun postRecipeComment(text: String) {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
-            ) {
+            if (!dataHelperManager.isLogin()) {
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             } else {
                 val response = repository.postRecipeCommentRequest(recipeID, text)
@@ -68,8 +65,7 @@ class RecipeCommentsViewModel @Inject constructor(
 
     fun deleteRecipeComments() {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
+            if (!dataHelperManager.isLogin()
             ) {
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             }
@@ -90,6 +86,7 @@ class RecipeCommentsViewModel @Inject constructor(
             }
         }
     }
+
     fun toEdit() {
         navigate(RecipeCommentsFragmentDirections.toCommentEditFragment(comment.value!!, recipeID))
     }
