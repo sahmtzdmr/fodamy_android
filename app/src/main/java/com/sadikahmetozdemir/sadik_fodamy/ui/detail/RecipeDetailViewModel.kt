@@ -1,7 +1,6 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui
+package com.sadikahmetozdemir.sadik_fodamy.ui.detail
 
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -19,45 +18,51 @@ import javax.inject.Inject
 class RecipeDetailViewModel @Inject constructor(
     private val repository: FeedRepository,
     private val sharedPreferences: SharedPreferences,
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
     val recipeDetail = MutableLiveData<EditorChoiceModel?>()
     val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
-    var showErrorMessage = MutableLiveData<String?>()
     val event = MutableLiveData<RecipeDetailEvent>()
-    var recipeID: Int = savedStateHandle.get("recipeId") ?: 0
+    var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
 
-    fun getRecipeDetail(
-        recipeID: Int
-    ) {
+    init {
+        getRecipeDetail()
+        getRecipeDetailComment()
+    }
+
+    private fun getRecipeDetail() {
         viewModelScope.launch {
             val response = repository.getRecipeDetail(recipeID)
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
                     recipeDetail.postValue(response.data)
-
-                    //    println(recipeDetail.value)
                 }
                 Status.ERROR -> {
-                    //   showErrorMessage.postValue(response.message.toString())
+
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
                 }
             }
         }
     }
 
-    fun getRecipeDetailComment(
-        recipeID: Int
-    ) {
+    private fun getRecipeDetailComment() {
         viewModelScope.launch {
             val response = repository.getRecipeDetailComment(recipeID)
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
                     recipeDetailComment.postValue(response.data)
                 }
                 Status.ERROR -> {
 
-                    //      showErrorMessage.postValue(response.message.toString())
+                    response.message?.let { showToast(it) }
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
                 }
             }
         }
@@ -65,15 +70,14 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun recipeLike(recipeID: Int) {
         viewModelScope.launch {
-            println(sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "sdasda"))
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
+                    .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             }
 
             val response = repository.userRecipeLikeRequest(recipeID)
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
 
                     event.postValue(
@@ -81,10 +85,14 @@ class RecipeDetailViewModel @Inject constructor(
                             RecipeDetailEvent.IsLiked(it)
                         }
                     )
-                    getRecipeDetail(recipeID)
+                    getRecipeDetail()
                 }
                 Status.ERROR -> {
                     response.data?.message?.let { showMessage(it) }
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
                 }
             }
         }
@@ -92,15 +100,15 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun recipeDislike(recipeID: Int) {
         viewModelScope.launch {
-            println(sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "sdasda"))
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
+                    .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
+
             }
 
             val response = repository.userRecipeDislikeRequest(recipeID)
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
 
                     event.postValue(
@@ -110,10 +118,14 @@ class RecipeDetailViewModel @Inject constructor(
                         }
                     )
 
-                    getRecipeDetail(recipeID)
+                    getRecipeDetail()
                 }
                 Status.ERROR -> {
-                    Log.d(TAG, "recipeLike: sadasd")
+                    response.message?.let { showToast(it) }
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
                 }
             }
         }
@@ -122,41 +134,37 @@ class RecipeDetailViewModel @Inject constructor(
     fun userFollow(followId: Int) {
         viewModelScope.launch {
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
+                    .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
                 val response = repository.userFollowRequest(followId)
                 when (response.status) {
                     Status.SUCCESS -> {
-                        event.postValue(
-                            response.data?.message.let {
-                                it?.let { it1 ->
-                                    RecipeDetailEvent.IsFollowed(
-                                        it1
-                                    )
-                                }
-                            }
-                        )
-                        getRecipeDetail(recipeID)
+                        getRecipeDetail()
                     }
                     Status.ERROR -> {
-                        Log.d(TAG, "recipeLike: sadasd")
+                        response.data?.message?.let { showToast(it) }
+                    }
+                    Status.LOADING -> {
+                    }
+                    Status.REDIRECT -> {
                     }
                 }
             }
         }
     }
 
-    fun userUnfollow(followId: Int) {
+    fun userUnfollow() {
         viewModelScope.launch {
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                .isNullOrBlank()
+                    .isNullOrBlank()
             ) {
-                event.postValue(RecipeDetailEvent.OpenDialog(RecipeDetailFragmentDirections.toAuthDialogFragment()))
+                navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                val response = repository.userUnfollowRequest(followId)
-                when (response.status) {
+                val response =
+                    recipeDetail.value?.user?.id?.let { repository.userUnfollowRequest(it) }
+                when (response?.status) {
                     Status.SUCCESS -> {
 
                         event.postValue(
@@ -168,26 +176,34 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
-                        getRecipeDetail(recipeID)
+                        getRecipeDetail()
                     }
                     Status.ERROR -> {
-                        Log.d(TAG, "recipeLike: sadasd")
+                        response.data?.message?.let { showToast(it) }
+                    }
+                    Status.LOADING -> {
+                    }
+                    Status.REDIRECT -> {
+                    }
+                    null -> {
                     }
                 }
             }
         }
     }
+
     fun openRecipeImages(recipeID: EditorChoiceModel) {
         navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
     }
+
     fun toCommentsScreen() {
-        println("sadık")
         navigate(RecipeDetailFragmentDirections.toRecipeComments(recipeID))
     }
 
     companion object {
-        const val TAG = "RecipeDetailViewModel"
+        const val RECIPE_ID = "recipeId"
     }
+
     fun bottomSheetUnfollow() {
         navigate(RecipeDetailFragmentDirections.toBottomSheet())
     }

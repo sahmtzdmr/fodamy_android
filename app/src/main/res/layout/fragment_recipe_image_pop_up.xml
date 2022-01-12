@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cinder"
-    android:layout_height="match_parent"
-    tools:context=".ui.RecipeImagePopUpFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close_icon"
-        android:layout_marginTop="54dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/image_viewpager_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-        android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:dotsColor="@color/indicator_color"
-        app:dotsCornerRadius="8dp"
-        app:dotsSize="16dp"
-        app:dotsSpacing="4dp"
-        app:dotsWidthFactor="1"
-        app:selectedDotColor="@color/design_default_color_background"
-        app:progressMode="false"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal"
+    <data>
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_viewpager_2" />
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.image.RecipeImageViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cinder"
+        tools:context=".ui.image.RecipeImagePopUpFragment">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="54dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{()->vM.popBackStack()}"
+            android:src="@drawable/ic_close_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/image_viewpager_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            app:dotsColor="@color/indicator_color"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/image_viewpager_2"
+            app:progressMode="false"
+            app:selectedDotColor="@color/design_default_color_background" />
 
 
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 
 
 

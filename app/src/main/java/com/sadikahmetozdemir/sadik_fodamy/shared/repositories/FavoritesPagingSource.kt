@@ -31,8 +31,8 @@ class FavoritesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceReci
                     STARTING_PAGE_INDEX
                 )
             )
-        } catch (expection: Exception) {
-            LoadResult.Error(expection)
+        } catch (exception: Exception) {
+            LoadResult.Error(exception)
         }
     }
 }

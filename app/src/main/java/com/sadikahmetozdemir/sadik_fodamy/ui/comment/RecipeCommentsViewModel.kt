@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class RecipeCommentsViewModel @Inject constructor(
     private val repository: FeedRepository,
     private val sharedPreferences: SharedPreferences,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) :
     BaseViewModel() {
     val event = SingleLiveEvent<RecipeCommentsEvent>()
@@ -47,12 +48,18 @@ class RecipeCommentsViewModel @Inject constructor(
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             } else {
                 val response = repository.postRecipeCommentRequest(recipeID, text)
-                when (response?.status) {
+                when (response.status) {
                     Status.SUCCESS -> {
-                        event.postValue(RecipeCommentsEvent.Success("Yorum Eklendi"))
+                        event.postValue(RecipeCommentsEvent.Success(R.string.comment_added.toString()))
                     }
                     Status.ERROR -> {
                         response.message?.let { showMessage(it) }
+                    }
+                    Status.LOADING -> {
+
+                    }
+                    Status.REDIRECT -> {
+
                     }
                 }
             }
@@ -61,7 +68,6 @@ class RecipeCommentsViewModel @Inject constructor(
 
     fun deleteRecipeComments() {
         viewModelScope.launch {
-            println(sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "sdasda"))
             if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
                 .isNullOrBlank()
             ) {
@@ -76,6 +82,11 @@ class RecipeCommentsViewModel @Inject constructor(
                 Status.ERROR -> {
                     response.message?.let { showMessage(it) }
                 }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
+                }
+                null -> response?.message?.let { showMessage(it) }
             }
         }
     }

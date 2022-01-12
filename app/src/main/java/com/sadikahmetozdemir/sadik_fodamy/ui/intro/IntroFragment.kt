@@ -1,54 +1,37 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.intro
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentIntroBinding
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.IntroModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 
-class IntroFragment : Fragment() {
-    private var dataBinding: FragmentIntroBinding? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        dataBinding = FragmentIntroBinding.inflate(layoutInflater)
-        return dataBinding?.root
-    }
+class IntroFragment : BaseFragment<FragmentIntroBinding, IntroViewModel>(R.layout.fragment_intro) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding?.viewPager2?.adapter = IntroAdapter(prepareIntroList())
-        dataBinding?.viewPager2?.let { dataBinding?.indicator?.setViewPager2(it) }
-        dataBinding?.viewPager2?.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    if (position == prepareIntroList().size - 1) { // TODO:will refactor
-                        dataBinding?.btNext?.text = getString(R.string.button_start)
-                    } else {
-                        dataBinding?.btNext?.text = getString(R.string.next_page)
-                    }
+        binding.viewPager2.adapter = IntroAdapter(prepareIntroList())
+        binding.viewPager2.let { binding.indicator.setViewPager2(it) }
+        binding.viewPager2.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position == prepareIntroList().size - 1) { // TODO:will refactor
+                    binding.btNext.text = getString(R.string.button_start)
+                } else {
+                    binding.btNext.text = getString(R.string.next_page)
                 }
-            })
-        dataBinding?.btNext?.setOnClickListener {
-            if (dataBinding?.viewPager2?.currentItem != prepareIntroList().size - 1
+            }
+        })
+        binding.btNext.setOnClickListener {
+            if (binding.viewPager2.currentItem != prepareIntroList().size - 1
             ) {
-                dataBinding?.viewPager2?.setCurrentItem(
-                    (dataBinding?.viewPager2?.currentItem ?: 0) + 1,
+                binding.viewPager2.setCurrentItem(
+                    (binding.viewPager2.currentItem) + 1,
                     true
                 )
                 SharedPreferanceStorage.isTutorialCompleted = true

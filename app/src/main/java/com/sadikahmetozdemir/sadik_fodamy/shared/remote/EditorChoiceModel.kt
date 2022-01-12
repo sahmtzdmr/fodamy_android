@@ -6,7 +6,8 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.local.ImagesModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.NumberOfPersonModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.TimeOfRecipeModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class EditorChoiceModel(

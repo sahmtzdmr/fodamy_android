@@ -2,7 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.api
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.BaseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiseResponseModel
+import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesResponseModel
 import retrofit2.Response
 import retrofit2.http.DELETE
@@ -15,10 +15,10 @@ import retrofit2.http.Query
 interface EditorChoiceRecipesAPI {
 
     @GET("api/editor-choices")
-    suspend fun editorChoicesRecipesRequest(@Query("page")pageInt: Int): EditorChoiseResponseModel
+    suspend fun editorChoicesRecipesRequest(@Query("page")pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/")
-    suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiseResponseModel
+    suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/{recipe_id}")
     suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): Response<EditorChoiceModel>
@@ -32,7 +32,7 @@ interface EditorChoiceRecipesAPI {
 
     @GET("api/category/{category_id}/recipe")
 
-    suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID: Int, @Query("page")pageInt: Int): EditorChoiseResponseModel
+    suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID: Int, @Query("page")pageInt: Int): EditorChoiceResponseModel
 
     @POST("api/recipe/{recipe_id}/like")
     suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID: Int): Response<BaseModel>
@@ -47,7 +47,7 @@ interface EditorChoiceRecipesAPI {
     suspend fun userUnfollowing(@Path("followedId") followedID: Int): Response<BaseModel>
 
     @GET("api/recipe/{recipe_id}/comment")
-    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): EditorChoiseResponseModel
+    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @POST("api/recipe/{recipe_id}/comment")
     suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<EditorChoiceModel>

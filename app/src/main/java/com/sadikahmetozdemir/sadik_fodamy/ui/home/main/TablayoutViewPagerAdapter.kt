@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout
+package com.sadikahmetozdemir.sadik_fodamy.ui.home.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -24,7 +24,7 @@ class TablayoutViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter
         titleList.add(title)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return titleList[position]
     }
 }

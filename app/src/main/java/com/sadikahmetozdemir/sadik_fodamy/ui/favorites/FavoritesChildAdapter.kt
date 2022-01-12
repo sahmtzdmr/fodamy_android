@@ -9,10 +9,10 @@ import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 
-class FavoritesChildAdapter(var categoryItem: List<EditorChoiceModel>) :
+class FavoritesChildAdapter(private var categoryItem: List<EditorChoiceModel>) :
     RecyclerView.Adapter<FavoritesChildAdapter.CategoryViewHolder>() {
 
-    var _itemClicked: ((Int) -> Unit)? = null
+    var itemClicked: ((Int) -> Unit)? = null
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,10 +39,10 @@ class FavoritesChildAdapter(var categoryItem: List<EditorChoiceModel>) :
                 tvUserName.text = item.user?.username
                 tvFavoritesFoodTitle.text = item.title
                 tvFavoritesComment.text = binding.root.context.getString(R.string.comment, item.comment_count)
-                tvFavoritesLike.text = item.like_count.toString()
+                tvFavoritesLike.text = binding.root.context.getString(R.string.like,item.like_count)
                 ivFavoritesFood.setOnClickListener {
                     item.id?.let {
-                        _itemClicked?.invoke(it)
+                        itemClicked?.invoke(it)
                     }
                 }
             }

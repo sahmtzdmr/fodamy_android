@@ -1,73 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="15dp" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="14dp"/>
-    <TextView
-        android:id="@+id/tv_tittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/ingredients_title"
-        android:textColor="@color/cinder"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/nunito_bold"
-        android:textSize="15sp"/>
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="23dp"
-        android:src="@drawable/ic_restaurant_icon"
-        android:layout_marginEnd="8dp"/>
-    <TextView
-        android:id="@+id/tv_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_card"
-        android:text="4-6"
-        app:layout_constraintEnd_toEndOf="@id/iv_card"
-        android:layout_marginTop="1dp"/>
-    <View
-        android:id="@+id/view_divider"
+        <variable
+            name="isRecipeType"
+            type="Boolean" />
+
+        <variable
+            name="model"
+            type="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12.5dp"
-        android:background="@color/divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_number"/>
-    <TextView
-        android:layout_marginTop="11.5dp"
-        android:id="@+id/tv_ingredients"
-        android:layout_width="0dp"
-        android:text="asdasdsad"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/view_divider"
-        app:layout_constraintEnd_toStartOf="@id/guidelineRight"
-        app:layout_constraintHorizontal_bias="0"/>
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="15dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="14dp" />
+
+        <TextView
+            android:id="@+id/tv_tittle"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@{isRecipeType ? @string/ingredients_title : @string/description}"
+            android:textColor="@color/cinder"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/ingredients_title" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="8dp"
+            tools:src="@drawable/ic_restaurant_icon"
+            android:src="@{isRecipeType ? @drawable/ic_restaurant_icon : @drawable/ic_clock_icon}"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="@{isRecipeType ? `` + model.number_of_person.text: `` + model.time_of_recipe.text+@string/dk}"
+            app:layout_constraintEnd_toEndOf="@id/iv_card"
+            app:layout_constraintTop_toBottomOf="@id/iv_card"
+            tools:text="4-6" />
+
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12.5dp"
+            android:background="@color/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_number" />
+
+        <TextView
+            android:id="@+id/tv_ingredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11.5dp"
+            android:text="@{isRecipeType ? model.ingredients : model.directions}"
+            app:layout_constraintEnd_toStartOf="@id/guidelineRight"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/view_divider"
+            tools:text="asdasdsad" />
 
 
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

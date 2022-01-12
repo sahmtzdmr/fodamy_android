@@ -2,11 +2,9 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLastAddedBinding
-import com.sadikahmetozdemir.sadik_fodamy.ui.home.tablayout.HomeTablayoutFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,18 +15,18 @@ class LastAddedFragment : BaseFragment<FragmentLastAddedBinding, LastAddedViewMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.lastAddedRecylerView?.apply {
+        binding.lastAddedRecylerView.apply {
             setHasFixedSize(true)
             adapter = lastAddedAdapter
         }
-        lastAddedAdapter._itemClicked =
+        lastAddedAdapter.itemClicked =
             {
-                (parentFragment as HomeTablayoutFragment).openRecipeDetail(it)
+                viewModel.openDetailScreen(it)
             }
         getLastAddedData()
     }
-    fun getLastAddedData() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+    private fun getLastAddedData() {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             lastAddedAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
     }

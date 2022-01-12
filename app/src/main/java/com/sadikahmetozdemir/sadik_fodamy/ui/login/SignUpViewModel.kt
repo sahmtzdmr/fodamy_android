@@ -23,10 +23,6 @@ class SignUpViewModel @Inject constructor(
     val username = MutableLiveData("")
     val email = MutableLiveData("")
     val password = MutableLiveData("")
-    val showUsernameError = MutableLiveData<String>()
-    val showEmailError = MutableLiveData<String>()
-    val showPasswordError = MutableLiveData<String>()
-    val showErrorMessage = MutableLiveData<String?>()
     val user = MutableLiveData<UserModel>()
 
     fun sendRegisterRequest() = viewModelScope.launch {
@@ -46,24 +42,23 @@ class SignUpViewModel @Inject constructor(
                     password = password.value,
                 )
             )
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
-                    response?.data.let {
-                        it?.user?.id?.let {
+                    response.data.let {
+                        it?.user?.id?.let { it1 ->
                             sharedPreferences.edit()
-                                .putInt(SharedPreferanceStorage.PREFS_USER_ID, it)
+                                .putInt(SharedPreferanceStorage.PREFS_USER_ID, it1)
                                 ?.apply()
                         }
-                        it?.token.let {
+                        it?.token.let { it1 ->
                             sharedPreferences.edit()
-                                .putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it).apply()
+                                .putString(SharedPreferanceStorage.PREFS_USER_TOKEN, it1).apply()
                         }
                         it?.user.let { ituser ->
                             user.postValue(ituser)
                         }
+                        response.message?.let { it1 -> showToast(it1) }
                     }
-
-                    // Geri ekranına yollar
                     navigate(SignUpFragmentDirections.toHomeFragment())
                 }
                 Status.ERROR -> {
@@ -71,26 +66,22 @@ class SignUpViewModel @Inject constructor(
                         showMessage(it)
                     }
                 }
+                Status.LOADING -> {}
+                Status.REDIRECT -> {}
             }
         }
     }
 
-    fun validateFile(username: String, email: String, password: String): Boolean {
+    private fun validateFile(username: String, email: String, password: String): Boolean {
         if (username.isEmpty()) {
-            // binding?.textInputLayoutUsername?.error = "Kullanıcı adı kısmı boş bırakılamaz."
-            showUsernameError.postValue("Kullanıcı adı kısmı boş bırakılamaz.")
             return false
         }
         if (email.isEmpty()) {
-            // binding?.textInputLayoutEmail?.error = "Email kısmı boş bırakılamaz."
-            showEmailError.postValue("Email kısmı boş bırakılamaz.")
             return false
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            showEmailError.postValue("Geçerli bir email giriniz.")
+            return false
         }
         if (password.isEmpty()) {
-            // binding?.textInputPassword?.error = "Şifre kısmı boş bırakılamaz."
-            showPasswordError.postValue("Şifre kısmı boş bırakılamaz.")
             return false
         }
 

@@ -17,7 +17,7 @@ class LastAddedAdapter @Inject constructor() :
         recipeComparator
     ) {
 
-    var _itemClicked: ((Int) -> Unit)? = null
+    var itemClicked: ((Int) -> Unit)? = null
 
     override fun onBindViewHolder(holder: LastAddedAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -36,8 +36,8 @@ class LastAddedAdapter @Inject constructor() :
 
         fun bind(item: EditorChoiceModel) {
             binding.apply {
-                binding?.foodImage.setOnClickListener {
-                    item.id?.let { it1 -> _itemClicked?.invoke(it1) }
+                binding.foodImage.setOnClickListener {
+                    item.id?.let { it1 -> itemClicked?.invoke(it1) }
                 }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title

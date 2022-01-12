@@ -50,10 +50,17 @@ class LoginViewModel @Inject constructor(
                             user.postValue(ituser)
                         }
                     }
+                    response.message?.let { showToast(it) }
                     navigate(LoginFragmentDirections.toHomeFragment())
                 }
                 Status.ERROR -> {
                     response.message?.let { showMessage(it) }
+                }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
+                }
+                null -> {
                 }
             }
         }

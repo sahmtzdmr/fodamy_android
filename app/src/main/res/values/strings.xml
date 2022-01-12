@@ -40,6 +40,16 @@
     <string name="delete">Sil</string>
     <string name="edit">Düzenle</string>
     <string name="save">Kaydet</string>
+    <string name="description">Yapılışı</string>
+    <string name="dk">dk</string>
+    <string name="comments_lower">Yorumlar</string>
+    <string name="validate_username">Kullanıcı adı kısmı boş bırakılamaz.</string>
+    <string name="validate_email">Email kısmı boş bırakılamaz.</string>
+    <string name="validate_password">Parola kısmı boş bırakılamaz.</string>
+    <string name="editor_choice">EDİTÖR SEÇİMİ</string>
+    <string name="last_added">SON EKLENENLER</string>
+    <string name="comment_added">Yorum Eklendi</string>
+    <string name="username">username</string>
 
 
 </resources>

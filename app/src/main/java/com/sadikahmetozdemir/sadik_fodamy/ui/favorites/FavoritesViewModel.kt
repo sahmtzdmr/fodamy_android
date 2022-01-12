@@ -32,13 +32,12 @@ class FavoritesViewModel @Inject constructor(
         getFavoriteItems()
     }
 
-    fun getFavoriteItems() {
+    private fun getFavoriteItems() {
         viewModelScope.launch {
             repository.favoriteRecipesRequest().distinctUntilChanged().cachedIn(viewModelScope)
-                .collectLatest {
-
+                .collectLatest { it ->
                     recipes.value = it.filter {
-                        it.recipes.size > 0
+                        it.recipes.isNotEmpty()
                     }
                 }
         }
@@ -47,21 +46,36 @@ class FavoritesViewModel @Inject constructor(
     fun logoutRequest() {
         viewModelScope.launch {
             val response = authRepository.logoutRequest()
-            when (response?.status) {
+            when (response.status) {
                 Status.SUCCESS -> {
                     sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN)
                         .apply()
                     event.postValue(response.data?.message)
+                    response.data?.message?.let { showToast(it) }
                 }
 
                 Status.ERROR -> {
 
                     event.postValue(response.data?.message)
                 }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
+                }
             }
         }
     }
+
     fun toCategories(favoritesCategoryModel: FavoritesCategoryModel) {
-        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(favoritesCategoryModel.id, favoritesCategoryModel.name))
+        navigate(
+            FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(
+                favoritesCategoryModel.id,
+                favoritesCategoryModel.name
+            )
+        )
+    }
+
+    fun openDetailScreen(recipeID: Int) {
+        navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
     }
 }

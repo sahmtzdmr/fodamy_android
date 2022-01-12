@@ -32,13 +32,10 @@ class EditorChoiceAdapter @Inject constructor() :
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        init {
-        }
-
         fun bind(item: EditorChoiceModel) {
             binding.apply {
 
-                binding?.foodImage.setOnClickListener {
+                binding.foodImage.setOnClickListener {
                     item.id?.let { it1 -> itemClicked?.invoke(it1) }
                 }
                 tvUsername.text = item.user?.username

@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeCommentsBinding
@@ -23,7 +22,7 @@ class RecipeCommentsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel?.getRecipeCommentsItem()
+        viewModel.getRecipeCommentsItem()
         recipeCommentsAdapter.itemClicked = {
             viewModel.navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment())
             viewModel.comment.value = it
@@ -33,28 +32,24 @@ class RecipeCommentsFragment :
         getRecipeComments()
     }
 
-    fun getRecipeComments() {
-        viewModel?.recipes?.observe(viewLifecycleOwner) {
+    private fun getRecipeComments() {
+        viewModel.recipes.observe(viewLifecycleOwner) {
             recipeCommentsAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-        viewModel?.event?.observe(viewLifecycleOwner) {
+        viewModel.event.observe(viewLifecycleOwner) {
             when (it) {
                 is RecipeCommentsEvent.Success -> {
                     requireView().clearFocus()
-                    binding?.root?.let { it1 -> context?.hideSoftKeyboard(it1) }
+                    binding.root.let { it1 -> context?.hideSoftKeyboard(it1) }
                     recipeCommentsAdapter.refresh()
-                    binding?.etComment?.setText("")
+                    binding.etComment.setText("")
                 }
             }
         }
     }
 
-    fun renderRecipeComment() {
-        binding?.apply {
-            toolbar.ivLogout.visibility = View.GONE
-            toolbar.ivShare.visibility = View.GONE
-            toolbar.logoFodamy.visibility = View.GONE
-            toolbar.tvFoodDetailTitle.setText(R.string.comments)
+    private fun renderRecipeComment() {
+        binding.apply {
             etComment.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
@@ -68,7 +63,6 @@ class RecipeCommentsFragment :
                             )
                         )
                     } else {
-                        ivSend.isEnabled = false
                         ivSend.backgroundTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
                                 requireContext(),
@@ -82,24 +76,24 @@ class RecipeCommentsFragment :
                 }
             })
             ivSend.setOnClickListener {
-                viewModel?.postRecipeComment(binding?.etComment?.text.toString())
+                viewModel.postRecipeComment(binding.etComment.text.toString())
             }
 
-            setFragmentResultListener("request_delete") { requestKey, bundle ->
+            setFragmentResultListener("request_delete") { _, bundle ->
                 if (bundle.getBoolean("delete", false)) {
                     viewModel.deleteRecipeComments()
                     recipeCommentsAdapter.refresh()
                 }
             }
 
-            setFragmentResultListener("request_edit") { requestKey, bundle ->
+            setFragmentResultListener("request_edit") { _, bundle ->
                 if (bundle.getBoolean("edit", false)) {
                     viewModel.toEdit()
                 }
             }
         }
 
-        binding?.recyclerViewComments?.apply {
+        binding.recyclerViewComments.apply {
             setHasFixedSize(true)
             adapter = recipeCommentsAdapter
         }

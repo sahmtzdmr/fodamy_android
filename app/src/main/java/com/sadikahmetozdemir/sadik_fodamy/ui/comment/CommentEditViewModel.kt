@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CommentEditViewModel @Inject constructor(
     val repository: FeedRepository,
-    val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 
 ) : BaseViewModel() {
 
@@ -31,6 +31,11 @@ class CommentEditViewModel @Inject constructor(
             )
             when (response.status) {
                 Status.SUCCESS -> { popBackStack() }
+                Status.ERROR -> response.data?.message?.let { showToast(it) }
+                Status.LOADING -> {
+                }
+                Status.REDIRECT -> {
+                }
             }
         }
     }

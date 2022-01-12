@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.favorites.FavoritesFragment"
@@ -21,7 +22,8 @@
             android:layout_height="wrap_content"
             layout="@layout/custom_toolbar"
             android:id="@+id/toolbar"
-
+            app:baseVM="@{vM}"
+            app:isVisible="@{false}"
             />
 
         <androidx.recyclerview.widget.RecyclerView
