@@ -14,44 +14,50 @@ import javax.inject.Inject
 
 
 class DataHelperManager @Inject constructor(private val context: Context) {
-    suspend fun saveToken(token:String){
+    suspend fun saveToken(token: String) {
         context.dataStore.edit {
-            it[TOKEN]=token
+            it[TOKEN] = token
         }
     }
-    suspend fun removeToken(){
+
+    suspend fun removeToken() {
         context.dataStore.edit {
             it.remove(TOKEN)
         }
     }
-    suspend fun getToken():String=context.dataStore.data.map {
-        it[TOKEN]?:""
+
+    suspend fun getToken(): String = context.dataStore.data.map {
+        it[TOKEN] ?: ""
     }.first()
-    suspend fun firstAttach(){
+
+    suspend fun firstAttach() {
         context.dataStore.edit {
-            it[ATTACH]=false
+            it[ATTACH] = false
         }
     }
 
-    suspend fun isFirstAttach():Boolean=context.dataStore.data.map {
-        it[ATTACH]?:true
+    suspend fun isFirstAttach(): Boolean = context.dataStore.data.map {
+        it[ATTACH] ?: true
     }.first()
-    suspend fun saveID(id:Int){
+
+    suspend fun saveID(id: Int) {
         context.dataStore.edit {
-            it[ID]=id
+            it[ID] = id
         }
+
     }
-    suspend fun isLogin():Boolean=getToken().isNotBlank()
+
+    suspend fun getID(): Int = context.dataStore.data.map {
+        it[ID] ?: 0
+    }.first()
+
+    suspend fun isLogin(): Boolean = getToken().isNotBlank()
 
 
-
-
-
-
-    companion object{
-        private val ID= intPreferencesKey("id")
-        private val ATTACH= booleanPreferencesKey("attach")
-        private val TOKEN= stringPreferencesKey("token")
-        val Context.dataStore:DataStore<Preferences> by preferencesDataStore("Data")
+    companion object {
+        private val ID = intPreferencesKey("id")
+        private val ATTACH = booleanPreferencesKey("attach")
+        private val TOKEN = stringPreferencesKey("token")
+        val Context.dataStore: DataStore<Preferences> by preferencesDataStore("Data")
     }
 }

@@ -21,7 +21,7 @@ fun ImageView.loadCircleCrop(isFadeInEnabled: Boolean = true, url: String?) {
         .with(context)
         .load(url)
         .circleCrop()
-        .placeholder(R.drawable.ic_baseline_android_24)
+        .placeholder(R.drawable.profile)
         .transition(DrawableTransitionOptions.withCrossFade(duration))
         .into(this)
 }
