@@ -14,7 +14,14 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.NETWORK_ERROR_MESSAGE
 import java.io.IOException
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
+interface AuthRepository{
+    suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>?
+    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel>
+    suspend fun logoutRequest(): Resource<LogoutModel>
+
+}
+
+class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
 
     suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
         return try {

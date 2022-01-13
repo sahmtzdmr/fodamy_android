@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedRepository) : BaseViewModel() {
+class EditorChoiceViewModel @Inject constructor(private val feedRepository: FeedRepository) :
+    BaseViewModel() {
 
     var recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
 
@@ -26,12 +27,14 @@ class EditorChoiceViewModel@Inject constructor(private val feedRepository: FeedR
 
     private fun getEditorChoice() {
         viewModelScope.launch {
-            feedRepository.feedRequest().distinctUntilChanged().cachedIn(viewModelScope).collectLatest {
-                recipes.value = it
-            }
+            feedRepository.feedRequest().distinctUntilChanged().cachedIn(viewModelScope)
+                .collectLatest {
+                    recipes.value = it
+                }
         }
     }
-    fun openDetailScreen(recipeID: Int){
+
+    fun openDetailScreen(recipeID: Int) {
         navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
     }
 }

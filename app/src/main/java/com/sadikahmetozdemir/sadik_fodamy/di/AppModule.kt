@@ -5,6 +5,7 @@ import com.sadikahmetozdemir.sadik_fodamy.BuildConfig
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
+import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.NetworkInterceptor
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
@@ -44,8 +45,8 @@ object AppModule {
         retrofitClient.create(EditorChoiceRecipesAPI::class.java)
 
     @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI) =
-        FeedRepository(editorChoiceRecipesAPI)
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI):FeedRepository =
+        DefaultFeedRepository(editorChoiceRecipesAPI)
 
     @Provides
     fun provideInterceptor(networkInterceptor: NetworkInterceptor): OkHttpClient {

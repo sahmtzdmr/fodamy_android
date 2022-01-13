@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val repository: AuthRepository,
+    private val authRepository: AuthRepository,
     private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     val user = MutableLiveData<UserModel>()
@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(
             return@launch
         } else {
             val response =
-                repository.loginRequest(
+                authRepository.loginRequest(
                     LoginRequestModel(
                         username.value.toString(),
                         password.value.toString()

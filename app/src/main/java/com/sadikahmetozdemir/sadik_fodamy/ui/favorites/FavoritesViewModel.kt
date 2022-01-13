@@ -10,7 +10,7 @@ import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
-    private val repository: FeedRepository,
+    private val repositoryDefault: DefaultFeedRepository,
     private val authRepository: AuthRepository,
     private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
@@ -33,7 +33,8 @@ class FavoritesViewModel @Inject constructor(
 
     private fun getFavoriteItems() {
         viewModelScope.launch {
-            repository.favoriteRecipesRequest().distinctUntilChanged().cachedIn(viewModelScope)
+            repositoryDefault.favoriteRecipesRequest().distinctUntilChanged()
+                .cachedIn(viewModelScope)
                 .collectLatest { it ->
                     recipes.value = it.filter {
                         it.recipes.isNotEmpty()

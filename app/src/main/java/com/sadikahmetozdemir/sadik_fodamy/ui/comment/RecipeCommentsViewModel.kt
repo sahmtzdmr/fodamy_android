@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeCommentsViewModel @Inject constructor(
-    private val repository: FeedRepository,
+    private val feedRepository: FeedRepository,
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle
 ) :
@@ -32,7 +32,7 @@ class RecipeCommentsViewModel @Inject constructor(
 
     fun getRecipeCommentsItem() {
         viewModelScope.launch {
-            repository.recipeCommentsRequest(recipeID).distinctUntilChanged()
+            feedRepository.recipeCommentsRequest(recipeID).distinctUntilChanged()
                 .cachedIn(viewModelScope).collectLatest {
                     recipes.value = it
                 }
@@ -44,7 +44,7 @@ class RecipeCommentsViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             } else {
-                val response = repository.postRecipeCommentRequest(recipeID, text)
+                val response = feedRepository.postRecipeCommentRequest(recipeID, text)
                 when (response.status) {
                     Status.SUCCESS -> {
                         event.postValue(RecipeCommentsEvent.Success(R.string.comment_added.toString()))
@@ -70,7 +70,8 @@ class RecipeCommentsViewModel @Inject constructor(
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             }
 
-            val response = comment.value?.id?.let { repository.deleteRecipeComment(recipeID, it) }
+            val response =
+                comment.value?.id?.let { feedRepository.deleteRecipeComment(recipeID, it) }
             when (response?.status) {
                 Status.SUCCESS -> {
                     response.message?.let { showMessage(it) }
@@ -90,8 +91,13 @@ class RecipeCommentsViewModel @Inject constructor(
     fun toEdit() {
         viewModelScope.launch {
             val userID = dataHelperManager.getID()
-            if (comment.value?.id == userID){
-                navigate(RecipeCommentsFragmentDirections.toCommentEditFragment(comment.value!!, recipeID))
+            if (comment.value?.id == userID) {
+                navigate(
+                    RecipeCommentsFragmentDirections.toCommentEditFragment(
+                        comment.value!!,
+                        recipeID
+                    )
+                )
 
             }
         }
