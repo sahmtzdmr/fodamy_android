@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager,
-    private val repository: AuthRepository
+    private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
     val username = MutableLiveData("")
@@ -35,7 +35,7 @@ class SignUpViewModel @Inject constructor(
             showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
-            val response = repository.registerRequest(
+            val response = authRepository.registerRequest(
                 RegisterRequestModel(
                     username = username.value,
                     email = email.value,

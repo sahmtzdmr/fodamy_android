@@ -17,27 +17,39 @@ import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
 
-class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) {
+interface FeedRepository {
 
-    fun feedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
+    fun feedRequest(): Flow<PagingData<EditorChoiceModel>>
+    fun lastAddedRequest(): Flow<PagingData<EditorChoiceModel>>
+    suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel>
+    suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel>
+    fun favoriteRecipesRequest(): Flow<PagingData<FavoritesCategoryModel>>
+    fun favoriteCategoriesRequest(categoryID: Int): Flow<PagingData<EditorChoiceModel>>
+    suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel>
+    suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel>
+    suspend fun userFollowRequest(followedID: Int): Resource<BaseModel>
+    suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel>
+    fun recipeCommentsRequest(categoryID: Int): Flow<PagingData<EditorChoiceModel>>
+    suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<EditorChoiceModel>
+    suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel>
+    suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): Resource<BaseModel>
+}
+class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI):FeedRepository {
+
+    override fun feedRequest(): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
-            config = pagingConfig,
+            config = pageConfig,
             pagingSourceFactory = { RecipePagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
 
-    fun lastAddedRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<EditorChoiceModel>> {
+    override fun lastAddedRequest(): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
-            config = pagingConfig,
+            config = pageConfig,
             pagingSourceFactory = { LastAddedPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
-
-    private fun getDefaultPageConfig(): PagingConfig {
-        return PagingConfig(pageSize = 24)
-    }
-
-    suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel> {
+    override suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -55,7 +67,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel> {
+    override suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -73,19 +85,18 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    fun favoriteRecipesRequest(pagingConfig: PagingConfig = getDefaultPageConfig()): Flow<PagingData<FavoritesCategoryModel>> {
+    override fun favoriteRecipesRequest(): Flow<PagingData<FavoritesCategoryModel>> {
         return Pager(
-            config = pagingConfig,
+            config = pageConfig,
             pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
 
-    fun favoriteCategoriesRequest(
-        categoryID: Int,
-        pagingConfig: PagingConfig = getDefaultPageConfig()
+    override fun favoriteCategoriesRequest(
+        categoryID: Int
     ): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
-            config = pagingConfig,
+            config = pageConfig,
             pagingSourceFactory = {
                 FavoriteCategoriesPagingSource(
                     editorChoiceRecipesAPI,
@@ -95,7 +106,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         ).flow
     }
 
-    suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel> {
+    override suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -113,7 +124,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel> {
+    override suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.userRecipeDislikeRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -131,7 +142,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    suspend fun userFollowRequest(followedID: Int): Resource<BaseModel> {
+    override suspend fun userFollowRequest(followedID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.userFollowing(followedID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -149,7 +160,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel> {
+    override suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.userUnfollowing(followedID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -167,12 +178,11 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         }
     }
 
-    fun recipeCommentsRequest(
-        categoryID: Int,
-        pagingConfig: PagingConfig = getDefaultPageConfig()
+    override fun recipeCommentsRequest(
+        categoryID: Int
     ): Flow<PagingData<EditorChoiceModel>> {
         return Pager(
-            config = pagingConfig,
+            config = pageConfig,
             pagingSourceFactory = {
                 RecipeCommentsPagingSource(
                     editorChoiceRecipesAPI,
@@ -182,7 +192,7 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
         ).flow
     }
 
-    suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<EditorChoiceModel> {
+    override suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<EditorChoiceModel> {
         return try {
             val response = editorChoiceRecipesAPI.postRecipeComments(recipeID, text)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -199,7 +209,8 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
-    suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel> {
+
+    override suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.deleteRecipeComments(recipeID, commentID)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -216,7 +227,12 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             Resource.error(apiException, null)
         }
     }
-    suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): Resource<BaseModel> {
+
+    override suspend fun editRecipeComment(
+        recipeID: Int,
+        commentID: Int,
+        text: String
+    ): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.editRecipeComments(recipeID, commentID, text)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -232,5 +248,9 @@ class FeedRepository @Inject constructor(private val editorChoiceRecipesAPI: Edi
             val apiException = ApiException.create(exception)
             Resource.error(apiException, null)
         }
+    }
+
+    companion object {
+        private val pageConfig = PagingConfig(24, 100, false)
     }
 }

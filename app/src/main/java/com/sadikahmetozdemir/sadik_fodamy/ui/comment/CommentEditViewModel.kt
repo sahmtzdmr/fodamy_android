@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
+import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,17 +14,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommentEditViewModel @Inject constructor(
-    val repository: FeedRepository,
+    val feedRepository: FeedRepository,
     savedStateHandle: SavedStateHandle
 
 ) : BaseViewModel() {
-    val recipeID = savedStateHandle.get<Int>("recipeID") ?: 0
-    val comment = savedStateHandle.get<EditorChoiceModel>("comment")
+    val recipeID = savedStateHandle.get<Int>(RECIPE_ID) ?: 0
+    val comment = savedStateHandle.get<EditorChoiceModel>(COMMENT)
     val editableComment = MutableLiveData<String>(comment?.text)
 
     fun saveOnClick() {
         viewModelScope.launch {
-            val response = repository.editRecipeComment(
+            val response = feedRepository.editRecipeComment(
                 recipeID,
                 comment?.id!!,
                 editableComment.value.toString()
@@ -37,5 +38,9 @@ class CommentEditViewModel @Inject constructor(
                 }
             }
         }
+    }
+    companion object{
+        val RECIPE_ID="recipeID"
+        val COMMENT="comment"
     }
 }

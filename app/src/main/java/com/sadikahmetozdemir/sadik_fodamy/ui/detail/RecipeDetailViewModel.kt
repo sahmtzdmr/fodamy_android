@@ -8,6 +8,7 @@ import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
+import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
-    private val repository: FeedRepository,
+    private val feedRepository: FeedRepository,
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle,
 
@@ -32,7 +33,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     private fun getRecipeDetail() {
         viewModelScope.launch {
-            val response = repository.getRecipeDetail(recipeID)
+            val response = feedRepository.getRecipeDetail(recipeID)
             when (response.status) {
                 Status.SUCCESS -> {
                     recipeDetail.postValue(response.data)
@@ -50,7 +51,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     private fun getRecipeDetailComment() {
         viewModelScope.launch {
-            val response = repository.getRecipeDetailComment(recipeID)
+            val response = feedRepository.getRecipeDetailComment(recipeID)
             when (response.status) {
                 Status.SUCCESS -> {
                     recipeDetailComment.postValue(response.data)
@@ -73,7 +74,7 @@ class RecipeDetailViewModel @Inject constructor(
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             }
 
-            val response = repository.userRecipeLikeRequest(recipeID)
+            val response = feedRepository.userRecipeLikeRequest(recipeID)
             when (response.status) {
                 Status.SUCCESS -> {
 
@@ -102,7 +103,7 @@ class RecipeDetailViewModel @Inject constructor(
 
             }
 
-            val response = repository.userRecipeDislikeRequest(recipeID)
+            val response = feedRepository.userRecipeDislikeRequest(recipeID)
             when (response.status) {
                 Status.SUCCESS -> {
 
@@ -131,7 +132,7 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                val response = repository.userFollowRequest(followId)
+                val response = feedRepository.userFollowRequest(followId)
                 when (response.status) {
                     Status.SUCCESS -> {
                         getRecipeDetail()
@@ -154,7 +155,7 @@ class RecipeDetailViewModel @Inject constructor(
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
                 val response =
-                    recipeDetail.value?.user?.id?.let { repository.userUnfollowRequest(it) }
+                    recipeDetail.value?.user?.id?.let { feedRepository.userUnfollowRequest(it) }
                 when (response?.status) {
                     Status.SUCCESS -> {
 

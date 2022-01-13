@@ -14,9 +14,16 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.NETWORK_ERROR_MESSAGE
 import java.io.IOException
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
+interface AuthRepository{
+    suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>?
+    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel>
+    suspend fun logoutRequest(): Resource<LogoutModel>
 
-    suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
+}
+
+class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI):AuthRepository {
+
+    override suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
         return try {
             val response = loginAPI.loginRequest(loginRequestModel)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -33,7 +40,7 @@ class AuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
             Resource.error(apiException, null)
         }
     }
-    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel> {
+    override suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel> {
         return try {
             val response = loginAPI.registerRequest(registerRequestModel)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -51,7 +58,7 @@ class AuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
         }
     }
 
-    suspend fun logoutRequest(): Resource<LogoutModel> {
+    override suspend fun logoutRequest(): Resource<LogoutModel> {
         return try {
             val response = loginAPI.logoutRequest()
             when (val apiResponse = ApiResponse.create(response)) {

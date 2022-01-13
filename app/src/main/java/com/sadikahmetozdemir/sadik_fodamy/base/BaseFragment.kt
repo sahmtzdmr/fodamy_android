@@ -1,4 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.base
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.BR
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.findGenericSuperclass
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
-import java.lang.IllegalStateException
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> constructor(
     @LayoutRes private val layoutId: Int
@@ -44,7 +44,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             return rootView
         }
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.vM, viewModel)
         rootView = binding.root
         return rootView
