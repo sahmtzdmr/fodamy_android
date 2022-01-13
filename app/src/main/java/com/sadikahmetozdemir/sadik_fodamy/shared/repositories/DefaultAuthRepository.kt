@@ -21,9 +21,9 @@ interface AuthRepository{
 
 }
 
-class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) {
+class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI):AuthRepository {
 
-    suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
+    override suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
         return try {
             val response = loginAPI.loginRequest(loginRequestModel)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -40,7 +40,7 @@ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) 
             Resource.error(apiException, null)
         }
     }
-    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel> {
+    override suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel> {
         return try {
             val response = loginAPI.registerRequest(registerRequestModel)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -58,7 +58,7 @@ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) 
         }
     }
 
-    suspend fun logoutRequest(): Resource<LogoutModel> {
+    override suspend fun logoutRequest(): Resource<LogoutModel> {
         return try {
             val response = loginAPI.logoutRequest()
             when (val apiResponse = ApiResponse.create(response)) {

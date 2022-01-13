@@ -19,7 +19,9 @@ class HomeTablayoutViewModel @Inject constructor(
             val response = authRepository.logoutRequest()
             when (response.status) {
                 Status.SUCCESS -> {
-                    response.data?.message?.let { showToast(it) }
+                    response.data?.message?.let {
+                        showToast(it)
+                    }
                     dataHelperManager.removeToken()
 
 
