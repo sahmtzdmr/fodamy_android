@@ -1,11 +1,10 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.home.main
 
-import android.content.SharedPreferences
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,18 +12,17 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeTablayoutViewModel @Inject constructor(
     private var authRepository: AuthRepository,
-    private var sharedPreferences: SharedPreferences
+    private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     fun logoutRequest() {
         viewModelScope.launch {
             val response = authRepository.logoutRequest()
             when (response.status) {
                 Status.SUCCESS -> {
-                    sharedPreferences.edit().remove(SharedPreferanceStorage.PREFS_USER_TOKEN)
-                        .apply()
-                    response.data?.message?.let {
-                        showToast(it)
-                    }
+                    response.data?.message?.let { showToast(it) }
+                    dataHelperManager.removeToken()
+
+
                 }
                 Status.ERROR -> {
 

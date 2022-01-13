@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.splash
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +8,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentSplashBinding
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding,SplashViewModel>(R.layout.fragment_splash) {
+class SplashFragment :
+    BaseFragment<FragmentSplashBinding, SplashViewModel>(R.layout.fragment_splash) {
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var dataHelperManager: DataHelperManager
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,9 +34,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding,SplashViewModel>(R.lay
         lifecycleScope.launch(Dispatchers.Main) {
             delay(1000)
 
-            if (sharedPreferences.getString(SharedPreferanceStorage.IS_FIRST_ATTACH, "").isNullOrBlank()) {
+            if (dataHelperManager.isFirstAttach()) {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToIntroFragment())
-                sharedPreferences.edit().putString(SharedPreferanceStorage.IS_FIRST_ATTACH, "is_first_attach").apply()
+                dataHelperManager.firstAttach()
             } else {
                 findNavController().navigate(SplashFragmentDirections.toHomeFragment())
             }

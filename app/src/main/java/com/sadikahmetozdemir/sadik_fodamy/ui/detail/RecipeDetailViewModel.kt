@@ -1,15 +1,14 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.detail
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
+import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeDetailViewModel @Inject constructor(
     private val repository: FeedRepository,
-    private val sharedPreferences: SharedPreferences,
+    private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle,
 
     ) : BaseViewModel() {
@@ -70,9 +69,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun recipeLike(recipeID: Int) {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                    .isNullOrBlank()
-            ) {
+            if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             }
 
@@ -100,9 +97,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun recipeDislike(recipeID: Int) {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                    .isNullOrBlank()
-            ) {
+            if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
 
             }
@@ -133,9 +128,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun userFollow(followId: Int) {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                    .isNullOrBlank()
-            ) {
+            if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
                 val response = repository.userFollowRequest(followId)
@@ -157,9 +150,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     fun userUnfollow() {
         viewModelScope.launch {
-            if (sharedPreferences.getString(SharedPreferanceStorage.PREFS_USER_TOKEN, "")
-                    .isNullOrBlank()
-            ) {
+            if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
                 val response =

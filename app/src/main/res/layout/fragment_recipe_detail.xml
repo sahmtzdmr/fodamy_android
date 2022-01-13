@@ -502,6 +502,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_start"
                     android:text="@string/add_comment"
+                    android:onClick="@{()->vM.toCommentsScreen()}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/material_cardview_comments" />
 

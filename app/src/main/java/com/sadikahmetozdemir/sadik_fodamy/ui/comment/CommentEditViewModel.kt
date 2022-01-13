@@ -17,7 +17,6 @@ class CommentEditViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 
 ) : BaseViewModel() {
-
     val recipeID = savedStateHandle.get<Int>("recipeID") ?: 0
     val comment = savedStateHandle.get<EditorChoiceModel>("comment")
     val editableComment = MutableLiveData<String>(comment?.text)

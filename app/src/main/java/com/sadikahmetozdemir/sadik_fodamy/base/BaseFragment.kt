@@ -71,7 +71,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             BaseViewEvent.NavigateBack -> {
                 findNavController().popBackStack()
             }
-            is BaseViewEvent.ShowToast -> Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+            is BaseViewEvent.ShowToast -> {
+                Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
