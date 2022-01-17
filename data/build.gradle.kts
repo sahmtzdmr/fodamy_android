@@ -32,6 +32,7 @@ android {
         implementation(Dependencies.APPCOMPAT)
         implementation(Dependencies.MATERIAL)
         implementation(Dependencies.GSON_CONVERTER)
+        implementation (Dependencies.PAGING)
         testImplementation(Dependencies.JUNIT)
         androidTestImplementation(Dependencies.EXT_JUNIT)
         androidTestImplementation(Dependencies.ESPRESSO_CORE)
