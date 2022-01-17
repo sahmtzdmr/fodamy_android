@@ -5,8 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel

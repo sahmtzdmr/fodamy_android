@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewEvent
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository

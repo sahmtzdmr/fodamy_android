@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FavoritesChildItemBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 
 class FavoritesChildAdapter(private var categoryItem: List<EditorChoiceModel>) :
     RecyclerView.Adapter<FavoritesChildAdapter.CategoryViewHolder>() {

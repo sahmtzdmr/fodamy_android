@@ -1,6 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.remote
 
 import android.os.Parcelable
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.local.ImagesModel
 import kotlinx.android.parcel.Parcelize
 

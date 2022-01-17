@@ -1,7 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy.api
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.BaseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesResponseModel
 import retrofit2.Response

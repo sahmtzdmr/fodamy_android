@@ -2,14 +2,13 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import javax.inject.Inject
 
 class LastAddedAdapter @Inject constructor() :

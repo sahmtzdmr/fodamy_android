@@ -9,7 +9,7 @@ import com.sadikahmetozdemir.sadik_fodamy.api.ApiSuccessResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.BaseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Resource
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Result

@@ -3,7 +3,7 @@ package com.sadikahmetozdemir.sadik_fodamy.shared.repositories
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 
 class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     PagingSource<Int, EditorChoiceModel>() {

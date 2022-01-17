@@ -2,15 +2,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesDetailBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import javax.inject.Inject
 
 class FavoritesCategoriesAdapter @Inject constructor() :
