@@ -6,5 +6,6 @@ object Plugins {
     const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs"
     const val KOTLIN_PARCELIZE = "kotlin-parcelize"
     const val KTLINT = "org.jlleitschuh.gradle.ktlint"
+    const val ANDROID_LIBRARY = "com.android.library"
 
 }
