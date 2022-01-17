@@ -17,11 +17,13 @@ import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
 
-class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI):FeedRepository {
+class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI):
+    FeedRepository {
 
     override fun feedRequest(): Flow<PagingData<EditorChoiceModel>> {
         return Pager(

@@ -1,7 +1,8 @@
 package com.sadikahmetozdemir.data.shared.local
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserModel(
@@ -10,14 +11,21 @@ data class UserModel(
     var username: String?,
     var name: String?,
     var surname: String?,
-    var is_banned: Int?,
+    @SerializedName("is_banned")
+    var isBanned: Int?,
     var is_trusted: Int?,
-    var followed_count: Int?,
-    var following_count: Int?,
-    var recipe_count: Int?,
-    var is_following: Boolean?,
-    var favorites_count: Int?,
-    var likes_count: Int?,
+    @SerializedName("followed_count")
+    var followedCount: Int?,
+    @SerializedName("following_count")
+    var followingCount: Int?,
+    @SerializedName("recipe_count")
+    var recipeCount: Int?,
+    @SerializedName("is_following")
+    var isFollowing: Boolean?,
+    @SerializedName("favorites_count")
+    var favoritesCount: Int?,
+    @SerializedName("likes_count")
+    var likesCount: Int?,
     var image: ImagesModel?
 
 ) : Parcelable

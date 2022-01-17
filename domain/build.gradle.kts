@@ -1,6 +1,7 @@
 plugins {
     id (Plugins.ANDROID_LIBRARY)
     id (Plugins.KOTLIN_ANDROID)
+    id  (Plugins.KOTLIN_PARCELIZE)
 }
 
 android {
@@ -28,8 +29,11 @@ dependencies {
 
     implementation (Dependencies.ANDROIDX_CORE)
     implementation (Dependencies.APPCOMPAT)
+    implementation (Dependencies.PAGING)
     implementation (Dependencies.MATERIAL)
+    implementation(project(Modules.DATA))
     testImplementation (Dependencies.JUNIT)
     androidTestImplementation (Dependencies.EXT_JUNIT)
     androidTestImplementation (Dependencies.ESPRESSO_CORE)
+
 }

@@ -1,7 +1,8 @@
 package com.sadikahmetozdemir.data.shared.local
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class ImagesModel(

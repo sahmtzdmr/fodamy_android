@@ -43,11 +43,11 @@ class FavoritesCategoriesAdapter @Inject constructor() :
                 tvUsername.text = item.user?.name
                 tvRecipe.text = String.format(
                     binding.root.context.getString(R.string.recipe),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
                 tvFoodTitle.text = item.title
                 tvFoodDescription.text = item.category?.name

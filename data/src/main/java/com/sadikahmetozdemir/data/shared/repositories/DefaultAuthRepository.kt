@@ -13,8 +13,10 @@ import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.data.shared.remote.Resource
 import com.sadikahmetozdemir.data.shared.remote.Result
 import com.sadikahmetozdemir.data.shared.utils.NETWORK_ERROR_MESSAGE
+import com.sadikahmetozdemir.domain.repositories.AuthRepository
+import javax.inject.Inject
 
-class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI):AuthRepository {
+class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI): AuthRepository {
 
     override suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>? {
         return try {

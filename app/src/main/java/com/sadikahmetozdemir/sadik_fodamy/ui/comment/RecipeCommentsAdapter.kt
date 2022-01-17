@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemCommentBinding
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class RecipeCommentsAdapter @Inject constructor() :
@@ -49,11 +48,11 @@ class RecipeCommentsAdapter @Inject constructor() :
                 tvUsername.text = item.user?.username
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
                 tvTime.text = item.difference.toString()
                 tvComment.text = item.text

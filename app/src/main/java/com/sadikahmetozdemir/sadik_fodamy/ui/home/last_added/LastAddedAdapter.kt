@@ -50,11 +50,11 @@ class LastAddedAdapter @Inject constructor() :
 
                 tvRecipe.text = String.format(
                     binding.root.context.getString(R.string.recipe),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
                 Glide
                     .with(binding.root.context)

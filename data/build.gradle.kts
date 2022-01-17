@@ -27,7 +27,8 @@ android {
 }
 
     dependencies {
-
+        implementation(project(Modules.APP))
+        implementation(project(Modules.DOMAIN))
         implementation(Dependencies.ANDROIDX_CORE)
         implementation(Dependencies.APPCOMPAT)
         implementation(Dependencies.MATERIAL)

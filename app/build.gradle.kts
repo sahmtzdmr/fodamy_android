@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation (project(Modules.DATA))
+    implementation (project(Modules.DOMAIN))
     implementation (Dependencies.ANDROIDX_CORE)
     implementation (Dependencies.APPCOMPAT)
     implementation (Dependencies.MATERIAL)
@@ -63,7 +64,7 @@ dependencies {
     implementation (Dependencies.FRAGMENT_KTX)
     implementation (Dependencies.LIFECYCLE_VIEWMODEL)
     implementation (Dependencies.ACTIVITY_KTX)
-    implementation (Dependencies.DAGGER_HILT)
+    api (Dependencies.DAGGER_HILT)
     kapt (Dependencies.DAGGER_HILT_COMPILER)
     implementation (Dependencies.HILT_LIFECYCLE_VIEWMODEL)
     implementation (Dependencies.PAGING)
