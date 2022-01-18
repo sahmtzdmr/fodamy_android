@@ -4,8 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Images(
-    val height: Int,
-    val url: String,
-    val width: Int
-) : Parcelable
+data class NumberOfPerson(
+    val id: Int,
+    val text: String
+):Parcelable

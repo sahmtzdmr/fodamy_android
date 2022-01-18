@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    val id: Int?,
-    val image: Images?,
-    val name: String?,
-    val username: String?,
+    val id: Int,
+    val image: Images,
+    val name: String,
+    val username: String,
     val favoritesCount: Int,
     val followedCount: Int,
     val followingCount: Int,

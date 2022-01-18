@@ -1,10 +1,13 @@
 package com.sadikahmetozdemir.data.shared.local
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class NumberOfPersonModel(
-    var number_of_person: Int?,
-    var text: String?
+    @SerializedName("number_of_person")
+    var id: Int,
+    var text: String
 ) : Parcelable

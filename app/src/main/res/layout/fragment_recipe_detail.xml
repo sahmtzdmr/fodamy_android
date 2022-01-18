@@ -103,7 +103,7 @@
                             android:layout_marginStart="@dimen/margin_start"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nunito_semibold"
-                            android:text="@{vM.recipeDetail.category.name}"
+                            android:text="@{vM.recipeDetail.categoryModel.name}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_food_title"
                             tools:text="Hamur işi" />
@@ -143,7 +143,7 @@
 
                         <TextView
                             android:id="@+id/tv_comment"
-                            comment_count="@{vM.recipeDetail.comment_count}"
+                            comment_count="@{vM.recipeDetail.commentCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
@@ -164,15 +164,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_like"
-                            likeStyle="@{vM.recipeDetail.is_liked()}"
+                            likeStyle="@{vM.recipeDetail.liked()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_comment"
                             android:clickable="true"
                             android:focusable="true"
-                            android:onClick="@{()->vM.recipeDetail.is_liked() ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
+                            android:onClick="@{()->vM.recipeDetail.liked() ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
                             android:src="@drawable/ic_hearth_dark"
-                            android:tint="@{vM.recipeDetail.is_liked() ? @color/primary : @color/cinder}"
+                            android:tint="@{vM.recipeDetail.liked() ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
 
@@ -180,7 +180,7 @@
 
                         <TextView
                             android:id="@+id/tv_like"
-                            like_count="@{vM.recipeDetail.like_count}"
+                            like_count="@{vM.recipeDetail.likeCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"

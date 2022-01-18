@@ -8,7 +8,7 @@ import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.data.shared.remote.FavoritesCategoryModel
+import com.sadikahmetozdemir.data.shared.remote.Category
 import com.sadikahmetozdemir.data.shared.remote.Resource
 import com.sadikahmetozdemir.data.shared.remote.Result
 import com.sadikahmetozdemir.data.shared.repositories.ApiException
@@ -74,7 +74,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override fun favoriteRecipesRequest(): Flow<PagingData<FavoritesCategoryModel>> {
+    override fun favoriteRecipesRequest(): Flow<PagingData<Category>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) }

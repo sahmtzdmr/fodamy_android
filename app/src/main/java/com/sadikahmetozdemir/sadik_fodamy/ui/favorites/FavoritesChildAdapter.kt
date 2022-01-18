@@ -36,8 +36,8 @@ class FavoritesChildAdapter(private var categoryItem: List<EditorChoiceModel>) :
                 ivUserImage.loadCircleCrop(url = item.user?.image?.url)
                 tvUserName.text = item.user?.username
                 tvFavoritesFoodTitle.text = item.title
-                tvFavoritesComment.text = binding.root.context.getString(R.string.comment, item.comment_count)
-                tvFavoritesLike.text = binding.root.context.getString(R.string.like,item.like_count)
+                tvFavoritesComment.text = binding.root.context.getString(R.string.comment, item.commentCount)
+                tvFavoritesLike.text = binding.root.context.getString(R.string.like,item.likeCount)
                 ivFavoritesFood.setOnClickListener {
                     item.id?.let {
                         itemClicked?.invoke(it)

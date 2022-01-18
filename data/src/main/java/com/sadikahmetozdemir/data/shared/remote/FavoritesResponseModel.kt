@@ -4,6 +4,6 @@ import com.sadikahmetozdemir.data.shared.local.PaginationModel
 
 
 data class FavoritesResponseModel(
-    var data: List<FavoritesCategoryModel>,
+    var data: List<Category>,
     var pagination: PaginationModel
 )

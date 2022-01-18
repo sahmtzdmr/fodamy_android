@@ -40,13 +40,13 @@ class LastAddedAdapter @Inject constructor() :
                 }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
-                tvFoodDescription.text = item.category?.name
+                tvFoodDescription.text = item.categoryModel?.name
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.comment_count
+                    item.commentCount
                 )
                 tvLike.text =
-                    String.format(binding.root.context.getString(R.string.like), item.like_count)
+                    String.format(binding.root.context.getString(R.string.like), item.likeCount)
 
                 tvRecipe.text = String.format(
                     binding.root.context.getString(R.string.recipe),

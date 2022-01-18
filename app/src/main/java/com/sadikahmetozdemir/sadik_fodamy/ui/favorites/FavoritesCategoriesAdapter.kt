@@ -50,15 +50,15 @@ class FavoritesCategoriesAdapter @Inject constructor() :
                     item.user?.followingCount
                 )
                 tvFoodTitle.text = item.title
-                tvFoodDescription.text = item.category?.name
+                tvFoodDescription.text = item.categoryModel?.name
                 foodImage.load(url = item.images?.get(0)?.url)
                 editorChoiceMedal.isVisible = (item.isEditorChoice == true)
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.comment_count
+                    item.commentCount
                 )
                 tvLike.text =
-                    String.format(binding.root.context.getString(R.string.like), item.like_count)
+                    String.format(binding.root.context.getString(R.string.like), item.likeCount)
                 foodImage.setOnClickListener {
                     itemClickedToImages?.invoke(item)
                 }
