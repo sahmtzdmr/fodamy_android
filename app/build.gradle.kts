@@ -57,7 +57,7 @@ dependencies {
     implementation (Dependencies.NAVIGATION_COMPONENT)
     implementation (Dependencies.NAVIGATION_UI)
     implementation (Dependencies.DOTS_INDICATOR)
-    implementation (Dependencies.RETROFIT2)
+    api (Dependencies.RETROFIT2)
     implementation (Dependencies.GSON_CONVERTER)
     implementation (Dependencies.OKHTTP)
     implementation (Dependencies.LIFECYCLE_EXT)
