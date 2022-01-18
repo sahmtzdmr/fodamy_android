@@ -8,7 +8,6 @@ import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.data.shared.remote.LogoutModel
 import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.data.shared.remote.Resource
 import com.sadikahmetozdemir.data.shared.remote.Result
 import com.sadikahmetozdemir.data.shared.utils.NETWORK_ERROR_MESSAGE

@@ -7,5 +7,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Register(
     var token: String, var user: User?
-
-) : Parcelable
+    ) : Parcelable
