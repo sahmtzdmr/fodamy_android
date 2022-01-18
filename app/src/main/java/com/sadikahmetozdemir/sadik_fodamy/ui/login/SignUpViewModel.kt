@@ -3,12 +3,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.login
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.domain.entities.User
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.sadik_fodamy.shared.local.UserModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
+import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
+import com.sadikahmetozdemir.data.shared.remote.Status
+import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class SignUpViewModel @Inject constructor(
     val username = MutableLiveData("")
     val email = MutableLiveData("")
     val password = MutableLiveData("")
-    val user = MutableLiveData<UserModel>()
+    val user = MutableLiveData<User>()
 
     fun sendRegisterRequest() = viewModelScope.launch {
         if (!validateFile(
@@ -51,9 +51,9 @@ class SignUpViewModel @Inject constructor(
                         it?.token?.let { it1 ->
                             dataHelperManager.saveToken(it1)
                         }
-                        it?.user.let { ituser ->
-                            user.postValue(ituser)
-                        }
+//                        it?.user.let { ituser ->
+//                            user.postValue(ituser)
+//                        }
                         response.message?.let { it1 -> showToast(it1) }
                     }
                     navigate(SignUpFragmentDirections.toHomeFragment())

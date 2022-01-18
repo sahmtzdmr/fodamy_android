@@ -110,7 +110,7 @@
         <argument
             android:name="editorChoiseModel"
             android:defaultValue="@null"
-            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel"
+            app:argType="com.sadikahmetozdemir.domain.entities.Recipe"
             app:nullable="true" />
 
 

@@ -1,8 +1,9 @@
 package com.sadikahmetozdemir.sadik_fodamy.shared.repositories
+import com.sadikahmetozdemir.domain.entities.Register
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiErrorResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiResponse
 import com.sadikahmetozdemir.sadik_fodamy.api.ApiSuccessResponse
-import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
+import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.sadik_fodamy.shared.remote.LogoutModel
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 interface AuthRepository{
     suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<LoginResponseModel>?
-    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel>
+    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<Register>
     suspend fun logoutRequest(): Resource<LogoutModel>
 
 }
@@ -40,7 +41,7 @@ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI):
             Resource.error(apiException, null)
         }
     }
-    override suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<RegisterResponseModel> {
+    override suspend fun registerRequest(registerRequestModel: com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel): Resource<Register> {
         return try {
             val response = loginAPI.registerRequest(registerRequestModel)
             when (val apiResponse = ApiResponse.create(response)) {

@@ -6,6 +6,8 @@ import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.Category
 import com.sadikahmetozdemir.data.shared.remote.Resource
+import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.entities.Recipe
 import kotlinx.coroutines.flow.Flow
 
 
@@ -13,8 +15,8 @@ interface FeedRepository {
 
     fun feedRequest(): Flow<PagingData<EditorChoiceModel>>
     fun lastAddedRequest(): Flow<PagingData<EditorChoiceModel>>
-    suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel>
-    suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel>
+    suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe>
+    suspend fun getRecipeDetailComment(recipeID: Int): Resource<Comment>
     fun favoriteRecipesRequest(): Flow<PagingData<Category>>
     fun favoriteCategoriesRequest(categoryID: Int): Flow<PagingData<EditorChoiceModel>>
     suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel>

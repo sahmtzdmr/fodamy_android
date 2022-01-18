@@ -8,6 +8,7 @@ import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.data.shared.remote.Category
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.LoginResponseModel
+import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 
 
 fun User.toDomainModel(): com.sadikahmetozdemir.domain.entities.User =
@@ -44,6 +45,12 @@ fun CommentModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Comment 
         text = this.text,
         user = this.user?.toDomainModel(),
         difference = this.difference
+
+    )
+fun RegisterResponseModel.toDomainModel():com.sadikahmetozdemir.domain.entities.Register=
+    com.sadikahmetozdemir.domain.entities.Register(
+        token=this.token,
+        user=this.user
 
     )
 

@@ -1,6 +1,7 @@
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.ApiErrorResponse
 import com.sadikahmetozdemir.data.service.ApiResponse
 import com.sadikahmetozdemir.data.service.ApiSuccessResponse
@@ -17,6 +18,7 @@ import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
@@ -38,12 +40,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             pagingSourceFactory = { LastAddedPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
-    override suspend fun getRecipeDetail(recipeID: Int): Resource<EditorChoiceModel> {
+    override suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomaninModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
