@@ -27,12 +27,14 @@ android {
 }
 
     dependencies {
-        implementation(project(Modules.APP))
-        implementation(project(Modules.DOMAIN))
+        api(project(Modules.DOMAIN))
         implementation(Dependencies.ANDROIDX_CORE)
         implementation(Dependencies.APPCOMPAT)
         implementation(Dependencies.MATERIAL)
         implementation(Dependencies.GSON_CONVERTER)
+        implementation(Dependencies.DAGGER_HILT)
+        implementation(Dependencies.DAGGER_HILT_COMPILER)
+        implementation(Dependencies.DAGGER_HILT_GRADLE_PLUGIN)
         implementation (Dependencies.PAGING)
         testImplementation(Dependencies.JUNIT)
         androidTestImplementation(Dependencies.EXT_JUNIT)

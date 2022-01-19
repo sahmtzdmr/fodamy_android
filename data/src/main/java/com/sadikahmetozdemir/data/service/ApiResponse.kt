@@ -1,7 +1,7 @@
 package com.sadikahmetozdemir.data.service
 
 import com.google.gson.Gson
-import com.sadikahmetozdemir.data.shared.remote.Result
+import com.sadikahmetozdemir.domain.requests.Result
 import com.sadikahmetozdemir.data.shared.utils.ERROR_MESSAGE
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -25,7 +25,7 @@ sealed class ApiResponse<T> {
             } else {
                 val errorMessage =
                     Gson().fromJson(response.errorBody()?.string(), Result::class.java)
-                ApiErrorResponse(errorMessage ?: ERROR_MESSAGE, errorMessage.code)
+                ApiErrorResponse((errorMessage ?: ERROR_MESSAGE) as Result, errorMessage.code)
             } /*else{
                 ApiErrorResponse(Result("unknown error"))
             }*/

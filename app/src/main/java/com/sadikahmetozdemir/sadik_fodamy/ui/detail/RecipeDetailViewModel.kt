@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.data.shared.remote.Status
+import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
@@ -21,7 +22,7 @@ class RecipeDetailViewModel @Inject constructor(
 
     ) : BaseViewModel() {
     val recipeDetail = MutableLiveData<Recipe?>()
-    val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
+    val recipeDetailComment = MutableLiveData<Comment?>()
     val event = MutableLiveData<RecipeDetailEvent>()
     var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
 

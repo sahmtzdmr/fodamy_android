@@ -1,4 +1,5 @@
 package com.sadikahmetozdemir.data.shared.remote
+
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.data.shared.local.ImagesModel
@@ -7,13 +8,12 @@ import com.sadikahmetozdemir.data.shared.local.TimeOfRecipeModel
 import com.sadikahmetozdemir.data.shared.local.User
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
-data class EditorChoiceModel(
+data class LastAddedModel(
     var id: Int,
     var title: String,
     var ingredients: String,
-    var definition:String,
+    var definition: String,
     var directions: String,
     var difference: String,
     @SerializedName("number_of_favorite_count")
@@ -31,11 +31,9 @@ data class EditorChoiceModel(
     var timeOfRecipe: TimeOfRecipeModel,
     @SerializedName("number_of_person")
     var numberOfPerson: NumberOfPersonModel,
-    var categoryModel: com.sadikahmetozdemir.data.shared.remote.CategoryModel,
+    var categoryModel: CategoryModel,
     var images: List<ImagesModel>?,
     @SerializedName("is_liked")
     var isLiked: Boolean,
     var text: String,
-
-
-    ) : Parcelable
+) : Parcelable

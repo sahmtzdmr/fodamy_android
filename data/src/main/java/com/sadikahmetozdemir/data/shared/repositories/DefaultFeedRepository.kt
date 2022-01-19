@@ -1,45 +1,45 @@
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.ApiErrorResponse
 import com.sadikahmetozdemir.data.service.ApiResponse
 import com.sadikahmetozdemir.data.service.ApiSuccessResponse
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
-import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.data.shared.remote.Category
-import com.sadikahmetozdemir.data.shared.remote.Resource
-import com.sadikahmetozdemir.data.shared.remote.Result
+import com.sadikahmetozdemir.domain.requests.Result
+import com.sadikahmetozdemir.domain.requests.Resource
 import com.sadikahmetozdemir.data.shared.repositories.ApiException
 import com.sadikahmetozdemir.data.shared.repositories.FavoriteCategoriesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
+import com.sadikahmetozdemir.domain.entities.CommentResponse
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import javax.inject.Inject
 
-class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI):
+class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     FeedRepository {
 
-    override fun feedRequest(): Flow<PagingData<EditorChoiceModel>> {
+    override fun feedRequest(): Flow<PagingData<Recipe>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = { RecipePagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
 
-    override fun lastAddedRequest(): Flow<PagingData<EditorChoiceModel>> {
+    override fun lastAddedRequest(): Flow<PagingData<Recipe>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = { LastAddedPagingSource(editorChoiceRecipesAPI) }
         ).flow
     }
+
     override suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
@@ -58,12 +58,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponseModel> {
+    override suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponse> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -76,7 +76,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override fun favoriteRecipesRequest(): Flow<PagingData<Category>> {
+    override fun favoriteRecipesRequest(): Flow<PagingData<com.sadikahmetozdemir.domain.entities.Category>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) }
@@ -85,7 +85,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
 
     override fun favoriteCategoriesRequest(
         categoryID: Int
-    ): Flow<PagingData<EditorChoiceModel>> {
+    ): Flow<PagingData<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = {
@@ -171,7 +171,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
 
     override fun recipeCommentsRequest(
         categoryID: Int
-    ): Flow<PagingData<EditorChoiceModel>> {
+    ): Flow<PagingData<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = {
@@ -183,7 +183,10 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         ).flow
     }
 
-    override suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<EditorChoiceModel> {
+    override suspend fun postRecipeCommentRequest(
+        recipeID: Int,
+        text: String
+    ): Resource<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel> {
         return try {
             val response = editorChoiceRecipesAPI.postRecipeComments(recipeID, text)
             when (val apiResponse = ApiResponse.create(response)) {
@@ -223,12 +226,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         recipeID: Int,
         commentID: Int,
         text: String
-    ): Resource<BaseModel> {
+    ): Resource<com.sadikahmetozdemir.domain.entities.BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.editRecipeComments(recipeID, commentID, text)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)

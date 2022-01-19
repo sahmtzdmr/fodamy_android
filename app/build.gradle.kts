@@ -46,8 +46,8 @@ android {
 }
 
 dependencies {
-    implementation (project(Modules.DATA))
-    implementation (project(Modules.DOMAIN))
+    api (project(Modules.DOMAIN))
+    api (project(Modules.DATA))
     implementation (Dependencies.ANDROIDX_CORE)
     implementation (Dependencies.APPCOMPAT)
     implementation (Dependencies.MATERIAL)

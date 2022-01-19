@@ -5,22 +5,25 @@ import com.sadikahmetozdemir.data.service.ApiErrorResponse
 import com.sadikahmetozdemir.data.service.ApiResponse
 import com.sadikahmetozdemir.data.service.ApiSuccessResponse
 import com.sadikahmetozdemir.data.service.LoginAPI
-import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
-import com.sadikahmetozdemir.data.shared.remote.LogoutModel
 import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.data.shared.remote.Resource
-import com.sadikahmetozdemir.data.shared.remote.Result
-import com.sadikahmetozdemir.data.shared.utils.NETWORK_ERROR_MESSAGE
-import com.sadikahmetozdemir.domain.entities.Register
+import com.sadikahmetozdemir.domain.utils.constants.NETWORK_ERROR_MESSAGE
+import com.sadikahmetozdemir.domain.entities.Auth
+import com.sadikahmetozdemir.domain.entities.LoginRequest
+import com.sadikahmetozdemir.domain.entities.LoginResponseModel
+import com.sadikahmetozdemir.domain.entities.Logout
+import com.sadikahmetozdemir.domain.entities.RegisterRequest
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
+import com.sadikahmetozdemir.domain.requests.Resource
+import com.sadikahmetozdemir.domain.requests.Result
 import java.io.IOException
 import javax.inject.Inject
 
-class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) : AuthRepository {
+abstract class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) :
+    AuthRepository {
 
-    override suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<com.sadikahmetozdemir.domain.entities.LoginResponseModel>? {
+    override suspend fun loginRequest(loginRequest: LoginRequest): Resource<LoginResponseModel> {
         return try {
-            val response = loginAPI.loginRequest(loginRequestModel)
+            val response = loginAPI.loginRequest(loginRequest)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
                     Resource.success(apiResponse.body.toDomainModel())
@@ -36,9 +39,9 @@ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) 
         }
     }
 
-    override suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<Register> {
+    override suspend fun registerRequest(registerRequest: RegisterRequest): Resource<Auth> {
         return try {
-            val response = loginAPI.registerRequest(registerRequestModel)
+            val response = loginAPI.registerRequest(registerRequest)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
                     Resource.success((apiResponse.body).toDomainModel())
@@ -54,12 +57,12 @@ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) 
         }
     }
 
-    override suspend fun logoutRequest(): Resource<LogoutModel> {
+    override suspend fun logoutRequest(): Resource<Logout> {
         return try {
             val response = loginAPI.logoutRequest()
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)

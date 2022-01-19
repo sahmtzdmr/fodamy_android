@@ -1,7 +1,8 @@
 package com.sadikahmetozdemir.data.di
 
-import com.sadikahmetozdemir.sadik_fodamy.api.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.sadik_fodamy.api.LoginAPI
+
+import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.data.service.LoginAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

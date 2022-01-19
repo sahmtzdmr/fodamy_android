@@ -1,7 +1,7 @@
 plugins {
-    id (Plugins.ANDROID_LIBRARY)
-    id (Plugins.KOTLIN_ANDROID)
-    id  (Plugins.KOTLIN_PARCELIZE)
+    id(Plugins.ANDROID_LIBRARY)
+    id(Plugins.KOTLIN_ANDROID)
+    id(Plugins.KOTLIN_PARCELIZE)
 }
 
 android {
@@ -27,13 +27,13 @@ android {
 
 dependencies {
 
-    implementation (Dependencies.ANDROIDX_CORE)
-    implementation (Dependencies.APPCOMPAT)
-    implementation (Dependencies.PAGING)
-    implementation (Dependencies.MATERIAL)
-    implementation(project(Modules.DATA))
-    testImplementation (Dependencies.JUNIT)
-    androidTestImplementation (Dependencies.EXT_JUNIT)
-    androidTestImplementation (Dependencies.ESPRESSO_CORE)
+    implementation(Dependencies.ANDROIDX_CORE)
+    implementation(Dependencies.APPCOMPAT)
+    implementation(Dependencies.PAGING)
+    implementation(Dependencies.MATERIAL)
+    testImplementation(Dependencies.JUNIT)
+    androidTestImplementation(Dependencies.EXT_JUNIT)
+    androidTestImplementation(Dependencies.ESPRESSO_CORE)
+    implementation(Dependencies.GSON_CONVERTER)
 
 }

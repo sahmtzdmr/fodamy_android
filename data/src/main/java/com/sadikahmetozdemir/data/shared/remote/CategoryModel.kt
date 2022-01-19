@@ -5,7 +5,7 @@ import com.sadikahmetozdemir.data.shared.local.ImagesModel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Category(
+data class CategoryModel(
     var id: Int,
     var name: String,
     var recipes: List<EditorChoiceModel>,

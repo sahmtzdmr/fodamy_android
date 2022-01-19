@@ -2,11 +2,12 @@ package com.sadikahmetozdemir.data.shared.repositories
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.data.shared.remote.Category
+import com.sadikahmetozdemir.domain.entities.Category
 
 class FavoritesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
-    PagingSource<Int, Category>() {
+    PagingSource<Int,Category>() {
     private val STARTING_PAGE_INDEX = 1
 
     override fun getRefreshKey(state: PagingState<Int, Category>): Int? {
@@ -16,11 +17,11 @@ class FavoritesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceReci
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Category> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int,Category> {
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = editorChoiceRecipesAPI.favoriteRecipesRequest(currentPage)
-            val favoriteItems = response.data
+            val favoriteItems = response.data.map { it.toDomainModel() }
 
             LoadResult.Page(
                 data = favoriteItems,

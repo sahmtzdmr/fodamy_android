@@ -1,15 +1,15 @@
 package com.sadikahmetozdemir.domain.repositories
 
-import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
-import com.sadikahmetozdemir.data.shared.remote.LogoutModel
-import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
-import com.sadikahmetozdemir.data.shared.remote.Resource
-import com.sadikahmetozdemir.domain.entities.Register
+import com.sadikahmetozdemir.domain.entities.Auth
+import com.sadikahmetozdemir.domain.entities.LoginRequest
+import com.sadikahmetozdemir.domain.entities.LoginResponseModel
+import com.sadikahmetozdemir.domain.entities.Logout
+import com.sadikahmetozdemir.domain.entities.RegisterRequest
+import com.sadikahmetozdemir.domain.requests.Resource
 
-interface AuthRepository{
-    suspend fun loginRequest(loginRequestModel: LoginRequestModel): Resource<com.sadikahmetozdemir.domain.entities.LoginResponseModel>?
-    suspend fun registerRequest(registerRequestModel: RegisterRequestModel): Resource<Register>
-    suspend fun logoutRequest(): Resource<LogoutModel>
+interface AuthRepository {
+    suspend fun loginRequest(loginRequest: LoginRequest): Resource<LoginResponseModel>?
+    suspend fun registerRequest(registerRequest: RegisterRequest): Resource<Auth>
+    suspend fun logoutRequest(): Resource<Logout>
 
 }

@@ -190,7 +190,7 @@
 
         <argument
             android:name="comment"
-            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+            app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
         <argument
             android:name="recipeID"
             app:argType="integer"
