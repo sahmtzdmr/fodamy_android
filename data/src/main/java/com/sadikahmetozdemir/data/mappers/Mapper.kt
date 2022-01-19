@@ -89,8 +89,8 @@ fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Categor
 
     )
 
-fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): com.sadikahmetozdemir.domain.entities.Recipe =
-    com.sadikahmetozdemir.domain.entities.Recipe(
+fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():Recipe =
+    Recipe(
         id = this.id,
         title = this.title,
         definition = this.definition,
@@ -173,3 +173,5 @@ fun CommentResponseModel.toDomainModel(): CommentResponse =
         data = this.data.map { it.toDomainModel() },
         pagination = this.pagination.toDomainModel()
     )
+
+

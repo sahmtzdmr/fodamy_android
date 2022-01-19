@@ -7,7 +7,6 @@ import com.sadikahmetozdemir.data.service.ApiErrorResponse
 import com.sadikahmetozdemir.data.service.ApiResponse
 import com.sadikahmetozdemir.data.service.ApiSuccessResponse
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.domain.requests.Result
 import com.sadikahmetozdemir.domain.requests.Resource
 import com.sadikahmetozdemir.data.shared.repositories.ApiException
@@ -16,6 +15,8 @@ import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
+import com.sadikahmetozdemir.domain.entities.BaseModel
+import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.CommentResponse
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
@@ -85,7 +86,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
 
     override fun favoriteCategoriesRequest(
         categoryID: Int
-    ): Flow<PagingData<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel>> {
+    ): Flow<PagingData<Recipe>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = {
@@ -102,7 +103,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -120,7 +121,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.userRecipeDislikeRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -138,7 +139,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.userFollowing(followedID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -156,7 +157,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.userUnfollowing(followedID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -171,7 +172,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
 
     override fun recipeCommentsRequest(
         categoryID: Int
-    ): Flow<PagingData<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel>> {
+    ): Flow<PagingData<Comment>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = {
@@ -186,12 +187,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
     override suspend fun postRecipeCommentRequest(
         recipeID: Int,
         text: String
-    ): Resource<com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel> {
+    ): Resource<Comment> {
         return try {
             val response = editorChoiceRecipesAPI.postRecipeComments(recipeID, text)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomaninModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
