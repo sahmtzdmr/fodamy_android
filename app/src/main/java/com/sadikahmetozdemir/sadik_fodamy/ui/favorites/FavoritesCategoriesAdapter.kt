@@ -2,22 +2,24 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesDetailBinding
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class FavoritesCategoriesAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, FavoritesCategoriesAdapter.ViewHolder>(
+    PagingDataAdapter<Recipe, FavoritesCategoriesAdapter.ViewHolder>(
         recipeComparator
     ) {
 
-    var itemClickedToImages: ((EditorChoiceModel) -> Unit)? = null
+    var itemClickedToImages: ((Recipe) -> Unit)? = null
 
     override fun onBindViewHolder(holder: FavoritesCategoriesAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -38,7 +40,7 @@ class FavoritesCategoriesAdapter @Inject constructor() :
     inner class ViewHolder(val binding: ItemFavoritesDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
 
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
@@ -69,16 +71,16 @@ class FavoritesCategoriesAdapter @Inject constructor() :
     }
 
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem == newItem
         }

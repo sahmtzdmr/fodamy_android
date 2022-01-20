@@ -13,12 +13,13 @@ data class Recipe(
     val difference: String,
     val isEditorChoice: Boolean,
     val isLiked: Boolean,
-    val likeCount: String,
+    val likeCount: Int,
     val numberOfFavoriteCount: String,
-    val commentCount: String,
+    val commentCount: Int,
     val user: User,
     val timeOfRecipe: TimeOfRecipe,
     val numberOfPerson: NumberOfPerson,
     val category: Category,
-    val images: List<Images>?
-):Parcelable
+    val images: List<Images>?,
+    var categoryModel: Category
+) : Parcelable

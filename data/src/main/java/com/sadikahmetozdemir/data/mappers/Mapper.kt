@@ -89,7 +89,7 @@ fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Categor
 
     )
 
-fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():Recipe =
+fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): Recipe =
     Recipe(
         id = this.id,
         title = this.title,
@@ -99,14 +99,15 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         difference = this.difference,
         isEditorChoice = this.isEditorChoice,
         isLiked = this.isLiked,
-        likeCount = this.likeCount.toString(),
+        likeCount = this.likeCount,
         numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
-        commentCount = this.commentCount.toString(),
+        commentCount = this.commentCount,
         category = this.categoryModel.toDomainModel(),
         user = this.user.toDomainModel(),
         timeOfRecipe = this.timeOfRecipe.toDomainModel(),
         numberOfPerson = this.numberOfPerson.toDomainModel(),
-        images = this.images?.map { it.toDomainModel() }
+        images = this.images?.map { it.toDomainModel() },
+        categoryModel = this.categoryModel.toDomainModel()
     )
 
 fun BaseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.BaseModel =
@@ -146,14 +147,15 @@ fun LastAddedModel.toDomainModel(): Recipe =
         difference = this.difference,
         isEditorChoice = this.isEditorChoice,
         isLiked = this.isLiked,
-        likeCount = this.likeCount.toString(),
+        likeCount = this.likeCount,
         numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
-        commentCount = this.commentCount.toString(),
+        commentCount = this.commentCount,
         category = this.categoryModel.toDomainModel(),
         user = this.user.toDomainModel(),
         timeOfRecipe = this.timeOfRecipe.toDomainModel(),
         numberOfPerson = this.numberOfPerson.toDomainModel(),
-        images = this.images?.map { it.toDomainModel() }
+        images = this.images?.map { it.toDomainModel() },
+        categoryModel = this.categoryModel.toDomainModel()
 
     )
 

@@ -25,15 +25,6 @@ import retrofit2.Retrofit
 @InstallIn(ViewModelComponent::class, FragmentComponent::class, ActivityRetainedComponent::class)
 object AppModule {
 
-
-    @Provides
-    fun provideAuthService(retrofitClient: Retrofit) = retrofitClient.create(LoginAPI::class.java)
-
-    @Provides
-    fun provideFeedService(retrofitClient: Retrofit) =
-        retrofitClient.create(EditorChoiceRecipesAPI::class.java)
-
-
     @Provides
     fun provideDataManager(@ApplicationContext context: Context): DataHelperManager {
         return DataHelperManager(context)

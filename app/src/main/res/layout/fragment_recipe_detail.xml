@@ -164,15 +164,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_like"
-                            likeStyle="@{vM.recipeDetail.liked()}"
+                            likeStyle="@{vM.recipeDetail.isLiked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_comment"
                             android:clickable="true"
                             android:focusable="true"
-                            android:onClick="@{()->vM.recipeDetail.liked() ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
+                            android:onClick="@{()->vM.recipeDetail.isLiked ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
                             android:src="@drawable/ic_hearth_dark"
-                            android:tint="@{vM.recipeDetail.liked() ? @color/primary : @color/cinder}"
+                            android:tint="@{vM.recipeDetail.isLiked ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
 

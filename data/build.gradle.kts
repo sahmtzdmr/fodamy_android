@@ -2,6 +2,7 @@ plugins {
     id(Plugins.ANDROID_LIBRARY)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_PARCELIZE)
+    id(Plugins.KOTLIN_KAPT)
 }
 
 android {
@@ -33,7 +34,7 @@ android {
         implementation(Dependencies.MATERIAL)
         implementation(Dependencies.GSON_CONVERTER)
         implementation(Dependencies.DAGGER_HILT)
-        implementation(Dependencies.DAGGER_HILT_COMPILER)
+        kapt(Dependencies.DAGGER_HILT_COMPILER)
         implementation(Dependencies.DAGGER_HILT_GRADLE_PLUGIN)
         implementation (Dependencies.PAGING)
         implementation (Dependencies.LIFECYCLE_EXT)
