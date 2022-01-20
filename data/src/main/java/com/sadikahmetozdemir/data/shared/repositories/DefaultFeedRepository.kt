@@ -59,12 +59,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override suspend fun getRecipeDetailComment(recipeID: Int): Resource<CommentResponse> {
+    override suspend fun getRecipeDetailComment(recipeID: Int): Resource<Comment> {
         return try {
             val response = editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body).toDomainModel())
+                    Resource.success((apiResponse.body).toDomainModel().data?.get(0))
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)

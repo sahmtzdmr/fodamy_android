@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 
 class FavoritesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     PagingSource<Int,Category>() {
-    private val pageConfig = PagingConfig(24, 100, false)
     private val STARTING_PAGE_INDEX = 1
+    private val pageConfig = PagingConfig(24, 100, false)
 
     fun getPagerFlow(): Flow<PagingData<Category>> {
         return Pager(
