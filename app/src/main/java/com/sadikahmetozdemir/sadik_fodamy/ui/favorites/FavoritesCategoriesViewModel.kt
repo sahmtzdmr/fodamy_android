@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
-import DefaultFeedRepository
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -11,6 +10,7 @@ import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.requests.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesCategoriesViewModel @Inject constructor(
-    private val repositoryDefault: DefaultFeedRepository,
+    private val feedRepository: FeedRepository,
     private val authRepository: AuthRepository,
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle
@@ -31,7 +31,7 @@ class FavoritesCategoriesViewModel @Inject constructor(
 
     fun getFavoriteCategoriesItem(categoryID: Int) {
         viewModelScope.launch {
-            repositoryDefault.favoriteCategoriesRequest(categoryID).distinctUntilChanged()
+            feedRepository.favoriteCategoriesRequest(categoryID).distinctUntilChanged()
                 .cachedIn(viewModelScope).collectLatest {
                     recipes.value = it
                 }

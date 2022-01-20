@@ -6,7 +6,7 @@ import androidx.navigation.NavDirections
 import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel constructor() : ViewModel() {
+abstract class BaseViewModel  : ViewModel() {
     val baseEvent = SingleLiveEvent<BaseViewEvent>()
 
     fun navigate(directions: NavDirections) = viewModelScope.launch {

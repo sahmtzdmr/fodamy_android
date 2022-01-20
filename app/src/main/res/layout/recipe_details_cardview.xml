@@ -11,7 +11,7 @@
 
         <variable
             name="model"
-            type="com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel" />
+            type="com.sadikahmetozdemir.domain.entities.Recipe" />
 
     </data>
 

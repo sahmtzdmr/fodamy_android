@@ -2,16 +2,19 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class EditorChoiceAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
+    PagingDataAdapter<Recipe, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
 
     var itemClicked: ((Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,7 +32,7 @@ class EditorChoiceAdapter @Inject constructor() :
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
 
                 binding.foodImage.setOnClickListener {
@@ -63,16 +66,16 @@ class EditorChoiceAdapter @Inject constructor() :
     }
 
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem == newItem
         }

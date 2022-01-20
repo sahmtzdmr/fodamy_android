@@ -408,7 +408,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_user_comment"
-                            circleImageLoader="@{vM.recipeDetailComment.data.get(0).user.image.url}"
+                            circleImageLoader="@{vM.recipeDetailComment.user.image.url}"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
@@ -435,7 +435,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="@{vM.recipeDetailComment.data.get(0).user.username}"
+                            android:text="@{vM.recipeDetailComment.user.username}"
                             android:textColor="@color/cinder"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/barrier_comment"
@@ -444,7 +444,7 @@
 
                         <TextView
                             android:id="@+id/tv_recipe_comment"
-                            recipe_count="@{vM.recipeDetailComment.data.get(0).user.recipe_count}"
+                            recipe_count="@{vM.recipeDetailComment.user.recipeCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
@@ -455,7 +455,7 @@
 
                         <TextView
                             android:id="@+id/tv_follower_comment"
-                            following_count="@{vM.recipeDetailComment.data.get(0).user.following_count}"
+                            following_count="@{vM.recipeDetailComment.user.followingCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1dp"
@@ -472,7 +472,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="11dp"
-                            android:text="@{vM.recipeDetailComment.data.get(0).difference}"
+                            android:text="@{vM.recipeDetailComment.difference}"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
                             app:layout_constraintTop_toBottomOf="@id/iv_user_comment"
                             tools:text="3 dakika önce" />
@@ -482,7 +482,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@{vM.recipeDetailComment.data.get(0).text}"
+                            android:text="@{vM.recipeDetailComment.text}"
                             app:layout_constraintEnd_toStartOf="@id/guidelineRight"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"

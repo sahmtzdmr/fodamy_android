@@ -2,17 +2,18 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
 import javax.inject.Inject
 
 class LastAddedAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, LastAddedAdapter.ViewHolder>(
+    PagingDataAdapter<Recipe, LastAddedAdapter.ViewHolder>(
         recipeComparator
     ) {
 
@@ -33,7 +34,7 @@ class LastAddedAdapter @Inject constructor() :
     }
     inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
                 binding.foodImage.setOnClickListener {
                     item.id?.let { it1 -> itemClicked?.invoke(it1) }
@@ -70,16 +71,16 @@ class LastAddedAdapter @Inject constructor() :
         }
     }
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem == newItem
         }

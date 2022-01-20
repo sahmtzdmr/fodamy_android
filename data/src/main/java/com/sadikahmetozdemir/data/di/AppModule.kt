@@ -30,6 +30,7 @@ object AppModule {
         retrofitClient.create(EditorChoiceRecipesAPI::class.java)
 
     @Provides
+    @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -38,6 +39,7 @@ object AppModule {
             .build()
     }
     @Provides
+    @Singleton
     fun provideInterceptor(networkInterceptor: NetworkInterceptor): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = if (BuildConfig.DEBUG)
