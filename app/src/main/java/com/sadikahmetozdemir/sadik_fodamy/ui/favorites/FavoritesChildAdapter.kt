@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FavoritesChildItemBinding
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
+import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 
-class FavoritesChildAdapter(private var categoryItem: List<EditorChoiceModel>) :
+class FavoritesChildAdapter(private var categoryItem: List<Recipe>) :
     RecyclerView.Adapter<FavoritesChildAdapter.CategoryViewHolder>() {
 
     var itemClicked: ((Int) -> Unit)? = null
@@ -30,7 +32,7 @@ class FavoritesChildAdapter(private var categoryItem: List<EditorChoiceModel>) :
     inner class CategoryViewHolder(val binding: FavoritesChildItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
                 ivFavoritesFood.load(url = item.images?.get(0)?.url)
                 ivUserImage.loadCircleCrop(url = item.user?.image?.url)

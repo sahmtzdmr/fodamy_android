@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.domain.entities.User
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.data.shared.remote.Status
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.LoginRequest
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,7 +29,7 @@ class LoginViewModel @Inject constructor(
         } else {
             val response =
                 authRepository.loginRequest(
-                    com.sadikahmetozdemir.data.shared.remote.LoginRequestModel(
+                    LoginRequest(
                         username.value.toString(),
                         password.value.toString()
                     )

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.sadikahmetozdemir.data.shared.local.IntroModel
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemIntroBinding
 
 class IntroAdapter(val list: ArrayList<IntroModel>) : RecyclerView.Adapter<IntroViewHolder>() {
@@ -28,7 +29,9 @@ class IntroViewHolder(val binding: ItemIntroBinding) : RecyclerView.ViewHolder(b
         binding.textViewTitle.text = intro.tittle
         binding.textViewDesc.text = intro.description
         intro.drawableId?.let {
-            binding.introImage1.setImageDrawable(ContextCompat.getDrawable(binding.root.context, intro.drawableId))
+            binding.introImage1.setImageDrawable(ContextCompat.getDrawable(binding.root.context,
+                intro.drawableId!!
+            ))
         } ?: kotlin.run {
             binding.introImage1.visibility = View.GONE
         }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.sadikahmetozdemir.data.shared.local.IntroModel
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentIntroBinding

@@ -137,11 +137,9 @@
             app:destination="@id/recipeDetailFragment" />
         <argument
             android:name="categoryID"
-            android:defaultValue="0"
             app:argType="integer" />
         <argument
             android:name="title"
-            android:defaultValue=""
             app:argType="string" />
 
 
