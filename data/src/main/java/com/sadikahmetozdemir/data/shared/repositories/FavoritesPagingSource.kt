@@ -1,14 +1,28 @@
 package com.sadikahmetozdemir.data.shared.repositories
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Category
+import kotlinx.coroutines.flow.Flow
 
 class FavoritesPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     PagingSource<Int,Category>() {
+    private val pageConfig = PagingConfig(24, 100, false)
     private val STARTING_PAGE_INDEX = 1
+
+    fun getPagerFlow(): Flow<PagingData<Category>> {
+        return Pager(
+            config = pageConfig,
+            pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) //it should be test with this value.
+                 }
+        ).flow
+
+    }
 
     override fun getRefreshKey(state: PagingState<Int, Category>): Int? {
         return state.anchorPosition?.let { anchorPosition ->

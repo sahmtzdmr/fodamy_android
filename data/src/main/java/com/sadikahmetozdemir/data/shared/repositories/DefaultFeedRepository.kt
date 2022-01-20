@@ -78,10 +78,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
     }
 
     override fun favoriteRecipesRequest(): Flow<PagingData<com.sadikahmetozdemir.domain.entities.Category>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = { FavoritesPagingSource(editorChoiceRecipesAPI) }
-        ).flow
+        return FavoritesPagingSource(editorChoiceRecipesAPI).getPagerFlow()
     }
 
     override fun favoriteCategoriesRequest(

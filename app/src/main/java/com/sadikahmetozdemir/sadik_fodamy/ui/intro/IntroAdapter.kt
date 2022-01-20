@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemIntroBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.local.IntroModel
 
 class IntroAdapter(val list: ArrayList<IntroModel>) : RecyclerView.Adapter<IntroViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntroViewHolder {

@@ -1,19 +1,24 @@
 package com.sadikahmetozdemir.data.di
 
 
+import com.sadikahmetozdemir.data.BuildConfig
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
+import com.sadikahmetozdemir.data.shared.utils.BASE_URL
+import com.sadikahmetozdemir.data.utils.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+
 object AppModule {
     @Provides
     @Singleton
@@ -27,7 +32,7 @@ object AppModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(SharedPreferanceStorage.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -44,6 +49,8 @@ object AppModule {
             .addInterceptor(loggingInterceptor)
             .build()
     }
+
+
 
 
 }

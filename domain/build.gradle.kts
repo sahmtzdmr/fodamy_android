@@ -28,6 +28,8 @@ android {
 dependencies {
 
     implementation(Dependencies.ANDROIDX_CORE)
+    implementation(Dependencies.LIFECYCLE_VIEWMODEL)
+    implementation(Dependencies.LIFECYCLE_EXT)
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.PAGING)
     implementation(Dependencies.MATERIAL)

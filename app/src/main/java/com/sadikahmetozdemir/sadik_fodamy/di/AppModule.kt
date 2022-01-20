@@ -1,16 +1,13 @@
 package com.sadikahmetozdemir.sadik_fodamy.di
 
+import DefaultFeedRepository
 import android.content.Context
-import com.sadikahmetozdemir.sadik_fodamy.BuildConfig
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
-import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
+import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
+import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
-//import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
-//import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.utils.NetworkInterceptor
-import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,10 +18,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
@@ -43,6 +37,14 @@ object AppModule {
     @Provides
     fun provideDataManager(@ApplicationContext context: Context): DataHelperManager {
         return DataHelperManager(context)
+    }
+    @Provides
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI):FeedRepository{
+        return DefaultFeedRepository(editorChoiceRecipesAPI)
+    }
+    @Provides
+    fun provideAuthRepository(loginAPI: LoginAPI):AuthRepository{
+        return DefaultAuthRepository(loginAPI)
     }
 
     @Provides

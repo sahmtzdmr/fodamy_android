@@ -18,7 +18,7 @@ import com.sadikahmetozdemir.domain.requests.Result
 import java.io.IOException
 import javax.inject.Inject
 
-abstract class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) :
+ class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) :
     AuthRepository {
 
     override suspend fun loginRequest(loginRequest: LoginRequest): Resource<LoginResponseModel> {

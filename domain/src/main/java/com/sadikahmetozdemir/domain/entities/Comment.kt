@@ -9,5 +9,4 @@ data class Comment(
     val text: String,
     val user: User?,
     val difference: String
-
 ):Parcelable

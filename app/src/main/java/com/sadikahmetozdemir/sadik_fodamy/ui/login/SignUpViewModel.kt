@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.domain.entities.User
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
-import com.sadikahmetozdemir.data.shared.remote.Status
+import com.sadikahmetozdemir.domain.requests.Status
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.RegisterRequest
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +36,7 @@ class SignUpViewModel @Inject constructor(
             return@launch
         } else {
             val response = authRepository.registerRequest(
-                RegisterRequestModel(
+                RegisterRequest(
                     username = username.value,
                     email = email.value,
                     password = password.value,

@@ -5,12 +5,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -26,9 +26,9 @@ class RecipeCommentsViewModel @Inject constructor(
 ) :
     BaseViewModel() {
     val event = SingleLiveEvent<RecipeCommentsEvent>()
-    var recipes: MutableLiveData<PagingData<EditorChoiceModel>> = MutableLiveData()
+    var recipes: MutableLiveData<PagingData<Comment>> = MutableLiveData()
     val recipeID: Int = savedStateHandle.get<Int>(RECIPE_ID) ?: 0
-    val comment = MutableLiveData<EditorChoiceModel>()
+    val comment = MutableLiveData<Comment>()
 
     fun getRecipeCommentsItem() {
         viewModelScope.launch {

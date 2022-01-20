@@ -7,7 +7,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentIntroBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.local.IntroModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 
 class IntroFragment : BaseFragment<FragmentIntroBinding, IntroViewModel>(R.layout.fragment_intro) {

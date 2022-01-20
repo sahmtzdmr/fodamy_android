@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "sadik_fodamy"
 include (":app",":data",":domain")
 
+include(":testt:myapplication")
