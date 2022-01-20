@@ -192,7 +192,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.postRecipeComments(recipeID, text)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body).toDomaninModel())
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -210,7 +210,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
             val response = editorChoiceRecipesAPI.deleteRecipeComments(recipeID, commentID)
             when (val apiResponse = ApiResponse.create(response)) {
                 is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body))
+                    Resource.success((apiResponse.body).toDomainModel())
                 }
                 is ApiErrorResponse -> {
                     Resource.error(apiResponse.errorMessage)
@@ -227,7 +227,7 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         recipeID: Int,
         commentID: Int,
         text: String
-    ): Resource<com.sadikahmetozdemir.domain.entities.BaseModel> {
+    ): Resource<BaseModel> {
         return try {
             val response = editorChoiceRecipesAPI.editRecipeComments(recipeID, commentID, text)
             when (val apiResponse = ApiResponse.create(response)) {

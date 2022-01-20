@@ -1,5 +1,6 @@
 package com.sadikahmetozdemir.data.service
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
+import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceResponseModel
@@ -47,10 +48,10 @@ interface EditorChoiceRecipesAPI {
     suspend fun userUnfollowing(@Path("followedId") followedID: Int): Response<BaseModel>
 
     @GET("api/recipe/{recipe_id}/comment")
-    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): EditorChoiceResponseModel
+    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): CommentResponseModel
 
     @POST("api/recipe/{recipe_id}/comment")
-    suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<EditorChoiceModel>
+    suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<CommentModel>
 
     @DELETE("api/recipe/{recipe_id}/comment/{comment_id}")
     suspend fun deleteRecipeComments(@Path("recipe_id") recipeID: Int, @Path("comment_id") commentID: Int): Response<BaseModel>

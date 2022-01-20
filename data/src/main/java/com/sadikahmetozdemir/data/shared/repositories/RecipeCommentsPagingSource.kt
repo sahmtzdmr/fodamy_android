@@ -2,10 +2,10 @@ package com.sadikahmetozdemir.data.shared.repositories
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.sadikahmetozdemir.data.mappers.toDomaninModel
+import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Comment
-import com.sadikahmetozdemir.domain.entities.Recipe
+
 
 class RecipeCommentsPagingSource(
     private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
@@ -26,7 +26,7 @@ class RecipeCommentsPagingSource(
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = editorChoiceRecipesAPI.getRecipeComments(categoryID, currentPage)
-            val dataFavoriteCategories = response.data.map { it.toDomaninModel() }
+            val dataFavoriteCategories = response.data.map { it.toDomainModel() }
 
             LoadResult.Page(
                 data = dataFavoriteCategories,
