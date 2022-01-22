@@ -37,11 +37,11 @@ class LoginViewModel @Inject constructor(
             when (response?.status) {
                 Status.SUCCESS -> {
                     response.data?.let {
-                        it.user.id.let { it1 ->
-                            dataHelperManager.saveID(it1)
+                        it.user?.id.let { it1 ->
+                            it1?.let { it2 -> dataHelperManager.saveID(it2) }
                         }
                         it.token.let { it1 ->
-                            dataHelperManager.saveToken(it1)
+                            it1?.let { it2 -> dataHelperManager.saveToken(it2) }
                         }
                         it.user.let { ituser ->
                             user.postValue(ituser)

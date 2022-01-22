@@ -23,8 +23,6 @@ class HomeTablayoutViewModel @Inject constructor(
                         showToast(it)
                     }
                     dataHelperManager.removeToken()
-
-
                 }
                 Status.ERROR -> {
 

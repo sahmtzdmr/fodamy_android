@@ -132,9 +132,9 @@ fun RegisterRequestModel.toDomainModel(): RegisterRequest =
 
 fun LogoutModel.toDomainModel(): Logout =
     Logout(
-        code = this.code,
-        message = this.message,
-        error = this.error
+        code = this.code?:"",
+        message = this.message?:"",
+        error = this.error?:""
     )
 
 fun LastAddedModel.toDomainModel(): Recipe =

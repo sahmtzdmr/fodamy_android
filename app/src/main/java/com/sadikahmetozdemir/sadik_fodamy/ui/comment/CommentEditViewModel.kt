@@ -3,9 +3,9 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.comment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.sadikahmetozdemir.data.shared.remote.Status
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

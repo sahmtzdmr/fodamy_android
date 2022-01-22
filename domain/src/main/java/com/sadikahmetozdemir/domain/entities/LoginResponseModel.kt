@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class LoginResponseModel(var token: String, var user: User) : Parcelable
+data class LoginResponseModel(var token: String?, var user: User?) : Parcelable
