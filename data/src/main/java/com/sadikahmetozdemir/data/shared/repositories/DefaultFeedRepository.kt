@@ -12,9 +12,7 @@ import com.sadikahmetozdemir.domain.requests.Resource
 import com.sadikahmetozdemir.data.shared.repositories.ApiException
 import com.sadikahmetozdemir.data.shared.repositories.FavoriteCategoriesPagingSource
 import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
-import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
-import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
-import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
+
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.CommentResponse
@@ -71,8 +69,8 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override fun favoriteRecipesRequest(): Flow<PagingData<com.sadikahmetozdemir.domain.entities.Category>> {
-        return FavoritesPagingSource(editorChoiceRecipesAPI).getPagerFlow()
+    override suspend fun favoriteRecipesRequest(page:Int): List<com.sadikahmetozdemir.domain.entities.Category> {
+        return editorChoiceRecipesAPI.favoriteRecipesRequest(page).data?.map { it.toDomainModel() }!!
     }
 
     override fun favoriteCategoriesRequest(

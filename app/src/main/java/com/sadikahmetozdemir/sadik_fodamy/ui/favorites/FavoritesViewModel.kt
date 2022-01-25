@@ -2,9 +2,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
+import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
@@ -12,6 +15,7 @@ import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -33,13 +37,9 @@ class FavoritesViewModel @Inject constructor(
 
     private fun getFavoriteItems() {
         viewModelScope.launch {
-            feedRepository.favoriteRecipesRequest().distinctUntilChanged()
-                .cachedIn(viewModelScope)
-                .collectLatest { it ->
-                    recipes.value = it.filter {
-                        it.recipes?.isNotEmpty() == true
-                    }
-                }
+            val pager=Pager(config = PAGE_CONFIG, pagingSourceFactory = {FavoritesPagingSource(feedRepository)
+            } ).flow
+            pager.cachedIn(viewModelScope).collect { recipes.value=it }
         }
     }
 
@@ -76,5 +76,10 @@ class FavoritesViewModel @Inject constructor(
 
     fun openDetailScreen(recipeID: Int) {
         navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
+    }
+    companion object{
+        private val PAGE_CONFIG =
+            PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)
+
     }
 }

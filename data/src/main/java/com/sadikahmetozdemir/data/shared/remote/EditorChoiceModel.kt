@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EditorChoiceModel(
-    var id: Int?,
+    var id: Int,
     var title: String?,
     var ingredients: String?,
     var definition: String?,

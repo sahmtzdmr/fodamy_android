@@ -13,8 +13,6 @@ import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,14 +29,19 @@ class EditorChoiceViewModel @Inject constructor(private val feedRepository: Feed
 
     private fun getEditorChoice() {
         viewModelScope.launch {
-            val pager = Pager(
-                config = PAGE_CONFIG,
-                pagingSourceFactory = {
-                    RecipePagingSource(feedRepository)
-                }).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value = it }
+            try {
+                val pager = Pager(
+                    config = PAGE_CONFIG,
+                    pagingSourceFactory = {
+                        RecipePagingSource(feedRepository)
+                    }).flow
+                pager.cachedIn(viewModelScope).collect { recipes.value = it }
+            } catch (ex: Exception) {
+            }
         }
+
     }
+
 
     fun openDetailScreen(recipeID: Int) {
         navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))

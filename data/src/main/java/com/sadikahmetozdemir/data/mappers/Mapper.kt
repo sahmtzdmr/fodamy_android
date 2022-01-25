@@ -26,7 +26,7 @@ fun User.toDomainModel(): com.sadikahmetozdemir.domain.entities.User =
     com.sadikahmetozdemir.domain.entities.User(
         id = this.id?:0,
         username = this.username?:"",
-        image = this.image?.toDomainModel()!!,
+        image = this.image?.toDomainModel(),
         favoritesCount = this.favoritesCount?:0,
         followedCount = this.followedCount?:0,
         followingCount = this.followingCount?:0,
@@ -90,7 +90,7 @@ fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Categor
 
 fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): Recipe =
     Recipe(
-        id = this.id?:0,
+        id = this.id,
         title = this.title?:"",
         definition = this.definition?:"",
         ingredients = this.ingredients?:"",
@@ -99,7 +99,7 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         isEditorChoice = this.isEditorChoice,
         isLiked = this.isLiked,
         likeCount = this.likeCount?:0,
-        numberOfFavoriteCount = this.numberOfFavoriteCount.toString()?:"",
+        numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
         commentCount = this.commentCount?:0,
         category = this.categoryModel?.toDomainModel(),
         user = this.user?.toDomainModel(),
