@@ -17,7 +17,7 @@ interface FeedRepository {
     suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe>
     suspend fun getRecipeDetailComment(recipeID: Int): Resource<Comment>
     suspend fun favoriteRecipesRequest(page:Int=1): List<Category>
-    fun favoriteCategoriesRequest(categoryID: Int): Flow<PagingData<Recipe>>
+    suspend fun favoriteCategoriesRequest(categoryID: Int,page: Int = 1): List<Recipe>
     suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel>
     suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel>
     suspend fun userFollowRequest(followedID: Int): Resource<BaseModel>

@@ -25,11 +25,11 @@ import javax.inject.Inject
 class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     FeedRepository {
 
-    override suspend fun feedRequest(page:Int): List<Recipe> {
+    override suspend fun feedRequest(page: Int): List<Recipe> {
         return editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data?.map { it.toDomaninModel() }!!
     }
 
-    override suspend fun lastAddedRequest(page:Int): List<Recipe> {
+    override suspend fun lastAddedRequest(page: Int): List<Recipe> {
         return editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data?.map { it.toDomaninModel() }!!
     }
 
@@ -69,22 +69,17 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override suspend fun favoriteRecipesRequest(page:Int): List<com.sadikahmetozdemir.domain.entities.Category> {
+    override suspend fun favoriteRecipesRequest(page: Int): List<com.sadikahmetozdemir.domain.entities.Category> {
         return editorChoiceRecipesAPI.favoriteRecipesRequest(page).data?.map { it.toDomainModel() }!!
     }
 
-    override fun favoriteCategoriesRequest(
-        categoryID: Int
-    ): Flow<PagingData<Recipe>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = {
-                FavoriteCategoriesPagingSource(
-                    editorChoiceRecipesAPI,
-                    categoryID
-                )
-            }
-        ).flow
+    override suspend fun favoriteCategoriesRequest(
+        categoryID: Int, page: Int
+    ): List<Recipe> {
+        return editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(
+            categoryID,
+            page
+        ).data?.map { it.toDomaninModel() }!!
     }
 
     override suspend fun userRecipeLikeRequest(recipeID: Int): Resource<BaseModel> {
@@ -160,9 +155,12 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
     }
 
     override suspend fun recipeCommentsRequest(
-        categoryID: Int,page:Int
+        categoryID: Int, page: Int
     ): List<Comment> {
-        return editorChoiceRecipesAPI.getRecipeComments(categoryID,page).data?.map { it.toDomainModel() }!!
+        return editorChoiceRecipesAPI.getRecipeComments(
+            categoryID,
+            page
+        ).data?.map { it.toDomainModel() }!!
 
     }
 

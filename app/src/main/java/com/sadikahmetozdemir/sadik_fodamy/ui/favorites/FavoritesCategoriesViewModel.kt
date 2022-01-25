@@ -3,8 +3,11 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.sadikahmetozdemir.data.shared.repositories.FavoriteCategoriesPagingSource
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewEvent
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.data.utils.DataHelperManager
@@ -13,6 +16,7 @@ import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.requests.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -31,10 +35,15 @@ class FavoritesCategoriesViewModel @Inject constructor(
 
     fun getFavoriteCategoriesItem(categoryID: Int) {
         viewModelScope.launch {
-            feedRepository.favoriteCategoriesRequest(categoryID).distinctUntilChanged()
-                .cachedIn(viewModelScope).collectLatest {
-                    recipes.value = it
-                }
+            val pager = Pager(
+                config = PAGE_CONFIG,
+                pagingSourceFactory = {
+                    FavoriteCategoriesPagingSource(
+                        feedRepository,
+                        categoryID
+                    )
+                }).flow
+            pager.cachedIn(viewModelScope).collect { recipes.value = it }
         }
     }
 
@@ -65,5 +74,7 @@ class FavoritesCategoriesViewModel @Inject constructor(
 
     companion object {
         private const val TITLE = "title"
+        private val PAGE_CONFIG =
+            PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)
     }
 }

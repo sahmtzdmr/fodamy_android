@@ -39,7 +39,9 @@ class FavoritesViewModel @Inject constructor(
         viewModelScope.launch {
             val pager=Pager(config = PAGE_CONFIG, pagingSourceFactory = {FavoritesPagingSource(feedRepository)
             } ).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value=it }
+            pager.cachedIn(viewModelScope).collect { recipes.value=it.filter{
+                it.recipes?.isNotEmpty() == true
+            } }
         }
     }
 
@@ -49,13 +51,13 @@ class FavoritesViewModel @Inject constructor(
             when (response.status) {
                 Status.SUCCESS -> {
                     dataHelperManager.removeToken()
-                    event.postValue(response.data?.message)
+                    event.postValue(response.data?.message!!)
                     response.data?.message?.let { showToast(it) }
                 }
 
                 Status.ERROR -> {
 
-                    event.postValue(response.data?.message)
+                    event.postValue(response.data?.message!!)
                 }
                 Status.LOADING -> {
                 }

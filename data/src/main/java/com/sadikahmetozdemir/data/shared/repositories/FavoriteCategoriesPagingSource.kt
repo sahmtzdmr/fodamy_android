@@ -5,9 +5,10 @@ import androidx.paging.PagingState
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 
 class FavoriteCategoriesPagingSource(
-    private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    private var feedRepository: FeedRepository,
     private var categoryID: Int
 ) :
     PagingSource<Int, Recipe>() {
@@ -25,11 +26,11 @@ class FavoriteCategoriesPagingSource(
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response =
-                editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(categoryID, currentPage)
-            val dataFavoriteCategories = response.data?.map { it.toDomaninModel() }
+                feedRepository.favoriteCategoriesRequest(categoryID, currentPage)
+            val dataFavoriteCategories = response
 
             LoadResult.Page(
-                data = dataFavoriteCategories!!,
+                data = dataFavoriteCategories,
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage.minus(
                     STARTING_PAGE_INDEX
                 ),

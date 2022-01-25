@@ -35,8 +35,13 @@ data class EditorChoiceModel(
     var categoryModel:CategoryModel?,
     var images: List<ImagesModel>?,
     @SerializedName("is_liked")
-    var isLiked: Boolean?,
+    var isLiked: Boolean,
     var text: String?,
+    var language:String,
+    @SerializedName("is_top_user_choice")
+    var isTopUserChoice:Boolean,
+
+
 
 
     ) : Parcelable
