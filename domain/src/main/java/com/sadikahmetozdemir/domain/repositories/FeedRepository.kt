@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface FeedRepository {
 
-    fun feedRequest(): Flow<PagingData<Recipe>>
-    fun lastAddedRequest(): Flow<PagingData<Recipe>>
+    suspend fun feedRequest(page: Int = 1): List<Recipe>
+    suspend fun lastAddedRequest(page: Int=1): List<Recipe>
     suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe>
     suspend fun getRecipeDetailComment(recipeID: Int): Resource<Comment>
     fun favoriteRecipesRequest(): Flow<PagingData<Category>>
@@ -22,7 +22,7 @@ interface FeedRepository {
     suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel>
     suspend fun userFollowRequest(followedID: Int): Resource<BaseModel>
     suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel>
-    fun recipeCommentsRequest(categoryID: Int): Flow<PagingData<Comment>>
+    suspend fun recipeCommentsRequest(categoryID: Int, page: Int = 1): List<Comment>
     suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<Comment>
     suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel>
     suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): Resource<BaseModel>

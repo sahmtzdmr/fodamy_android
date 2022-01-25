@@ -5,10 +5,11 @@ import androidx.paging.PagingState
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 
 
 class RecipeCommentsPagingSource(
-    private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    var feedRepository: FeedRepository,
     private var categoryID: Int
 ) :
     PagingSource<Int, Comment>() {
@@ -25,8 +26,8 @@ class RecipeCommentsPagingSource(
 
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = editorChoiceRecipesAPI.getRecipeComments(categoryID, currentPage)
-            val dataFavoriteCategories = response.data.map { it.toDomainModel() }
+            val response = feedRepository.recipeCommentsRequest(categoryID, currentPage)
+            val dataFavoriteCategories = response
 
             LoadResult.Page(
                 data = dataFavoriteCategories,

@@ -6,8 +6,9 @@ import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 
-class LastAddedPagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
+class LastAddedPagingSource(private var feedRepository: FeedRepository) :
     PagingSource<Int, Recipe>() {
     private val STARTING_PAGE_INDEX = 1
 
@@ -21,8 +22,8 @@ class LastAddedPagingSource(private var editorChoiceRecipesAPI: EditorChoiceReci
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = editorChoiceRecipesAPI.lastAddedRecipesRequest(currentPage)
-            val dataLastAddedRecipes = response.data.map { it.toDomaninModel() }
+            val response = feedRepository.lastAddedRequest(currentPage)
+            val dataLastAddedRecipes = response
 
             LoadResult.Page(
                 data = dataLastAddedRecipes,

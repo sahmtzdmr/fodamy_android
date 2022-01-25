@@ -68,8 +68,8 @@ class FavoritesViewModel @Inject constructor(
     fun toCategories(category: Category) {
         navigate(
             FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(
-                category.id,
-                category.name
+                category.id!!,
+                category.name!!
             )
         )
     }

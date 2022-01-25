@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Pagination(
-    var total: Int,
-    var perPage: Int,
-    var currentPage: Int,
-    var lastPage: Int,
-    var firstItem: Int,
-    var lastItem: Int
+    var total: Int?,
+    var perPage: Int?,
+    var currentPage: Int?,
+    var lastPage: Int?,
+    var firstItem: Int?,
+    var lastItem: Int?
 ) : Parcelable

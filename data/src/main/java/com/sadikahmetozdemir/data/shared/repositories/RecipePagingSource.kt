@@ -1,12 +1,11 @@
 package com.sadikahmetozdemir.data.shared.repositories
+
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.sadikahmetozdemir.data.mappers.toDomaninModel
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
 
-class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
+class RecipePagingSource(private var feedRepository: FeedRepository) :
     PagingSource<Int, Recipe>() {
     private val STARTING_PAGE_INDEX = 1
 
@@ -21,8 +20,8 @@ class RecipePagingSource(private var editorChoiceRecipesAPI: EditorChoiceRecipes
         val currentPage = params.key ?: STARTING_PAGE_INDEX
 
         return try {
-            val response = editorChoiceRecipesAPI.editorChoicesRecipesRequest(currentPage)
-            val dataRecipes = response.data.map { it.toDomaninModel() }
+            val response = feedRepository.feedRequest(currentPage)
+            val dataRecipes = response
 
             LoadResult.Page(
                 data = dataRecipes,

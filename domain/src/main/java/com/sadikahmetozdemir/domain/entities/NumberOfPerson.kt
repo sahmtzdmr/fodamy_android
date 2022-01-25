@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class NumberOfPerson(
-    val id: Int,
-    val text: String
+    val id: Int?,
+    val text: String?
 ):Parcelable

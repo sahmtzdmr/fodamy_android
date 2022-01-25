@@ -5,4 +5,4 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class TimeOfRecipeModel(var id: Int, var text: String) : Parcelable
+data class TimeOfRecipeModel(var id: Int?, var text: String?) : Parcelable

@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CommentResponse(
     var data: List<Comment>?,
-    var pagination: Pagination
+    var pagination: Pagination?
 ) : Parcelable

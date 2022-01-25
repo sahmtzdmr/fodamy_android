@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BaseModel(
-    var code: String, var message: String, var error: String
+    var code: String?, var message: String?, var error: String?
 ) : Parcelable

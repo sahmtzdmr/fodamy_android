@@ -26,10 +26,10 @@ class FavoriteCategoriesPagingSource(
         return try {
             val response =
                 editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(categoryID, currentPage)
-            val dataFavoriteCategories = response.data.map { it.toDomaninModel() }
+            val dataFavoriteCategories = response.data?.map { it.toDomaninModel() }
 
             LoadResult.Page(
-                data = dataFavoriteCategories,
+                data = dataFavoriteCategories!!,
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage.minus(
                     STARTING_PAGE_INDEX
                 ),

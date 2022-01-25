@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CommentModel(
-    var id: Int,
-    var text: String,
-    var difference: String,
+    var id: Int?,
+    var text: String?,
+    var difference: String?,
     var user: User?,
 ):Parcelable

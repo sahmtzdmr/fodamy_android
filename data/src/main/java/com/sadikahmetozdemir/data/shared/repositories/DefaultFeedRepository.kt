@@ -27,18 +27,12 @@ import javax.inject.Inject
 class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
     FeedRepository {
 
-    override fun feedRequest(): Flow<PagingData<Recipe>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = { RecipePagingSource(editorChoiceRecipesAPI) }
-        ).flow
+    override suspend fun feedRequest(page:Int): List<Recipe> {
+        return editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data?.map { it.toDomaninModel() }!!
     }
 
-    override fun lastAddedRequest(): Flow<PagingData<Recipe>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = { LastAddedPagingSource(editorChoiceRecipesAPI) }
-        ).flow
+    override suspend fun lastAddedRequest(page:Int): List<Recipe> {
+        return editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data?.map { it.toDomaninModel() }!!
     }
 
     override suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe> {
@@ -167,18 +161,11 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
         }
     }
 
-    override fun recipeCommentsRequest(
-        categoryID: Int
-    ): Flow<PagingData<Comment>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = {
-                RecipeCommentsPagingSource(
-                    editorChoiceRecipesAPI,
-                    categoryID
-                )
-            }
-        ).flow
+    override suspend fun recipeCommentsRequest(
+        categoryID: Int,page:Int
+    ): List<Comment> {
+        return editorChoiceRecipesAPI.getRecipeComments(categoryID,page).data?.map { it.toDomainModel() }!!
+
     }
 
     override suspend fun postRecipeCommentRequest(

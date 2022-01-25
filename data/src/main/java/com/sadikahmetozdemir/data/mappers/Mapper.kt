@@ -9,7 +9,6 @@ import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CategoryModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
-import com.sadikahmetozdemir.data.shared.remote.LastAddedModel
 import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.data.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.data.shared.remote.LogoutModel
@@ -25,22 +24,22 @@ import com.sadikahmetozdemir.domain.entities.RegisterRequest
 
 fun User.toDomainModel(): com.sadikahmetozdemir.domain.entities.User =
     com.sadikahmetozdemir.domain.entities.User(
-        id = this.id,
-        username = this.username,
-        image = this.image.toDomainModel(),
-        favoritesCount = this.favoritesCount,
-        followedCount = this.followedCount,
-        followingCount = this.followingCount,
+        id = this.id?:0,
+        username = this.username?:"",
+        image = this.image?.toDomainModel()!!,
+        favoritesCount = this.favoritesCount?:0,
+        followedCount = this.followedCount?:0,
+        followingCount = this.followingCount?:0,
         isFollowing = this.isFollowing,
-        likeCount = this.likesCount,
-        name = this.name,
-        recipeCount = this.recipeCount
+        likeCount = this.likesCount?:0,
+        name = this.name?:"",
+        recipeCount = this.recipeCount?:0
     )
 
 fun LoginResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.LoginResponseModel =
     com.sadikahmetozdemir.domain.entities.LoginResponseModel(
         token = this.token,
-        user = this.user.toDomainModel()
+        user = this.user?.toDomainModel()
     )
 
 fun ImagesModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
@@ -53,16 +52,16 @@ fun ImagesModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
 
 fun CommentModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Comment =
     com.sadikahmetozdemir.domain.entities.Comment(
-        id = this.id,
-        text = this.text,
+        id = this.id?:0,
+        text = this.text?:"",
         user = this.user?.toDomainModel(),
-        difference = this.difference
+        difference = this.difference?:""
 
     )
 
 fun RegisterResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Auth =
     com.sadikahmetozdemir.domain.entities.Auth(
-        token = this.token,
+        token = this.token?:"",
         user = this.user?.toDomainModel()
 
     )
@@ -84,43 +83,43 @@ fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Categor
         id = this.id,
         name = this.name,
         image = this.image?.toDomainModel(),
-        recipes = this.recipes.map { it.toDomaninModel() }
+        recipes = this.recipes?.map { it.toDomaninModel() }
 
 
     )
 
 fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): Recipe =
     Recipe(
-        id = this.id,
-        title = this.title,
-        definition = this.definition,
-        ingredients = this.ingredients,
-        directions = this.directions,
-        difference = this.difference,
+        id = this.id?:0,
+        title = this.title?:"",
+        definition = this.definition?:"",
+        ingredients = this.ingredients?:"",
+        directions = this.directions?:"",
+        difference = this.difference?:"",
         isEditorChoice = this.isEditorChoice,
         isLiked = this.isLiked,
-        likeCount = this.likeCount,
-        numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
-        commentCount = this.commentCount,
-        category = this.categoryModel.toDomainModel(),
-        user = this.user.toDomainModel(),
-        timeOfRecipe = this.timeOfRecipe.toDomainModel(),
-        numberOfPerson = this.numberOfPerson.toDomainModel(),
+        likeCount = this.likeCount?:0,
+        numberOfFavoriteCount = this.numberOfFavoriteCount.toString()?:"",
+        commentCount = this.commentCount?:0,
+        category = this.categoryModel?.toDomainModel(),
+        user = this.user?.toDomainModel(),
+        timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
+        numberOfPerson = this.numberOfPerson?.toDomainModel(),
         images = this.images?.map { it.toDomainModel() },
-        categoryModel = this.categoryModel.toDomainModel()
+        categoryModel = this.categoryModel?.toDomainModel()
     )
 
 fun BaseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.BaseModel =
     com.sadikahmetozdemir.domain.entities.BaseModel(
-        code = this.code,
-        message = this.message,
-        error = this.error
+        code = this.code?:"",
+        message =this.message?:"",
+        error = this.error?:""
     )
 
 fun LoginRequestModel.toDomainModel(): LoginRequest =
     LoginRequest(
-        username = this.username,
-        password = this.password
+        username = this.username?:"",
+        password = this.password?:""
     )
 
 fun RegisterRequestModel.toDomainModel(): RegisterRequest =
@@ -136,44 +135,21 @@ fun LogoutModel.toDomainModel(): Logout =
         message = this.message?:"",
         error = this.error?:""
     )
-
-fun LastAddedModel.toDomainModel(): Recipe =
-    Recipe(
-        id = this.id,
-        title = this.title,
-        definition = this.definition,
-        ingredients = this.ingredients,
-        directions = this.directions,
-        difference = this.difference,
-        isEditorChoice = this.isEditorChoice,
-        isLiked = this.isLiked,
-        likeCount = this.likeCount,
-        numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
-        commentCount = this.commentCount,
-        category = this.categoryModel.toDomainModel(),
-        user = this.user.toDomainModel(),
-        timeOfRecipe = this.timeOfRecipe.toDomainModel(),
-        numberOfPerson = this.numberOfPerson.toDomainModel(),
-        images = this.images?.map { it.toDomainModel() },
-        categoryModel = this.categoryModel.toDomainModel()
-
-    )
-
 fun PaginationModel.toDomainModel(): Pagination =
     Pagination(
-        total = this.total,
-        perPage = this.perPage,
-        currentPage = this.currentPage,
-        lastPage = this.lastPage,
-        firstItem = this.firstItem,
-        lastItem = this.lastItem
+        total = this.total?:0,
+        perPage = this.perPage?:0,
+        currentPage = this.currentPage?:0,
+        lastPage = this.lastPage?:0,
+        firstItem = this.firstItem?:0,
+        lastItem = this.lastItem?:0
 
     )
 
 fun CommentResponseModel.toDomainModel(): CommentResponse =
     CommentResponse(
-        data = this.data.map { it.toDomainModel() },
-        pagination = this.pagination.toDomainModel()
+        data = this.data?.map { it.toDomainModel() },
+        pagination = this.pagination?.toDomainModel()!!
     )
 
 

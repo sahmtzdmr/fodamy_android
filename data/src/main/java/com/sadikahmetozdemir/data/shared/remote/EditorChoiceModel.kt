@@ -1,4 +1,5 @@
 package com.sadikahmetozdemir.data.shared.remote
+
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.data.shared.local.ImagesModel
@@ -10,32 +11,32 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EditorChoiceModel(
-    var id: Int,
-    var title: String,
-    var ingredients: String,
-    var definition:String,
-    var directions: String,
-    var difference: String,
+    var id: Int?,
+    var title: String?,
+    var ingredients: String?,
+    var definition: String?,
+    var directions: String?,
+    var difference: String?,
     @SerializedName("number_of_favorite_count")
-    val numberOfFavoriteCount: Int,
+    val numberOfFavoriteCount: Int?,
     @SerializedName("is_editor_choice")
-    var isEditorChoice: Boolean,
+    var isEditorChoice: Boolean?,
     @SerializedName("is_owner")
-    var isOwner: Boolean,
+    var isOwner: Boolean?,
     @SerializedName("like_count")
-    var likeCount: Int,
+    var likeCount: Int?,
     @SerializedName("comment_count")
-    var commentCount: Int,
-    var user: User,
+    var commentCount: Int?,
+    var user: User?,
     @SerializedName("time_of_recipe")
-    var timeOfRecipe: TimeOfRecipeModel,
+    var timeOfRecipe: TimeOfRecipeModel?,
     @SerializedName("number_of_person")
-    var numberOfPerson: NumberOfPersonModel,
-    var categoryModel: com.sadikahmetozdemir.data.shared.remote.CategoryModel,
+    var numberOfPerson: NumberOfPersonModel?,
+    var categoryModel:CategoryModel?,
     var images: List<ImagesModel>?,
     @SerializedName("is_liked")
-    var isLiked: Boolean,
-    var text: String,
+    var isLiked: Boolean?,
+    var text: String?,
 
 
     ) : Parcelable

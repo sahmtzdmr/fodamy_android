@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NumberOfPersonModel(
     @SerializedName("number_of_person")
-    var id: Int,
-    var text: String
+    var id: Int?,
+    var text: String?
 ) : Parcelable

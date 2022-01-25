@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ImagesModel(
-    var width: Int,
-    var height: Int,
-    var key: String,
-    var order: Int,
-    var url: String
+    var width: Int?,
+    var height: Int?,
+    var key: String?,
+    var order: Int?,
+    var url: String?
 ) : Parcelable
