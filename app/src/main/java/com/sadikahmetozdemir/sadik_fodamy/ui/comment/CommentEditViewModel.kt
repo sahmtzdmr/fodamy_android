@@ -28,16 +28,8 @@ class CommentEditViewModel @Inject constructor(
                 comment?.id!!,
                 editableComment.value.toString()
             )
-            when (response.status) {
-                Status.SUCCESS -> {
-                    popBackStack()
-                }
-                Status.ERROR -> response.data?.message?.let { showToast(it) }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
+            sendRequest(success = popBackStack(),
+            error = response.message?.let { showToast(it) })
         }
     }
 
