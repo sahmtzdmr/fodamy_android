@@ -44,5 +44,6 @@ android {
         testImplementation(Dependencies.JUNIT)
         androidTestImplementation(Dependencies.EXT_JUNIT)
         androidTestImplementation(Dependencies.ESPRESSO_CORE)
+        implementation(Dependencies.RETROFIT2)
 
     }

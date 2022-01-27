@@ -17,8 +17,6 @@ import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.requests.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

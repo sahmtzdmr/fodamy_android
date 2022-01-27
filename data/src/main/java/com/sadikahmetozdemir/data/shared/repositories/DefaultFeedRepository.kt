@@ -1,6 +1,4 @@
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.ApiErrorResponse
@@ -10,12 +8,10 @@ import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.requests.Result
 import com.sadikahmetozdemir.domain.requests.Resource
 import com.sadikahmetozdemir.data.shared.repositories.ApiException
-import com.sadikahmetozdemir.data.shared.repositories.FavoriteCategoriesPagingSource
-import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
+import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
-import com.sadikahmetozdemir.domain.entities.CommentResponse
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +19,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
-    FeedRepository {
+    FeedRepository,BaseRepository(){
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data?.map { it.toDomaninModel() }!!
@@ -34,21 +30,26 @@ class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesA
     }
 
     override suspend fun getRecipeDetail(recipeID: Int): Resource<Recipe> {
-        return try {
-            val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
-            when (val apiResponse = ApiResponse.create(response)) {
-                is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body).toDomaninModel())
-                }
-                is ApiErrorResponse -> {
-                    Resource.error(apiResponse.errorMessage)
-                }
-                else -> Resource.error(Result())
-            }
-        } catch (exception: IOException) {
-            val apiException = ApiException.create(exception)
-            Resource.error(apiException, null)
+        return execute {
+            val response=editorChoiceRecipesAPI.recipeDetailsRequest(recipeID).body().toDomaninModel()
         }
+
+
+//        return try {
+//            val response = editorChoiceRecipesAPI.recipeDetailsRequest(recipeID)
+//            when (val apiResponse = ApiResponse.create(response)) {
+//                is ApiSuccessResponse -> {
+//                    Resource.success((apiResponse.body).toDomaninModel())
+//                }
+//                is ApiErrorResponse -> {
+//                    Resource.error(apiResponse.errorMessage)
+//                }
+//                else -> Resource.error(Result())
+//            }
+//        } catch (exception: IOException) {
+//            val apiException = ApiException.create(exception)
+//            Resource.error(apiException, null)
+//        }
     }
 
     override suspend fun getRecipeDetailComment(recipeID: Int): Resource<Comment> {
