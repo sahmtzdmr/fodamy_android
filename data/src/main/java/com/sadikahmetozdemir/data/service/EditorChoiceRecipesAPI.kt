@@ -22,7 +22,7 @@ interface EditorChoiceRecipesAPI {
     suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/{recipe_id}")
-    suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): Response<EditorChoiceModel>
+    suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): EditorChoiceModel
 
     @GET("api/recipe/{recipe_id}/comment")
     suspend fun recipeDetailsCommentRequest(@Path("recipe_id")recipeID: Int): Response<CommentResponseModel>

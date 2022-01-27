@@ -33,39 +33,23 @@ class RecipeDetailViewModel @Inject constructor(
     private fun getRecipeDetail() {
         viewModelScope.launch {
             val response = feedRepository.getRecipeDetail(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-                    recipeDetail.postValue(response.data)
-                }
-                Status.ERROR -> {
 
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
+            recipeDetail.postValue(response)
+
+
         }
     }
+
 
     private fun getRecipeDetailComment() {
         viewModelScope.launch {
             val response = feedRepository.getRecipeDetailComment(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-                    recipeDetailComment.postValue(response.data)
-                }
-                Status.ERROR -> {
 
-                    response.message?.let { showToast(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
+            recipeDetailComment.postValue(response)
+
         }
     }
+
 
     fun recipeLike(recipeID: Int) {
         viewModelScope.launch {
