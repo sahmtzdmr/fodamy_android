@@ -1,5 +1,4 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.comment
-
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable

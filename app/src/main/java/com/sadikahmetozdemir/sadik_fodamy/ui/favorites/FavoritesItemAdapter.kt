@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.FavoritesCategoryModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class FavoritesItemAdapter @Inject constructor() :
-    PagingDataAdapter<FavoritesCategoryModel, FavoritesItemAdapter.ViewHolder>(
+    PagingDataAdapter<Category, FavoritesItemAdapter.ViewHolder>(
         recipeComparator
     ) {
 
-    var itemClicked: ((FavoritesCategoryModel) -> Unit)? = null
+    var itemClicked: ((Category) -> Unit)? = null
     var childItemClicked: ((Int) -> Unit)? = null
 
     override fun onBindViewHolder(holder: FavoritesItemAdapter.ViewHolder, position: Int) {
@@ -37,14 +37,14 @@ class FavoritesItemAdapter @Inject constructor() :
     inner class ViewHolder(val binding: ItemFavoritesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: FavoritesCategoryModel) {
-            val childAdapter = FavoritesChildAdapter(item.recipes)
+        fun bind(item: Category) {
+            val childAdapter = item.recipes?.let { FavoritesChildAdapter(it) }
             binding.favoritesRecylerview.apply {
                 setHasFixedSize(true)
                 adapter = childAdapter
             }
 
-            childAdapter.itemClicked = {
+            childAdapter?.itemClicked = {
                 childItemClicked?.invoke(it)
             }
 
@@ -62,16 +62,16 @@ class FavoritesItemAdapter @Inject constructor() :
     }
 
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<FavoritesCategoryModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Category>() {
             override fun areItemsTheSame(
-                oldItem: FavoritesCategoryModel,
-                newItem: FavoritesCategoryModel
+                oldItem: Category,
+                newItem: Category
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: FavoritesCategoryModel,
-                newItem: FavoritesCategoryModel
+                oldItem: Category,
+                newItem: Category
             ): Boolean =
                 oldItem == newItem
         }

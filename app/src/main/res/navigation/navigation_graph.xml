@@ -77,7 +77,6 @@
         android:label="RecipeDetailFragment">
         <argument
             android:name="recipeId"
-            android:defaultValue="0"
             app:argType="integer" />
         <action
             android:id="@+id/to_recipe_images"
@@ -109,8 +108,7 @@
         android:label="RecipeImagePopUpFragment">
         <argument
             android:name="editorChoiseModel"
-            android:defaultValue="@null"
-            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel"
+            app:argType="com.sadikahmetozdemir.domain.entities.Recipe"
             app:nullable="true" />
 
 
@@ -139,11 +137,9 @@
             app:destination="@id/recipeDetailFragment" />
         <argument
             android:name="categoryID"
-            android:defaultValue="0"
             app:argType="integer" />
         <argument
             android:name="title"
-            android:defaultValue=""
             app:argType="string" />
 
 
@@ -162,7 +158,6 @@
         android:label="RecipeCommentsFragment">
         <argument
             android:name="recipeID"
-            android:defaultValue="0"
             app:argType="integer" />
         <action
             android:id="@+id/toAuthDialogFragment"
@@ -190,11 +185,11 @@
 
         <argument
             android:name="comment"
-            app:argType="com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel" />
+            app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
         <argument
             android:name="recipeID"
             app:argType="integer"
-            android:defaultValue="0" />
+           />
     </fragment>
 
 

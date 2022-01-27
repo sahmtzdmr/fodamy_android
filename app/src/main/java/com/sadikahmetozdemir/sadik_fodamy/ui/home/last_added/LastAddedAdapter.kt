@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
 import javax.inject.Inject
 
 class LastAddedAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, LastAddedAdapter.ViewHolder>(
+    PagingDataAdapter<Recipe, LastAddedAdapter.ViewHolder>(
         recipeComparator
     ) {
 
@@ -34,28 +34,28 @@ class LastAddedAdapter @Inject constructor() :
     }
     inner class ViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
                 binding.foodImage.setOnClickListener {
                     item.id?.let { it1 -> itemClicked?.invoke(it1) }
                 }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
-                tvFoodDescription.text = item.category?.name
+                tvFoodDescription.text = item.categoryModel?.name
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.comment_count
+                    item.commentCount
                 )
                 tvLike.text =
-                    String.format(binding.root.context.getString(R.string.like), item.like_count)
+                    String.format(binding.root.context.getString(R.string.like), item.likeCount)
 
                 tvRecipe.text = String.format(
                     binding.root.context.getString(R.string.recipe),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
                 Glide
                     .with(binding.root.context)
@@ -71,16 +71,16 @@ class LastAddedAdapter @Inject constructor() :
         }
     }
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem == newItem
         }

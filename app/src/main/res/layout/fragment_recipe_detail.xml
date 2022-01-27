@@ -103,7 +103,7 @@
                             android:layout_marginStart="@dimen/margin_start"
                             android:layout_marginTop="1dp"
                             android:fontFamily="@font/nunito_semibold"
-                            android:text="@{vM.recipeDetail.category.name}"
+                            android:text="@{vM.recipeDetail.categoryModel.name}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_food_title"
                             tools:text="Hamur işi" />
@@ -143,7 +143,7 @@
 
                         <TextView
                             android:id="@+id/tv_comment"
-                            comment_count="@{vM.recipeDetail.comment_count}"
+                            comment_count="@{vM.recipeDetail.commentCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
@@ -164,15 +164,15 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_like"
-                            likeStyle="@{vM.recipeDetail.is_liked()}"
+                            likeStyle="@{vM.recipeDetail.isLiked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_comment"
                             android:clickable="true"
                             android:focusable="true"
-                            android:onClick="@{()->vM.recipeDetail.is_liked() ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
+                            android:onClick="@{()->vM.recipeDetail.isLiked ? vM.recipeDislike(vM.recipeDetail.id) : vM.recipeLike(vM.recipeDetail.id)}"
                             android:src="@drawable/ic_hearth_dark"
-                            android:tint="@{vM.recipeDetail.is_liked() ? @color/primary : @color/cinder}"
+                            android:tint="@{vM.recipeDetail.isLiked ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
 
@@ -180,7 +180,7 @@
 
                         <TextView
                             android:id="@+id/tv_like"
-                            like_count="@{vM.recipeDetail.like_count}"
+                            like_count="@{vM.recipeDetail.likeCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
@@ -261,7 +261,7 @@
 
                         <TextView
                             android:id="@+id/tv_recipe"
-                            recipe_count="@{vM.recipeDetail.user.recipe_count}"
+                            recipe_count="@{vM.recipeDetail.user.recipeCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
@@ -272,7 +272,7 @@
 
                         <TextView
                             android:id="@+id/tv_follower"
-                            following_count="@{vM.recipeDetail.user.following_count}"
+                            following_count="@{vM.recipeDetail.user.followingCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1dp"
@@ -288,12 +288,12 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_follow"
                             style="@style/PrimaryButtonSmallBorder.Fodamy"
-                            buttonStyle="@{vM.recipeDetail.user.is_following()}"
+                            buttonStyle="@{vM.recipeDetail.user.isFollowing()}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margin_comment"
-                            android:onClick="@{()->vM.recipeDetail.user.is_following() ? vM.bottomSheetUnfollow(): vM.userFollow(vM.recipeDetail.user.id)}"
-                            android:text="@{vM.recipeDetail.user.is_following() ? @string/following : @string/follow}"
+                            android:onClick="@{()->vM.recipeDetail.user.isFollowing() ? vM.bottomSheetUnfollow(): vM.userFollow(vM.recipeDetail.user.id)}"
+                            android:text="@{vM.recipeDetail.user.isFollowing() ? @string/following : @string/follow}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -408,7 +408,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_user_comment"
-                            circleImageLoader="@{vM.recipeDetailComment.data.get(0).user.image.url}"
+                            circleImageLoader="@{vM.recipeDetailComment.user.image.url}"
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
@@ -435,7 +435,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/nunito_bold"
-                            android:text="@{vM.recipeDetailComment.data.get(0).user.username}"
+                            android:text="@{vM.recipeDetailComment.user.username}"
                             android:textColor="@color/cinder"
                             android:textSize="13sp"
                             app:layout_constraintStart_toEndOf="@id/barrier_comment"
@@ -444,7 +444,7 @@
 
                         <TextView
                             android:id="@+id/tv_recipe_comment"
-                            recipe_count="@{vM.recipeDetailComment.data.get(0).user.recipe_count}"
+                            recipe_count="@{vM.recipeDetailComment.user.recipeCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="1dp"
@@ -455,7 +455,7 @@
 
                         <TextView
                             android:id="@+id/tv_follower_comment"
-                            following_count="@{vM.recipeDetailComment.data.get(0).user.following_count}"
+                            following_count="@{vM.recipeDetailComment.user.followingCount}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="1dp"
@@ -472,7 +472,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="11dp"
-                            android:text="@{vM.recipeDetailComment.data.get(0).difference}"
+                            android:text="@{vM.recipeDetailComment.difference}"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
                             app:layout_constraintTop_toBottomOf="@id/iv_user_comment"
                             tools:text="3 dakika önce" />
@@ -482,7 +482,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="@{vM.recipeDetailComment.data.get(0).text}"
+                            android:text="@{vM.recipeDetailComment.text}"
                             app:layout_constraintEnd_toStartOf="@id/guidelineRight"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="@id/guidelineLeft"

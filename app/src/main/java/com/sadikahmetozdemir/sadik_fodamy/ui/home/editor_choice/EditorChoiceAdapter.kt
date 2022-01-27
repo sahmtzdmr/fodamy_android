@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemHomeBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class EditorChoiceAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
+    PagingDataAdapter<Recipe, EditorChoiceAdapter.ViewHolder>(recipeComparator) {
 
     var itemClicked: ((Int) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +32,7 @@ class EditorChoiceAdapter @Inject constructor() :
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Recipe) {
             binding.apply {
 
                 binding.foodImage.setOnClickListener {
@@ -40,21 +40,21 @@ class EditorChoiceAdapter @Inject constructor() :
                 }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
-                tvFoodDescription.text = item.category?.name
+                tvFoodDescription.text = item.categoryModel?.name
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.comment_count
+                    item.commentCount
                 )
                 tvLike.text =
-                    String.format(binding.root.context.getString(R.string.like), item.like_count)
+                    String.format(binding.root.context.getString(R.string.like), item.likeCount)
 
                 tvRecipe.text = String.format(
                     binding.root.context.getString(R.string.recipe),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
 
@@ -66,16 +66,16 @@ class EditorChoiceAdapter @Inject constructor() :
     }
 
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Recipe>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Recipe,
+                newItem: Recipe
             ): Boolean =
                 oldItem == newItem
         }

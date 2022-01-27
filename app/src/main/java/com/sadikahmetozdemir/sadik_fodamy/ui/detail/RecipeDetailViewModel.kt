@@ -3,13 +3,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.CommentResponseModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +20,8 @@ class RecipeDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 
     ) : BaseViewModel() {
-    val recipeDetail = MutableLiveData<EditorChoiceModel?>()
-    val recipeDetailComment = MutableLiveData<CommentResponseModel?>()
+    val recipeDetail = MutableLiveData<Recipe?>()
+    val recipeDetailComment = MutableLiveData<Comment?>()
     val event = MutableLiveData<RecipeDetailEvent>()
     var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
 
@@ -184,7 +183,7 @@ class RecipeDetailViewModel @Inject constructor(
         }
     }
 
-    fun openRecipeImages(recipeID: EditorChoiceModel) {
+    fun openRecipeImages(recipeID: Recipe) {
         navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
     }
 

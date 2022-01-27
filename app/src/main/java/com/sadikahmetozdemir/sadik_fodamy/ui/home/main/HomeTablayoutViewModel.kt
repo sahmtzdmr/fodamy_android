@@ -1,10 +1,10 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.home.main
 
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.repositories.AuthRepository
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.core.utils.DataHelperManager
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,8 +23,6 @@ class HomeTablayoutViewModel @Inject constructor(
                         showToast(it)
                     }
                     dataHelperManager.removeToken()
-
-
                 }
                 Status.ERROR -> {
 

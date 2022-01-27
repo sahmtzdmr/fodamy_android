@@ -3,11 +3,10 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.comment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.Status
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.DefaultFeedRepository
-import com.sadikahmetozdemir.sadik_fodamy.shared.repositories.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +18,7 @@ class CommentEditViewModel @Inject constructor(
 
 ) : BaseViewModel() {
     val recipeID = savedStateHandle.get<Int>(RECIPE_ID) ?: 0
-    val comment = savedStateHandle.get<EditorChoiceModel>(COMMENT)
+    val comment = savedStateHandle.get<Comment>(COMMENT)
     val editableComment = MutableLiveData<String>(comment?.text)
 
     fun saveOnClick() {
@@ -30,7 +29,9 @@ class CommentEditViewModel @Inject constructor(
                 editableComment.value.toString()
             )
             when (response.status) {
-                Status.SUCCESS -> { popBackStack() }
+                Status.SUCCESS -> {
+                    popBackStack()
+                }
                 Status.ERROR -> response.data?.message?.let { showToast(it) }
                 Status.LOADING -> {
                 }
@@ -39,8 +40,9 @@ class CommentEditViewModel @Inject constructor(
             }
         }
     }
-    companion object{
-        val RECIPE_ID="recipeID"
-        val COMMENT="comment"
+
+    companion object {
+        val RECIPE_ID = "recipeID"
+        val COMMENT = "comment"
     }
 }

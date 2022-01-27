@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemCommentBinding
-import com.sadikahmetozdemir.sadik_fodamy.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
 class RecipeCommentsAdapter @Inject constructor() :
-    PagingDataAdapter<EditorChoiceModel, RecipeCommentsAdapter.ViewHolder>(recipeComparator) {
-    var itemClicked: ((EditorChoiceModel) -> Unit)? = null
+    PagingDataAdapter<Comment, RecipeCommentsAdapter.ViewHolder>(recipeComparator) {
+    var itemClicked: ((Comment) -> Unit)? = null
 
     override fun onBindViewHolder(holder: RecipeCommentsAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -43,35 +43,35 @@ class RecipeCommentsAdapter @Inject constructor() :
                 false
             }
         }
-        fun bind(item: EditorChoiceModel) {
+        fun bind(item: Comment) {
             binding.apply {
                 ivUser.loadCircleCrop(url = item.user?.image?.url)
                 tvUsername.text = item.user?.username
                 tvComment.text = String.format(
                     binding.root.context.getString(R.string.comment),
-                    item.user?.recipe_count
+                    item.user?.recipeCount
                 )
                 tvFollower.text = String.format(
                     binding.root.context.getString(R.string.follower),
-                    item.user?.following_count
+                    item.user?.followingCount
                 )
-                tvTime.text = item.difference.toString()
+                tvTime.text = item.difference
                 tvComment.text = item.text
             }
         }
     }
 
     companion object {
-        private val recipeComparator = object : DiffUtil.ItemCallback<EditorChoiceModel>() {
+        private val recipeComparator = object : DiffUtil.ItemCallback<Comment>() {
             override fun areItemsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Comment,
+                newItem: Comment
             ): Boolean =
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(
-                oldItem: EditorChoiceModel,
-                newItem: EditorChoiceModel
+                oldItem: Comment,
+                newItem: Comment
             ): Boolean =
                 oldItem == newItem
         }
