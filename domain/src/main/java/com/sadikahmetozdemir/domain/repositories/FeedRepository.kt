@@ -19,11 +19,11 @@ interface FeedRepository {
     suspend fun favoriteRecipesRequest(page:Int=1): List<Category>
     suspend fun favoriteCategoriesRequest(categoryID: Int,page: Int = 1): List<Recipe>
     suspend fun userRecipeLikeRequest(recipeID: Int): BaseModel
-    suspend fun userRecipeDislikeRequest(recipeID: Int): Resource<BaseModel>
-    suspend fun userFollowRequest(followedID: Int): Resource<BaseModel>
-    suspend fun userUnfollowRequest(followedID: Int): Resource<BaseModel>
+    suspend fun userRecipeDislikeRequest(recipeID: Int): BaseModel
+    suspend fun userFollowRequest(followedID: Int): BaseModel
+    suspend fun userUnfollowRequest(followedID: Int): BaseModel
     suspend fun recipeCommentsRequest(categoryID: Int, page: Int = 1): List<Comment>
-    suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Resource<Comment>
-    suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): Resource<BaseModel>
-    suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): Resource<BaseModel>
+    suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Comment
+    suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): BaseModel
+    suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): BaseModel
 }
