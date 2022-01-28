@@ -1,10 +1,13 @@
 package com.sadikahmetozdemir.sadik_fodamy.base
 
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.sadikahmetozdemir.data.shared.exceptions.SimpleHttpException
 import com.sadikahmetozdemir.data.shared.exceptions.UnauthorizedException
+import com.sadikahmetozdemir.sadik_fodamy.BuildConfig
 import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -34,12 +37,6 @@ abstract class BaseViewModel  : ViewModel() {
             is SimpleHttpException -> {
                 exception.friendlyMessage?.let { showMessage(it) }
             }
-
-            is UnauthorizedException -> {
-
-
-            }
-
             else -> {
                 exception.message?.let { showMessage(it) }
             }

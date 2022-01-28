@@ -11,13 +11,10 @@ import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,12 +32,15 @@ class RecipeCommentsViewModel @Inject constructor(
     val comment = MutableLiveData<Comment>()
 
     fun getRecipeCommentsItem() {
-        viewModelScope.launch {
-            val pager = Pager(config = PAGE_CONFIG, pagingSourceFactory = {
+        sendRequest(request = {
+            Pager(config = PAGE_CONFIG, pagingSourceFactory = {
                 RecipeCommentsPagingSource(feedRepository, recipeID)
             }).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value = it }
-        }
+        }, success = {
+            viewModelScope.launch {
+                it.cachedIn(viewModelScope).collect { recipes.value = it }
+            }
+        })
     }
 
     fun postRecipeComment(text: String) {
@@ -48,21 +48,13 @@ class RecipeCommentsViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             } else {
-                val response = feedRepository.postRecipeCommentRequest(recipeID, text)
-                when (response.status) {
-                    Status.SUCCESS -> {
+                sendRequest(
+                    request = {
+                        feedRepository.postRecipeCommentRequest(recipeID, text)
+                    },
+                    success = {
                         event.postValue(RecipeCommentsEvent.Success(R.string.comment_added.toString()))
-                    }
-                    Status.ERROR -> {
-                        response.message?.let { showMessage(it) }
-                    }
-                    Status.LOADING -> {
-
-                    }
-                    Status.REDIRECT -> {
-
-                    }
-                }
+                    })
             }
         }
     }
@@ -73,22 +65,14 @@ class RecipeCommentsViewModel @Inject constructor(
             ) {
                 navigate(RecipeCommentsFragmentDirections.toAuthDialogFragment())
             }
-
-            val response =
-                comment.value?.id?.let { feedRepository.deleteRecipeComment(recipeID, it) }
-            when (response?.status) {
-                Status.SUCCESS -> {
-                    response.message?.let { showMessage(it) }
+            sendRequest(request = {
+                comment.value?.id?.let {
+                    feedRepository.deleteRecipeComment(
+                        recipeID,
+                        it
+                    )
                 }
-                Status.ERROR -> {
-                    response.message?.let { showMessage(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-                null -> response?.message?.let { showMessage(it) }
-            }
+            }, success = { it?.message?.let { it1 -> showMessage(it1) } })
         }
     }
 
@@ -105,8 +89,6 @@ class RecipeCommentsViewModel @Inject constructor(
 
             }
         }
-
-
     }
 
     companion object {
