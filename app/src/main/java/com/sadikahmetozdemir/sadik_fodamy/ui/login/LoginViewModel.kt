@@ -2,12 +2,11 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.User
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.data.utils.DataHelperManager
-import com.sadikahmetozdemir.domain.entities.LoginRequest
-import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.utils.SharedPreferanceStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,39 +26,22 @@ class LoginViewModel @Inject constructor(
             showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
-            val response =
+            sendRequest(request = {
                 authRepository.loginRequest(
                     LoginRequest(
                         username.value.toString(),
                         password.value.toString()
                     )
                 )
-            when (response?.status) {
-                Status.SUCCESS -> {
-                    response.data?.let {
-                        it.user?.id.let { it1 ->
-                            it1?.let { it2 -> dataHelperManager.saveID(it2) }
-                        }
-                        it.token.let { it1 ->
-                            it1?.let { it2 -> dataHelperManager.saveToken(it2) }
-                        }
-                        it.user.let { ituser ->
-                            user.postValue(ituser)
-                        }
+            },
+                success = {
+                    viewModelScope.launch {
+                        it?.token?.let { it1 -> dataHelperManager.saveToken(it1) }
+                        it?.user?.id?.let { it1 -> dataHelperManager.saveID(it1) }
+                        navigate(LoginFragmentDirections.toHomeFragment())
                     }
-                    response.message?.let { showToast(it) }
-                    navigate(LoginFragmentDirections.toHomeFragment())
-                }
-                Status.ERROR -> {
-                    response.message?.let { showMessage(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-                null -> {
-                }
-            }
+
+                })
         }
     }
 

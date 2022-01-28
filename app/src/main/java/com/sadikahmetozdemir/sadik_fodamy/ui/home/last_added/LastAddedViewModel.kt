@@ -7,14 +7,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
-import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,13 +27,18 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
     }
 
     private fun getLastAdded() {
-        viewModelScope.launch {
-            val pager = Pager(
+
+        sendRequest(request = {
+            Pager(
                 config = PAGE_CONFIG,
                 pagingSourceFactory = { LastAddedPagingSource(feedRepository) }).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value = it }
-        }
+        },
+            success = {
+                viewModelScope.launch {
+                    it.cachedIn(viewModelScope).collect { recipes.value = it }
+                }
 
+            })
     }
 
     fun openDetailScreen(recipeID: Int) {

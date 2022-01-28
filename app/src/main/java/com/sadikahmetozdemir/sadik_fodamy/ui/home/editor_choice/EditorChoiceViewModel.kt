@@ -7,9 +7,9 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
-import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -28,18 +28,18 @@ class EditorChoiceViewModel @Inject constructor(private val feedRepository: Feed
     }
 
     private fun getEditorChoice() {
-        viewModelScope.launch {
-            try {
-                val pager = Pager(
-                    config = PAGE_CONFIG,
-                    pagingSourceFactory = {
-                        RecipePagingSource(feedRepository)
-                    }).flow
-                pager.cachedIn(viewModelScope).collect { recipes.value = it }
-            } catch (ex: Exception) {
-            }
-        }
-
+        sendRequest(request = {
+            Pager(
+                config = PAGE_CONFIG,
+                pagingSourceFactory = {
+                    RecipePagingSource(feedRepository)
+                }).flow
+        },
+            success = {
+                viewModelScope.launch {
+                    it.cachedIn(viewModelScope).collect { recipes.value = it }
+                }
+            })
     }
 
 

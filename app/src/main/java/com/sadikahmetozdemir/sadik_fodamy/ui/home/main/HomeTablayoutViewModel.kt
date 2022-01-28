@@ -15,24 +15,7 @@ class HomeTablayoutViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     fun logoutRequest() {
-        viewModelScope.launch {
-            val response = authRepository.logoutRequest()
-            when (response.status) {
-                Status.SUCCESS -> {
-                    response.data?.message?.let {
-                        showToast(it)
-                    }
-                    dataHelperManager.removeToken()
-                }
-                Status.ERROR -> {
-
-                    response.data?.message?.let { showToast(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+        sendRequest(request = {authRepository.logoutRequest()},
+        success = { it.message?.let { it1 -> showToast(it1) } })
     }
 }
