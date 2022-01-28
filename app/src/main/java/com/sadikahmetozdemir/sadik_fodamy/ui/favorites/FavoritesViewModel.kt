@@ -12,12 +12,9 @@ import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,35 +33,30 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun getFavoriteItems() {
-        viewModelScope.launch {
-            val pager=Pager(config = PAGE_CONFIG, pagingSourceFactory = {FavoritesPagingSource(feedRepository)
-            } ).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value=it.filter{
-                it.recipes?.isNotEmpty() == true
-            } }
-        }
+        sendRequest(request = {
+            Pager(config = PAGE_CONFIG, pagingSourceFactory = {
+                FavoritesPagingSource(feedRepository)
+            }).flow
+        },
+            success = {
+                viewModelScope.launch {
+                    it.cachedIn(viewModelScope).collect {
+                        recipes.value = it.filter {
+                            it.recipes?.isNotEmpty() == true
+                        }
+                    }
+                }
+            }
+        )
     }
 
     fun logoutRequest() {
-        viewModelScope.launch {
-            val response = authRepository.logoutRequest()
-            when (response.status) {
-                Status.SUCCESS -> {
-                    dataHelperManager.removeToken()
-                    event.postValue(response.data?.message!!)
-                    response.data?.message?.let { showToast(it) }
-                }
-
-                Status.ERROR -> {
-
-                    event.postValue(response.data?.message!!)
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+        sendRequest(request = {
+            authRepository.logoutRequest()
+        }, success = {
+            viewModelScope.launch { dataHelperManager.removeToken() }
+            it.message?.let { it1 -> showToast(it1) }
+        })
     }
 
     fun toCategories(category: Category) {
@@ -79,7 +71,8 @@ class FavoritesViewModel @Inject constructor(
     fun openDetailScreen(recipeID: Int) {
         navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
     }
-    companion object{
+
+    companion object {
         private val PAGE_CONFIG =
             PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)
 
