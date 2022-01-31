@@ -26,7 +26,7 @@ class FavoritesCategoriesViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-    val title = savedStateHandle.get<String>(TITLE)
+   val title = savedStateHandle.get<String>(TITLE)
     var recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
     var event = MutableLiveData<BaseViewEvent>()
 
@@ -60,8 +60,9 @@ class FavoritesCategoriesViewModel @Inject constructor(
     }
 
     fun toRecipeDetail(recipe: Recipe) {
-        recipe.id.let { FavoritesCategoriesFragmentDirections.toRecipeDetail(it) }
-            .let { navigate(it) }
+        recipe.id.let {
+            FavoritesCategoriesFragmentDirections.toNavigationRecipes(it) }
+
     }
 
     companion object {

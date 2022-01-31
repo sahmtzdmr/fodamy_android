@@ -5,7 +5,7 @@ object Versions {
     const val CONSTRAINT_LAYOUT ="2.1.2"
     const val ANDROIDX_LEGACY_SUPPORT="1.0.0"
     const val VIEWPAGER2 ="1.0.0"
-    const val NAVIGATION_COMPONENT="2.4.0-beta02"
+    const val NAVIGATION_COMPONENT="2.4.0"
     const val DOTS_INDICATOR = "4.2"
     const val RETROFIT2="2.9.0"
     const val GSON_CONVERTER="2.9.0"
@@ -24,7 +24,7 @@ object Versions {
     //classpath
     const val TOOLS_BUILD_GRADLE="7.0.4"
     const val KOTLIN_GRADLE_PLUGIN="1.6.10"
-    const val NAVIGATION_SAFE_ARGS="2.4.0-beta02"
+    const val NAVIGATION_SAFE_ARGS="2.4.0"
     const val KTLINT_VERSION ="10.2.1"
     //test
     const val JUNIT="4.13.1"

@@ -38,7 +38,8 @@ class LoginViewModel @Inject constructor(
                     viewModelScope.launch {
                         it?.token?.let { it1 -> dataHelperManager.saveToken(it1) }
                         it?.user?.id?.let { it1 -> dataHelperManager.saveID(it1) }
-                        navigate(LoginFragmentDirections.toHomeFragment())
+                       backTo()
+      //                  navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
                     }
 
                 })

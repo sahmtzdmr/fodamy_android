@@ -21,13 +21,6 @@ class SplashFragment :
     BaseFragment<FragmentSplashBinding, SplashViewModel>(R.layout.fragment_splash) {
     @Inject
     lateinit var dataHelperManager: DataHelperManager
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_splash, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

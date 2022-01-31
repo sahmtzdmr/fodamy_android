@@ -48,7 +48,7 @@ class SignUpViewModel @Inject constructor(
                         it.user?.id?.let { it1 ->
                             dataHelperManager.saveID(it1)
                             it.token?.let { it2 -> dataHelperManager.saveToken(it2) }
-                            navigate(SignUpFragmentDirections.toHomeFragment())
+                            navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
 
                         }
                     }

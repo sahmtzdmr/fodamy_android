@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_recipes"
+    app:startDestination="@id/recipeDetailFragment">
+    <include app:graph="@navigation/navigation_auth">
+
+    </include>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailFragment"
+        android:label="RecipeDetailFragment">
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/to_recipe_images"
+            app:destination="@id/recipeImageFragment" />
+        <action
+            android:id="@+id/toAuthDialogFragment"
+            app:destination="@id/toAuthDialogFragment" />
+        <action
+            android:id="@+id/toBottomSheet"
+            app:destination="@id/bottomSheetFragment" />
+        <action
+            android:id="@+id/toRecipeComments"
+            app:destination="@id/recipeCommentsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/recipeCommentsFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.comment.RecipeCommentsFragment"
+        android:label="RecipeCommentsFragment">
+        <argument
+            android:name="recipeID"
+            app:argType="integer" />
+        <action
+            android:id="@+id/toAuthDialogFragment"
+            app:destination="@id/toAuthDialogFragment" />
+        <action
+            android:id="@+id/tocommentDialogFragment"
+            app:destination="@id/commentDialogFragment" />
+        <action
+            android:id="@+id/toCommentEditFragment"
+            app:destination="@id/commentEditFragment" />
+
+
+    </fragment>
+    <dialog
+        android:id="@+id/commentDialogFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogFragment"
+        android:label="fragment_comment_dialog"
+        tools:layout="@layout/fragment_comment_dialog" >
+
+    </dialog>
+    <fragment
+        android:id="@+id/commentEditFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.comment.CommentEditFragment"
+        android:label="CommentEditFragment">
+
+
+        <argument
+            android:name="comment"
+            app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
+        <argument
+            android:name="recipeID"
+            app:argType="integer"
+            />
+    </fragment>
+
+    <dialog
+        android:id="@+id/toAuthDialogFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.AuthDialogFragment"
+        android:label="AuthDialogFragment">
+        <action
+            android:id="@+id/toLoginFragment"
+            app:destination="@id/navigation_auth" />
+    </dialog>
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.UnfollowDialogFragment"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet">
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/recipeImageFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.image.RecipeImagePopUpFragment"
+        android:label="RecipeImagePopUpFragment">
+        <argument
+            android:name="editorChoiseModel"
+            app:argType="com.sadikahmetozdemir.domain.entities.Recipe"
+            app:nullable="true" />
+
+
+    </fragment>
+
+</navigation>

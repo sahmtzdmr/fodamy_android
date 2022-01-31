@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_favorites"
+    app:startDestination="@id/favoritesFragment">
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/toFavoritesCategoriesFragment"
+            app:destination="@id/favoritesCategoriesFragment">
+        </action>
+        <action
+            android:id="@+id/action_favoritesFragment_to_navigation_recipes"
+            app:destination="@id/navigation_recipes">
+            <argument
+                android:name="recipeId"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesCategoriesFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesCategoriesFragment"
+        android:label="FavoritesCategoriesFragment" >
+        <argument
+            android:name="categoryID"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/to_navigation_recipes"
+            app:destination="@id/navigation_recipes">
+            <argument
+                android:name="recipeId"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
+    <include app:graph="@navigation/navigation_recipes"/>
+</navigation>
