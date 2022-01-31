@@ -2,13 +2,10 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.comment
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,24 +19,18 @@ class CommentEditViewModel @Inject constructor(
     val editableComment = MutableLiveData<String>(comment?.text)
 
     fun saveOnClick() {
-        viewModelScope.launch {
-            val response = feedRepository.editRecipeComment(
+        sendRequest(request = {
+            feedRepository.editRecipeComment(
                 recipeID,
                 comment?.id!!,
                 editableComment.value.toString()
             )
-            when (response.status) {
-                Status.SUCCESS -> {
-                    popBackStack()
-                }
-                Status.ERROR -> response.data?.message?.let { showToast(it) }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+        }, success = {
+            popBackStack()
+        })
+
     }
+
 
     companion object {
         val RECIPE_ID = "recipeID"

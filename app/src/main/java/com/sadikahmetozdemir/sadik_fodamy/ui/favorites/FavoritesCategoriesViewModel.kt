@@ -8,13 +8,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.data.shared.repositories.FavoriteCategoriesPagingSource
-import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewEvent
-import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.domain.requests.Status
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewEvent
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -32,8 +31,8 @@ class FavoritesCategoriesViewModel @Inject constructor(
     var event = MutableLiveData<BaseViewEvent>()
 
     fun getFavoriteCategoriesItem(categoryID: Int) {
-        viewModelScope.launch {
-            val pager = Pager(
+        sendRequest(request = {
+            Pager(
                 config = PAGE_CONFIG,
                 pagingSourceFactory = {
                     FavoriteCategoriesPagingSource(
@@ -41,33 +40,28 @@ class FavoritesCategoriesViewModel @Inject constructor(
                         categoryID
                     )
                 }).flow
-            pager.cachedIn(viewModelScope).collect { recipes.value = it }
-        }
+
+        },
+            success = {
+                viewModelScope.launch { it.cachedIn(viewModelScope).collect { recipes.value = it } }
+            }
+        )
+
     }
 
     fun logoutRequest() {
-        viewModelScope.launch {
-            val response = authRepository.logoutRequest()
-            when (response.status) {
-                Status.SUCCESS -> {
+        sendRequest(request = { authRepository.logoutRequest() },
+            success = {
+                viewModelScope.launch {
                     dataHelperManager.removeToken()
-                    response.data?.message?.let { showToast(it) }
+                    it.message?.let { it1 -> showToast(it1) }
                 }
-
-                Status.ERROR -> {
-                    response.data?.message?.let { showToast(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+            })
     }
 
     fun toRecipeDetail(recipe: Recipe) {
-        recipe.id?.let { FavoritesCategoriesFragmentDirections.toRecipeDetail(it) }
-            ?.let { navigate(it) }
+        recipe.id.let { FavoritesCategoriesFragmentDirections.toRecipeDetail(it) }
+            .let { navigate(it) }
     }
 
     companion object {

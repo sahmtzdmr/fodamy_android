@@ -7,7 +7,6 @@ import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import com.sadikahmetozdemir.domain.requests.Status
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +22,7 @@ class RecipeDetailViewModel @Inject constructor(
     val recipeDetail = MutableLiveData<Recipe?>()
     val recipeDetailComment = MutableLiveData<Comment?>()
     val event = MutableLiveData<RecipeDetailEvent>()
-    var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
+    private var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
 
     init {
         getRecipeDetail()
@@ -31,66 +30,36 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
     private fun getRecipeDetail() {
-        viewModelScope.launch {
-            val response = feedRepository.getRecipeDetail(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-                    recipeDetail.postValue(response.data)
-                }
-                Status.ERROR -> {
+        sendRequest(request = { feedRepository.getRecipeDetail(recipeID) },
+            success = {
+                recipeDetail.postValue(it)
+            })
 
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+
     }
+
 
     private fun getRecipeDetailComment() {
-        viewModelScope.launch {
-            val response = feedRepository.getRecipeDetailComment(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-                    recipeDetailComment.postValue(response.data)
-                }
-                Status.ERROR -> {
-
-                    response.message?.let { showToast(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
-            }
-        }
+        sendRequest(
+            request = { feedRepository.getRecipeDetailComment(recipeID) },
+            success = { recipeDetailComment.postValue(it) })
     }
+
 
     fun recipeLike(recipeID: Int) {
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
-            }
+            } else {
+                sendRequest(request = { feedRepository.userRecipeLikeRequest(recipeID) },
+                    success = {
+                        event.postValue(it.message?.let { it1 ->
+                            RecipeDetailEvent.IsLiked(
+                                it1
+                            )
+                        })
+                    })
 
-            val response = feedRepository.userRecipeLikeRequest(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-
-                    event.postValue(
-                        response.data?.message?.let {
-                            RecipeDetailEvent.IsLiked(it)
-                        }
-                    )
-                    getRecipeDetail()
-                }
-                Status.ERROR -> {
-                    response.data?.message?.let { showMessage(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
             }
         }
     }
@@ -100,28 +69,15 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
 
-            }
-
-            val response = feedRepository.userRecipeDislikeRequest(recipeID)
-            when (response.status) {
-                Status.SUCCESS -> {
-
-                    event.postValue(
-                        response.data?.message?.let {
-
-                            RecipeDetailEvent.IsDisliked(it)
-                        }
-                    )
-
-                    getRecipeDetail()
-                }
-                Status.ERROR -> {
-                    response.message?.let { showToast(it) }
-                }
-                Status.LOADING -> {
-                }
-                Status.REDIRECT -> {
-                }
+            } else {
+                sendRequest(request = { feedRepository.userRecipeDislikeRequest(recipeID) },
+                    success = {
+                        event.postValue(it.message?.let { it1 ->
+                            RecipeDetailEvent.IsDisliked(
+                                it1
+                            )
+                        })
+                    })
             }
         }
     }
@@ -131,19 +87,9 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                val response = feedRepository.userFollowRequest(followId)
-                when (response.status) {
-                    Status.SUCCESS -> {
-                        getRecipeDetail()
-                    }
-                    Status.ERROR -> {
-                        response.data?.message?.let { showToast(it) }
-                    }
-                    Status.LOADING -> {
-                    }
-                    Status.REDIRECT -> {
-                    }
-                }
+                sendRequest(request = { feedRepository.userFollowRequest(followId) },
+                    success = { getRecipeDetail() })
+
             }
         }
     }
@@ -153,13 +99,16 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                val response =
-                    recipeDetail.value?.user?.id?.let { feedRepository.userUnfollowRequest(it) }
-                when (response?.status) {
-                    Status.SUCCESS -> {
-
+                sendRequest(request = {
+                    recipeDetail.value?.user?.id?.let {
+                        feedRepository.userUnfollowRequest(
+                            it
+                        )
+                    }
+                },
+                    success = {
                         event.postValue(
-                            response.data?.message.let {
+                            it?.message.let {
                                 it?.let { it1 ->
                                     RecipeDetailEvent.IsUnfollowed(
                                         it1
@@ -168,17 +117,7 @@ class RecipeDetailViewModel @Inject constructor(
                             }
                         )
                         getRecipeDetail()
-                    }
-                    Status.ERROR -> {
-                        response.data?.message?.let { showToast(it) }
-                    }
-                    Status.LOADING -> {
-                    }
-                    Status.REDIRECT -> {
-                    }
-                    null -> {
-                    }
-                }
+                    })
             }
         }
     }

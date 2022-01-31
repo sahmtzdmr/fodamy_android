@@ -22,10 +22,10 @@ interface EditorChoiceRecipesAPI {
     suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/{recipe_id}")
-    suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): Response<EditorChoiceModel>
+    suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): EditorChoiceModel
 
     @GET("api/recipe/{recipe_id}/comment")
-    suspend fun recipeDetailsCommentRequest(@Path("recipe_id")recipeID: Int): Response<CommentResponseModel>
+    suspend fun recipeDetailsCommentRequest(@Path("recipe_id")recipeID: Int): CommentResponseModel
 
     @GET("api/category-recipes")
 
@@ -36,10 +36,10 @@ interface EditorChoiceRecipesAPI {
     suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID: Int, @Query("page")pageInt: Int): EditorChoiceResponseModel
 
     @POST("api/recipe/{recipe_id}/like")
-    suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID: Int): Response<BaseModel>
+    suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID: Int): BaseModel
 
     @DELETE("api/recipe/{recipe_id}/like")
-    suspend fun userRecipeDislikeRequest(@Path("recipe_id") recipeID: Int): Response<BaseModel>
+    suspend fun userRecipeDislikeRequest(@Path("recipe_id") recipeID: Int): BaseModel
 
     @POST("api/user/{followedId}/following")
     suspend fun userFollowing(@Path("followedId") followedID: Int): Response<BaseModel>

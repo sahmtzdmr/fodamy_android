@@ -19,60 +19,18 @@ import java.io.IOException
 import javax.inject.Inject
 
  class DefaultAuthRepository @Inject constructor(private val loginAPI: LoginAPI) :
-    AuthRepository {
+    AuthRepository,BaseRepository() {
 
-    override suspend fun loginRequest(loginRequest: LoginRequest): Resource<LoginResponseModel> {
-        return try {
-            val response = loginAPI.loginRequest(loginRequest)
-            when (val apiResponse = ApiResponse.create(response)) {
-                is ApiSuccessResponse -> {
-                    Resource.success(apiResponse.body.toDomainModel())
-                }
-                is ApiErrorResponse -> {
-                    Resource.error(apiResponse.errorMessage)
-                }
-                else -> Resource.error(Result())
-            }
-        } catch (exception: IOException) {
-            val apiException = ApiException.create(exception)
-            Resource.error(apiException, null)
-        }
+    override suspend fun loginRequest(loginRequest: LoginRequest): LoginResponseModel {
+        return execute { loginAPI.loginRequest(loginRequest).body()?.toDomainModel()!! }
     }
 
-    override suspend fun registerRequest(registerRequest: RegisterRequest): Resource<Auth> {
-        return try {
-            val response = loginAPI.registerRequest(registerRequest)
-            when (val apiResponse = ApiResponse.create(response)) {
-                is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body).toDomainModel())
-                }
-                is ApiErrorResponse -> {
-                    Resource.error(apiResponse.errorMessage)
-                }
-                else -> Resource.error(Result())
-            }
-        } catch (exception: IOException) {
-            val apiException = ApiException.create(exception)
-            Resource.error(apiException, null)
-        }
+    override suspend fun registerRequest(registerRequest: RegisterRequest):Auth {
+        return execute { loginAPI.registerRequest(registerRequest).body()?.toDomainModel()!! }
     }
 
-    override suspend fun logoutRequest(): Resource<Logout> {
-        return try {
-            val response = loginAPI.logoutRequest()
-            when (val apiResponse = ApiResponse.create(response)) {
-                is ApiSuccessResponse -> {
-                    Resource.success((apiResponse.body).toDomainModel())
-                }
-                is ApiErrorResponse -> {
-                    Resource.error(apiResponse.errorMessage)
-                }
-                else -> Resource.error(Result())
-            }
-        } catch (exception: IOException) {
-            val apiException = ApiException.create(exception)
-            Resource.error(apiException, null)
-        }
+    override suspend fun logoutRequest():Logout{
+        return execute { loginAPI.logoutRequest().body()?.toDomainModel()!! }
     }
 }
 
