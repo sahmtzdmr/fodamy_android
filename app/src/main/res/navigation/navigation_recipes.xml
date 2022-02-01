@@ -11,9 +11,7 @@
         android:id="@+id/recipeDetailFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailFragment"
         android:label="RecipeDetailFragment">
-        <argument
-            android:name="recipeId"
-            app:argType="integer" />
+
         <action
             android:id="@+id/to_recipe_images"
             app:destination="@id/recipeImageFragment" />
