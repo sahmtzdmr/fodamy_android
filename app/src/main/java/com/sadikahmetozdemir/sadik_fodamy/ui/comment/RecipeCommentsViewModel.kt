@@ -79,7 +79,7 @@ class RecipeCommentsViewModel @Inject constructor(
     fun toEdit() {
         viewModelScope.launch {
             val userID = dataHelperManager.getID()
-            if (comment.value?.id == userID) {
+            if (comment.value?.user?.id == userID) {
                 navigate(
                     RecipeCommentsFragmentDirections.toCommentEditFragment(
                         comment.value!!,
