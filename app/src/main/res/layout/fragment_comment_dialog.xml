@@ -1,86 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dialog.CommentDialogFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="8dp" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="8dp" />
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogViewModel" />
 
+    </data>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_edit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bottomsheet_custom_button"
-        android:letterSpacing="0"
-        android:text="@string/edit"
-        android:textAllCaps="false"
-        android:textColor="@color/cancel"
-        android:textSize="20sp"
-        app:backgroundTint="@color/bottom_sheet"
-        app:layout_constraintBottom_toTopOf="@id/divider"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dialog.CommentDialogFragment">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/indicator_color"
-        android:backgroundTint="@color/indicator_color"
-        app:layout_constraintBottom_toTopOf="@id/bt_delete"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/bt_edit" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="8dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_delete"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bottomsheet_delete_button"
-        android:text="@string/delete"
-        android:textColor="@color/primary"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/bottom_sheet"
-        app:layout_constraintBottom_toTopOf="@id/bt_cancel"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/divider" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="8dp" />
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_cancel"
-        style="@style/AlertButton.Fodamy"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:backgroundTint="@color/cardview_light_background"
-        android:letterSpacing="0"
-        android:text="@string/cancel_bottom_sheet"
-        android:textColor="@color/cancel"
-        android:textSize="20sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/bt_delete" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bottomsheet_custom_button"
+            android:letterSpacing="0"
+            android:text="@string/edit"
+            android:textAllCaps="false"
+            android:textColor="@color/cancel"
+            android:textSize="20sp"
+            app:backgroundTint="@color/bottom_sheet"
+            app:layout_constraintBottom_toTopOf="@id/divider"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/indicator_color"
+            android:backgroundTint="@color/indicator_color"
+            app:layout_constraintBottom_toTopOf="@id/bt_delete"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/bt_edit" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bottomsheet_delete_button"
+            android:text="@string/delete"
+            android:textAllCaps="false"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            app:backgroundTint="@color/bottom_sheet"
+            app:layout_constraintBottom_toTopOf="@id/bt_cancel"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_cancel"
+            style="@style/AlertButton.Fodamy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:letterSpacing="0"
+            android:text="@string/cancel_bottom_sheet"
+            android:textColor="@color/cancel"
+            android:textSize="20sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/bt_delete" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

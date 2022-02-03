@@ -12,12 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseBottomSheet
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentBottomSheetBinding
 
-class UnfollowDialogFragment : BottomSheetDialogFragment() {
+class UnfollowDialogFragment : BaseBottomSheet<FragmentBottomSheetBinding,UnfollowDialogViewModel>(R.layout.fragment_bottom_sheet) {
     var binding: FragmentBottomSheetBinding? = null
-    val viewModel by viewModels<UnfollowDialogViewModel>()
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 

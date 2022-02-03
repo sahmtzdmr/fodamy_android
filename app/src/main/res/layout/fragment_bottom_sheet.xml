@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.dialog.UnfollowDialogFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="8dp" />
+        tools:context=".ui.dialog.UnfollowDialogFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="8dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="8dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_unfollow"
-        style="@style/AlertButton.Fodamy"
-        android:letterSpacing="0"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/bottom_sheet"
-        android:text="@string/unfollow"
-        android:textColor="@color/primary"
-        android:textSize="20sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@id/bt_cancel"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/cardview_light_background"
-        app:strokeWidth="1dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="8dp" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_cancel"
-        style="@style/AlertButton.Fodamy"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:letterSpacing="0"
-        android:backgroundTint="@color/cardview_light_background"
-        android:text="@string/cancel_bottom_sheet"
-        android:textColor="@color/cancel"
-        android:textSize="20sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/bt_unfollow" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_unfollow"
+            style="@style/AlertButton.Fodamy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/bottom_sheet"
+            android:letterSpacing="0"
+            android:text="@string/unfollow"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@id/bt_cancel"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/cardview_light_background"
+            app:strokeWidth="1dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_cancel"
+            style="@style/AlertButton.Fodamy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:backgroundTint="@color/cardview_light_background"
+            android:letterSpacing="0"
+            android:text="@string/cancel_bottom_sheet"
+            android:textColor="@color/cancel"
+            android:textSize="20sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/bt_unfollow" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 

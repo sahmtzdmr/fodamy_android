@@ -12,11 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseBottomSheet
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentCommentDialogBinding
 
-class CommentDialogFragment : BottomSheetDialogFragment() {
+class CommentDialogFragment : BaseBottomSheet<FragmentCommentDialogBinding,CommentDialogViewModel>(R.layout.fragment_comment_dialog) {
     var binding: FragmentCommentDialogBinding? = null
-    val viewModel by viewModels<CommentDialogViewModel>()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 
