@@ -26,7 +26,7 @@ class CommentEditViewModel @Inject constructor(
                 editableComment.value.toString()
             )
         }, success = {
-            popBackStack()
+            backTo()
         })
 
     }

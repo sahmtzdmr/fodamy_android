@@ -10,10 +10,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -51,8 +55,18 @@ object AppModule {
             .addInterceptor(loggingInterceptor)
             .build()
     }
+    @Provides
+    @Singleton
+    @InterceptorScope
+    fun provideScope():CoroutineScope{
+        return CoroutineScope(SupervisorJob()+Dispatchers.IO)
+    }
+
 
 
 
 
 }
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class InterceptorScope

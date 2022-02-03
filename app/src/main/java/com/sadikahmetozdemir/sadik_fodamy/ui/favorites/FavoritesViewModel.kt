@@ -61,7 +61,7 @@ class FavoritesViewModel @Inject constructor(
 
     fun toCategories(category: Category) {
         navigate(
-            FavoritesFragmentDirections.actionFavoritesFragmentToFavoritesCategoriesFragment(
+            FavoritesFragmentDirections.toFavoritesCategoriesFragment(
                 category.id!!,
                 category.name!!
             )
@@ -69,7 +69,7 @@ class FavoritesViewModel @Inject constructor(
     }
 
     fun openDetailScreen(recipeID: Int) {
-        navigate(FavoritesFragmentDirections.toRecipeDetail(recipeID))
+        navigate(FavoritesFragmentDirections.actionFavoritesFragmentToNavigationRecipes(recipeID))
     }
 
     companion object {

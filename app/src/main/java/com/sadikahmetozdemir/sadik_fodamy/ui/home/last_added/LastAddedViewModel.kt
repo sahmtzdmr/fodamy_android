@@ -42,7 +42,7 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
     }
 
     fun openDetailScreen(recipeID: Int) {
-        navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+        navigate(HomeTablayoutFragmentDirections.actionHomeTablayoutFragmentToNavigationRecipes(recipeID))
     }
 
     companion object {

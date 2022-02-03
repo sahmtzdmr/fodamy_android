@@ -58,6 +58,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 it1
                             )
                         })
+                        getRecipeDetail()
                     })
 
             }
@@ -77,6 +78,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 it1
                             )
                         })
+                        getRecipeDetail()
                     })
             }
         }

@@ -25,7 +25,7 @@
             android:layout_marginTop="54dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{()->vM.popBackStack()}"
+            android:onClick="@{()->vM.backTo()}"
             android:src="@drawable/ic_close_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -44,7 +44,7 @@ class EditorChoiceViewModel @Inject constructor(private val feedRepository: Feed
 
 
     fun openDetailScreen(recipeID: Int) {
-        navigate(HomeTablayoutFragmentDirections.toRecipeDetail(recipeID))
+        navigate(HomeTablayoutFragmentDirections.actionHomeTablayoutFragmentToNavigationRecipes(recipeID))
     }
 
     companion object {
