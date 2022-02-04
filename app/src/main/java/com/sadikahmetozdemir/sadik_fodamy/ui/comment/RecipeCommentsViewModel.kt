@@ -29,7 +29,7 @@ class RecipeCommentsViewModel @Inject constructor(
     val event = SingleLiveEvent<RecipeCommentsEvent>()
     var recipes: MutableLiveData<PagingData<Comment>> = MutableLiveData()
     val recipeID: Int = savedStateHandle.get<Int>(RECIPE_ID) ?: 0
-    val comment = MutableLiveData<Comment>()
+    val comment:MutableLiveData<Comment> = MutableLiveData<Comment>()
 
     fun getRecipeCommentsItem() {
         sendRequest(request = {
@@ -75,21 +75,10 @@ class RecipeCommentsViewModel @Inject constructor(
             }, success = { it?.message?.let { it1 -> showMessage(it1) } })
         }
     }
-
-    fun toEdit() {
-        viewModelScope.launch {
-            val userID = dataHelperManager.getID()
-            if (comment.value?.user?.id == userID) {
-                navigate(
-                    RecipeCommentsFragmentDirections.toCommentEditFragment(
-                        comment.value!!,
-                        recipeID
-                    )
-                )
-
-            }
-        }
+    fun toDialog(){
+        navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment(comment.value!!,recipeID))
     }
+
 
     companion object {
         private const val RECIPE_ID: String = "recipeID"

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vM"
             type="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogViewModel" />
@@ -37,7 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/bottomsheet_custom_button"
+            android:clickable="true"
+            android:focusable="true"
             android:letterSpacing="0"
+            android:onClick="@{()->vM.toEdit()}"
             android:text="@string/edit"
             android:textAllCaps="false"
             android:textColor="@color/cancel"

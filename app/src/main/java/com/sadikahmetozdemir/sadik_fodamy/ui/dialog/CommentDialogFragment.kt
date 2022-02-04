@@ -14,7 +14,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseBottomSheet
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentCommentDialogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommentDialogFragment : BaseBottomSheet<FragmentCommentDialogBinding,CommentDialogViewModel>(R.layout.fragment_comment_dialog) {
     var binding: FragmentCommentDialogBinding? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
@@ -35,19 +37,11 @@ class CommentDialogFragment : BaseBottomSheet<FragmentCommentDialogBinding,Comme
             btDelete.setOnClickListener {
                 onDeleteClicked()
             }
-            btEdit.setOnClickListener {
-                onEditClicked()
-            }
         }
     }
 
     private fun onDeleteClicked() {
         setFragmentResult("request_delete", bundleOf("delete" to true))
-        findNavController().popBackStack()
-    }
-
-    private fun onEditClicked() {
-        setFragmentResult("request_edit", bundleOf("edit" to true))
         findNavController().popBackStack()
     }
 }
