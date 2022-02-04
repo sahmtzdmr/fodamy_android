@@ -170,7 +170,7 @@
                             android:layout_marginTop="@dimen/margin_comment"
                             android:clickable="true"
                             android:focusable="true"
-                            android:onClick="@{()->vM.recipeDetail.isLiked ? vM.recipeDislike() : vM.recipeLike(vM.recipeDetail.id)}"
+                            android:onClick="@{()->vM.recipeDetail.isLiked ? vM.recipeDislike() : vM.recipeLike()}"
                             android:src="@drawable/ic_hearth_dark"
                             android:tint="@{vM.recipeDetail.isLiked ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"

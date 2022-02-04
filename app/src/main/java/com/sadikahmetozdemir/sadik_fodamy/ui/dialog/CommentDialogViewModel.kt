@@ -24,14 +24,17 @@ class CommentDialogViewModel @Inject constructor(
             commentID
             if (comment?.user?.id == userID) {
                 navigate(
-                    CommentDialogFragmentDirections.actionCommentDialogFragmentToCommentEditFragment(
-                        comment.id!!,
+                    CommentDialogFragmentDirections.toCommentEditFragment(
+                        comment,
                         recipeId
                     )
                 )
 
             }
         }
+    }
+    fun onCancel(){
+        backTo()
     }
 
 

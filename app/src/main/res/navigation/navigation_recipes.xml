@@ -49,8 +49,16 @@
         tools:layout="@layout/fragment_comment_dialog" >
 
         <action
-            android:id="@+id/action_commentDialogFragment_to_commentEditFragment"
-            app:destination="@id/commentEditFragment" />
+            android:id="@+id/to_commentEditFragment"
+            app:destination="@id/commentEditFragment" >
+            <argument
+                android:name="comment"
+                app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
+            <argument
+                android:name="recipeID"
+                app:argType="integer"
+                />
+        </action>
         <argument
             android:name="comment"
             app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
@@ -66,8 +74,8 @@
 
 
         <argument
-            android:name="commentID"
-            app:argType="integer" />
+            android:name="comment"
+            app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
         <argument
             android:name="recipeID"
             app:argType="integer"

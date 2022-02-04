@@ -18,22 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CommentDialogFragment : BaseBottomSheet<FragmentCommentDialogBinding,CommentDialogViewModel>(R.layout.fragment_comment_dialog) {
-    var binding: FragmentCommentDialogBinding? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCommentDialogBinding.inflate(layoutInflater)
-        return binding?.root
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+        binding.apply {
             btDelete.setOnClickListener {
                 onDeleteClicked()
             }

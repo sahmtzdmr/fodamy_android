@@ -87,6 +87,7 @@
             android:backgroundTint="@color/cardview_light_background"
             android:letterSpacing="0"
             android:text="@string/cancel_bottom_sheet"
+            android:onClick="@{()->vM.backTo()}"
             android:textColor="@color/cancel"
             android:textSize="20sp"
             app:cornerRadius="10dp"

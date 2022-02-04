@@ -46,14 +46,18 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
 
-    fun recipeLike(recipeID: Int) {
+    fun recipeLike() {
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                sendRequest(request = { feedRepository.userRecipeLikeRequest(recipeID) },
+                sendRequest(request = { recipeDetail.value?.id?.let {
+                    feedRepository.userRecipeLikeRequest(
+                        it
+                    )
+                } },
                     success = {
-                        event.postValue(it.message?.let { it1 ->
+                        event.postValue(it?.message?.let { it1 ->
                             RecipeDetailEvent.IsLiked(
                                 it1
                             )

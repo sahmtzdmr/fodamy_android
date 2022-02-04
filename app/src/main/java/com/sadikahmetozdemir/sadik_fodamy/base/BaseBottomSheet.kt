@@ -22,7 +22,8 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
 abstract class BaseBottomSheet<VDB : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes private val layoutId: Int
 ) : BottomSheetDialogFragment() {
-    lateinit private var binding: VDB
+    private var _binding: VDB? = null
+    val binding: VDB get() = _binding!!
 
     lateinit var viewModel: VM
 
@@ -51,7 +52,7 @@ abstract class BaseBottomSheet<VDB : ViewDataBinding, VM : BaseViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=DataBindingUtil.inflate(inflater,layoutId,container,false)
+        _binding=DataBindingUtil.inflate(inflater,layoutId,container,false)
         eventObserver()
         binding.setVariable(BR.vM,viewModel)
         binding.lifecycleOwner=this
@@ -65,7 +66,7 @@ abstract class BaseBottomSheet<VDB : ViewDataBinding, VM : BaseViewModel>(
     private fun evetHandler(event: BaseViewEvent){
         when (event){
             BaseViewEvent.NavigateBack -> findNavController().popBackStack()
-            is BaseViewEvent.NavigateTo -> return
+            is BaseViewEvent.NavigateTo -> findNavController().navigate(event.directions)
             is BaseViewEvent.ShowMessage -> snackbar(event.message)
             is BaseViewEvent.ShowToast -> Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
         }
