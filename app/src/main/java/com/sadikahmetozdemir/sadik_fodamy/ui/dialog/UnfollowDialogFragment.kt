@@ -12,30 +12,19 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseBottomSheet
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentBottomSheetBinding
 
-class UnfollowDialogFragment : BottomSheetDialogFragment() {
-    var binding: FragmentBottomSheetBinding? = null
-    val viewModel by viewModels<UnfollowDialogViewModel>()
-
+class UnfollowDialogFragment : BaseBottomSheet<FragmentBottomSheetBinding,UnfollowDialogViewModel>(R.layout.fragment_bottom_sheet) {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentBottomSheetBinding.inflate(layoutInflater)
-        return binding?.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btUnfollow?.setOnClickListener {
+        binding.btUnfollow.setOnClickListener {
             onUnfollowClicked()
         }
-        binding?.btCancel?.setOnClickListener {
+        binding.btCancel.setOnClickListener {
             dismiss()
         }
     }

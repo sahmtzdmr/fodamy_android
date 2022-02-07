@@ -1,4 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.comment
+
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
@@ -23,8 +24,8 @@ class RecipeCommentsFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel.getRecipeCommentsItem()
         recipeCommentsAdapter.itemClicked = {
-            viewModel.navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment())
             viewModel.comment.value = it
+            viewModel.toDialog()
         }
         renderRecipeComment()
 
@@ -85,11 +86,11 @@ class RecipeCommentsFragment :
                 }
             }
 
-            setFragmentResultListener("request_edit") { _, bundle ->
-                if (bundle.getBoolean("edit", false)) {
-                    viewModel.toEdit()
-                }
-            }
+//            setFragmentResultListener("request_edit") { _, bundle ->
+//                if (bundle.getBoolean("edit", false)) {
+//                    viewModel.toEdit()
+//                }
+//            }
         }
 
         binding.recyclerViewComments.apply {

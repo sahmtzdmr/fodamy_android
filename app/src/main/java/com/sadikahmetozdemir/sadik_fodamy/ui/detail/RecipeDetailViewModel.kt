@@ -46,14 +46,18 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
 
-    fun recipeLike(recipeID: Int) {
+    fun recipeLike() {
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                sendRequest(request = { feedRepository.userRecipeLikeRequest(recipeID) },
+                sendRequest(request = { recipeDetail.value?.id?.let {
+                    feedRepository.userRecipeLikeRequest(
+                        it
+                    )
+                } },
                     success = {
-                        event.postValue(it.message?.let { it1 ->
+                        event.postValue(it?.message?.let { it1 ->
                             RecipeDetailEvent.IsLiked(
                                 it1
                             )
@@ -65,15 +69,19 @@ class RecipeDetailViewModel @Inject constructor(
         }
     }
 
-    fun recipeDislike(recipeID: Int) {
+    fun recipeDislike() {
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
 
             } else {
-                sendRequest(request = { feedRepository.userRecipeDislikeRequest(recipeID) },
+                sendRequest(request = { recipeDetail.value?.id?.let {
+                    feedRepository.userRecipeDislikeRequest(
+                        it
+                    )
+                } },
                     success = {
-                        event.postValue(it.message?.let { it1 ->
+                        event.postValue(it?.message?.let { it1 ->
                             RecipeDetailEvent.IsDisliked(
                                 it1
                             )
@@ -124,8 +132,8 @@ class RecipeDetailViewModel @Inject constructor(
         }
     }
 
-    fun openRecipeImages(recipeID: Recipe) {
-        navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeID))
+    fun openRecipeImages() {
+        navigate(RecipeDetailFragmentDirections.toRecipeImages(recipeDetail.value))
     }
 
     fun toCommentsScreen() {

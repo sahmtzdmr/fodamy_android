@@ -12,42 +12,28 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseBottomSheet
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentCommentDialogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class CommentDialogFragment : BottomSheetDialogFragment() {
-    var binding: FragmentCommentDialogBinding? = null
-    val viewModel by viewModels<CommentDialogViewModel>()
+@AndroidEntryPoint
+class CommentDialogFragment : BaseBottomSheet<FragmentCommentDialogBinding,CommentDialogViewModel>(R.layout.fragment_comment_dialog) {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         BottomSheetDialog(requireContext(), R.style.TransparentBottomSheetDialog)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCommentDialogBinding.inflate(layoutInflater)
-        return binding?.root
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+        binding.apply {
             btDelete.setOnClickListener {
                 onDeleteClicked()
-            }
-            btEdit.setOnClickListener {
-                onEditClicked()
             }
         }
     }
 
     private fun onDeleteClicked() {
         setFragmentResult("request_delete", bundleOf("delete" to true))
-        findNavController().popBackStack()
-    }
-
-    private fun onEditClicked() {
-        setFragmentResult("request_edit", bundleOf("edit" to true))
         findNavController().popBackStack()
     }
 }
