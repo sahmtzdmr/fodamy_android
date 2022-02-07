@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.sadik_fodamy.BR
 import com.sadikahmetozdemir.sadik_fodamy.core.utils.findGenericSuperclass
+import com.sadikahmetozdemir.sadik_fodamy.utils.REQUEST_KEY
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.snackbar
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> constructor(
@@ -74,6 +77,10 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             is BaseViewEvent.ShowToast -> {
                 Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
             }
+            is BaseViewEvent.Extras -> setFragmentResult(
+                REQUEST_KEY,
+                bundleOf(event.key to event.value)
+            )
         }
     }
 }
