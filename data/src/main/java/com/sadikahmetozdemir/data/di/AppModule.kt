@@ -4,6 +4,7 @@ package com.sadikahmetozdemir.data.di
 import com.sadikahmetozdemir.data.BuildConfig
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
+import com.sadikahmetozdemir.data.service.UserAPI
 import com.sadikahmetozdemir.data.shared.utils.BASE_URL
 import com.sadikahmetozdemir.data.utils.NetworkInterceptor
 import dagger.Module
@@ -35,6 +36,11 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideUserService(retrofitClient: Retrofit) =
+        retrofitClient.create(UserAPI::class.java)
+
+    @Provides
+    @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -42,6 +48,7 @@ object AppModule {
             .client(okHttpClient)
             .build()
     }
+
     @Provides
     @Singleton
     fun provideInterceptor(networkInterceptor: NetworkInterceptor): OkHttpClient {
@@ -55,18 +62,17 @@ object AppModule {
             .addInterceptor(loggingInterceptor)
             .build()
     }
+
     @Provides
     @Singleton
     @InterceptorScope
-    fun provideScope():CoroutineScope{
-        return CoroutineScope(SupervisorJob()+Dispatchers.IO)
+    fun provideScope(): CoroutineScope {
+        return CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
 
 
-
-
-
 }
+
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class InterceptorScope

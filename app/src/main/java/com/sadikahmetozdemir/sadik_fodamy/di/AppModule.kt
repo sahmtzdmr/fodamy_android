@@ -4,10 +4,13 @@ import DefaultFeedRepository
 import android.content.Context
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
+import com.sadikahmetozdemir.data.service.UserAPI
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
+import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
+import com.sadikahmetozdemir.domain.repositories.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,12 +35,14 @@ object AppModule {
     fun provideDataManager(@ApplicationContext context: Context): DataHelperManager {
         return DataHelperManager(context)
     }
+
     @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI):FeedRepository{
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI): FeedRepository {
         return DefaultFeedRepository(editorChoiceRecipesAPI)
     }
+
     @Provides
-    fun provideAuthRepository(loginAPI: LoginAPI):AuthRepository{
+    fun provideAuthRepository(loginAPI: LoginAPI): AuthRepository {
         return DefaultAuthRepository(loginAPI)
     }
 
@@ -46,5 +51,11 @@ object AppModule {
     @ApplicationScope
     fun provideCoroutineScope(): CoroutineScope {
         return CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(userAPI: UserAPI): UserRepository {
+        return DefaultUserRepository(userAPI)
     }
 }
