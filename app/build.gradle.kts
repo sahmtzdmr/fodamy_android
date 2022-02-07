@@ -6,6 +6,7 @@ plugins {
     id (Plugins.NAVIGATION_SAFE_ARGS)
     id (Plugins.KOTLIN_PARCELIZE)
     id (Plugins.KTLINT)
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -65,6 +66,9 @@ dependencies {
     implementation (Dependencies.LIFECYCLE_VIEWMODEL)
     implementation (Dependencies.ACTIVITY_KTX)
     implementation (Dependencies.DAGGER_HILT)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     kapt (Dependencies.DAGGER_HILT_COMPILER)
 //    implementation (Dependencies.HILT_LIFECYCLE_VIEWMODEL)
     implementation (Dependencies.PAGING)
