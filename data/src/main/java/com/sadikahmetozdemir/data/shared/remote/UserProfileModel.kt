@@ -2,6 +2,7 @@ package com.sadikahmetozdemir.data.shared.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.sadikahmetozdemir.data.shared.local.UserImageModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -13,7 +14,7 @@ data class UserProfileModel(
     @SerializedName("following_count")
     val followingCount: Int,
     val id: Int,
-    val image: String,
+    val image: UserImageModel?,
     @SerializedName("is_following")
     val isFollowing: Boolean,
     @SerializedName("is_top_user_choice")
