@@ -14,6 +14,7 @@ import javax.inject.Inject
 class RecipeCommentsAdapter @Inject constructor() :
     PagingDataAdapter<Comment, RecipeCommentsAdapter.ViewHolder>(recipeComparator) {
     var itemClicked: ((Comment) -> Unit)? = null
+    var imageClicked: ((Comment) -> Unit)? = null
 
     override fun onBindViewHolder(holder: RecipeCommentsAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -41,6 +42,14 @@ class RecipeCommentsAdapter @Inject constructor() :
                     }
                 }
                 false
+            }
+            binding.ivUser.setOnClickListener {
+                if (bindingAdapterPosition!=RecyclerView.NO_POSITION){
+                    val currentItem=getItem(bindingAdapterPosition)
+                    currentItem?.let {
+                        imageClicked?.invoke(it)
+                    }
+                }
             }
         }
         fun bind(item: Comment) {

@@ -27,6 +27,9 @@ class RecipeCommentsFragment :
             viewModel.comment.value = it
             viewModel.toDialog()
         }
+        recipeCommentsAdapter.imageClicked = {
+            viewModel.toUserProfile(it.user?.id!!)
+        }
         renderRecipeComment()
 
         getRecipeComments()

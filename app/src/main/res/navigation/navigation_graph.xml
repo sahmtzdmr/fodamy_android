@@ -27,8 +27,9 @@
             android:id="@+id/toHomeFragment"
             app:destination="@id/navigation_home" />
     </fragment>
-    <include app:graph="@navigation/navigation_home"/>
-    <include app:graph="@navigation/navigation_favorites"/>
+    <include app:graph="@navigation/navigation_home" />
+    <include app:graph="@navigation/navigation_favorites" />
+    <include app:graph="@navigation/navigation_user" />
 
 
 </navigation>

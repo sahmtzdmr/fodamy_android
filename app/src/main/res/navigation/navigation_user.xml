@@ -7,5 +7,9 @@
     <fragment
         android:id="@+id/userFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.user.UserFragment"
-        android:label="UserFragment" />
+        android:label="UserFragment" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

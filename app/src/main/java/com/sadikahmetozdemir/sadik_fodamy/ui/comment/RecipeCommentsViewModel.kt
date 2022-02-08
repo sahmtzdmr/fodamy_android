@@ -78,6 +78,9 @@ class RecipeCommentsViewModel @Inject constructor(
     fun toDialog(){
         navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment(comment.value!!,recipeID))
     }
+    fun toUserProfile(userID: Int){
+        navigate(RecipeCommentsFragmentDirections.toUserProfile(userID))
+    }
 
 
     companion object {
