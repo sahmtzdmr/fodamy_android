@@ -17,9 +17,23 @@ class DefaultUserRepository @Inject constructor(private val userAPI: UserAPI) : 
 
     override suspend fun userLikesRequest(userID: Int, page: Int): List<Recipe> {
         return execute {
-            userAPI.userLikesRequest(userID, page).data?.map { it.toDomaninModel() } }!!
+            val response = userAPI.userLikesRequest(userID, page)
+            response.data?.map {
+                it.toDomaninModel()
+            }
+        } ?: emptyList()
 
     }
+
+    override suspend fun userProfileRecipes(userID: Int, page: Int): List<Recipe> {
+        return execute {
+            val response = userAPI.userProfileRecipes(userID, page)
+            response.data?.map {
+                it.toDomaninModel()
+            }
+        } ?: emptyList()
+    }
+
 
 
 }

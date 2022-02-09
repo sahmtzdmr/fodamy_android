@@ -4,6 +4,7 @@ package com.sadikahmetozdemir.data.shared.repositories
 import com.google.gson.Gson
 import com.sadikahmetozdemir.data.shared.exceptions.SimpleHttpException
 import com.sadikahmetozdemir.data.shared.exceptions.UnauthorizedException
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.requests.Result
 import retrofit2.HttpException
 

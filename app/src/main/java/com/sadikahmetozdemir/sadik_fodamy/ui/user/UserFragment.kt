@@ -12,22 +12,34 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>(R.layout.fragment_user) {
     @Inject
-    lateinit var userProfileAdapter: UserProfileAdapter
+    lateinit var userProfileLikesAdapter: UserProfileLikesAdapter
+    @Inject
+    lateinit var userProfileRecipesAdapter: UserProfileRecipesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvLikedRecipes.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = userProfileAdapter
+            adapter = userProfileLikesAdapter
         }
-        getUserLikedRecipes()
-
+        binding.rvRecipes.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = userProfileRecipesAdapter
+        }
+        getUserDetails()
     }
 
-    private fun getUserLikedRecipes() {
+    private fun getUserDetails() {
+        viewModel.likes.observe(viewLifecycleOwner) {
+            userProfileLikesAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        }
         viewModel.recipes.observe(viewLifecycleOwner) {
-            userProfileAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            userProfileRecipesAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
+
     }
+
+
 }

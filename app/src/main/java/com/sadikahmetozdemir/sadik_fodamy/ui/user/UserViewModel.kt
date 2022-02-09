@@ -10,7 +10,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.data.shared.repositories.UserLikePagingSource
-import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.data.shared.repositories.UserProfileRecipesPagingSource
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.UserProfile
 import com.sadikahmetozdemir.domain.repositories.UserRepository
@@ -23,10 +23,10 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val dataHelperManager: DataHelperManager,
     private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-     val recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
+    val likes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
+    val recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
     private val _user: MutableLiveData<UserProfile> = MutableLiveData()
     val user: LiveData<UserProfile> get() = _user
     private var userID: Int = savedStateHandle.get(USER_ID) ?: 0
@@ -34,6 +34,7 @@ class UserViewModel @Inject constructor(
     init {
         getUserProfile()
         getUserLikes(userID)
+        getUserProfileRecipes(userID)
     }
 
 
@@ -47,14 +48,40 @@ class UserViewModel @Inject constructor(
     }
 
     fun getUserLikes(userID: Int) {
-        sendRequest(request = {
-            Pager(config = PAGE_CONFIG, pagingSourceFactory = {
-                UserLikePagingSource(userRepository, userID)
-            }).flow
-        }, success = {viewModelScope.launch { it.cachedIn(viewModelScope).collect { recipes.value=it } }}
-        )
+        sendRequest(
+            request = {
+                Pager(config = PAGE_CONFIG, pagingSourceFactory = {
+                    UserLikePagingSource(userRepository, userID)
+                }).flow
+            },
+            success = {
+                viewModelScope.launch {
+                    it.cachedIn(viewModelScope).collect {
+                        likes.value = it }
+                }
+            })
 
     }
+
+    private fun getUserProfileRecipes(userID: Int) {
+        sendRequest(request = {
+            Pager(
+                config = PAGE_CONFIG,
+                pagingSourceFactory = {
+                    UserProfileRecipesPagingSource(
+                        userRepository,
+                        userID
+                    )
+                }).flow
+        }, success = {
+            viewModelScope.launch {
+                it.cachedIn(viewModelScope).collect {
+                    recipes.value = it }
+            }
+        }
+        )
+    }
+
 
     companion object {
         const val USER_ID = "userId"

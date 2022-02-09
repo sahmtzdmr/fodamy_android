@@ -6,7 +6,7 @@ import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.UserRepository
 import javax.inject.Inject
 
-class UserLikePagingSource @Inject constructor(
+class UserProfileRecipesPagingSource @Inject constructor(
     private var userRepository: UserRepository,
     private var userID: Int
 ) :
@@ -25,15 +25,15 @@ class UserLikePagingSource @Inject constructor(
         val currentPage = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response =
-                userRepository.userLikesRequest(userID, currentPage)
-            val dataUserLike = response
+                userRepository.userProfileRecipes(userID, currentPage)
+            val dataUserRecipes = response
 
             LoadResult.Page(
-                data = dataUserLike,
+                data = dataUserRecipes,
                 prevKey = if (currentPage == STARTING_PAGE_INDEX) null else currentPage.minus(
                     STARTING_PAGE_INDEX
                 ),
-                nextKey = if (dataUserLike.isEmpty()) null else currentPage.plus(
+                nextKey = if (dataUserRecipes.isEmpty()) null else currentPage.plus(
                     STARTING_PAGE_INDEX
                 )
             )

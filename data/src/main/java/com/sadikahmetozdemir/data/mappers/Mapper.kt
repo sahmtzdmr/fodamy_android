@@ -100,7 +100,7 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         directions = this.directions ?: "",
         difference = this.difference ?: "",
         isEditorChoice = this.isEditorChoice,
-        isLiked = this.isLiked,
+        haveLiked = this.isLiked,
         likeCount = this.likeCount ?: 0,
         numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
         commentCount = this.commentCount ?: 0,

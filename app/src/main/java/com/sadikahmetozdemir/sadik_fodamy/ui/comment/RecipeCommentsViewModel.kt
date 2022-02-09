@@ -32,7 +32,8 @@ class RecipeCommentsViewModel @Inject constructor(
     val comment:MutableLiveData<Comment> = MutableLiveData<Comment>()
 
     fun getRecipeCommentsItem() {
-        sendRequest(request = {
+        sendRequest(
+            request = {
             Pager(config = PAGE_CONFIG, pagingSourceFactory = {
                 RecipeCommentsPagingSource(feedRepository, recipeID)
             }).flow

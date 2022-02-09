@@ -12,7 +12,7 @@ data class Recipe(
     val directions: String?,
     val difference: String?,
     val isEditorChoice: Boolean?,
-    val isLiked: Boolean?,
+    val haveLiked: Boolean?,
     val likeCount: Int?,
     val numberOfFavoriteCount: String?,
     val commentCount: Int?,

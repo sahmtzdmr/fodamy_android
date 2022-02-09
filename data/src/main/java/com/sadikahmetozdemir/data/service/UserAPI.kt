@@ -17,4 +17,10 @@ interface UserAPI {
         @Query("page") page: Int
     ): EditorChoiceResponseModel
 
+    @GET("api/user/{user_id}/recipe")
+    suspend fun userProfileRecipes(
+        @Path("user_id") userId: Int,
+        @Query("page") page: Int
+    ): EditorChoiceResponseModel
+
 }

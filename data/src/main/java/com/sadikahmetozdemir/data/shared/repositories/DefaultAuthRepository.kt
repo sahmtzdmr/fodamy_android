@@ -1,9 +1,6 @@
 package com.sadikahmetozdemir.data.shared.repositories
 
 import com.sadikahmetozdemir.data.mappers.toDomainModel
-import com.sadikahmetozdemir.data.service.ApiErrorResponse
-import com.sadikahmetozdemir.data.service.ApiResponse
-import com.sadikahmetozdemir.data.service.ApiSuccessResponse
 import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.domain.utils.constants.NETWORK_ERROR_MESSAGE

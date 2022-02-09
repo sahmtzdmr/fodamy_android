@@ -12,11 +12,12 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
-class UserProfileAdapter @Inject constructor() : PagingDataAdapter<Recipe, UserProfileAdapter.ViewHolder>(
-    recipeComparator
-) {
+class UserProfileRecipesAdapter @Inject constructor() :
+    PagingDataAdapter<Recipe, UserProfileRecipesAdapter.ViewHolder>(
+        recipeComparator
+    ) {
 
-    override fun onBindViewHolder(holder: UserProfileAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserProfileRecipesAdapter.ViewHolder, position: Int) {
         val currentItem = getItem(position)
         currentItem?.let {
             holder.bind(it)
@@ -27,14 +28,15 @@ class UserProfileAdapter @Inject constructor() : PagingDataAdapter<Recipe, UserP
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Recipe) {
-            binding.ivUserImage.loadCircleCrop(true,item.user?.image?.url)
-            binding.ivFavoritesFood.load(true,item.images?.get(0)?.url)
-            binding.tvFavoritesFoodTitle.text=item.title
-            binding.tvFavoritesComment.text=binding.root.context.getString(R.string.comment, item.commentCount)
-            binding.tvFavoritesLike.text=binding.root.context.getString(R.string.like,item.likeCount)
-
-
-
+            binding.ivUserImage.loadCircleCrop(true, item.user?.image?.url)
+            binding.ivFavoritesFood.load(true, item.images?.get(0)?.url)
+            binding.tvFavoritesFoodTitle.text = item.title
+            binding.tvFavoritesComment.text =
+                binding.root.context.getString(R.string.comment, item.commentCount)
+            binding.tvFavoritesLike.text =
+                binding.root.context.getString(R.string.like, item.likeCount)
+            binding.tvUserName.text = item.user?.username
+            binding.executePendingBindings()
         }
     }
 
@@ -42,7 +44,7 @@ class UserProfileAdapter @Inject constructor() : PagingDataAdapter<Recipe, UserP
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): UserProfileAdapter.ViewHolder {
+    ): UserProfileRecipesAdapter.ViewHolder {
         val binding =
             FavoritesChildItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder((binding))
