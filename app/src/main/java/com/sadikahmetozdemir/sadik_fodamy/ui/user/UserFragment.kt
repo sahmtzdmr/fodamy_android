@@ -2,6 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.user
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentUserBinding
@@ -16,7 +17,8 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>(R.layout.f
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvLikedRecipes.apply {
-            setHasFixedSize(true)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = userProfileAdapter
         }
         getUserLikedRecipes()
