@@ -11,6 +11,9 @@
     <dimen name="favorites_title_margin">10dp</dimen>
     <dimen name="alert_iv_size">60dp</dimen>
     <dimen name="send_iv_size">18dp</dimen>
+    <dimen name="user_iv_size">150dp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">16sp</dimen>
 
 
 </resources>

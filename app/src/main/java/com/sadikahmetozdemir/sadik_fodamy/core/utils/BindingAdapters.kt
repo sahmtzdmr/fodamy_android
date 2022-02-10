@@ -12,7 +12,8 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
-import java.util.*
+import java.util.Locale
+
 
 @BindingAdapter("imageLoader")
 fun setImageLoader(imageView: ImageView, url: String?) {
@@ -68,7 +69,6 @@ fun ifFollowing(button: Button, isFollowing: Boolean) {
                 R.color.cardview_light_background
             )
         )
-
     } else {
         button.backgroundTintList =
             ColorStateList.valueOf(

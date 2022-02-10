@@ -38,8 +38,5 @@ class UserFragment : BaseFragment<FragmentUserBinding, UserViewModel>(R.layout.f
         viewModel.recipes.observe(viewLifecycleOwner) {
             userProfileRecipesAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-
     }
-
-
 }

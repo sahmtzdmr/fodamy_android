@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemCommentBinding
-import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject
 
@@ -44,8 +44,8 @@ class RecipeCommentsAdapter @Inject constructor() :
                 false
             }
             binding.ivUser.setOnClickListener {
-                if (bindingAdapterPosition!=RecyclerView.NO_POSITION){
-                    val currentItem=getItem(bindingAdapterPosition)
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                    val currentItem = getItem(bindingAdapterPosition)
                     currentItem?.let {
                         imageClicked?.invoke(it)
                     }

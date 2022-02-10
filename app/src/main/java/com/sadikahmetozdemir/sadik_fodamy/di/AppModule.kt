@@ -26,7 +26,6 @@ import javax.inject.Singleton
 @Qualifier
 annotation class ApplicationScope
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

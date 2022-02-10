@@ -1,11 +1,8 @@
 package com.sadikahmetozdemir.data.shared.remote
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.data.shared.local.UserImageModel
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class UserProfileModel(
     @SerializedName("favorites_count")
     val favoritesCount: Int,
@@ -13,7 +10,9 @@ data class UserProfileModel(
     val followedCount: Int,
     @SerializedName("following_count")
     val followingCount: Int,
+    @SerializedName("id")
     val id: Int,
+    @SerializedName("image")
     val image: UserImageModel?,
     @SerializedName("is_following")
     val isFollowing: Boolean,
@@ -23,9 +22,12 @@ data class UserProfileModel(
     val isTrusted: Int,
     @SerializedName("likes_count")
     val likesCount: Int,
+    @SerializedName("name")
     val name: String,
     @SerializedName("recipe_count")
     val recipeCount: Int,
+    @SerializedName("surname")
     val surname: String,
+    @SerializedName("username")
     val username: String
-) : Parcelable
+)

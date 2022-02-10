@@ -26,43 +26,45 @@ class FavoritesCategoriesViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-   val title = savedStateHandle.get<String>(TITLE)
+    val title = savedStateHandle.get<String>(TITLE)
     var recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
     var event = MutableLiveData<BaseViewEvent>()
 
     fun getFavoriteCategoriesItem(categoryID: Int) {
-        sendRequest(request = {
-            Pager(
-                config = PAGE_CONFIG,
-                pagingSourceFactory = {
-                    FavoriteCategoriesPagingSource(
-                        feedRepository,
-                        categoryID
-                    )
-                }).flow
-
-        },
+        sendRequest(
+            request = {
+                Pager(
+                    config = PAGE_CONFIG,
+                    pagingSourceFactory = {
+                        FavoriteCategoriesPagingSource(
+                            feedRepository,
+                            categoryID
+                        )
+                    }
+                ).flow
+            },
             success = {
                 viewModelScope.launch { it.cachedIn(viewModelScope).collect { recipes.value = it } }
             }
         )
-
     }
 
     fun logoutRequest() {
-        sendRequest(request = { authRepository.logoutRequest() },
+        sendRequest(
+            request = { authRepository.logoutRequest() },
             success = {
                 viewModelScope.launch {
                     dataHelperManager.removeToken()
                     it.message?.let { it1 -> showToast(it1) }
                 }
-            })
+            }
+        )
     }
 
     fun toRecipeDetail(recipe: Recipe) {
         recipe.id.let {
-            FavoritesCategoriesFragmentDirections.toNavigationRecipes(it) }
-
+            FavoritesCategoriesFragmentDirections.toNavigationRecipes(it)
+        }
     }
 
     companion object {

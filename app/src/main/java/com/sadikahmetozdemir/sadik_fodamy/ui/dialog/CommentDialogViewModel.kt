@@ -20,7 +20,7 @@ class CommentDialogViewModel @Inject constructor(
     fun toEdit() {
         viewModelScope.launch {
             val userID = dataHelperManager.getID()
-            val commentID=comment?.user?.id
+            val commentID = comment?.user?.id
             commentID
             if (comment?.user?.id == userID) {
                 navigate(
@@ -29,14 +29,12 @@ class CommentDialogViewModel @Inject constructor(
                         recipeId
                     )
                 )
-
             }
         }
     }
-    fun onCancel(){
+    fun onCancel() {
         backTo()
     }
-
 
     companion object {
         private const val COMMENT = "comment"

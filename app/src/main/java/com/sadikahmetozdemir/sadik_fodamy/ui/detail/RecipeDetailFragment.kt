@@ -8,7 +8,6 @@ import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentRecipeDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class RecipeDetailFragment :
     BaseFragment<FragmentRecipeDetailBinding, RecipeDetailViewModel>(R.layout.fragment_recipe_detail) {
@@ -22,5 +21,3 @@ class RecipeDetailFragment :
         }
     }
 }
-
-

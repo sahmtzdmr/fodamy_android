@@ -37,11 +37,8 @@ class UserProfileLikesAdapter @Inject constructor() :
                 binding.root.context.getString(R.string.like, item.likeCount)
             binding.tvUserName.text = item.user?.username
             binding.executePendingBindings()
-
-
         }
     }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -67,5 +64,4 @@ class UserProfileLikesAdapter @Inject constructor() :
                 oldItem == newItem
         }
     }
-
 }

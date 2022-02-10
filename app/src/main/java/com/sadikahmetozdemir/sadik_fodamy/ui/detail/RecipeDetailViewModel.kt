@@ -18,7 +18,7 @@ class RecipeDetailViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager,
     savedStateHandle: SavedStateHandle,
 
-    ) : BaseViewModel() {
+) : BaseViewModel() {
     val recipeDetail = MutableLiveData<Recipe?>()
     val recipeDetailComment = MutableLiveData<Comment?>()
     val event = MutableLiveData<RecipeDetailEvent>()
@@ -30,41 +30,45 @@ class RecipeDetailViewModel @Inject constructor(
     }
 
     private fun getRecipeDetail() {
-        sendRequest(request = { feedRepository.getRecipeDetail(recipeID) },
+        sendRequest(
+            request = { feedRepository.getRecipeDetail(recipeID) },
             success = {
                 recipeDetail.postValue(it)
-            })
-
-
+            }
+        )
     }
-
 
     private fun getRecipeDetailComment() {
         sendRequest(
             request = { feedRepository.getRecipeDetailComment(recipeID) },
-            success = { recipeDetailComment.postValue(it) })
+            success = { recipeDetailComment.postValue(it) }
+        )
     }
-
 
     fun recipeLike() {
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                sendRequest(request = { recipeDetail.value?.id?.let {
-                    feedRepository.userRecipeLikeRequest(
-                        it
-                    )
-                } },
-                    success = {
-                        event.postValue(it?.message?.let { it1 ->
-                            RecipeDetailEvent.IsLiked(
-                                it1
+                sendRequest(
+                    request = {
+                        recipeDetail.value?.id?.let {
+                            feedRepository.userRecipeLikeRequest(
+                                it
                             )
-                        })
+                        }
+                    },
+                    success = {
+                        event.postValue(
+                            it?.message?.let { it1 ->
+                                RecipeDetailEvent.IsLiked(
+                                    it1
+                                )
+                            }
+                        )
                         getRecipeDetail()
-                    })
-
+                    }
+                )
             }
         }
     }
@@ -73,21 +77,26 @@ class RecipeDetailViewModel @Inject constructor(
         viewModelScope.launch {
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
-
             } else {
-                sendRequest(request = { recipeDetail.value?.id?.let {
-                    feedRepository.userRecipeDislikeRequest(
-                        it
-                    )
-                } },
-                    success = {
-                        event.postValue(it?.message?.let { it1 ->
-                            RecipeDetailEvent.IsDisliked(
-                                it1
+                sendRequest(
+                    request = {
+                        recipeDetail.value?.id?.let {
+                            feedRepository.userRecipeDislikeRequest(
+                                it
                             )
-                        })
+                        }
+                    },
+                    success = {
+                        event.postValue(
+                            it?.message?.let { it1 ->
+                                RecipeDetailEvent.IsDisliked(
+                                    it1
+                                )
+                            }
+                        )
                         getRecipeDetail()
-                    })
+                    }
+                )
             }
         }
     }
@@ -97,9 +106,10 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                sendRequest(request = { feedRepository.userFollowRequest(followId) },
-                    success = { getRecipeDetail() })
-
+                sendRequest(
+                    request = { feedRepository.userFollowRequest(followId) },
+                    success = { getRecipeDetail() }
+                )
             }
         }
     }
@@ -109,13 +119,14 @@ class RecipeDetailViewModel @Inject constructor(
             if (!dataHelperManager.isLogin()) {
                 navigate(RecipeDetailFragmentDirections.toAuthDialogFragment())
             } else {
-                sendRequest(request = {
-                    recipeDetail.value?.user?.id?.let {
-                        feedRepository.userUnfollowRequest(
-                            it
-                        )
-                    }
-                },
+                sendRequest(
+                    request = {
+                        recipeDetail.value?.user?.id?.let {
+                            feedRepository.userUnfollowRequest(
+                                it
+                            )
+                        }
+                    },
                     success = {
                         event.postValue(
                             it?.message.let {
@@ -127,7 +138,8 @@ class RecipeDetailViewModel @Inject constructor(
                             }
                         )
                         getRecipeDetail()
-                    })
+                    }
+                )
             }
         }
     }

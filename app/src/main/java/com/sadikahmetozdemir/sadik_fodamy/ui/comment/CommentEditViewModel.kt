@@ -28,9 +28,7 @@ class CommentEditViewModel @Inject constructor(
         }, success = {
             backTo()
         })
-
     }
-
 
     companion object {
         val RECIPE_ID = "recipeID"

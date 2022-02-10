@@ -40,7 +40,7 @@ abstract class BaseBottomSheet<VDB : ViewDataBinding, VM : BaseViewModel>(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
 
-            )
+        )
         viewModel = ViewModelProvider(this)[viewModelClass]
     }
 
@@ -52,26 +52,23 @@ abstract class BaseBottomSheet<VDB : ViewDataBinding, VM : BaseViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding=DataBindingUtil.inflate(inflater,layoutId,container,false)
+        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         eventObserver()
-        binding.setVariable(BR.vM,viewModel)
-        binding.lifecycleOwner=this
+        binding.setVariable(BR.vM, viewModel)
+        binding.lifecycleOwner = this
         return binding.root
     }
-    private fun eventObserver(){
-        viewModel.baseEvent.observe(viewLifecycleOwner){event->
+    private fun eventObserver() {
+        viewModel.baseEvent.observe(viewLifecycleOwner) { event ->
             evetHandler(event)
         }
     }
-    private fun evetHandler(event: BaseViewEvent){
-        when (event){
+    private fun evetHandler(event: BaseViewEvent) {
+        when (event) {
             BaseViewEvent.NavigateBack -> findNavController().popBackStack()
             is BaseViewEvent.NavigateTo -> findNavController().navigate(event.directions)
             is BaseViewEvent.ShowMessage -> snackbar(event.message)
             is BaseViewEvent.ShowToast -> Toast.makeText(requireContext(), event.message, Toast.LENGTH_SHORT).show()
         }
-
-
     }
-
 }

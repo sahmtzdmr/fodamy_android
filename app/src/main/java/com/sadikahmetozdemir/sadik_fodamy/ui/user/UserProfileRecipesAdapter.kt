@@ -40,7 +40,6 @@ class UserProfileRecipesAdapter @Inject constructor() :
         }
     }
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -65,5 +64,4 @@ class UserProfileRecipesAdapter @Inject constructor() :
                 oldItem == newItem
         }
     }
-
 }

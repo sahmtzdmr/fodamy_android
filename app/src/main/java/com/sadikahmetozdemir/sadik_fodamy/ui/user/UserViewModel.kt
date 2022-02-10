@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.user
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -37,7 +36,6 @@ class UserViewModel @Inject constructor(
         getUserProfileRecipes(userID)
     }
 
-
     fun getUserProfile() = viewModelScope.launch {
         sendRequest(
             request = { userRepository.userProfileRequest(userID) },
@@ -57,31 +55,34 @@ class UserViewModel @Inject constructor(
             success = {
                 viewModelScope.launch {
                     it.cachedIn(viewModelScope).collect {
-                        likes.value = it }
+                        likes.value = it
+                    }
                 }
-            })
-
+            }
+        )
     }
 
     private fun getUserProfileRecipes(userID: Int) {
-        sendRequest(request = {
-            Pager(
-                config = PAGE_CONFIG,
-                pagingSourceFactory = {
-                    UserProfileRecipesPagingSource(
-                        userRepository,
-                        userID
-                    )
-                }).flow
-        }, success = {
+        sendRequest(
+            request = {
+                Pager(
+                    config = PAGE_CONFIG,
+                    pagingSourceFactory = {
+                        UserProfileRecipesPagingSource(
+                            userRepository,
+                            userID
+                        )
+                    }
+                ).flow
+            }, success = {
             viewModelScope.launch {
                 it.cachedIn(viewModelScope).collect {
-                    recipes.value = it }
+                    recipes.value = it
+                }
             }
         }
         )
     }
-
 
     companion object {
         const val USER_ID = "userId"
@@ -89,5 +90,3 @@ class UserViewModel @Inject constructor(
             PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)
     }
 }
-
-

@@ -22,26 +22,27 @@ class EditorChoiceViewModel @Inject constructor(private val feedRepository: Feed
 
     var recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
 
-
     init {
         getEditorChoice()
     }
 
     private fun getEditorChoice() {
-        sendRequest(request = {
-            Pager(
-                config = PAGE_CONFIG,
-                pagingSourceFactory = {
-                    RecipePagingSource(feedRepository)
-                }).flow
-        },
+        sendRequest(
+            request = {
+                Pager(
+                    config = PAGE_CONFIG,
+                    pagingSourceFactory = {
+                        RecipePagingSource(feedRepository)
+                    }
+                ).flow
+            },
             success = {
                 viewModelScope.launch {
                     it.cachedIn(viewModelScope).collect { recipes.value = it }
                 }
-            })
+            }
+        )
     }
-
 
     fun openDetailScreen(recipeID: Int) {
         navigate(HomeTablayoutFragmentDirections.actionHomeTablayoutFragmentToNavigationRecipes(recipeID))
