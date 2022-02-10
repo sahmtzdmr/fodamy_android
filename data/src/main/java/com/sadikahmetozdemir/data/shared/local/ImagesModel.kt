@@ -1,14 +1,17 @@
 package com.sadikahmetozdemir.data.shared.local
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.SerializedName
 
 
-@Parcelize
 data class ImagesModel(
+    @SerializedName("width")
     var width: Int?,
+    @SerializedName("height")
     var height: Int?,
+    @SerializedName("key")
     var key: String?,
+    @SerializedName("order")
     var order: Int?,
+    @SerializedName("url")
     var url: String?
-) : Parcelable
+)

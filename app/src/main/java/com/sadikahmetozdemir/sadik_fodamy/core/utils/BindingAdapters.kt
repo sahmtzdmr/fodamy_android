@@ -14,7 +14,6 @@ import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
 import java.util.Locale
 
-
 @BindingAdapter("imageLoader")
 fun setImageLoader(imageView: ImageView, url: String?) {
 
