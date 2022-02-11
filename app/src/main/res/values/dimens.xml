@@ -17,6 +17,11 @@
     <dimen name="alert_dialog_margin_start">133dp</dimen>
     <dimen name="alert_dialog_margin_end">132dp</dimen>
     <dimen name="alert_dialog_text_size">14sp</dimen>
+    <dimen name="toolbar_padding">10dp</dimen>
+    <dimen name="toolbar_padding_8">8dp</dimen>
+    <dimen name="toolbar_gonemargin">41dp</dimen>
+    <dimen name="toolbar_text_size">13sp</dimen>
+    <dimen name="toolbar_padding_end">20dp</dimen>
 
 
 </resources>
