@@ -31,10 +31,16 @@
     <dimen name="child_item_margin_top">6dp</dimen>
     <dimen name="title_tv_size">12sp</dimen>
     <dimen name="child_margin_bottom">7dp</dimen>
-    <dimen name="guide_begin">8dp</dimen>
+    <dimen name="guide_8">8dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="corner_radius_10">10dp</dimen>
     <dimen name="stroke_width">1dp</dimen>
-    
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_48">48dp</dimen>
+    <dimen name="guide_15">15dp</dimen>
+    <dimen name="margin_26">26dp</dimen>
+
+
 </resources>

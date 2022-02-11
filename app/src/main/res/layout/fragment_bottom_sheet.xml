@@ -20,14 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/guide_begin" />
+            app:layout_constraintGuide_begin="@dimen/guide_8" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/guide_begin" />
+            app:layout_constraintGuide_end="@dimen/guide_8" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_unfollow"
@@ -60,8 +60,8 @@
             android:letterSpacing="0"
             android:text="@string/cancel_bottom_sheet"
             android:textColor="@color/cancel"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
+            android:textSize="@dimen/text_size_20"
+            app:cornerRadius="@dimen/corner_radius_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
