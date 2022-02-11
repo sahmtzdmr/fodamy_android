@@ -53,6 +53,9 @@
     <string name="following_count">%1d Takip Edilen</string>
     <string name="recipes">Tarifler</string>
     <string name="liked_counts">Beğeniler</string>
+    <string name="child_item_title">Köfte Tarifi</string>
+    <string name="no_comment">0 Yorum</string>
+    <string name="no_like">0 Beğeni</string>
 
 
 </resources>

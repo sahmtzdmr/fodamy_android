@@ -22,6 +22,14 @@
     <dimen name="toolbar_gonemargin">41dp</dimen>
     <dimen name="toolbar_text_size">13sp</dimen>
     <dimen name="toolbar_padding_end">20dp</dimen>
-
-
+    <dimen name="padding_child_item_start">7.5dp</dimen>
+    <dimen name="child_item_iv_size">30dp</dimen>
+    <dimen name="child_item_margin_start">5dp</dimen>
+    <dimen name="elevation">4dp</dimen>
+    <dimen name="child_item_username_margin_start">20dp</dimen>
+    <dimen name="child_item_padding_bot">3dp</dimen>
+    <dimen name="child_item_text_size">11sp</dimen>
+    <dimen name="child_item_margin_top">6dp</dimen>
+    <dimen name="title_tv_size">12sp</dimen>
+    <dimen name="child_margin_bottom">7dp</dimen>
 </resources>

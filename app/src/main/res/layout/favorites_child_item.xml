@@ -5,7 +5,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="7.5dp">
+        android:padding="@dimen/padding_child_item_start">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -16,8 +16,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_favorites_food"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="@dimen/user_iv_size"
+                android:layout_height="@dimen/user_iv_size"
                 android:scaleType="centerCrop"
                 android:src="@drawable/walkthrough_image_3"
                 app:layout_constraintStart_toStartOf="parent"
@@ -26,10 +26,10 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_user_image"
                 android:background="@drawable/favorites_userimage_background"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="5dp"
-                android:elevation="4dp"
+                android:layout_width="@dimen/child_item_iv_size"
+                android:layout_height="@dimen/child_item_iv_size"
+                android:layout_marginStart="@dimen/child_item_margin_start"
+                android:elevation="@dimen/elevation"
                 android:src="@drawable/walkthrough_image_first"
                 app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
                 app:layout_constraintTop_toTopOf="@id/iv_favorites_food" />
@@ -38,16 +38,16 @@
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/child_item_username_margin_start"
                 android:background="@drawable/username_background"
                 android:gravity="center_vertical|center_horizontal"
-                android:paddingStart="15dp"
-                android:paddingEnd="5dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="3dp"
+                android:paddingStart="@dimen/margin_start"
+                android:paddingEnd="@dimen/padding_child_item_start"
+                android:paddingTop="@dimen/cardview_default_elevation"
+                android:paddingBottom="@dimen/child_item_padding_bot"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="11sp"
+                android:textSize="@dimen/child_item_text_size"
                 app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
                 app:layout_constraintStart_toStartOf="@id/iv_favorites_food"
                 app:layout_constraintTop_toTopOf="@id/iv_user_image"
@@ -58,11 +58,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/favorites_title_margin"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/child_item_margin_top"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Köfte Tarifi"
+                android:text="@string/child_item_title"
                 android:textColor="@color/cinder"
-                android:textSize="12sp"
+                android:textSize="@dimen/title_tv_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_favorites_food" />
 
@@ -70,9 +70,9 @@
                 android:id="@+id/tv_favorites_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 Yorum"
+                android:text="@string/no_comment"
                 android:fontFamily="@font/nunito_semibold"
-                android:textSize="12sp"
+                android:textSize="@dimen/title_tv_size"
                 app:layout_constraintTop_toBottomOf="@id/tv_favorites_food_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/favorites_title_margin" />
@@ -81,15 +81,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_favorites_like"
-                android:text="0 Beğeni"
+                android:text="@string/no_like"
                 app:layout_constraintStart_toEndOf="@id/tv_favorites_comment"
                 app:layout_constraintTop_toBottomOf="@id/tv_favorites_food_title"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="@dimen/child_item_padding_bot"
                 android:fontFamily="@font/nunito_semibold"
-                android:textSize="12sp"
+                android:textSize="@dimen/title_tv_size"
                 app:layout_constraintBottom_toBottomOf="parent"
-
-                android:layout_marginBottom="7dp" />
+                android:layout_marginBottom="@dimen/child_margin_bottom" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
