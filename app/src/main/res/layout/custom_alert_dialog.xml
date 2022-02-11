@@ -25,7 +25,7 @@
         android:layout_marginTop="@dimen/margin_start"
         android:fontFamily="@font/nunito_semibold"
         android:text="@string/alert_text"
-        android:textSize="@dimen/alert_dialog_text_size"
+        android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toTopOf="@id/bt_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

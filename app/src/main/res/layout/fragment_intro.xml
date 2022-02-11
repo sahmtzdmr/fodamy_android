@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.intro.IntroViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,52 +20,54 @@
             android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="@dimen/margin_26"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{()->vM.onClose()}"
             android:src="@drawable/ic_close"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_16"
             app:layout_constraintBottom_toTopOf="@id/indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_close"
-            android:layout_marginTop="@dimen/margin_normal"/>
+            app:layout_constraintTop_toBottomOf="@id/iv_close" />
 
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:dotsColor="@color/dot_color"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="16dp"
-            app:dotsSpacing="4dp"
-            app:dotsWidthFactor="1"
-            app:selectedDotColor="@color/primary"
-            app:progressMode="false"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_normal"
+            app:dotsColor="@color/dot_color"
+            app:dotsCornerRadius="@dimen/corner_radius_8"
+            app:dotsSize="@dimen/dots_size_16"
+            app:dotsSpacing="@dimen/dots_spacing"
+            app:dotsWidthFactor="1"
             app:layout_constraintBottom_toTopOf="@id/bt_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPager2" />
+            app:layout_constraintTop_toBottomOf="@id/viewPager2"
+            app:progressMode="false"
+            app:selectedDotColor="@color/primary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_next"
             style="@style/PrimaryButtonLarge.Fodamy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/margin_15"
             android:layout_marginBottom="@dimen/margin_normal"
             android:text="@string/next_page"
             app:layout_constraintBottom_toBottomOf="parent"

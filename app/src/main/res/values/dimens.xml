@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_normal">20dp</dimen>
     <dimen name="medal_size">40dp</dimen>
     <dimen name="tablayout_heigh">46dp</dimen>
     <dimen name="icon_size_32dp">32dp</dimen>
     <dimen name="margin_line">16dp</dimen>
     <dimen name="margin_start">15dp</dimen>
-    <dimen name="margin_comment">15.5dp</dimen>
+    <dimen name="margin_comment">15dp</dimen>
     <dimen name="drawable_size">24dp</dimen>
     <dimen name="favorites_title_margin">10dp</dimen>
     <dimen name="alert_iv_size">60dp</dimen>
@@ -15,11 +14,11 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">16sp</dimen>
     <dimen name="alert_dialog_margin_132">132dp</dimen>
-    <dimen name="alert_dialog_text_size">14sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
     <dimen name="toolbar_padding">10dp</dimen>
     <dimen name="toolbar_padding_8">8dp</dimen>
     <dimen name="toolbar_gonemargin">41dp</dimen>
-    <dimen name="toolbar_text_size">13sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
     <dimen name="toolbar_padding_end">20dp</dimen>
     <dimen name="padding_child_item_start">8dp</dimen>
     <dimen name="child_item_iv_size">30dp</dimen>
@@ -41,6 +40,17 @@
     <dimen name="margin_48">48dp</dimen>
     <dimen name="guide_15">15dp</dimen>
     <dimen name="margin_26">26dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="padding_21">21dp</dimen>
+    <dimen name="margin_52">52dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="corner_radius_8">8dp</dimen>
+    <dimen name="dots_size_16">16dp</dimen>
+    <dimen name="dots_spacing">4dp</dimen>
+    <dimen name="margin_93">93dp</dimen>
+    <dimen name="margin_9">9dp</dimen>
 
 
 </resources>
