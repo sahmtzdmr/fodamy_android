@@ -24,25 +24,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="15dp" />
+            app:layout_constraintGuide_begin="@dimen/guide_15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="14dp" />
+            app:layout_constraintGuide_end="@dimen/guide_15" />
 
         <TextView
             android:id="@+id/tv_tittle"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/margin_28"
             android:fontFamily="@font/nunito_bold"
             android:text="@{isRecipeType ? @string/ingredients_title : @string/description}"
             android:textColor="@color/cinder"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_size_15"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/ingredients_title" />
@@ -51,8 +51,8 @@
             android:id="@+id/iv_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="@dimen/margin_23"
+            android:layout_marginEnd="@dimen/margin_8"
             tools:src="@drawable/ic_restaurant_icon"
             android:src="@{isRecipeType ? @drawable/ic_restaurant_icon : @drawable/ic_clock_icon}"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
@@ -62,7 +62,7 @@
             android:id="@+id/tv_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="@dimen/margin_1"
             android:text="@{isRecipeType ? `` + model.numberOfPerson.text: `` + model.timeOfRecipe.text+@string/dk}"
             app:layout_constraintEnd_toEndOf="@id/iv_card"
             app:layout_constraintTop_toBottomOf="@id/iv_card"
@@ -71,8 +71,8 @@
         <View
             android:id="@+id/view_divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="12.5dp"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/margin_12"
             android:background="@color/divider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_number" />
@@ -81,7 +81,7 @@
             android:id="@+id/tv_ingredients"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11.5dp"
+            android:layout_marginTop="@dimen/margin_12"
             android:text="@{isRecipeType ? model.ingredients : model.directions}"
             app:layout_constraintEnd_toStartOf="@id/guidelineRight"
             app:layout_constraintHorizontal_bias="0"

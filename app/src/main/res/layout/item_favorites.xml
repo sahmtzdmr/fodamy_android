@@ -15,14 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="15dp" />
+            app:layout_constraintGuide_begin="@dimen/guide_15" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_title_drawable"
             android:layout_width="@dimen/drawable_size"
             android:layout_height="@dimen/drawable_size"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_10"
             android:src="@drawable/walkthrough_image_3"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,13 +32,13 @@
             android:id="@+id/tv_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_12"
             android:layout_marginBottom="@dimen/margin_start"
             android:fontFamily="@font/nunito_bold"
-            android:text="Ana Yemekler"
+            tools:text="Ana Yemekler"
             android:textColor="@color/cinder"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_size_13"
             app:layout_constraintStart_toEndOf="@id/iv_title_drawable"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/view_divider"
@@ -48,13 +48,13 @@
             android:id="@+id/tv_see_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="@dimen/margin_13"
             android:layout_marginBottom="@dimen/margin_start"
             android:layout_marginEnd="@dimen/margin_start"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/see_all"
             android:textColor="@color/primary"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_size_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/view_divider"
@@ -62,8 +62,8 @@
         <View
             android:id="@+id/view_divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/margin_10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_title_drawable"/>
 
@@ -71,7 +71,7 @@
 
             android:id="@+id/favorites_recylerview"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"

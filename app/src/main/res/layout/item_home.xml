@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        app:layout_constraintGuide_begin="@dimen/guide_16" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+        app:layout_constraintGuide_end="@dimen/guide_16" />
 
     <View
         android:id="@+id/seperator"
@@ -31,10 +31,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_user"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="@dimen/user_image_size"
+        android:layout_height="@dimen/user_image_size"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_15"
         android:src="@drawable/walkthrough_image_3"
         app:layout_constraintEnd_toStartOf="@id/barrier"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
@@ -57,12 +57,11 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16"
         android:fontFamily="@font/nunito_bold"
-        android:text="sadas"
+        android:text="@string/username"
         android:textColor="@color/cinder"
-        android:textSize="13sp"
-
+        android:textSize="@dimen/text_size_13"
         app:layout_constraintStart_toEndOf="@id/barrier"
         app:layout_constraintTop_toBottomOf="@id/seperator" />
 
@@ -70,9 +69,9 @@
         android:id="@+id/tv_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:text="0 Tarif"
-        android:textSize="13sp"
+        android:layout_marginTop="@dimen/margin_1"
+        android:text="@string/null_recipe"
+        android:textSize="@dimen/text_size_13"
         app:layout_constraintStart_toEndOf="@id/barrier"
         app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
@@ -81,11 +80,11 @@
         android:id="@+id/tv_follower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="@dimen/margin_1"
+        android:layout_marginTop="@dimen/margin_1"
         android:fontFamily="@font/nunito_semibold"
-        android:text="0 Takipçi"
-        android:textSize="13sp"
+        android:text="@string/no_follower"
+        android:textSize="@dimen/text_size_13"
         app:layout_constraintStart_toEndOf="@id/tv_recipe"
 
         app:layout_constraintTop_toBottomOf="@id/tv_username" />
@@ -93,8 +92,8 @@
     <View
         android:id="@+id/view_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="15.5dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/margin_16"
         android:background="@color/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_user" />
@@ -103,11 +102,11 @@
         android:id="@+id/tv_food_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10.5dp"
+        android:layout_marginTop="@dimen/margin_11"
         android:fontFamily="@font/nunito_bold"
-        android:text="Makarna Tarifi"
+        android:text="@string/food_title"
         android:textColor="@color/cinder"
-        android:textSize="15sp"
+        android:textSize="@dimen/text_size_15"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toTopOf="@id/view_divider" />
 
@@ -115,9 +114,9 @@
         android:id="@+id/tv_food_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="@dimen/margin_1"
         android:fontFamily="@font/nunito_semibold"
-        android:text="Hamur işi"
+        android:text="@string/type_of_food"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@id/tv_food_title" />
 
@@ -125,23 +124,23 @@
         android:id="@+id/food_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="@dimen/margin_11"
         android:scaleType="centerCrop"
         android:src="@drawable/walkthrough_image_3"
         app:layout_constraintBottom_toTopOf="@id/tv_like"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@id/tv_food_description"
-        android:paddingBottom="12dp"/>
+        android:paddingBottom="@dimen/padding_12"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/editor_choice_medal"
         android:layout_width="@dimen/medal_size"
         android:layout_height="@dimen/medal_size"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/margin_15"
         android:background="@drawable/medal_background"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="@dimen/margin_15"
         android:src="@drawable/editors_pick_icon"
         app:layout_constraintEnd_toEndOf="@id/food_image"
         app:layout_constraintHorizontal_bias="1"
@@ -151,8 +150,8 @@
         android:id="@+id/tv_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:text="0 comment"
+        android:layout_marginBottom="@dimen/margin_14"
+        android:text="@string/no_comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft" />
 
@@ -160,9 +159,9 @@
         android:id="@+id/tv_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="14dp"
-        android:text="0 like"
+        android:layout_marginStart="@dimen/margin_1"
+        android:layout_marginBottom="@dimen/margin_14"
+        android:text="@string/no_like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_comment" />
 

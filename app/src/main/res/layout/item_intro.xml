@@ -24,9 +24,9 @@
         android:id="@+id/lnContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginStart="@dimen/margin_68"
+        android:layout_marginTop="@dimen/margin_64"
+        android:layout_marginEnd="@dimen/margin_68"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +41,8 @@
             android:fontFamily="@font/nunito_bold"
             android:gravity="center"
             android:text="@string/welcome"
-            android:layout_marginBottom="12dp"
-            android:textSize="15dp"
+            android:layout_marginBottom="@dimen/margin_12"
+            android:textSize="@dimen/text_size_15"
             android:textStyle="bold" />
 
         <TextView

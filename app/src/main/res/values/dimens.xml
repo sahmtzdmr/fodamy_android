@@ -3,7 +3,6 @@
     <dimen name="medal_size">40dp</dimen>
     <dimen name="tablayout_heigh">46dp</dimen>
     <dimen name="icon_size_32dp">32dp</dimen>
-    <dimen name="margin_line">16dp</dimen>
     <dimen name="margin_start">15dp</dimen>
     <dimen name="margin_comment">15dp</dimen>
     <dimen name="drawable_size">24dp</dimen>
@@ -60,6 +59,19 @@
     <dimen name="margin_11">11dp</dimen>
     <dimen name="padding_12">12dp</dimen>
     <dimen name="margin_14">14dp</dimen>
+    <dimen name="min_height">48dp</dimen>
+    <dimen name="margin_19">19dp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_13">13dp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="recycler_view_height">200dp</dimen>
+    <dimen name="margin_28">28dp</dimen>
+    <dimen name="margin_23">23dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_68">68dp</dimen>
+    <dimen name="margin_64">64dp</dimen>
 
 
 </resources>
