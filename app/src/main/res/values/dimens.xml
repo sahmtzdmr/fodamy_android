@@ -14,6 +14,9 @@
     <dimen name="user_iv_size">150dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">16sp</dimen>
+    <dimen name="alert_dialog_margin_start">133dp</dimen>
+    <dimen name="alert_dialog_margin_end">132dp</dimen>
+    <dimen name="alert_dialog_text_size">14sp</dimen>
 
 
 </resources>

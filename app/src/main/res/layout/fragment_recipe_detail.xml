@@ -175,7 +175,6 @@
                             android:tint="@{vM.recipeDetail.haveLiked ? @color/primary : @color/cinder}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view_divider_vertical"
-
                             app:layout_constraintTop_toTopOf="@id/view_divider_horizontal" />
 
                         <TextView
