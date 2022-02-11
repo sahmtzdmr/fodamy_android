@@ -1,14 +1,16 @@
 package com.sadikahmetozdemir.data.shared.remote
 
-import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.data.shared.local.ImagesModel
-import kotlinx.parcelize.Parcelize
 
 
-@Parcelize
 data class CategoryModel(
+    @SerializedName("id")
     var id: Int?,
+    @SerializedName("name")
     var name: String?,
+    @SerializedName("recipes")
     var recipes: List<EditorChoiceModel>?,
+    @SerializedName("image")
     var image: ImagesModel?
-) : Parcelable
+)

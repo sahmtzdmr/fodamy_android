@@ -29,9 +29,12 @@ class IntroViewHolder(val binding: ItemIntroBinding) : RecyclerView.ViewHolder(b
         binding.textViewTitle.text = intro.tittle
         binding.textViewDesc.text = intro.description
         intro.drawableId?.let {
-            binding.introImage1.setImageDrawable(ContextCompat.getDrawable(binding.root.context,
-                intro.drawableId!!
-            ))
+            binding.introImage1.setImageDrawable(
+                ContextCompat.getDrawable(
+                    binding.root.context,
+                    intro.drawableId!!
+                )
+            )
         } ?: kotlin.run {
             binding.introImage1.visibility = View.GONE
         }

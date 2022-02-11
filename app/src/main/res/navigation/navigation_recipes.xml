@@ -7,6 +7,9 @@
     <include app:graph="@navigation/navigation_auth">
 
     </include>
+    <include app:graph="@navigation/navigation_user">
+
+    </include>
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.detail.RecipeDetailFragment"
@@ -39,33 +42,39 @@
         <action
             android:id="@+id/tocommentDialogFragment"
             app:destination="@id/commentDialogFragment" />
+        <action
+            android:id="@+id/toUserProfile"
+            app:destination="@id/navigation_user">
+            <argument
+                android:name="userId"
+                app:argType="integer" />
+        </action>
 
 
     </fragment>
+
     <dialog
         android:id="@+id/commentDialogFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogFragment"
         android:label="fragment_comment_dialog"
-        tools:layout="@layout/fragment_comment_dialog" >
+        tools:layout="@layout/fragment_comment_dialog">
 
         <action
             android:id="@+id/to_commentEditFragment"
-            app:destination="@id/commentEditFragment" >
+            app:destination="@id/commentEditFragment">
             <argument
                 android:name="comment"
                 app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
             <argument
                 android:name="recipeID"
-                app:argType="integer"
-                />
+                app:argType="integer" />
         </action>
         <argument
             android:name="comment"
             app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
         <argument
             android:name="recipeID"
-            app:argType="integer"
-            />
+            app:argType="integer" />
     </dialog>
     <fragment
         android:id="@+id/commentEditFragment"
@@ -78,8 +87,7 @@
             app:argType="com.sadikahmetozdemir.domain.entities.Comment" />
         <argument
             android:name="recipeID"
-            app:argType="integer"
-            />
+            app:argType="integer" />
     </fragment>
 
     <dialog

@@ -12,7 +12,7 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.spannableNum
-import java.util.*
+import java.util.Locale
 
 @BindingAdapter("imageLoader")
 fun setImageLoader(imageView: ImageView, url: String?) {
@@ -31,6 +31,7 @@ fun setLikeCount(textView: TextView, likeCount: Int) {
     textView.text = String.format(textView.context.getString(R.string.like), likeCount)
         .spannableNum(0, likeCount.toString().length)
 }
+
 @BindingAdapter("circleImageLoader")
 fun setCircleImageLoader(imageView: ImageView, url: String?) {
 
@@ -67,7 +68,6 @@ fun ifFollowing(button: Button, isFollowing: Boolean) {
                 R.color.cardview_light_background
             )
         )
-
     } else {
         button.backgroundTintList =
             ColorStateList.valueOf(
@@ -103,4 +103,14 @@ fun checkVisibility(imageView: ImageView, check: Boolean) {
     if (check) {
         imageView.visibility = View.GONE
     }
+}
+
+@BindingAdapter("followed_count")
+fun setFollowed(tv: TextView, followedCount: Int?) {
+    tv.text = tv.context.resources.getString(R.string.follower, followedCount)
+}
+
+@BindingAdapter("following_count")
+fun setFollowing(tv: TextView, followingCount: Int?) {
+    tv.text = tv.context.resources.getString(R.string.following_count, followingCount)
 }

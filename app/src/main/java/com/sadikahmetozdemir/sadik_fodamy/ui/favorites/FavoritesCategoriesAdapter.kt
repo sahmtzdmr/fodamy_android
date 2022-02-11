@@ -6,10 +6,9 @@ import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.ItemFavoritesDetailBinding
-import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
-import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 import javax.inject.Inject

@@ -8,5 +8,4 @@ sealed class BaseViewEvent {
     data class ShowToast(val message: String) : BaseViewEvent()
     data class Extras(val key: String, val value: Any) : BaseViewEvent()
     object NavigateBack : BaseViewEvent()
-
 }

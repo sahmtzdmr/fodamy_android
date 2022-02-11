@@ -1,11 +1,10 @@
 package com.sadikahmetozdemir.data.shared.local
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 data class PaginationModel(
+    @SerializedName("total")
     var total: Int?,
     @SerializedName("per_page")
     var perPage: Int?,
@@ -17,4 +16,4 @@ data class PaginationModel(
     var firstItem: Int?,
     @SerializedName("last_item")
     var lastItem: Int?,
-):Parcelable
+)

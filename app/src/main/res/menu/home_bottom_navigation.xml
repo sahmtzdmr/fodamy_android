@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_heart_icon"
         android:title="Favoriler"
         /><item
-        android:id="@+id/user"
+        android:id="@+id/navigation_user"
         android:icon="@drawable/ic_user_icon"
         android:title="Kullanıcı"
         /><item

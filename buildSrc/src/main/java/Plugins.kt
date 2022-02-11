@@ -7,5 +7,6 @@ object Plugins {
     const val KOTLIN_PARCELIZE = "kotlin-parcelize"
     const val KTLINT = "org.jlleitschuh.gradle.ktlint"
     const val ANDROID_LIBRARY = "com.android.library"
+    const val KOTLIN_JETBRAINS = "org.jetbrains.kotlin.android"
 
 }

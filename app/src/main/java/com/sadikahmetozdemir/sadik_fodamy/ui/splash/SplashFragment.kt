@@ -1,9 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.splash
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sadikahmetozdemir.data.utils.DataHelperManager

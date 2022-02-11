@@ -1,18 +1,23 @@
 package com.sadikahmetozdemir.data.shared.local
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 data class User(
+    @SerializedName("id")
     var id: Int?,
+    @SerializedName("email")
     var email: String?,
+    @SerializedName("username")
     var username: String?,
+    @SerializedName("name")
     var name: String?,
+    @SerializedName("surname")
     var surname: String?,
-    var definition:String?,
-    var is_trusted: Int?,
+    @SerializedName("definition")
+    var definition: String?,
+    @SerializedName("is_trusted")
+    var isTrusted: Int?,
     @SerializedName("followed_count")
     var followedCount: Int?,
     @SerializedName("following_count")
@@ -27,4 +32,4 @@ data class User(
     var likesCount: Int?,
     var image: ImagesModel?
 
-) : Parcelable
+)

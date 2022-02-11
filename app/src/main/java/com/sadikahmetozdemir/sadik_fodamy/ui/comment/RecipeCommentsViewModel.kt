@@ -29,18 +29,20 @@ class RecipeCommentsViewModel @Inject constructor(
     val event = SingleLiveEvent<RecipeCommentsEvent>()
     var recipes: MutableLiveData<PagingData<Comment>> = MutableLiveData()
     val recipeID: Int = savedStateHandle.get<Int>(RECIPE_ID) ?: 0
-    val comment:MutableLiveData<Comment> = MutableLiveData<Comment>()
+    val comment: MutableLiveData<Comment> = MutableLiveData<Comment>()
 
     fun getRecipeCommentsItem() {
-        sendRequest(request = {
-            Pager(config = PAGE_CONFIG, pagingSourceFactory = {
-                RecipeCommentsPagingSource(feedRepository, recipeID)
-            }).flow
-        }, success = {
+        sendRequest(
+            request = {
+                Pager(config = PAGE_CONFIG, pagingSourceFactory = {
+                    RecipeCommentsPagingSource(feedRepository, recipeID)
+                }).flow
+            }, success = {
             viewModelScope.launch {
                 it.cachedIn(viewModelScope).collect { recipes.value = it }
             }
-        })
+        }
+        )
     }
 
     fun postRecipeComment(text: String) {
@@ -54,7 +56,8 @@ class RecipeCommentsViewModel @Inject constructor(
                     },
                     success = {
                         event.postValue(RecipeCommentsEvent.Success(R.string.comment_added.toString()))
-                    })
+                    }
+                )
             }
         }
     }
@@ -75,10 +78,12 @@ class RecipeCommentsViewModel @Inject constructor(
             }, success = { it?.message?.let { it1 -> showMessage(it1) } })
         }
     }
-    fun toDialog(){
-        navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment(comment.value!!,recipeID))
+    fun toDialog() {
+        navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment(comment.value!!, recipeID))
     }
-
+    fun toUserProfile(userID: Int) {
+        navigate(RecipeCommentsFragmentDirections.toUserProfile(userID))
+    }
 
     companion object {
         private const val RECIPE_ID: String = "recipeID"

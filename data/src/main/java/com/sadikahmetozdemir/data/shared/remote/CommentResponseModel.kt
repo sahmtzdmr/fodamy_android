@@ -1,11 +1,12 @@
 package com.sadikahmetozdemir.data.shared.remote
 
-import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.sadikahmetozdemir.data.shared.local.PaginationModel
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 data class CommentResponseModel(
+    @SerializedName("data")
     var data: List<CommentModel>?,
+    @SerializedName("pagination")
     var pagination: PaginationModel?
-):Parcelable
+)

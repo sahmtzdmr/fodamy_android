@@ -14,13 +14,14 @@ class HomeTablayoutViewModel @Inject constructor(
     private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     fun logoutRequest() {
-        sendRequest(request = { authRepository.logoutRequest() },
+        sendRequest(
+            request = { authRepository.logoutRequest() },
             success = {
                 viewModelScope.launch {
                     it.message?.let { it1 -> showToast(it1) }
                     dataHelperManager.removeToken()
                 }
-            })
-
+            }
+        )
     }
 }

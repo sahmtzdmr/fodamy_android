@@ -26,23 +26,24 @@ class LoginViewModel @Inject constructor(
             showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
-            sendRequest(request = {
-                authRepository.loginRequest(
-                    LoginRequest(
-                        username.value.toString(),
-                        password.value.toString()
+            sendRequest(
+                request = {
+                    authRepository.loginRequest(
+                        LoginRequest(
+                            username.value.toString(),
+                            password.value.toString()
+                        )
                     )
-                )
-            },
+                },
                 success = {
                     viewModelScope.launch {
                         it?.token?.let { it1 -> dataHelperManager.saveToken(it1) }
                         it?.user?.id?.let { it1 -> dataHelperManager.saveID(it1) }
-                       backTo()
-      //                  navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
+                        backTo()
+                        //                  navigate(LoginFragmentDirections.actionLoginFragmentToNavigationHome())
                     }
-
-                })
+                }
+            )
         }
     }
 

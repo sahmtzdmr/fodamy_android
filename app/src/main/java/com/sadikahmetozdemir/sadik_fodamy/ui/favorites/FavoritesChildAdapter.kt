@@ -3,9 +3,9 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.favorites
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FavoritesChildItemBinding
-import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.load
 import com.sadikahmetozdemir.sadik_fodamy.utils.extensions.loadCircleCrop
 
@@ -39,7 +39,7 @@ class FavoritesChildAdapter(private var categoryItem: List<Recipe>) :
                 tvUserName.text = item.user?.username
                 tvFavoritesFoodTitle.text = item.title
                 tvFavoritesComment.text = binding.root.context.getString(R.string.comment, item.commentCount)
-                tvFavoritesLike.text = binding.root.context.getString(R.string.like,item.likeCount)
+                tvFavoritesLike.text = binding.root.context.getString(R.string.like, item.likeCount)
                 ivFavoritesFood.setOnClickListener {
                     item.id?.let {
                         itemClicked?.invoke(it)

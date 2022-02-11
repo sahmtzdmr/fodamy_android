@@ -17,16 +17,16 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroViewModel>(R.layou
         binding.viewPager2.adapter = IntroAdapter(prepareIntroList())
         binding.viewPager2.let { binding.indicator.setViewPager2(it) }
         binding.viewPager2.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                if (position == prepareIntroList().size - 1) { // TODO:will refactor
-                    binding.btNext.text = getString(R.string.button_start)
-                } else {
-                    binding.btNext.text = getString(R.string.next_page)
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    if (position == prepareIntroList().size - 1) { // TODO:will refactor
+                        binding.btNext.text = getString(R.string.button_start)
+                    } else {
+                        binding.btNext.text = getString(R.string.next_page)
+                    }
                 }
-            }
-        })
+            })
         binding.btNext.setOnClickListener {
             if (binding.viewPager2.currentItem != prepareIntroList().size - 1
             ) {

@@ -33,11 +33,12 @@ class FavoritesViewModel @Inject constructor(
     }
 
     private fun getFavoriteItems() {
-        sendRequest(request = {
-            Pager(config = PAGE_CONFIG, pagingSourceFactory = {
-                FavoritesPagingSource(feedRepository)
-            }).flow
-        },
+        sendRequest(
+            request = {
+                Pager(config = PAGE_CONFIG, pagingSourceFactory = {
+                    FavoritesPagingSource(feedRepository)
+                }).flow
+            },
             success = {
                 viewModelScope.launch {
                     it.cachedIn(viewModelScope).collect {
@@ -75,6 +76,5 @@ class FavoritesViewModel @Inject constructor(
     companion object {
         private val PAGE_CONFIG =
             PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)
-
     }
 }

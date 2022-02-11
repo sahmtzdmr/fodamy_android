@@ -34,22 +34,22 @@ class SignUpViewModel @Inject constructor(
             showMessage(SharedPreferanceStorage.FILL_REQUIRED_FIELDS)
             return@launch
         } else {
-            sendRequest(request = {
-                authRepository.registerRequest(
-                    RegisterRequest(
-                        username = username.value,
-                        email = email.value,
-                        password = password.value,
+            sendRequest(
+                request = {
+                    authRepository.registerRequest(
+                        RegisterRequest(
+                            username = username.value,
+                            email = email.value,
+                            password = password.value,
+                        )
                     )
-                )
-            },
+                },
                 success = {
                     viewModelScope.launch {
                         it.user?.id?.let { it1 ->
                             dataHelperManager.saveID(it1)
                             it.token?.let { it2 -> dataHelperManager.saveToken(it2) }
                             navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-
                         }
                     }
                 }

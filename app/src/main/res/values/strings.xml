@@ -50,6 +50,9 @@
     <string name="last_added">SON EKLENENLER</string>
     <string name="comment_added">Yorum Eklendi</string>
     <string name="username">username</string>
+    <string name="following_count">%1d Takip Edilen</string>
+    <string name="recipes">Tarifler</string>
+    <string name="liked_counts">Beğeniler</string>
 
 
 </resources>

@@ -6,5 +6,4 @@ import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layout.fragment_login) {
-}
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(R.layout.fragment_login)

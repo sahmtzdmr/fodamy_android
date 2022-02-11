@@ -1,8 +1,11 @@
 package com.sadikahmetozdemir.data.shared.local
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.SerializedName
 
 
-@Parcelize
-data class TimeOfRecipeModel(var id: Int?, var text: String?) : Parcelable
+data class TimeOfRecipeModel(
+    @SerializedName("id")
+    var id: Int?,
+    @SerializedName("text")
+    var text: String?
+)

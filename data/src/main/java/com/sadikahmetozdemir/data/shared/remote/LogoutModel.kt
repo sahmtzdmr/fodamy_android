@@ -1,3 +1,12 @@
 package com.sadikahmetozdemir.data.shared.remote
 
-data class LogoutModel(var code: String?, var message: String?, var error: String?)
+import com.google.gson.annotations.SerializedName
+
+data class LogoutModel(
+    @SerializedName("code")
+    var code: String?,
+    @SerializedName("message")
+    var message: String?,
+    @SerializedName("error")
+    var error: String?
+)

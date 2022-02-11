@@ -19,9 +19,8 @@ class FavoritesCategoriesFragment :
     private val args: FavoritesCategoriesFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       val categoryID = args.categoryID
+        val categoryID = args.categoryID
         viewModel.getFavoriteCategoriesItem(categoryID)
-
 
         binding.apply {
             toolbar.ivLogout.setOnClickListener {

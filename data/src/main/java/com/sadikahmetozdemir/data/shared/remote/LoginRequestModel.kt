@@ -1,3 +1,9 @@
 package com.sadikahmetozdemir.data.shared.remote
 
-data class LoginRequestModel(var username: String?, var password: String?)
+import com.google.gson.annotations.SerializedName
+
+data class LoginRequestModel(
+    @SerializedName("username")
+    var username: String?,
+    @SerializedName("password")
+    var password: String?)
