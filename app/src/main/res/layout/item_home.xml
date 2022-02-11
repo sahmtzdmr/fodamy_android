@@ -22,7 +22,7 @@
     <View
         android:id="@+id/seperator"
         android:layout_width="0dp"
-        android:layout_height="@dimen/margin_normal"
+        android:layout_height="@dimen/margin_16"
         android:background="@color/seperator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

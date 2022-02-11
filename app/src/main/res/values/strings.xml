@@ -56,6 +56,10 @@
     <string name="child_item_title">Köfte Tarifi</string>
     <string name="no_comment">0 Yorum</string>
     <string name="no_like">0 Beğeni</string>
+    <string name="null_recipe">0 Tarif</string>
+    <string name="no_follower">0 Takipçi</string>
+    <string name="food_title">Makarna Tarifi</string>
+    <string name="type_of_food">Hamur işi</string>
 
 
 </resources>

@@ -11,7 +11,7 @@
         android:layout_marginStart="@dimen/alert_dialog_margin_132"
         android:layout_marginEnd="@dimen/alert_dialog_margin_132"
         android:layout_height="@dimen/alert_iv_size"
-        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_16"
         android:foregroundGravity="center"
         android:src="@drawable/ic_path_1090"
         app:layout_constraintEnd_toEndOf="parent"

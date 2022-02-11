@@ -51,6 +51,15 @@
     <dimen name="dots_spacing">4dp</dimen>
     <dimen name="margin_93">93dp</dimen>
     <dimen name="margin_9">9dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="food_image_size">375dp</dimen>
+    <dimen name="guide_16">16dp</dimen>
+    <dimen name="user_image_size">64dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="margin_11">11dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="margin_14">14dp</dimen>
 
 
 </resources>

@@ -46,7 +46,6 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/material_cardview1"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
@@ -60,11 +59,10 @@
                             android:id="@+id/iv_food"
                             imageLoader="@{vM.recipeDetail.images.get(0).url}"
                             android:layout_width="0dp"
-                            android:layout_height="375dp"
+                            android:layout_height="@dimen/food_image_size"
                             android:onClick="@{()->vM.openRecipeImages()}"
                             android:scaleType="centerCrop"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:src="@drawable/walkthrough_image_3" />
