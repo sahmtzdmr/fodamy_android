@@ -20,34 +20,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="8dp" />
+            app:layout_constraintGuide_begin="@dimen/guide_begin" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="8dp" />
+            app:layout_constraintGuide_end="@dimen/guide_begin" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_unfollow"
             style="@style/AlertButton.Fodamy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
             android:backgroundTint="@color/bottom_sheet"
             android:letterSpacing="0"
             android:text="@string/unfollow"
             android:textColor="@color/primary"
-            android:textSize="20sp"
-            app:cornerRadius="10dp"
+            android:textSize="@dimen/text_size_20"
+            app:cornerRadius="@dimen/corner_radius_10"
             app:layout_constraintBottom_toTopOf="@id/bt_cancel"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/cardview_light_background"
-            app:strokeWidth="1dp" />
+            app:strokeWidth="@dimen/stroke_width" />
 
 
         <com.google.android.material.button.MaterialButton

@@ -14,15 +14,14 @@
     <dimen name="user_iv_size">150dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">16sp</dimen>
-    <dimen name="alert_dialog_margin_start">133dp</dimen>
-    <dimen name="alert_dialog_margin_end">132dp</dimen>
+    <dimen name="alert_dialog_margin_132">132dp</dimen>
     <dimen name="alert_dialog_text_size">14sp</dimen>
     <dimen name="toolbar_padding">10dp</dimen>
     <dimen name="toolbar_padding_8">8dp</dimen>
     <dimen name="toolbar_gonemargin">41dp</dimen>
     <dimen name="toolbar_text_size">13sp</dimen>
     <dimen name="toolbar_padding_end">20dp</dimen>
-    <dimen name="padding_child_item_start">7.5dp</dimen>
+    <dimen name="padding_child_item_start">8dp</dimen>
     <dimen name="child_item_iv_size">30dp</dimen>
     <dimen name="child_item_margin_start">5dp</dimen>
     <dimen name="elevation">4dp</dimen>
@@ -32,4 +31,10 @@
     <dimen name="child_item_margin_top">6dp</dimen>
     <dimen name="title_tv_size">12sp</dimen>
     <dimen name="child_margin_bottom">7dp</dimen>
+    <dimen name="guide_begin">8dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="corner_radius_10">10dp</dimen>
+    <dimen name="stroke_width">1dp</dimen>
+    
 </resources>

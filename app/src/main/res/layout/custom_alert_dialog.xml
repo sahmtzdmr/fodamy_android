@@ -8,8 +8,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_error_alert"
         android:layout_width="@dimen/alert_iv_size"
-        android:layout_marginStart="@dimen/alert_dialog_margin_start"
-        android:layout_marginEnd="@dimen/alert_dialog_margin_end"
+        android:layout_marginStart="@dimen/alert_dialog_margin_132"
+        android:layout_marginEnd="@dimen/alert_dialog_margin_132"
         android:layout_height="@dimen/alert_iv_size"
         android:layout_marginTop="@dimen/margin_normal"
         android:foregroundGravity="center"
