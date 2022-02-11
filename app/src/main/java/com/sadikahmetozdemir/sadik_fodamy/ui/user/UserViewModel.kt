@@ -30,13 +30,13 @@ class UserViewModel @Inject constructor(
     val recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
     private val _user: MutableLiveData<UserProfile> = MutableLiveData()
     val user: LiveData<UserProfile> get() = _user
-    private var userID: Int = savedStateHandle.get(USER_ID) ?:0
+    private var userID: Int = savedStateHandle.get(USER_ID) ?: 0
 
     init {
-        viewModelScope.launch{
-        if (userID==0){
-         userID=dataHelperManager.getID()
-        }
+        viewModelScope.launch {
+            if (userID == 0) {
+                userID = dataHelperManager.getID()
+            }
             getUserProfile()
             getUserLikes(userID)
             getUserProfileRecipes(userID)
