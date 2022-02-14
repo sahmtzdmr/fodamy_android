@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "185001091036",
+    "project_id": "sadik-fodamy",
+    "storage_bucket": "sadik-fodamy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185001091036:android:09318b31c1a86b0770b919",
+        "android_client_info": {
+          "package_name": "com.sadikahmetozdemir.sadik_fodamy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185001091036-ovmc84cm313a9btc3f4ltnm4n1c2th7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYTJh4x1X8yH6FF0nRqO5J0UW3IqU0KsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185001091036-ovmc84cm313a9btc3f4ltnm4n1c2th7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

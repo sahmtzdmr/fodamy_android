@@ -69,7 +69,6 @@
     <dimen name="recycler_view_height">200dp</dimen>
     <dimen name="margin_28">28dp</dimen>
     <dimen name="margin_23">23dp</dimen>
-    <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_68">68dp</dimen>
     <dimen name="margin_64">64dp</dimen>
 

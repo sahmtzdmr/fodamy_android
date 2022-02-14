@@ -6,6 +6,7 @@ plugins {
     id(Plugins.NAVIGATION_SAFE_ARGS)
     id(Plugins.KOTLIN_PARCELIZE)
     id(Plugins.KTLINT)
+    id(Plugins.FIREBASE_BOM)
 }
 
 android {
@@ -71,6 +72,8 @@ dependencies {
     annotationProcessor(Dependencies.GLIDE_COMPILER)
     implementation(Dependencies.LOGGING_INTERCEPTOR)
     implementation(Dependencies.DATASTORE_PREFERENCES)
+    implementation(Dependencies.FIREBASE_BOM)
+    implementation(Dependencies.FIREBASE_ANALYTCS)
 
     testImplementation(Dependencies.JUNIT)
     androidTestImplementation(Dependencies.EXT_JUNIT)
