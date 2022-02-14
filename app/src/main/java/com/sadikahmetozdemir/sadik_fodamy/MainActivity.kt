@@ -27,7 +27,14 @@ class MainActivity : AppCompatActivity() {
                 bottomNavigationView.gone()
         }
     }
+
     private fun shouldShowBottomNav(id: Int): Boolean {
-        return listOf(R.id.homeTablayoutFragment, R.id.favoritesCategoriesFragment, R.id.favoritesFragment, R.id.recipeDetailFragment).contains(id)
+        return listOf(
+            R.id.homeTablayoutFragment,
+            R.id.favoritesCategoriesFragment,
+            R.id.favoritesFragment,
+            R.id.recipeDetailFragment,
+            R.id.userFragment
+        ).contains(id)
     }
 }

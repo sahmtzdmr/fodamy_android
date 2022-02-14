@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sadikahmetozdemir.data.shared.repositories.UserLikePagingSource
 import com.sadikahmetozdemir.data.shared.repositories.UserProfileRecipesPagingSource
+import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.UserProfile
 import com.sadikahmetozdemir.domain.repositories.UserRepository
@@ -22,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     val likes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
     val recipes: MutableLiveData<PagingData<Recipe>> = MutableLiveData()
@@ -31,9 +33,14 @@ class UserViewModel @Inject constructor(
     private var userID: Int = savedStateHandle.get(USER_ID) ?: 0
 
     init {
-        getUserProfile()
-        getUserLikes(userID)
-        getUserProfileRecipes(userID)
+        viewModelScope.launch {
+            if (userID == 0) {
+                userID = dataHelperManager.getID()
+            }
+            getUserProfile()
+            getUserLikes(userID)
+            getUserProfileRecipes(userID)
+        }
     }
 
     fun getUserProfile() = viewModelScope.launch {
