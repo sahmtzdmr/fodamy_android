@@ -28,6 +28,7 @@ object Versions {
     const val NAVIGATION_SAFE_ARGS="2.4.0"
     const val KTLINT_VERSION ="10.2.1"
     const val GOOGLE_SERVICES="4.3.10"
+    const val CRASHLYTCS_GRADLE="2.8.1"
     //test
     const val JUNIT="4.13.1"
     const val EXT_JUNIT="1.1.3"

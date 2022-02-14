@@ -33,7 +33,8 @@ object Dependencies {
     const val DATASTORE_PREFERENCES =
         "androidx.datastore:datastore-preferences:${Versions.DATASTORE_PREFERENCES}"
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE_BOM}"
-    const val FIREBASE_ANALYTCS = "com.google.firebase:firebase-analytics-ktx"
+    const val FIREBASE_ANALYTICS="com.google.firebase:firebase-analytics-ktx"
+    const val FIREBASE_CRASHLYTCS="com.google.firebase:firebase-crashlytics-ktx"
 
 
     //classpath
@@ -46,6 +47,7 @@ object Dependencies {
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.NAVIGATION_SAFE_ARGS}"
     const val KTLINT_GRADLE = "org.jlleitschuh.gradle:ktlint-gradle:${Versions.KTLINT_VERSION}"
     const val GOOGLE_SERVICES = "com.google.gms:google-services:${Versions.GOOGLE_SERVICES}"
+    const val CRASHLYTCS_GRADLE="com.google.firebase:firebase-crashlytics-gradle:${Versions.CRASHLYTCS_GRADLE}"
 
     //test
     const val JUNIT = "junit:junit:${Versions.JUNIT}"

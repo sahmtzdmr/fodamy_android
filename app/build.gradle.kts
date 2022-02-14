@@ -7,6 +7,7 @@ plugins {
     id(Plugins.KOTLIN_PARCELIZE)
     id(Plugins.KTLINT)
     id(Plugins.FIREBASE_BOM)
+    id(Plugins.FIREBASE_CRASHLYTCS)
 }
 
 android {
@@ -72,8 +73,9 @@ dependencies {
     annotationProcessor(Dependencies.GLIDE_COMPILER)
     implementation(Dependencies.LOGGING_INTERCEPTOR)
     implementation(Dependencies.DATASTORE_PREFERENCES)
-    implementation(Dependencies.FIREBASE_BOM)
-    implementation(Dependencies.FIREBASE_ANALYTCS)
+    implementation(platform(Dependencies.FIREBASE_BOM))
+    implementation(Dependencies.FIREBASE_ANALYTICS)
+    implementation(Dependencies.FIREBASE_CRASHLYTCS)
 
     testImplementation(Dependencies.JUNIT)
     androidTestImplementation(Dependencies.EXT_JUNIT)
