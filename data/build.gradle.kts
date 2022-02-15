@@ -27,23 +27,26 @@ android {
     }
 }
 
-    dependencies {
-        api(project(Modules.DOMAIN))
-        implementation(Dependencies.ANDROIDX_CORE)
-        implementation(Dependencies.APPCOMPAT)
-        implementation(Dependencies.MATERIAL)
-        implementation(Dependencies.GSON_CONVERTER)
-        implementation(Dependencies.DAGGER_HILT)
-        kapt(Dependencies.DAGGER_HILT_COMPILER)
-        implementation(Dependencies.DAGGER_HILT_GRADLE_PLUGIN)
-        implementation (Dependencies.PAGING)
-        implementation (Dependencies.LIFECYCLE_EXT)
-        implementation (Dependencies.LIFECYCLE_VIEWMODEL)
-        implementation(Dependencies.DATASTORE_PREFERENCES)
-        implementation(Dependencies.LOGGING_INTERCEPTOR)
-        testImplementation(Dependencies.JUNIT)
-        androidTestImplementation(Dependencies.EXT_JUNIT)
-        androidTestImplementation(Dependencies.ESPRESSO_CORE)
-        implementation(Dependencies.RETROFIT2)
+dependencies {
+    api(project(Modules.DOMAIN))
+    implementation(Dependencies.ANDROIDX_CORE)
+    implementation(Dependencies.APPCOMPAT)
+    implementation(Dependencies.MATERIAL)
+    implementation(Dependencies.GSON_CONVERTER)
+    implementation(Dependencies.DAGGER_HILT)
+    kapt(Dependencies.DAGGER_HILT_COMPILER)
+    implementation(Dependencies.DAGGER_HILT_GRADLE_PLUGIN)
+    implementation(Dependencies.PAGING)
+    implementation(Dependencies.LIFECYCLE_EXT)
+    implementation(Dependencies.LIFECYCLE_VIEWMODEL)
+    implementation(Dependencies.DATASTORE_PREFERENCES)
+    implementation(Dependencies.LOGGING_INTERCEPTOR)
+    testImplementation(Dependencies.JUNIT)
+    androidTestImplementation(Dependencies.EXT_JUNIT)
+    androidTestImplementation(Dependencies.ESPRESSO_CORE)
+    implementation(Dependencies.RETROFIT2)
+    implementation(Dependencies.ROOM_RUNTIME)
+    annotationProcessor(Dependencies.ROOM_COMPILER)
+    implementation(Dependencies.ROOM_EXTENSIONS)
 
-    }
+}

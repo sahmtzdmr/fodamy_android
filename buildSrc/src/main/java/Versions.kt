@@ -22,6 +22,8 @@ object Versions {
     const val LOGGING_INTERCEPTOR="4.9.3"
     const val DATASTORE_PREFERENCES="1.0.0"
     const val FIREBASE_BOM="29.1.0"
+    const val ROOM="2.4.1"
+
     //classpath
     const val TOOLS_BUILD_GRADLE="7.0.4"
     const val KOTLIN_GRADLE_PLUGIN="1.6.10"
