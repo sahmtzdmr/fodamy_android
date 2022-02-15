@@ -21,11 +21,14 @@ object Versions {
     const val GLIDE_COMPILER="4.12.0"
     const val LOGGING_INTERCEPTOR="4.9.3"
     const val DATASTORE_PREFERENCES="1.0.0"
+    const val FIREBASE_BOM="29.1.0"
     //classpath
     const val TOOLS_BUILD_GRADLE="7.0.4"
     const val KOTLIN_GRADLE_PLUGIN="1.6.10"
     const val NAVIGATION_SAFE_ARGS="2.4.0"
     const val KTLINT_VERSION ="10.2.1"
+    const val GOOGLE_SERVICES="4.3.10"
+    const val CRASHLYTCS_GRADLE="2.8.1"
     //test
     const val JUNIT="4.13.1"
     const val EXT_JUNIT="1.1.3"
