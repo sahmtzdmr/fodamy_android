@@ -4,6 +4,8 @@ plugins {
     id(Plugins.KOTLIN_PARCELIZE)
     id(Plugins.KOTLIN_KAPT)
 }
+val DBNAME: String by project
+
 android {
     compileSdk = (ConfigData.COMPILE_SDK_VERSION)
     buildToolsVersion(ConfigData.BUILD_TOOLS_VERSION)
@@ -22,6 +24,11 @@ android {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
+        }
+    }
+    buildTypes{
+        getByName("debug") {
+            buildConfigField("String", "DBNAME", DBNAME)
         }
     }
 }

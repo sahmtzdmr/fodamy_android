@@ -17,7 +17,7 @@ data class RecipeDataBase(
     @ColumnInfo(name = "is_editor_choice")
     val isEditorChoice: Boolean,
     @ColumnInfo(name = "is_liked")
-    val isLiked: Boolean,
+    val haveLiked: Boolean,
     @ColumnInfo(name = "like_count")
     val likeCount: Int,
     @ColumnInfo(name = "comment_count")
