@@ -4,7 +4,6 @@ plugins {
     id(Plugins.KOTLIN_PARCELIZE)
     id(Plugins.KOTLIN_KAPT)
 }
-
 android {
     compileSdk = (ConfigData.COMPILE_SDK_VERSION)
     buildToolsVersion(ConfigData.BUILD_TOOLS_VERSION)
@@ -48,5 +47,7 @@ dependencies {
     implementation(Dependencies.ROOM_RUNTIME)
     annotationProcessor(Dependencies.ROOM_COMPILER)
     implementation(Dependencies.ROOM_EXTENSIONS)
+    implementation(Dependencies.GLIDE)
+    kapt(Dependencies.GLIDE_COMPILER)
 
 }

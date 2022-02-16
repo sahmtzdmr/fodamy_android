@@ -21,7 +21,7 @@ buildscript {
 }
 plugins {
     id (Plugins.KTLINT) version Versions.KTLINT_VERSION
-    id("org.jetbrains.kotlin.android") version "1.6.10" apply false
+
 }
 
 

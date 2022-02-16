@@ -1,31 +1,33 @@
 package com.sadikahmetozdemir.data.shared.local.dto
 
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.sadikahmetozdemir.domain.entities.Category
-import com.sadikahmetozdemir.domain.entities.Images
-import com.sadikahmetozdemir.domain.entities.NumberOfPerson
-import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
-import com.sadikahmetozdemir.domain.entities.User
 
 @Entity(tableName = "recipes")
 data class RecipeDataBase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val title: String?,
-    val definition: String?,
-    val ingredients: String?,
-    val directions: String?,
-    val difference: String?,
-    val isEditorChoice: Boolean?,
-    val haveLiked: Boolean?,
-    val likeCount: Int?,
-    val numberOfFavoriteCount: String?,
-    val commentCount: Int?,
-    val user: User?,
-    val timeOfRecipe: TimeOfRecipe?,
-    val numberOfPerson: NumberOfPerson?,
-    val category: Category?,
-    val images: List<Images>?,
-    var categoryModel: Category?
+    val definition: String,
+    val ingredients: String,
+    val directions: String,
+    val difference: String,
+    @ColumnInfo(name = "is_editor_choice")
+    val isEditorChoice: Boolean,
+    @ColumnInfo(name = "is_liked")
+    val isLiked: Boolean,
+    @ColumnInfo(name = "like_count")
+    val likeCount: Int,
+    @ColumnInfo(name = "comment_count")
+    val commentCount: Int,
+    val user: UserDatabase,
+    @Embedded(prefix = "time_of_recipe")
+    val timeOfRecipe: TimeOfRecipeDatabase,
+    @Embedded(prefix = "number_of_person")
+    val numberOfPerson: NumberOfPersonDatabase,
+    @ColumnInfo(name = "category_id")
+    val category: CategoryDatabase,
+    val image: List<ImageDatabase>
 )
