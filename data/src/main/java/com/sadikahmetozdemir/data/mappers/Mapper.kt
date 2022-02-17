@@ -103,7 +103,6 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         haveLiked = this.isLiked,
         likeCount = this.likeCount ?: 0,
         commentCount = this.commentCount ?: 0,
-//        category = this.categoryModel?.toDomainModel(),
         user = this.user?.toDomainModel(),
         timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
         numberOfPerson = this.numberOfPerson?.toDomainModel(),
