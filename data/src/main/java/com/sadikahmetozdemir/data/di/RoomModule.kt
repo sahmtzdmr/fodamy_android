@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.sadikahmetozdemir.data.BuildConfig
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.service.UserDao
+import com.sadikahmetozdemir.data.shared.local.converters.CategoryConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageListConverter
 import com.sadikahmetozdemir.data.shared.local.converters.RecipeListConverter
+import com.sadikahmetozdemir.data.shared.local.converters.UserConverter
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -57,13 +59,17 @@ object RoomModule {
         @ApplicationContext context: Context,
         imageConverter: ImageConverter,
         imageListConverter: ImageListConverter,
-        recipeListConverter: RecipeListConverter
+        recipeListConverter: RecipeListConverter,
+        userConverter: UserConverter,
+        categoryConverter: CategoryConverter
     ): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             BuildConfig.DBNAME
         ).fallbackToDestructiveMigration()
+            .addTypeConverter(userConverter)
+            .addTypeConverter(categoryConverter)
             .addTypeConverter(recipeListConverter)
             .addTypeConverter(imageConverter)
             .addTypeConverter(imageListConverter)

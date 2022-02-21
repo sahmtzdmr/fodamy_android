@@ -1,9 +1,12 @@
 package com.sadikahmetozdemir.data.shared.local.converters
 
+import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
+import javax.inject.Inject
 
-class CategoryConverter {
+@ProvidedTypeConverter
+class CategoryConverter @Inject constructor() {
 
     @TypeConverter
     fun categoryToJson(category: CategoryDatabase): String {

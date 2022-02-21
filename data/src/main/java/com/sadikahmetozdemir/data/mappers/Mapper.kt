@@ -10,6 +10,7 @@ import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CategoryModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.data.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.data.shared.remote.LogoutModel
@@ -17,6 +18,7 @@ import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.data.shared.remote.UserProfileModel
 import com.sadikahmetozdemir.domain.entities.CommentResponse
+import com.sadikahmetozdemir.domain.entities.Images
 import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.Logout
 import com.sadikahmetozdemir.domain.entities.Pagination
@@ -91,7 +93,7 @@ fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Categor
 
     )
 
-fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): Recipe =
+fun EditorChoiceModel.toDomaninModel(): Recipe =
     Recipe(
         id = this.id,
         title = this.title ?: "",
@@ -100,7 +102,7 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         directions = this.directions ?: "",
         difference = this.difference ?: "",
         isEditorChoice = this.isEditorChoice,
-        haveLiked = this.isLiked,
+        haveLiked = this.haveLiked,
         likeCount = this.likeCount ?: 0,
         commentCount = this.commentCount ?: 0,
         user = this.user?.toDomainModel(),
@@ -151,7 +153,7 @@ fun PaginationModel.toDomainModel(): Pagination =
 fun CommentResponseModel.toDomainModel(): CommentResponse =
     CommentResponse(
         data = this.data?.map { it.toDomainModel() },
-        pagination = this.pagination?.toDomainModel()!!
+        pagination = this.pagination?.toDomainModel()
     )
 
 fun UserImageModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =

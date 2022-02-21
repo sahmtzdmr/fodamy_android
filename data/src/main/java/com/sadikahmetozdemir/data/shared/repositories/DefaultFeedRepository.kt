@@ -20,7 +20,6 @@ class DefaultFeedRepository @Inject constructor(
         return execute {
            try{
                val data = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
-               data
                recipeDao.insertRecipes(data?.map { it.toLocalDto() }!!)
                data.map { it.toDomaninModel() }
            }

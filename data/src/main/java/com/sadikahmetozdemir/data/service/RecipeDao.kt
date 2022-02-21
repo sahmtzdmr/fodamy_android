@@ -20,8 +20,8 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(category: List<CategoryDatabase>)
 
-//    @Query("select * from comments")
-//    suspend fun getAllComments(recipeID: Int): List<CommentDatabase>
+//  @Query("select * from comments")
+//   suspend fun getAllComments(recipeID: Int): List<CommentDatabase>
 
     @Query("select * from recipes where is_editor_choice = 1")
     suspend fun getEditorChoices(): List<RecipeDatabase>

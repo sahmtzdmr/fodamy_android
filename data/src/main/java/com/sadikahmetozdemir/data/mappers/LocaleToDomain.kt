@@ -1,7 +1,5 @@
 package com.sadikahmetozdemir.data.mappers
 
-import android.media.Image
-import com.sadikahmetozdemir.data.shared.local.ImagesModel
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.ImageDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.NumberOfPersonDatabase
@@ -31,14 +29,15 @@ fun RecipeDatabase.toDomainModel(): Recipe {
         timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
         numberOfPerson = this.numberOfPerson?.toDomainModel(),
         categoryModel = this.category?.toDomainModel(),
-        images= emptyList(),
+        images = this.image?.map { it.toDomainModel() },
 
-    )
+        )
 }
+
 fun UserDatabase.toDomainModel(): User {
     return User(
         id = this.id,
-        image = this.image.toDomainModel(),
+        image = this.image?.toDomainModel(),
         name = this.name,
         username = this.username,
         favoritesCount = this.favoritesCount,
@@ -49,12 +48,15 @@ fun UserDatabase.toDomainModel(): User {
         recipeCount = this.recipeCount
     )
 }
+
 fun TimeOfRecipeDatabase.toDomainModel(): TimeOfRecipe {
     return TimeOfRecipe(id, text)
 }
+
 fun NumberOfPersonDatabase.toDomainModel(): NumberOfPerson {
     return NumberOfPerson(id, text)
 }
+
 fun ImageDatabase.toDomainModel(): Images {
     return Images(
         height = this.height,
@@ -68,7 +70,7 @@ fun CategoryDatabase.toDomainModel(): Category {
     return Category(
         id = this.id,
         name = this.name,
-        image = this.image.toDomainModel(),
-        recipes = this.recipes.map { it.toDomainModel() }
+        image = this.image?.toDomainModel(),
+        recipes = this.recipes?.map { it.toDomainModel() }
     )
 }

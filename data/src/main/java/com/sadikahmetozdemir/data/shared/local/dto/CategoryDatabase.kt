@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class CategoryDatabase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val name: String,
-    val image: ImageDatabase,
-    val recipes: List<RecipeDatabase>
+    val name: String?,
+    val image: ImageDatabase?,
+    val recipes: List<RecipeDatabase>?
 )

@@ -25,14 +25,15 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
         difference = this.difference ?: "",
         isLastAdded = isLastAdded,
         isEditorChoice = this.isEditorChoice ?: false,
-        haveLiked = this.isLiked,
+        haveLiked = this.haveLiked,
         likeCount = this.likeCount ?: 0,
         commentCount = this.commentCount ?: 0,
-        user = this.user?.toLocalDto()!!,
-        timeOfRecipe = this.timeOfRecipe?.toLocalDto()!!,
-        numberOfPerson = this.numberOfPerson?.toLocalDto()!!,
-        category = this.categoryModel?.toLocalDto()!!,
-        image = this.images?.map { it.toLocalDto() }!!
+        user = this.user?.toLocalDto(),
+        timeOfRecipe = this.timeOfRecipe?.toLocalDto(),
+        numberOfPerson = this.numberOfPerson?.toLocalDto(),
+        category = this.categoryModel?.toLocalDto(),
+        image =this.images?.map { it.toLocalDto() }
+
     )
 }
 
@@ -55,7 +56,7 @@ fun User.toLocalDto(): UserDatabase {
         isFollowing = this.isFollowing,
         likesCount = this.likesCount ?: 0,
         recipeCount = this.recipeCount ?: 0,
-        image = this.image?.toLocalDto()!!
+        image = this.image?.toLocalDto()?: ImageDatabase.empty
     )
 }
 

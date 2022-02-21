@@ -8,12 +8,12 @@ import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
 class RecipeListConverter {
 
     @TypeConverter
-    fun recipeListToJson(recipes: List<RecipeDatabase>): String {
+    fun recipeListToJson(recipes: List<RecipeDatabase?>): String {
         return toJson<List<RecipeDatabase>>(recipes)
     }
 
     @TypeConverter
-    fun jsonToRecipeList(recipes: String): List<RecipeDatabase> {
+    fun jsonToRecipeList(recipes: String): List<RecipeDatabase?> {
         return fromJson<List<RecipeDatabase>>(recipes)
     }
 }

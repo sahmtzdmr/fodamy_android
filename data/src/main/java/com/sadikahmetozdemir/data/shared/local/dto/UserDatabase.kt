@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 data class UserDatabase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val name: String,
-    val username: String,
-    val favoritesCount: Int,
-    val followedCount: Int,
-    val followingCount: Int,
+    val name: String?,
+    val username: String?,
+    val favoritesCount: Int?,
+    val followedCount: Int?,
+    val followingCount: Int?,
     val isFollowing: Boolean,
-    val likesCount: Int,
-    val recipeCount: Int,
-    val image: ImageDatabase
+    val likesCount: Int?,
+    val recipeCount: Int?,
+    val image: ImageDatabase?
 )

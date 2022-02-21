@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
 class CommentDatabase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val text: String,
-    val user: UserDatabase,
-    val difference: String,
+    val text: String?,
+    val user: UserDatabase?,
+    val difference: String?,
     @ColumnInfo(name="recipe_id")
-    val recipeId:Int
+    val recipeId:Int?
 )

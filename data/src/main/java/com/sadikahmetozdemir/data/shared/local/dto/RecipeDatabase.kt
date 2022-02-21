@@ -10,16 +10,16 @@ data class RecipeDatabase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val title: String?,
-    val definition: String,
-    val ingredients: String,
-    val directions: String,
-    val difference: String,
+    val definition: String?,
+    val ingredients: String?,
+    val directions: String?,
+    val difference: String?,
     @ColumnInfo(name = "is_editor_choice")
     val isEditorChoice: Boolean,
     @ColumnInfo(name = "is_liked")
     val haveLiked: Boolean,
     @ColumnInfo(name = "like_count")
-    val likeCount: Int,
+    val likeCount: Int?,
     @ColumnInfo(name = "comment_count")
     val commentCount: Int,
     val user: UserDatabase?,
