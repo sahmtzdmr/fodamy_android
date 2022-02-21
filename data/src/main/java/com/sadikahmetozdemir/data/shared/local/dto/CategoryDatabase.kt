@@ -9,5 +9,5 @@ data class CategoryDatabase(
     val id: Int,
     val name: String,
     val image: ImageDatabase,
-    val recipes: List<RecipeDataBase>
+    val recipes: List<RecipeDatabase>
 )

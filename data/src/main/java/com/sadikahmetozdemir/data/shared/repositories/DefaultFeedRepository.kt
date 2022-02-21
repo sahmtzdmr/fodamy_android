@@ -1,6 +1,8 @@
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
+import com.sadikahmetozdemir.data.mappers.toLocalDto
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
@@ -8,12 +10,24 @@ import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import javax.inject.Inject
 
-class DefaultFeedRepository @Inject constructor(private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI) :
+class DefaultFeedRepository @Inject constructor(
+    private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    private val recipeDao: RecipeDao
+) :
     FeedRepository, BaseRepository() {
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return execute {
-            editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data?.map { it.toDomaninModel() }!!
+           try{
+               val data = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
+               data
+               recipeDao.insertRecipes(data?.map { it.toLocalDto() }!!)
+               data.map { it.toDomaninModel() }
+           }
+           catch (ex:Exception)
+           {
+               throw ex
+           }
         }
 
     }

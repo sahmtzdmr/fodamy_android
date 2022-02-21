@@ -7,7 +7,7 @@ import com.sadikahmetozdemir.data.shared.local.User
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.ImageDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.NumberOfPersonDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.RecipeDataBase
+import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.TimeOfRecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 import com.sadikahmetozdemir.data.shared.remote.CategoryModel
@@ -15,14 +15,15 @@ import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 
 class RemoteToLocale
 
-fun EditorChoiceModel.toLocalDto(): RecipeDataBase {
-    return RecipeDataBase(
+fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
+    return RecipeDatabase(
         id = this.id,
         title = this.title,
         definition = this.definition ?: "",
         ingredients = this.ingredients ?: "",
         directions = this.directions ?: "",
         difference = this.difference ?: "",
+        isLastAdded = isLastAdded,
         isEditorChoice = this.isEditorChoice ?: false,
         haveLiked = this.isLiked,
         likeCount = this.likeCount ?: 0,
@@ -40,7 +41,6 @@ fun ImagesModel.toLocalDto(): ImageDatabase {
         width = this.width ?: 0,
         height = this.height ?: 0,
         url = this.url ?: "",
-        image = null
     )
 }
 
@@ -55,7 +55,7 @@ fun User.toLocalDto(): UserDatabase {
         isFollowing = this.isFollowing,
         likesCount = this.likesCount ?: 0,
         recipeCount = this.recipeCount ?: 0,
-        image = this.image?.toLocalDto() ?: ImageDatabase(0, "", null, 0)
+        image = this.image?.toLocalDto()!!
     )
 }
 
@@ -78,6 +78,6 @@ fun CategoryModel.toLocalDto(): CategoryDatabase {
         id = this.id ?: 0,
         name = this.name ?: "",
         recipes = this.recipes?.map { it.toLocalDto() } ?: emptyList(),
-        image = this.image?.toLocalDto() ?: ImageDatabase(0, "", null, 0)
+        image = this.image?.toLocalDto()!!
     )
 }

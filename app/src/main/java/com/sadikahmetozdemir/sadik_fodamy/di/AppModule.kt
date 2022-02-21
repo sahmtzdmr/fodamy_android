@@ -4,6 +4,7 @@ import DefaultFeedRepository
 import android.content.Context
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
+import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.service.UserAPI
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
 import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
@@ -36,8 +37,9 @@ object AppModule {
     }
 
     @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI): FeedRepository {
-        return DefaultFeedRepository(editorChoiceRecipesAPI)
+    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    recipeDao: RecipeDao): FeedRepository {
+        return DefaultFeedRepository(editorChoiceRecipesAPI,recipeDao)
     }
 
     @Provides
@@ -51,6 +53,7 @@ object AppModule {
     fun provideCoroutineScope(): CoroutineScope {
         return CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
+
 
     @Provides
     @Singleton

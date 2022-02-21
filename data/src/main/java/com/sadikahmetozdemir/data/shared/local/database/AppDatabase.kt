@@ -7,26 +7,30 @@ import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.service.UserDao
 import com.sadikahmetozdemir.data.shared.local.converters.CategoryConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageConverter
-import com.sadikahmetozdemir.data.shared.local.converters.JsonConverter
+import com.sadikahmetozdemir.data.shared.local.converters.ImageListConverter
+import com.sadikahmetozdemir.data.shared.local.converters.RecipeListConverter
 import com.sadikahmetozdemir.data.shared.local.converters.UserConverter
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.ImageDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.RecipeDataBase
+import com.sadikahmetozdemir.data.shared.local.dto.CommentDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 
 @Database(
     entities = [
-        RecipeDataBase::class,
+        RecipeDatabase::class,
         CategoryDatabase::class,
-        ImageDatabase::class,
+        CommentDatabase::class,
+        UserDatabase::class
     ],
-    version = 5,
+    version = 7,
     exportSchema = false
 )
 @TypeConverters(
     UserConverter::class,
     CategoryConverter::class,
     ImageConverter::class,
-    JsonConverter::class
+    RecipeListConverter::class,
+    ImageListConverter::class,
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao

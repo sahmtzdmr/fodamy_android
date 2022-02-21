@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "recipes")
-data class RecipeDataBase(
+data class RecipeDatabase(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     val title: String?,
@@ -22,12 +22,15 @@ data class RecipeDataBase(
     val likeCount: Int,
     @ColumnInfo(name = "comment_count")
     val commentCount: Int,
-    val user: UserDatabase,
+    val user: UserDatabase?,
     @Embedded(prefix = "time_of_recipe")
-    val timeOfRecipe: TimeOfRecipeDatabase,
+    val timeOfRecipe: TimeOfRecipeDatabase?,
     @Embedded(prefix = "number_of_person")
-    val numberOfPerson: NumberOfPersonDatabase,
+    val numberOfPerson: NumberOfPersonDatabase?,
+    @ColumnInfo(name = "is_last_added")
+    val isLastAdded: Boolean = false,
     @ColumnInfo(name = "category_id")
-    val category: CategoryDatabase,
-    val image: List<ImageDatabase>
+    val category: CategoryDatabase?,
+    val image: List<ImageDatabase>?
+
 )

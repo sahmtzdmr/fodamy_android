@@ -1,17 +1,21 @@
 package com.sadikahmetozdemir.data.mappers
 
+import android.media.Image
+import com.sadikahmetozdemir.data.shared.local.ImagesModel
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.ImageDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.NumberOfPersonDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.RecipeDataBase
+import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.TimeOfRecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 import com.sadikahmetozdemir.domain.entities.Category
+import com.sadikahmetozdemir.domain.entities.Images
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.entities.User
 
-fun RecipeDataBase.toDomainModel(): Recipe {
+fun RecipeDatabase.toDomainModel(): Recipe {
     return Recipe(
         id = this.id,
         title = this.title ?: "",
@@ -23,10 +27,10 @@ fun RecipeDataBase.toDomainModel(): Recipe {
         haveLiked = this.haveLiked,
         likeCount = this.likeCount,
         commentCount = this.commentCount,
-        user = this.user.toDomainModel(),
-        timeOfRecipe = this.timeOfRecipe.toDomainModel(),
-        numberOfPerson = this.numberOfPerson.toDomainModel(),
-        categoryModel = this.category.toDomainModel(),
+        user = this.user?.toDomainModel(),
+        timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
+        numberOfPerson = this.numberOfPerson?.toDomainModel(),
+        categoryModel = this.category?.toDomainModel(),
         images= emptyList(),
 
     )
@@ -34,7 +38,7 @@ fun RecipeDataBase.toDomainModel(): Recipe {
 fun UserDatabase.toDomainModel(): User {
     return User(
         id = this.id,
-        image = null,// TODO("")
+        image = this.image.toDomainModel(),
         name = this.name,
         username = this.username,
         favoritesCount = this.favoritesCount,
@@ -51,11 +55,20 @@ fun TimeOfRecipeDatabase.toDomainModel(): TimeOfRecipe {
 fun NumberOfPersonDatabase.toDomainModel(): NumberOfPerson {
     return NumberOfPerson(id, text)
 }
+fun ImageDatabase.toDomainModel(): Images {
+    return Images(
+        height = this.height,
+        width = this.width,
+        url = this.url,
+        image = this.image
+    )
+}
+
 fun CategoryDatabase.toDomainModel(): Category {
     return Category(
         id = this.id,
         name = this.name,
-        image = null,// TODO(""),
+        image = this.image.toDomainModel(),
         recipes = this.recipes.map { it.toDomainModel() }
     )
 }

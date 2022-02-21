@@ -1,6 +1,11 @@
 package com.sadikahmetozdemir.data.shared.local.dto
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "users")
 data class UserDatabase(
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val name: String,
     val username: String,
