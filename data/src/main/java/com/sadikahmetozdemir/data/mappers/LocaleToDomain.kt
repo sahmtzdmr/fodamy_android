@@ -17,14 +17,14 @@ fun RecipeDatabase.toDomainModel(): Recipe {
     return Recipe(
         id = this.id,
         title = this.title ?: "",
-        definition = this.definition,
-        ingredients = this.ingredients,
-        directions = this.directions,
-        difference = this.difference,
+        definition = this.definition ?: "",
+        ingredients = this.ingredients ?: "",
+        directions = this.directions ?: "",
+        difference = this.difference ?: "",
         isEditorChoice = this.isEditorChoice,
         haveLiked = this.haveLiked,
-        likeCount = this.likeCount,
-        commentCount = this.commentCount,
+        likeCount = this.likeCount ?: 0,
+        commentCount = this.commentCount ?: 0,
         user = this.user?.toDomainModel(),
         timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
         numberOfPerson = this.numberOfPerson?.toDomainModel(),
@@ -38,37 +38,42 @@ fun UserDatabase.toDomainModel(): User {
     return User(
         id = this.id,
         image = this.image?.toDomainModel(),
-        name = this.name,
-        username = this.username,
-        favoritesCount = this.favoritesCount,
-        followedCount = this.followedCount,
-        followingCount = this.followingCount,
+        name = this.name?:"",
+        username = this.username?:"",
+        favoritesCount = this.favoritesCount?:0,
+        followedCount = this.followedCount?:0,
+        followingCount = this.followingCount?:0,
         isFollowing = this.isFollowing,
-        likeCount = this.likesCount,
-        recipeCount = this.recipeCount
+        likeCount = this.likesCount?:0,
+        recipeCount = this.recipeCount?:0
     )
 }
 
 fun TimeOfRecipeDatabase.toDomainModel(): TimeOfRecipe {
-    return TimeOfRecipe(id, text)
+    return TimeOfRecipe(
+        id,
+        text?:"")
 }
 
 fun NumberOfPersonDatabase.toDomainModel(): NumberOfPerson {
-    return NumberOfPerson(id, text)
+    return NumberOfPerson(
+        id,
+        text ?: ""
+    )
 }
 
 fun ImageDatabase.toDomainModel(): Images {
     return Images(
-        height = this.height,
-        width = this.width,
-        url = this.url,
+        height = this.height ?: 0,
+        width = this.width ?: 0,
+        url = this.url ?: "",
     )
 }
 
 fun CategoryDatabase.toDomainModel(): Category {
     return Category(
         id = this.id,
-        name = this.name,
+        name = this.name ?: "",
         image = this.image?.toDomainModel(),
         recipes = this.recipes?.map { it.toDomainModel() }
     )

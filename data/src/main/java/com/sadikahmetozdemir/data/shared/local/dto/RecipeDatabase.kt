@@ -21,7 +21,7 @@ data class RecipeDatabase(
     @ColumnInfo(name = "like_count")
     val likeCount: Int?,
     @ColumnInfo(name = "comment_count")
-    val commentCount: Int,
+    val commentCount: Int?,
     val user: UserDatabase?,
     @Embedded(prefix = "time_of_recipe")
     val timeOfRecipe: TimeOfRecipeDatabase?,

@@ -22,7 +22,7 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
         CommentDatabase::class,
         UserDatabase::class
     ],
-    version = 11,
+    version = 12,
     exportSchema = false
 )
 @TypeConverters(

@@ -48,9 +48,9 @@ fun LoginResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Lo
 
 fun ImagesModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
     com.sadikahmetozdemir.domain.entities.Images(
-        height = this.height,
-        url = this.url,
-        width = this.width
+        height = this.height?:0,
+        url = this.url?:"",
+        width = this.width?:0
 
     )
 
@@ -73,19 +73,19 @@ fun RegisterResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities
 fun NumberOfPersonModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.NumberOfPerson =
     com.sadikahmetozdemir.domain.entities.NumberOfPerson(
         id = this.id,
-        text = this.text
+        text = this.text?:""
     )
 
 fun TimeOfRecipeModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.TimeOfRecipe =
     com.sadikahmetozdemir.domain.entities.TimeOfRecipe(
         id = this.id,
-        text = this.text
+        text = this.text?:""
     )
 
 fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Category =
     com.sadikahmetozdemir.domain.entities.Category(
         id = this.id,
-        name = this.name,
+        name = this.name?:"",
         image = this.image?.toDomainModel(),
         recipes = this.recipes?.map { it.toDomaninModel() }
 
