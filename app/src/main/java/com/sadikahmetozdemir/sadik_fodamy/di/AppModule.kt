@@ -6,6 +6,7 @@ import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.service.UserAPI
+import com.sadikahmetozdemir.data.service.UserDao
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
 import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
 import com.sadikahmetozdemir.data.utils.DataHelperManager
@@ -37,9 +38,11 @@ object AppModule {
     }
 
     @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
-    recipeDao: RecipeDao): FeedRepository {
-        return DefaultFeedRepository(editorChoiceRecipesAPI,recipeDao)
+    fun provideFeedRepository(
+        editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+        recipeDao: RecipeDao
+    ): FeedRepository {
+        return DefaultFeedRepository(editorChoiceRecipesAPI, recipeDao)
     }
 
     @Provides
@@ -57,7 +60,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(userAPI: UserAPI): UserRepository {
-        return DefaultUserRepository(userAPI)
+    fun provideUserRepository(userAPI: UserAPI, userDao: UserDao): UserRepository {
+        return DefaultUserRepository(userAPI, userDao)
     }
 }

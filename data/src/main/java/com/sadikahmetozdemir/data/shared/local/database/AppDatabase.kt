@@ -22,8 +22,8 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
         CommentDatabase::class,
         UserDatabase::class
     ],
-    version = 12,
-    exportSchema = false
+    version = 12
+
 )
 @TypeConverters(
     UserConverter::class,
