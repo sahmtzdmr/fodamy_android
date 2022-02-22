@@ -18,7 +18,6 @@ import com.sadikahmetozdemir.data.shared.remote.RegisterRequestModel
 import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.data.shared.remote.UserProfileModel
 import com.sadikahmetozdemir.domain.entities.CommentResponse
-import com.sadikahmetozdemir.domain.entities.Images
 import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.Logout
 import com.sadikahmetozdemir.domain.entities.Pagination

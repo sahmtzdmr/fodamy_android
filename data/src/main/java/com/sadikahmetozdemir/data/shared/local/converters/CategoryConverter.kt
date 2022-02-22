@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
 import javax.inject.Inject
 
-@ProvidedTypeConverter
+
 class CategoryConverter @Inject constructor() {
 
     @TypeConverter

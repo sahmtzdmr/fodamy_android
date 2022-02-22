@@ -32,7 +32,7 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
         timeOfRecipe = this.timeOfRecipe?.toLocalDto(),
         numberOfPerson = this.numberOfPerson?.toLocalDto(),
         category = this.categoryModel?.toLocalDto(),
-        image =this.images?.map { it.toLocalDto() }
+        image = this.images?.map { it.toLocalDto() }
 
     )
 }
@@ -56,7 +56,7 @@ fun User.toLocalDto(): UserDatabase {
         isFollowing = this.isFollowing,
         likesCount = this.likesCount ?: 0,
         recipeCount = this.recipeCount ?: 0,
-        image = this.image?.toLocalDto()?: ImageDatabase.empty
+        image = this.image?.toLocalDto() ?: ImageDatabase.empty
     )
 }
 
@@ -78,7 +78,7 @@ fun CategoryModel.toLocalDto(): CategoryDatabase {
     return CategoryDatabase(
         id = this.id ?: 0,
         name = this.name ?: "",
-        recipes = this.recipes?.map { it.toLocalDto() } ?: emptyList(),
-        image = this.image?.toLocalDto()!!
+        recipes = this.recipes?.map { it.toLocalDto()},
+        image = this.image?.toLocalDto()
     )
 }

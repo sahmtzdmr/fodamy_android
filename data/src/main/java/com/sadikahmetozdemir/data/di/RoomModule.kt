@@ -60,16 +60,12 @@ object RoomModule {
         imageConverter: ImageConverter,
         imageListConverter: ImageListConverter,
         recipeListConverter: RecipeListConverter,
-        userConverter: UserConverter,
-        categoryConverter: CategoryConverter
     ): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
             BuildConfig.DBNAME
         ).fallbackToDestructiveMigration()
-            .addTypeConverter(userConverter)
-            .addTypeConverter(categoryConverter)
             .addTypeConverter(recipeListConverter)
             .addTypeConverter(imageConverter)
             .addTypeConverter(imageListConverter)
