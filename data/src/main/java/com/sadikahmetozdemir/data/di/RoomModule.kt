@@ -60,6 +60,7 @@ object RoomModule {
         imageConverter: ImageConverter,
         imageListConverter: ImageListConverter,
         recipeListConverter: RecipeListConverter,
+
     ): AppDatabase {
         return Room.databaseBuilder(
             context,

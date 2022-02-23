@@ -31,7 +31,7 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
         user = this.user?.toLocalDto(),
         timeOfRecipe = this.timeOfRecipe?.toLocalDto(),
         numberOfPerson = this.numberOfPerson?.toLocalDto(),
-        category = this.categoryModel?.toLocalDto(),
+        category = this.categoryModel?.toLocalDto()?: CategoryDatabase.empty,
         image = this.images?.map { it.toLocalDto() }
 
     )
@@ -39,15 +39,15 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
 
 fun ImagesModel.toLocalDto(): ImageDatabase {
     return ImageDatabase(
-        width = this.width ?: 0,
-        height = this.height ?: 0,
+        width = this.width,
+        height = this.height ,
         url = this.url ?: "",
     )
 }
 
 fun User.toLocalDto(): UserDatabase {
     return UserDatabase(
-        id = this.id ?: 0,
+        id = this.id,
         name = this.name ?: "",
         username = this.username ?: "",
         favoritesCount = this.favoritesCount ?: 0,
@@ -62,23 +62,23 @@ fun User.toLocalDto(): UserDatabase {
 
 fun TimeOfRecipeModel.toLocalDto(): TimeOfRecipeDatabase {
     return TimeOfRecipeDatabase(
-        id = this.id ?: 0,
-        text = this.text ?: ""
+        id = this.id,
+        text = this.text
     )
 }
 
 fun NumberOfPersonModel.toLocalDto(): NumberOfPersonDatabase {
     return NumberOfPersonDatabase(
-        id = this.id ?: 0,
-        text = this.text ?: ""
+        id = this.id,
+        text = this.text
     )
 }
 
 fun CategoryModel.toLocalDto(): CategoryDatabase {
     return CategoryDatabase(
-        id = this.id ?: 0,
+        id = this.id?:0 ,
         name = this.name ?: "",
-        recipes = this.recipes?.map { it.toLocalDto()},
-        image = this.image?.toLocalDto()
+        recipes = this.recipes?.map { it.toLocalDto()}?: emptyList(),
+        image = this.image?.toLocalDto()?: ImageDatabase.empty
     )
 }

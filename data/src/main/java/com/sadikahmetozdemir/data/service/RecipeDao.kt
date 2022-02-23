@@ -12,7 +12,7 @@ import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
 interface RecipeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipes(recipes: List<RecipeDatabase>)
+    suspend fun insertRecipes(recipes: List<RecipeDatabase>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComments(comments: CommentDatabase)
@@ -20,10 +20,10 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(category: List<CategoryDatabase>)
 
-    @Query("select * from recipes where is_editor_choice = 1")
+    @Query("select * from recipes where is_editor_choice = 1 order by id desc ")
     suspend fun getEditorChoices(): List<RecipeDatabase>
 
-    @Query("select * from recipes where is_last_added=1")
+    @Query("select * from recipes where is_last_added=1 order by id desc")
     suspend fun getLastAdded(): List<RecipeDatabase>
 
     @Query("select * from categories")

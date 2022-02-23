@@ -9,12 +9,12 @@ import javax.inject.Inject
 class CategoryConverter @Inject constructor() {
 
     @TypeConverter
-    fun categoryToJson(category: CategoryDatabase?): String {
-        return toJson<CategoryDatabase>(category?:0)
+    fun categoryToJson(category: CategoryDatabase): String {
+        return toJson<CategoryDatabase>(category)
     }
 
     @TypeConverter
-    fun jsonToCategory(category: String?): CategoryDatabase {
-        return fromJson<CategoryDatabase>(category?:"")
+    fun jsonToCategory(category: String): CategoryDatabase {
+        return fromJson<CategoryDatabase>(category)
     }
 }

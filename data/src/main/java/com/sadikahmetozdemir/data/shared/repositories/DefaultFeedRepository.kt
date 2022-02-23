@@ -18,22 +18,33 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return execute {
-           try{
-               val data = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
-               recipeDao.insertRecipes(data?.map { it.toLocalDto() }!!)
-               data.map { it.toDomaninModel() }
-           }
-           catch (ex:Exception)
-           {
-               throw ex
-           }
+            try {
+                val data = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
+                recipeDao.insertRecipes(data.map { it.toLocalDto() })
+                data.map { it.toDomaninModel() }
+            } catch (ex: Exception) {
+                throw ex
+            }
         }
 
     }
 
-    override suspend fun lastAddedRequest(page: Int): List<Recipe> {
-        return execute { editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data?.map { it.toDomaninModel() }!! }
-    }
+    override suspend fun lastAddedRequest(page: Int): List<Recipe> =
+        execute {
+            try {
+                val local = fetchFromLocal { recipeDao.getLastAdded().map {it.toDomainModel()}}
+                ((if (local?.isNotEmpty() == true) {
+                    local
+                } else {
+                    val remote = editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data
+                    saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
+                    remote.map { it.toDomaninModel() }
+                }))
+            }catch (ex:Exception){
+                throw ex
+            }
+
+        }
 
     override suspend fun getRecipeDetail(recipeID: Int): Recipe {
         return execute {
@@ -61,7 +72,7 @@ class DefaultFeedRepository @Inject constructor(
             editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(
                 categoryID,
                 page
-            ).data?.map { it.toDomaninModel() }!!
+            ).data.map { it.toDomaninModel() }
         }
     }
 

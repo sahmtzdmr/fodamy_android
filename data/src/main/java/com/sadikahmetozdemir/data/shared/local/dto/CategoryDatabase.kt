@@ -10,4 +10,8 @@ data class CategoryDatabase(
     val name: String?,
     val image: ImageDatabase?,
     val recipes: List<RecipeDatabase>?
-)
+){
+    companion object {
+        val empty = CategoryDatabase(0,"", ImageDatabase.empty, emptyList())
+    }
+}

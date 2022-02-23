@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ImagesModel(
     @SerializedName("width")
-    var width: Int?,
+    var width: Int,
     @SerializedName("height")
-    var height: Int?,
+    var height: Int,
     @SerializedName("key")
     var key: String?,
     @SerializedName("order")

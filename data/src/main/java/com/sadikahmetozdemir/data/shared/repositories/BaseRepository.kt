@@ -4,10 +4,8 @@ package com.sadikahmetozdemir.data.shared.repositories
 import com.google.gson.Gson
 import com.sadikahmetozdemir.data.shared.exceptions.SimpleHttpException
 import com.sadikahmetozdemir.data.shared.exceptions.UnauthorizedException
-import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.requests.Result
 import retrofit2.HttpException
-
 
 
 abstract class BaseRepository() {
@@ -19,6 +17,24 @@ abstract class BaseRepository() {
             throw parseException(exception)
         }
     }
+
+    open suspend fun <T> fetchFromLocal(cached: suspend () -> T?): T? {
+        return try {
+            cached.invoke()
+        } catch (ex: Exception) {
+            throw parseException(ex)
+        }
+    }
+
+    open suspend fun saveToLocal(store: suspend () -> Unit) {
+        try {
+            store.invoke()
+        } catch (ex: Exception) {
+            throw parseException(ex)
+        }
+    }
+
+
     private fun parseException(exception: Exception): Exception {
         return when (exception) {
             is HttpException -> {
@@ -46,8 +62,9 @@ abstract class BaseRepository() {
             }
         }
     }
+
     companion object {
         private const val AUTHENTICATION_CODE = 403
-        private const val  UNAUTHORIZED_CODE = 401
+        private const val UNAUTHORIZED_CODE = 401
     }
 }
