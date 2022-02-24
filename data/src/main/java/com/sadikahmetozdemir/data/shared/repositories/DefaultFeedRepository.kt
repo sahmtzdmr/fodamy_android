@@ -18,31 +18,28 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return execute {
-            try {
-                val data = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
-                recipeDao.insertRecipes(data.map { it.toLocalDto() })
-                data.map { it.toDomaninModel() }
-            } catch (ex: Exception) {
-                throw ex
-            }
+            val local = fetchFromLocal { recipeDao.getEditorChoices().map {it.toDomainModel()}}
+            ((if (local?.isNotEmpty() == true) {
+                local
+            } else {
+                val remote = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
+                saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
+                remote.map { it.toDomaninModel() }
+            }))
         }
 
     }
 
     override suspend fun lastAddedRequest(page: Int): List<Recipe> =
         execute {
-            try {
-                val local = fetchFromLocal { recipeDao.getLastAdded().map {it.toDomainModel()}}
-                ((if (local?.isNotEmpty() == true) {
-                    local
-                } else {
-                    val remote = editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data
-                    saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
-                    remote.map { it.toDomaninModel() }
-                }))
-            }catch (ex:Exception){
-                throw ex
-            }
+            val local = fetchFromLocal { recipeDao.getLastAdded().map {it.toDomainModel()}}
+            ((if (local?.isNotEmpty() == true) {
+                local
+            } else {
+                val remote = editorChoiceRecipesAPI.lastAddedRecipesRequest(page).data
+                saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
+                remote.map { it.toDomaninModel() }
+            }))
 
         }
 
