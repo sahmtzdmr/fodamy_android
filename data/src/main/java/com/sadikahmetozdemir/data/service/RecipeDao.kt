@@ -1,5 +1,7 @@
 package com.sadikahmetozdemir.data.service
 
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -24,10 +26,16 @@ interface RecipeDao {
     suspend fun getEditorChoices(): List<RecipeDatabase>
 
     @Query("select * from recipes where is_last_added=1 order by id desc")
-    suspend fun getLastAdded(): List<RecipeDatabase>
+     fun getLastAdded(): PagingSource<Int, RecipeDatabase>
+
+     @Query("select * from recipes where is_last_added=1 order by id desc")
+     fun getLastAddedFromApi(): List<RecipeDatabase>
 
     @Query("select * from categories")
     suspend fun getCategories(): List<CategoryDatabase>
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteAll()
 
     @Query("select * from comments where recipe_id =:recipeId")
     suspend fun getRecipeComments(recipeId: Int): List<CommentDatabase>
