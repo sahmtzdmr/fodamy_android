@@ -2,11 +2,9 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.last_added
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
@@ -29,18 +27,26 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
     private fun getLastAdded() {
 
         sendRequest(
-            request = {feedRepository.getLastEditFromMediator()
-                      },
+            request = {
+                feedRepository.getLastEditFromMediator()
+            },
             success = {
                 viewModelScope.launch {
-                    it.cachedIn(viewModelScope).collect { recipes.value = it }
+                    it.cachedIn(viewModelScope).collect {
+                        recipes.value = it
+                        it
+                    }
                 }
             }
         )
     }
 
     fun openDetailScreen(recipeID: Int) {
-        navigate(HomeTablayoutFragmentDirections.actionHomeTablayoutFragmentToNavigationRecipes(recipeID))
+        navigate(
+            HomeTablayoutFragmentDirections.actionHomeTablayoutFragmentToNavigationRecipes(
+                recipeID
+            )
+        )
     }
 
     companion object {
