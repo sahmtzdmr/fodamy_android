@@ -9,7 +9,7 @@ import com.sadikahmetozdemir.data.mappers.toLocalDto
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.LastAddedRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.RecipeRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
@@ -148,7 +148,7 @@ class DefaultFeedRepository @Inject constructor(
             val pagingSourceFactory = { recipeDao.getLastAdded() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = RecipeRemoteMediator(editorChoiceRecipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {
@@ -165,7 +165,7 @@ class DefaultFeedRepository @Inject constructor(
             val pagingSourceFactory = { recipeDao.getEditorChoices() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = RecipeRemoteMediator(editorChoiceRecipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {

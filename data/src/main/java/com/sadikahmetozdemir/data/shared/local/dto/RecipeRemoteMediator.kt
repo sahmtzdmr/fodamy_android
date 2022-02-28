@@ -13,7 +13,7 @@ import com.sadikahmetozdemir.domain.entities.Recipe
 import java.io.IOException
 
 @ExperimentalPagingApi
-class LastAddedRemoteMediator(
+class RecipeRemoteMediator(
     private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
     private val appDatabase: AppDatabase
 ) : RemoteMediator<Int, RecipeDatabase>() {
