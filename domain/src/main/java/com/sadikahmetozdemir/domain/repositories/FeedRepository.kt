@@ -26,4 +26,5 @@ interface FeedRepository {
     suspend fun postRecipeCommentRequest(recipeID: Int, text: String): Comment
     suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): BaseModel
     suspend fun editRecipeComment(recipeID: Int, commentID: Int, text: String): BaseModel
+    suspend fun getLastEditFromMediator(): Flow<PagingData<Recipe>>
 }

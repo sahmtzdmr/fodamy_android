@@ -16,7 +16,7 @@ import java.io.IOException
 class LastAddedRemoteMediator(
     private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
     private val appDatabase: AppDatabase
-) : RemoteMediator<Int, Recipe>() {
+) : RemoteMediator<Int, RecipeDatabase>() {
     private val STARTING_PAGE_INDEX = 1
 
     override suspend fun initialize(): InitializeAction {
@@ -24,7 +24,7 @@ class LastAddedRemoteMediator(
     }
 
     override suspend fun load(
-        loadType: LoadType, state: PagingState<Int, Recipe>
+        loadType: LoadType, state: PagingState<Int, RecipeDatabase>
     ): MediatorResult {
         val pageKeyData = getKeyPageData(loadType, state)
         val page = when (pageKeyData) {
@@ -47,17 +47,10 @@ class LastAddedRemoteMediator(
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
-                    nextKey?.let { it1 ->
-                        prevKey?.let { it2 ->
-                            RemoteKey(
-                                it.id.toString(),
-                                prevKey = it2,
-                                nextKey = it1
-                            )
-                        }
-                    }
+                    RemoteKeyDatabase(it.id,prevKey,nextKey)
+
                 }
-                appDatabase.remoteKeyDao().insertAll(keys as List<RemoteKey>)
+                appDatabase.remoteKeyDao().insertAll(keys)
                 appDatabase.recipeDao().insertRecipes(response.data.map {
                     it.toLocalDto()
                 })
@@ -70,7 +63,7 @@ class LastAddedRemoteMediator(
         }
     }
 
-    private suspend fun getKeyPageData(loadType: LoadType, state: PagingState<Int, Recipe>): Any {
+    private suspend fun getKeyPageData(loadType: LoadType, state: PagingState<Int, RecipeDatabase>): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -91,7 +84,7 @@ class LastAddedRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Recipe>): RemoteKey? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { repoId ->
                 appDatabase.remoteKeyDao().remoteKeysId(repoId)
@@ -99,7 +92,7 @@ class LastAddedRemoteMediator(
         }
     }
 
-    private suspend fun getLastRemoteKey(state: PagingState<Int, Recipe>): RemoteKey? {
+    private suspend fun getLastRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.pages
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
@@ -108,7 +101,7 @@ class LastAddedRemoteMediator(
             }
     }
 
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, Recipe>): RemoteKey? {
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()

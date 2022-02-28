@@ -14,6 +14,7 @@ import com.sadikahmetozdemir.data.shared.local.converters.UserConverter
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.CommentDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 
 @Database(
@@ -21,9 +22,10 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
         RecipeDatabase::class,
         CategoryDatabase::class,
         CommentDatabase::class,
-        UserDatabase::class
+        UserDatabase::class,
+        RemoteKeyDatabase::class
     ],
-    version = 14
+    version = 16
 
 )
 @TypeConverters(

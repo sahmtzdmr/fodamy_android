@@ -23,6 +23,7 @@ object Versions {
     const val DATASTORE_PREFERENCES="1.0.0"
     const val FIREBASE_BOM="29.1.0"
     const val ROOM="2.4.1"
+    const val ROOM_PAGING="2.5.0-alpha01"
 
     //classpath
     const val TOOLS_BUILD_GRADLE="7.0.4"

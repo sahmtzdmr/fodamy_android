@@ -8,8 +8,9 @@ import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.mappers.toLocalDto
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
+import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.LastAddedRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
-import com.sadikahmetozdemir.data.shared.repositories.LastAddedPagingSource
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.Recipe
@@ -18,15 +19,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class DefaultFeedRepository @Inject constructor(
     private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
-    private val recipeDao: RecipeDao
+    private val recipeDao: RecipeDao,
+    private val appDatabase: AppDatabase
 ) :
     FeedRepository, BaseRepository() {
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return execute {
-            val local = fetchFromLocal { recipeDao.getEditorChoices().map {it.toDomainModel()}}
+            val local = fetchFromLocal { recipeDao.getEditorChoicesFromApi().map { it.toDomainModel() } }
             ((if (local?.isNotEmpty() == true) {
                 local
             } else {
@@ -39,9 +42,10 @@ class DefaultFeedRepository @Inject constructor(
     }
 
     override suspend fun lastAddedRequest(page: Int): List<Recipe> =
-         execute {
-            val local = fetchFromLocal { recipeDao.getLastAddedFromApi().map {it.toDomainModel()}}
-                if (local?.isNotEmpty() == true) {
+        execute {
+            val local =
+                fetchFromLocal { recipeDao.getLastAddedFromApi().map { it.toDomainModel() } }
+            if (local?.isNotEmpty() == true) {
                 local
             } else {
                 val remote = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
@@ -49,7 +53,6 @@ class DefaultFeedRepository @Inject constructor(
                 remote.map { it.toDomaninModel() }
             }
         }
-
 
 
     override suspend fun getRecipeDetail(recipeID: Int): Recipe {
@@ -139,21 +142,24 @@ class DefaultFeedRepository @Inject constructor(
                 ?.toDomainModel()!!
         }
     }
-    @ExperimentalPagingApi
-    fun getLastEditFromMediator(): Flow<PagingData<Recipe>> {
-        val pagingSourceFactory={ recipeDao.getLastAdded()}
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_CONFIG.pageSize,
-                maxSize = PAGE_CONFIG.pageSize + (PAGE_CONFIG.pageSize * 2),
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = pagingSourceFactory
-        ).flow.map{ pagingData ->
-            pagingData.map {
-                it.toDomainModel()
-            } }
+
+    override suspend fun getLastEditFromMediator(): Flow<PagingData<Recipe>> {
+        return execute {
+            val pagingSourceFactory = { recipeDao.getLastAdded() }
+            Pager(
+                config = PAGE_CONFIG,
+                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                pagingSourceFactory = pagingSourceFactory
+            ).flow.map { pagingData ->
+                pagingData.map {
+                    it.toDomainModel()
+                }
+            }
+
+        }
+
     }
+
     companion object {
         private val PAGE_CONFIG =
             PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)

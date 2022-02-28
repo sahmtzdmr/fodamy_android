@@ -26,7 +26,7 @@ android {
             jvmTarget = "1.8"
         }
     }
-    buildTypes{
+    buildTypes {
         getByName("debug") {
             buildConfigField("String", "DBNAME", DBNAME)
         }
@@ -56,5 +56,6 @@ dependencies {
     implementation(Dependencies.ROOM_EXTENSIONS)
     implementation(Dependencies.GLIDE)
     kapt(Dependencies.GLIDE_COMPILER)
+    implementation(Dependencies.ROOM_PAGING)
 
 }

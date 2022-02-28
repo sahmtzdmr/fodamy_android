@@ -29,12 +29,8 @@ class LastAddedViewModel @Inject constructor(private val feedRepository: FeedRep
     private fun getLastAdded() {
 
         sendRequest(
-            request = {
-                Pager(
-                    config = PAGE_CONFIG,
-                    pagingSourceFactory = { LastAddedPagingSource(feedRepository) }
-                ).flow
-            },
+            request = {feedRepository.getLastEditFromMediator()
+                      },
             success = {
                 viewModelScope.launch {
                     it.cachedIn(viewModelScope).collect { recipes.value = it }

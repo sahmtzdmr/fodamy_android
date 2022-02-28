@@ -2,11 +2,13 @@ package com.sadikahmetozdemir.sadik_fodamy.di
 
 import DefaultFeedRepository
 import android.content.Context
+import androidx.paging.ExperimentalPagingApi
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.service.UserAPI
 import com.sadikahmetozdemir.data.service.UserDao
+import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
 import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
 import com.sadikahmetozdemir.data.utils.DataHelperManager
@@ -38,11 +40,13 @@ object AppModule {
     }
 
     @Provides
+    @ExperimentalPagingApi
     fun provideFeedRepository(
         editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
-        recipeDao: RecipeDao
+        recipeDao: RecipeDao,
+        appDatabase: AppDatabase
     ): FeedRepository {
-        return DefaultFeedRepository(editorChoiceRecipesAPI, recipeDao)
+        return DefaultFeedRepository(editorChoiceRecipesAPI, recipeDao, appDatabase)
     }
 
     @Provides

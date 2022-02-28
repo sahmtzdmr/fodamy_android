@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.data.service
 
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -23,13 +22,16 @@ interface RecipeDao {
     suspend fun insertCategories(category: List<CategoryDatabase>)
 
     @Query("select * from recipes where is_editor_choice = 1 order by id desc ")
-    suspend fun getEditorChoices(): List<RecipeDatabase>
+     fun getEditorChoices(): PagingSource<Int, RecipeDatabase>
+
+    @Query("select * from recipes where is_editor_choice = 1 order by id desc ")
+    suspend fun getEditorChoicesFromApi(): List<RecipeDatabase>
 
     @Query("select * from recipes where is_last_added=1 order by id desc")
-     fun getLastAdded(): PagingSource<Int, RecipeDatabase>
+    fun getLastAdded(): PagingSource<Int, RecipeDatabase>
 
-     @Query("select * from recipes where is_last_added=1 order by id desc")
-     fun getLastAddedFromApi(): List<RecipeDatabase>
+    @Query("select * from recipes where is_last_added=1 order by id desc")
+    fun getLastAddedFromApi(): List<RecipeDatabase>
 
     @Query("select * from categories")
     suspend fun getCategories(): List<CategoryDatabase>
