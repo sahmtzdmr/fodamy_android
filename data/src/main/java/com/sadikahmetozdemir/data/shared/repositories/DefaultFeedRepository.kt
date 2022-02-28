@@ -160,6 +160,24 @@ class DefaultFeedRepository @Inject constructor(
 
     }
 
+    override suspend fun getEditorChoicesFromMediator(): Flow<PagingData<Recipe>> {
+        return execute {
+            val pagingSourceFactory = { recipeDao.getEditorChoices() }
+            Pager(
+                config = PAGE_CONFIG,
+                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                pagingSourceFactory = pagingSourceFactory
+            ).flow.map { pagingData ->
+                pagingData.map {
+                    it.toDomainModel()
+                }
+            }
+
+        }
+
+    }
+
+
     companion object {
         private val PAGE_CONFIG =
             PagingConfig(maxSize = 100, pageSize = 24, enablePlaceholders = false)

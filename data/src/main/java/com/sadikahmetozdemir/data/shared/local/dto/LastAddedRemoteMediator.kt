@@ -52,7 +52,7 @@ class LastAddedRemoteMediator(
                 }
                 appDatabase.remoteKeyDao().insertAll(keys)
                 appDatabase.recipeDao().insertRecipes(response.data.map {
-                    it.toLocalDto()
+                    it.toLocalDto(isLastAdded = true)
                 })
             }
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
