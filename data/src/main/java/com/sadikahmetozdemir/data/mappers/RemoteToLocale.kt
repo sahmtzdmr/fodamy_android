@@ -5,12 +5,14 @@ import com.sadikahmetozdemir.data.shared.local.NumberOfPersonModel
 import com.sadikahmetozdemir.data.shared.local.TimeOfRecipeModel
 import com.sadikahmetozdemir.data.shared.local.User
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.CommentDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.ImageDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.NumberOfPersonDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.TimeOfRecipeDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 import com.sadikahmetozdemir.data.shared.remote.CategoryModel
+import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 
 class RemoteToLocale
@@ -31,7 +33,7 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
         user = this.user?.toLocalDto(),
         timeOfRecipe = this.timeOfRecipe?.toLocalDto(),
         numberOfPerson = this.numberOfPerson?.toLocalDto(),
-        category = this.categoryModel?.toLocalDto()?: CategoryDatabase.empty,
+        category = this.categoryModel?.toLocalDto() ?: CategoryDatabase.empty,
         image = this.images?.map { it.toLocalDto() }
 
     )
@@ -40,8 +42,18 @@ fun EditorChoiceModel.toLocalDto(isLastAdded: Boolean = false): RecipeDatabase {
 fun ImagesModel.toLocalDto(): ImageDatabase {
     return ImageDatabase(
         width = this.width,
-        height = this.height ,
+        height = this.height,
         url = this.url ?: "",
+    )
+}
+
+fun CommentModel.toLocalDto(recipeId:Int): CommentDatabase {
+    return CommentDatabase(
+        difference = this.difference ?: "",
+        id = this.id,
+        text = this.text,
+        user = this.user?.toLocalDto(),
+        recipeId = recipeId
     )
 }
 
@@ -76,9 +88,9 @@ fun NumberOfPersonModel.toLocalDto(): NumberOfPersonDatabase {
 
 fun CategoryModel.toLocalDto(): CategoryDatabase {
     return CategoryDatabase(
-        id = this.id?:0 ,
+        id = this.id ?: 0,
         name = this.name ?: "",
-        recipes = this.recipes?.map { it.toLocalDto()}?: emptyList(),
-        image = this.image?.toLocalDto()?: ImageDatabase.empty
+        recipes = this.recipes?.map { it.toLocalDto() } ?: emptyList(),
+        image = this.image?.toLocalDto() ?: ImageDatabase.empty
     )
 }

@@ -25,7 +25,7 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
         UserDatabase::class,
         RemoteKeyDatabase::class
     ],
-    version = 16
+    version = 17
 
 )
 @TypeConverters(

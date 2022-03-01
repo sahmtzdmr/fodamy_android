@@ -9,6 +9,7 @@ import com.sadikahmetozdemir.data.mappers.toLocalDto
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.CommentRemoteMediator
 import com.sadikahmetozdemir.data.shared.local.dto.RecipeRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
@@ -175,6 +176,16 @@ class DefaultFeedRepository @Inject constructor(
 
         }
 
+    }
+
+    override suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>> {
+        return  execute {
+            val pagingSourceFactory={recipeDao.getRecipeComments(recipeID)}
+            Pager(config = PAGE_CONFIG, remoteMediator = CommentRemoteMediator(editorChoiceRecipesAPI,appDatabase,recipeID),
+            pagingSourceFactory = pagingSourceFactory).flow.map { pagingData->
+                pagingData.map { it.toDomainModel() }
+            }
+        }
     }
 
 
