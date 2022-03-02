@@ -21,7 +21,6 @@ class CommentDialogViewModel @Inject constructor(
         viewModelScope.launch {
             val userID = dataHelperManager.getID()
             val commentID = comment?.user?.id
-            commentID
             if (comment?.user?.id == userID) {
                 navigate(
                     CommentDialogFragmentDirections.toCommentEditFragment(
