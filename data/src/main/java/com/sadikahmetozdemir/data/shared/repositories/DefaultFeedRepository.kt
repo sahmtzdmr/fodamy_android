@@ -10,7 +10,8 @@ import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.service.RecipeDao
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.CommentRemoteMediator
-import com.sadikahmetozdemir.data.shared.local.dto.RecipeRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.EditorChoiceRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.LastAddedRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
@@ -149,7 +150,7 @@ class DefaultFeedRepository @Inject constructor(
             val pagingSourceFactory = { recipeDao.getLastAdded() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = RecipeRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {
@@ -161,12 +162,13 @@ class DefaultFeedRepository @Inject constructor(
 
     }
 
+
     override suspend fun getEditorChoicesFromMediator(): Flow<PagingData<Recipe>> {
         return execute {
             val pagingSourceFactory = { recipeDao.getEditorChoices() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = RecipeRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = EditorChoiceRemoteMediator(editorChoiceRecipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {

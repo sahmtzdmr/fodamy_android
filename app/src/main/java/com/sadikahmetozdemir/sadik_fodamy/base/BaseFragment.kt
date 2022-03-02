@@ -29,14 +29,23 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
             ?.getOrNull(1) as? Class<VM>
             ?: throw IllegalStateException("viewModelClass does not equal Class<VM>")
     lateinit var viewModel: VM
-    lateinit var binding: VDB
+    private var _binding: VDB? = null
+    val binding: VDB get() = _binding!!
+    open val isSharedViewModel = false
     var rootView: View? = null
     private var isViewCreated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(viewModelClass)
+        viewModel = ViewModelProvider(
+            if (isSharedViewModel) {
+                requireActivity()
+            } else {
+                this
+            }
+        )[viewModelClass]
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +55,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
         if (isViewCreated) {
             return rootView
         }
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.vM, viewModel)
         rootView = binding.root
@@ -82,5 +91,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
                 bundleOf(event.key to event.value)
             )
         }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

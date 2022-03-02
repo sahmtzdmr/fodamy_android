@@ -12,19 +12,18 @@ import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import java.io.IOException
 
 @ExperimentalPagingApi
-class CommentRemoteMediator(
+class LastAddedRemoteMediator(
     private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
-    private val appDatabase: AppDatabase,
-    private val recipeID:Int
-) : RemoteMediator<Int, CommentDatabase>() {
+    private val appDatabase: AppDatabase
+) : RemoteMediator<Int, RecipeDatabase>() {
     private val STARTING_PAGE_INDEX = 1
 
-    override suspend fun initialize(): InitializeAction {
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
-    }
+//    override suspend fun initialize(): InitializeAction {
+//        return InitializeAction.LAUNCH_INITIAL_REFRESH
+//    }
 
     override suspend fun load(
-        loadType: LoadType, state: PagingState<Int, CommentDatabase>
+        loadType: LoadType, state: PagingState<Int, RecipeDatabase>
     ): MediatorResult {
         val pageKeyData = getKeyPageData(loadType, state)
         val page = when (pageKeyData) {
@@ -37,22 +36,22 @@ class CommentRemoteMediator(
         }
 
         try {
-            val response = editorChoiceRecipesAPI.getRecipeComments(recipeID=recipeID,page)
+            val response = editorChoiceRecipesAPI.lastAddedRecipesRequest(page)
             val isEndOfList = response.data.isEmpty()
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     appDatabase.recipeDao().deleteAll()
-                    appDatabase.remoteKeyDao().deleteEditorChoice()
+                    appDatabase.remoteKeyDao().deleteLastAdded()
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
-                    RemoteKeyDatabase(it.id, prevKey, nextKey)
+                    RemoteKeyDatabase(it.id,prevKey,nextKey)
 
                 }
-                appDatabase.remoteKeyDao().insertEditorChoice(keys)
-                appDatabase.recipeDao().insertComments(response.data.map {
-                    it.toLocalDto(recipeID)
+                appDatabase.remoteKeyDao().insertLastAdded(keys)
+                appDatabase.recipeDao().insertRecipes(response.data.map {
+                    it.toLocalDto(isLastAdded = true)
                 })
             }
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
@@ -63,10 +62,7 @@ class CommentRemoteMediator(
         }
     }
 
-    private suspend fun getKeyPageData(
-        loadType: LoadType,
-        state: PagingState<Int, CommentDatabase>
-    ): Any {
+    private suspend fun getKeyPageData(loadType: LoadType, state: PagingState<Int, RecipeDatabase>): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -87,28 +83,28 @@ class CommentRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, CommentDatabase>): RemoteKeyDatabase? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { repoId ->
-                appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(repoId)
+                appDatabase.remoteKeyDao().remoteKeysLastAddedId(repoId)
             }
         }
     }
 
-    private suspend fun getLastRemoteKey(state: PagingState<Int, CommentDatabase>): RemoteKeyDatabase? {
+    private suspend fun getLastRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.pages
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
             ?.let { recipe ->
-                appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(recipe.id)
+                appDatabase.remoteKeyDao().remoteKeysLastAddedId(recipe.id)
             }
     }
 
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, CommentDatabase>): RemoteKeyDatabase? {
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
-            ?.let { recipe -> appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(recipe.id) }
+            ?.let { recipe -> appDatabase.remoteKeyDao().remoteKeysLastAddedId(recipe.id) }
     }
 
 

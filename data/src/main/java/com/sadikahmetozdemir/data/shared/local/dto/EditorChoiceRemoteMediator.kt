@@ -9,19 +9,18 @@ import com.bumptech.glide.load.HttpException
 import com.sadikahmetozdemir.data.mappers.toLocalDto
 import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
-import com.sadikahmetozdemir.domain.entities.Recipe
 import java.io.IOException
 
 @ExperimentalPagingApi
-class RecipeRemoteMediator(
+class EditorChoiceRemoteMediator(
     private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
     private val appDatabase: AppDatabase
 ) : RemoteMediator<Int, RecipeDatabase>() {
     private val STARTING_PAGE_INDEX = 1
 
-    override suspend fun initialize(): InitializeAction {
-        return InitializeAction.LAUNCH_INITIAL_REFRESH
-    }
+//    override suspend fun initialize(): InitializeAction {
+//        return InitializeAction.LAUNCH_INITIAL_REFRESH
+//    }
 
     override suspend fun load(
         loadType: LoadType, state: PagingState<Int, RecipeDatabase>
@@ -37,22 +36,22 @@ class RecipeRemoteMediator(
         }
 
         try {
-            val response = editorChoiceRecipesAPI.lastAddedRecipesRequest(page)
+            val response = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page)
             val isEndOfList = response.data.isEmpty()
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     appDatabase.recipeDao().deleteAll()
-                    appDatabase.remoteKeyDao().deleteAll()
+                    appDatabase.remoteKeyDao().deleteEditorChoice()
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
-                    RemoteKeyDatabase(it.id,prevKey,nextKey)
+                    RemoteKeyDatabase(it.id, prevKey, nextKey)
 
                 }
-                appDatabase.remoteKeyDao().insertAll(keys)
+                appDatabase.remoteKeyDao().insertEditorChoice(keys)
                 appDatabase.recipeDao().insertRecipes(response.data.map {
-                    it.toLocalDto(isLastAdded = true)
+                    it.toLocalDto()
                 })
             }
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
@@ -63,7 +62,10 @@ class RecipeRemoteMediator(
         }
     }
 
-    private suspend fun getKeyPageData(loadType: LoadType, state: PagingState<Int, RecipeDatabase>): Any {
+    private suspend fun getKeyPageData(
+        loadType: LoadType,
+        state: PagingState<Int, RecipeDatabase>
+    ): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -87,7 +89,7 @@ class RecipeRemoteMediator(
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { repoId ->
-                appDatabase.remoteKeyDao().remoteKeysId(repoId)
+                appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(repoId)
             }
         }
     }
@@ -97,7 +99,7 @@ class RecipeRemoteMediator(
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
             ?.let { recipe ->
-                appDatabase.remoteKeyDao().remoteKeysId(recipe.id)
+                appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(recipe.id)
             }
     }
 
@@ -105,7 +107,7 @@ class RecipeRemoteMediator(
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
-            ?.let { recipe -> appDatabase.remoteKeyDao().remoteKeysId(recipe.id) }
+            ?.let { recipe -> appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(recipe.id) }
     }
 
 

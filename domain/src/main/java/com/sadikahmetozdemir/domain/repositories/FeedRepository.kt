@@ -27,4 +27,5 @@ interface FeedRepository {
     suspend fun getLastEditFromMediator(): Flow<PagingData<Recipe>>
     suspend fun getEditorChoicesFromMediator(): Flow<PagingData<Recipe>>
     suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>>
+
 }

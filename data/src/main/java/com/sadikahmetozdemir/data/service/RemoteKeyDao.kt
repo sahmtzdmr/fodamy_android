@@ -9,12 +9,21 @@ import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyDatabase
 @Dao
 interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(remoteKey: List<RemoteKeyDatabase>)
+    suspend fun insertEditorChoice(remoteKey: List<RemoteKeyDatabase>)
 
     @Query("select * from remote_keys where keyId=:id")
-    suspend fun remoteKeysId(id: Int): RemoteKeyDatabase?
+    suspend fun remoteKeysEditorChoiceId(id: Int): RemoteKeyDatabase?
 
     @Query("delete from remote_keys")
-    suspend fun deleteAll()
+    suspend fun deleteEditorChoice()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLastAdded(remoteKey: List<RemoteKeyDatabase>)
+
+    @Query("select * from remote_keys where keyId=:id")
+    suspend fun remoteKeysLastAddedId(id: Int): RemoteKeyDatabase?
+
+    @Query("delete from remote_keys")
+    suspend fun deleteLastAdded()
 
 }
