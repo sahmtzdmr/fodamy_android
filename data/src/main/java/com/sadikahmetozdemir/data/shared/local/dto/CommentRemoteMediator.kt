@@ -39,7 +39,7 @@ class CommentRemoteMediator(
         try {
             val response = editorChoiceRecipesAPI.getRecipeComments(recipeID=recipeID,page)
             val isEndOfList = response.data.isEmpty()
-            appDatabase.withTransaction {
+
                 if (loadType == LoadType.REFRESH) {
                     appDatabase.recipeDao().deleteComments()
                     appDatabase.remoteKeyDao().deleteComments()
@@ -54,7 +54,7 @@ class CommentRemoteMediator(
                 appDatabase.recipeDao().insertComments(response.data.map {
                     it.toLocalDto(recipeID)
                 })
-            }
+
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)
