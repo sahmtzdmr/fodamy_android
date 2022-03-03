@@ -35,10 +35,6 @@ class LastAddedRemoteMediator(
             val response = editorChoiceRecipesAPI.lastAddedRecipesRequest(page)
             val isEndOfList = response.data.isEmpty()
 
-            if (loadType == LoadType.REFRESH) {
-                 appDatabase.recipeDao().deleteLastAddeds()
-                   appDatabase.remoteKeyDao().deleteLastAdded()
-                }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {

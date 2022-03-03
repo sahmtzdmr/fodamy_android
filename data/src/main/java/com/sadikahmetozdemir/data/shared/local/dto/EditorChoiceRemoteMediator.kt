@@ -38,10 +38,7 @@ class EditorChoiceRemoteMediator(
         try {
             val response = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page)
             val isEndOfList = response.data.isEmpty()
-            if (loadType == LoadType.REFRESH) {
-                    appDatabase.recipeDao().deleteEditorChoices()
-                    appDatabase.remoteKeyDao().deleteEditorChoice()
-                }
+
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
@@ -52,7 +49,7 @@ class EditorChoiceRemoteMediator(
                 appDatabase.recipeDao().insertRecipes(response.data.map {
                     it.toLocalDto()
                 })
-            
+
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)

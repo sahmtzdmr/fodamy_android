@@ -40,10 +40,6 @@ class CommentRemoteMediator(
             val response = editorChoiceRecipesAPI.getRecipeComments(recipeID=recipeID,page)
             val isEndOfList = response.data.isEmpty()
 
-                if (loadType == LoadType.REFRESH) {
-                    appDatabase.recipeDao().deleteComments()
-                    appDatabase.remoteKeyDao().deleteComments()
-                }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
