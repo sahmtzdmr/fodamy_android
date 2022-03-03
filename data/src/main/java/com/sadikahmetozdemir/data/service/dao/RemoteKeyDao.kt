@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.data.service
+package com.sadikahmetozdemir.data.service.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

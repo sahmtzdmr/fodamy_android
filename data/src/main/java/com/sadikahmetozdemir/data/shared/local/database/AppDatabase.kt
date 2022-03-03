@@ -3,9 +3,10 @@ package com.sadikahmetozdemir.data.shared.local.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.sadikahmetozdemir.data.service.RecipeDao
-import com.sadikahmetozdemir.data.service.RemoteKeyDao
-import com.sadikahmetozdemir.data.service.UserDao
+import com.sadikahmetozdemir.data.service.dao.CommentDao
+import com.sadikahmetozdemir.data.service.dao.RecipeDao
+import com.sadikahmetozdemir.data.service.dao.RemoteKeyDao
+import com.sadikahmetozdemir.data.service.dao.UserDao
 import com.sadikahmetozdemir.data.shared.local.converters.CategoryConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageListConverter
@@ -43,4 +44,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
     abstract fun userDao(): UserDao
     abstract fun remoteKeyDao(): RemoteKeyDao
+    abstract fun commentDao(): CommentDao
 }

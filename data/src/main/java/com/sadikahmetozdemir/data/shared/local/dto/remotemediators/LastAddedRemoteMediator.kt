@@ -1,19 +1,20 @@
-package com.sadikahmetozdemir.data.shared.local.dto
+package com.sadikahmetozdemir.data.shared.local.dto.remotemediators
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
 import com.bumptech.glide.load.HttpException
 import com.sadikahmetozdemir.data.mappers.toLocalDto
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.data.service.RecipesAPI
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyLastAddedDatabase
 import java.io.IOException
 
 @ExperimentalPagingApi
 class LastAddedRemoteMediator(
-    private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    private val recipesAPI: RecipesAPI,
     private val appDatabase: AppDatabase
 ) : RemoteMediator<Int, RecipeDatabase>() {
     private val STARTING_PAGE_INDEX = 1
@@ -32,7 +33,7 @@ class LastAddedRemoteMediator(
         }
 
         try {
-            val response = editorChoiceRecipesAPI.lastAddedRecipesRequest(page)
+            val response = recipesAPI.lastAddedRecipesRequest(page)
             val isEndOfList = response.data.isEmpty()
 
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1

@@ -6,12 +6,13 @@ import androidx.paging.map
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.mappers.toLocalDto
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
-import com.sadikahmetozdemir.data.service.RecipeDao
+import com.sadikahmetozdemir.data.service.RecipesAPI
+import com.sadikahmetozdemir.data.service.dao.CommentDao
+import com.sadikahmetozdemir.data.service.dao.RecipeDao
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.CommentRemoteMediator
-import com.sadikahmetozdemir.data.shared.local.dto.EditorChoiceRemoteMediator
-import com.sadikahmetozdemir.data.shared.local.dto.LastAddedRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.CommentRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.EditorChoiceRemoteMediator
+import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.LastAddedRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
@@ -23,19 +24,21 @@ import javax.inject.Inject
 
 @ExperimentalPagingApi
 class DefaultFeedRepository @Inject constructor(
-    private val editorChoiceRecipesAPI: EditorChoiceRecipesAPI,
+    private val recipesAPI: RecipesAPI,
     private val recipeDao: RecipeDao,
+    private val commentDao: CommentDao,
     private val appDatabase: AppDatabase
 ) :
     FeedRepository, BaseRepository() {
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
         return execute {
-            val local = fetchFromLocal { recipeDao.getEditorChoicesFromApi().map { it.toDomainModel() } }
+            val local =
+                fetchFromLocal { recipeDao.getEditorChoicesFromApi().map { it.toDomainModel() } }
             ((if (local?.isNotEmpty() == true) {
                 local
             } else {
-                val remote = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
+                val remote = recipesAPI.editorChoicesRecipesRequest(page).data
                 saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
                 remote.map { it.toDomaninModel() }
             }))
@@ -50,7 +53,7 @@ class DefaultFeedRepository @Inject constructor(
             if (local?.isNotEmpty() == true) {
                 local
             } else {
-                val remote = editorChoiceRecipesAPI.editorChoicesRecipesRequest(page).data
+                val remote = recipesAPI.editorChoicesRecipesRequest(page).data
                 saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
                 remote.map { it.toDomaninModel() }
             }
@@ -59,7 +62,7 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun getRecipeDetail(recipeID: Int): Recipe {
         return execute {
-            editorChoiceRecipesAPI.recipeDetailsRequest(recipeID).toDomaninModel()
+            recipesAPI.recipeDetailsRequest(recipeID).toDomaninModel()
 
         }
     }
@@ -67,20 +70,20 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun getRecipeDetailComment(recipeID: Int): Comment {
         return execute {
-            editorChoiceRecipesAPI.recipeDetailsCommentRequest(recipeID)
+            recipesAPI.recipeDetailsCommentRequest(recipeID)
                 .toDomainModel().data?.get(0)!!
         }
     }
 
     override suspend fun favoriteRecipesRequest(page: Int): List<com.sadikahmetozdemir.domain.entities.Category> {
-        return execute { editorChoiceRecipesAPI.favoriteRecipesRequest(page).data?.map { it.toDomainModel() }!! }
+        return execute { recipesAPI.favoriteRecipesRequest(page).data?.map { it.toDomainModel() }!! }
     }
 
     override suspend fun favoriteCategoriesRequest(
         categoryID: Int, page: Int
     ): List<Recipe> {
         return execute {
-            editorChoiceRecipesAPI.favoriteCategoriesDetailRequest(
+            recipesAPI.favoriteCategoriesDetailRequest(
                 categoryID,
                 page
             ).data.map { it.toDomaninModel() }
@@ -88,22 +91,22 @@ class DefaultFeedRepository @Inject constructor(
     }
 
     override suspend fun userRecipeLikeRequest(recipeID: Int): BaseModel {
-        return execute { editorChoiceRecipesAPI.userRecipeLikeRequest(recipeID).toDomainModel() }
+        return execute { recipesAPI.userRecipeLikeRequest(recipeID).toDomainModel() }
     }
 
     override suspend fun userRecipeDislikeRequest(recipeID: Int): BaseModel {
-        return execute { editorChoiceRecipesAPI.userRecipeDislikeRequest(recipeID).toDomainModel() }
+        return execute { recipesAPI.userRecipeDislikeRequest(recipeID).toDomainModel() }
     }
 
     override suspend fun userFollowRequest(followedID: Int): BaseModel {
         return execute {
-            editorChoiceRecipesAPI.userFollowing(followedID).body()?.toDomainModel()!!
+            recipesAPI.userFollowing(followedID).body()?.toDomainModel()!!
         }
     }
 
     override suspend fun userUnfollowRequest(followedID: Int): BaseModel {
         return execute {
-            editorChoiceRecipesAPI.userUnfollowing(followedID).body()?.toDomainModel()!!
+            recipesAPI.userUnfollowing(followedID).body()?.toDomainModel()!!
         }
     }
 
@@ -111,7 +114,7 @@ class DefaultFeedRepository @Inject constructor(
         categoryID: Int, page: Int
     ): List<Comment> {
         return execute {
-            editorChoiceRecipesAPI.getRecipeComments(
+            recipesAPI.getRecipeComments(
                 categoryID,
                 page
             ).data?.map { it.toDomainModel() }!!
@@ -123,13 +126,13 @@ class DefaultFeedRepository @Inject constructor(
         text: String
     ): Comment {
         return execute {
-            editorChoiceRecipesAPI.postRecipeComments(recipeID, text).body()?.toDomainModel()!!
+            recipesAPI.postRecipeComments(recipeID, text).body()?.toDomainModel()!!
         }
     }
 
     override suspend fun deleteRecipeComment(recipeID: Int, commentID: Int): BaseModel {
         return execute {
-            editorChoiceRecipesAPI.deleteRecipeComments(recipeID, commentID).body()
+            recipesAPI.deleteRecipeComments(recipeID, commentID).body()
                 ?.toDomainModel()!!
         }
     }
@@ -140,7 +143,7 @@ class DefaultFeedRepository @Inject constructor(
         text: String
     ): BaseModel {
         return execute {
-            editorChoiceRecipesAPI.editRecipeComments(recipeID, commentID, text).body()
+            recipesAPI.editRecipeComments(recipeID, commentID, text).body()
                 ?.toDomainModel()!!
         }
     }
@@ -150,7 +153,7 @@ class DefaultFeedRepository @Inject constructor(
             val pagingSourceFactory = { recipeDao.getLastAdded() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = LastAddedRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = LastAddedRemoteMediator(recipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {
@@ -168,7 +171,7 @@ class DefaultFeedRepository @Inject constructor(
             val pagingSourceFactory = { recipeDao.getEditorChoices() }
             Pager(
                 config = PAGE_CONFIG,
-                remoteMediator = EditorChoiceRemoteMediator(editorChoiceRecipesAPI, appDatabase),
+                remoteMediator = EditorChoiceRemoteMediator(recipesAPI, appDatabase),
                 pagingSourceFactory = pagingSourceFactory
             ).flow.map { pagingData ->
                 pagingData.map {
@@ -181,10 +184,13 @@ class DefaultFeedRepository @Inject constructor(
     }
 
     override suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>> {
-        return  execute {
-            val pagingSourceFactory={recipeDao.getRecipeComments(recipeID)}
-            Pager(config = PAGE_CONFIG, remoteMediator = CommentRemoteMediator(editorChoiceRecipesAPI,appDatabase,recipeID),
-            pagingSourceFactory = pagingSourceFactory).flow.map { pagingData->
+        return execute {
+            val pagingSourceFactory = { commentDao.getRecipeComments(recipeID) }
+            Pager(
+                config = PAGE_CONFIG,
+                remoteMediator = CommentRemoteMediator(recipesAPI, appDatabase, recipeID),
+                pagingSourceFactory = pagingSourceFactory
+            ).flow.map { pagingData ->
                 pagingData.map { it.toDomainModel() }
             }
         }

@@ -1,15 +1,9 @@
 package com.sadikahmetozdemir.data.shared.repositories
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.sadikahmetozdemir.data.mappers.toDomainModel
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
-import kotlinx.coroutines.flow.Flow
 
 class FavoritesPagingSource(private var feedRepository: FeedRepository) :
     PagingSource<Int,Category>() {

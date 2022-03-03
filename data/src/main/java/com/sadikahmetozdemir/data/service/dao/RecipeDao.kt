@@ -1,4 +1,4 @@
-package com.sadikahmetozdemir.data.service
+package com.sadikahmetozdemir.data.service.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
@@ -18,11 +18,6 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLastAdded(recipes: List<RecipeDatabase>?)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertComments(comments: List<CommentDatabase>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategories(category: List<CategoryDatabase>)
 
     @Query("select * from recipes where is_editor_choice = 1 order by id desc ")
     fun getEditorChoices(): PagingSource<Int, RecipeDatabase>
@@ -48,8 +43,6 @@ interface RecipeDao {
     @Query("DELETE FROM recipes")
     suspend fun deleteComments()
 
-    @Query("select * from comments where recipe_id =:recipeId order by id desc")
-     fun getRecipeComments(recipeId: Int): PagingSource<Int, CommentDatabase>
 
 
 }

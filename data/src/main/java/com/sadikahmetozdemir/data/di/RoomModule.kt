@@ -3,13 +3,12 @@ package com.sadikahmetozdemir.data.di
 import android.content.Context
 import androidx.room.Room
 import com.sadikahmetozdemir.data.BuildConfig
-import com.sadikahmetozdemir.data.service.RecipeDao
-import com.sadikahmetozdemir.data.service.UserDao
-import com.sadikahmetozdemir.data.shared.local.converters.CategoryConverter
+import com.sadikahmetozdemir.data.service.dao.CommentDao
+import com.sadikahmetozdemir.data.service.dao.RecipeDao
+import com.sadikahmetozdemir.data.service.dao.UserDao
 import com.sadikahmetozdemir.data.shared.local.converters.ImageConverter
 import com.sadikahmetozdemir.data.shared.local.converters.ImageListConverter
 import com.sadikahmetozdemir.data.shared.local.converters.RecipeListConverter
-import com.sadikahmetozdemir.data.shared.local.converters.UserConverter
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -32,6 +31,12 @@ object RoomModule {
     @Singleton
     fun provideUserDao(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCommentDao(appDatabase: AppDatabase): CommentDao {
+        return appDatabase.commentDao()
     }
 
     @Provides
@@ -61,7 +66,7 @@ object RoomModule {
         imageListConverter: ImageListConverter,
         recipeListConverter: RecipeListConverter,
 
-    ): AppDatabase {
+        ): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,

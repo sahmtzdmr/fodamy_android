@@ -3,7 +3,7 @@ package com.sadikahmetozdemir.data.shared.repositories
 import com.sadikahmetozdemir.data.mappers.toDomainModel
 import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.service.UserAPI
-import com.sadikahmetozdemir.data.service.UserDao
+import com.sadikahmetozdemir.data.service.dao.UserDao
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.UserProfile
 import com.sadikahmetozdemir.domain.repositories.UserRepository
