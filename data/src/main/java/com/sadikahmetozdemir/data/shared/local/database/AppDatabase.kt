@@ -14,7 +14,9 @@ import com.sadikahmetozdemir.data.shared.local.converters.UserConverter
 import com.sadikahmetozdemir.data.shared.local.dto.CategoryDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.CommentDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.RecipeDatabase
-import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyCommentDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyEditorChoiceDatabase
+import com.sadikahmetozdemir.data.shared.local.dto.RemoteKeyLastAddedDatabase
 import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 
 @Database(
@@ -23,9 +25,11 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
         CategoryDatabase::class,
         CommentDatabase::class,
         UserDatabase::class,
-        RemoteKeyDatabase::class
+        RemoteKeyEditorChoiceDatabase::class,
+        RemoteKeyLastAddedDatabase::class,
+        RemoteKeyCommentDatabase::class
     ],
-    version = 17
+    version = 18
 
 )
 @TypeConverters(
@@ -38,5 +42,5 @@ import com.sadikahmetozdemir.data.shared.local.dto.UserDatabase
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
     abstract fun userDao(): UserDao
-    abstract fun remoteKeyDao():RemoteKeyDao
+    abstract fun remoteKeyDao(): RemoteKeyDao
 }
