@@ -16,6 +16,9 @@ interface RecipeDao {
     suspend fun insertRecipes(recipes: List<RecipeDatabase>?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLastAdded(recipes: List<RecipeDatabase>?)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComments(comments: List<CommentDatabase>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -37,7 +40,13 @@ interface RecipeDao {
     suspend fun getCategories(): List<CategoryDatabase>
 
     @Query("DELETE FROM recipes")
-    suspend fun deleteAll()
+    suspend fun deleteEditorChoices()
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteLastAddeds()
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteComments()
 
     @Query("select * from comments where recipe_id =:recipeId order by id desc")
      fun getRecipeComments(recipeId: Int): PagingSource<Int, CommentDatabase>

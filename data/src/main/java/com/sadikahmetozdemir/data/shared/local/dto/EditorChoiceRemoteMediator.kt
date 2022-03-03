@@ -40,13 +40,13 @@ class EditorChoiceRemoteMediator(
             val isEndOfList = response.data.isEmpty()
             appDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    appDatabase.recipeDao().deleteAll()
+                    appDatabase.recipeDao().deleteEditorChoices()
                     appDatabase.remoteKeyDao().deleteEditorChoice()
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
                 val keys = response.data.map {
-                    RemoteKeyDatabase(it.id, prevKey, nextKey)
+                    RemoteKeyEditorChoiceDatabase(it.id, prevKey, nextKey)
 
                 }
                 appDatabase.remoteKeyDao().insertEditorChoice(keys)
@@ -74,19 +74,19 @@ class EditorChoiceRemoteMediator(
             LoadType.APPEND -> {
                 val remoteKeys = getLastRemoteKey(state)
                 val nextKey = remoteKeys?.nextKey
-                return nextKey ?: MediatorResult.Success(endOfPaginationReached = false)
+                return nextKey ?: MediatorResult.Success(remoteKeys!=null)
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getFirstRemoteKey(state)
                 val prevKey = remoteKeys?.prevKey ?: return MediatorResult.Success(
-                    endOfPaginationReached = false
+                    remoteKeys!=null
                 )
                 prevKey
             }
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RecipeDatabase>): RemoteKeyEditorChoiceDatabase? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { repoId ->
                 appDatabase.remoteKeyDao().remoteKeysEditorChoiceId(repoId)
@@ -94,7 +94,7 @@ class EditorChoiceRemoteMediator(
         }
     }
 
-    private suspend fun getLastRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
+    private suspend fun getLastRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyEditorChoiceDatabase? {
         return state.pages
             .lastOrNull { it.data.isNotEmpty() }
             ?.data?.lastOrNull()
@@ -103,7 +103,7 @@ class EditorChoiceRemoteMediator(
             }
     }
 
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyDatabase? {
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, RecipeDatabase>): RemoteKeyEditorChoiceDatabase? {
         return state.pages
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()

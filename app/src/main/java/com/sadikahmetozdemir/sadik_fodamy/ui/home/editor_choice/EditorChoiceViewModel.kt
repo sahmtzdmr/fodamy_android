@@ -31,10 +31,7 @@ class EditorChoiceViewModel @Inject constructor(private val feedRepository: Feed
     private fun getEditorChoice() {
         sendRequest(
             request = {
-                Pager(config = PAGE_CONFIG, pagingSourceFactory = {
-                    RecipePagingSource(feedRepository)
-                }).flow
-//                feedRepository.getEditorChoicesFromMediator()
+                feedRepository.getEditorChoicesFromMediator()
             },
             success = {
                 viewModelScope.launch {
