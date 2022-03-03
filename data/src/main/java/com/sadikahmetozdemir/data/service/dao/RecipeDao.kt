@@ -31,17 +31,8 @@ interface RecipeDao {
     @Query("select * from recipes where is_last_added=1 order by id desc")
     fun getLastAddedFromApi(): List<RecipeDatabase>
 
-    @Query("select * from categories")
-    suspend fun getCategories(): List<CategoryDatabase>
-
-    @Query("DELETE FROM recipes")
-    suspend fun deleteEditorChoices()
-
-    @Query("DELETE FROM recipes")
-    suspend fun deleteLastAddeds()
-
-    @Query("DELETE FROM recipes")
-    suspend fun deleteComments()
+    @Query("select * from recipes where id =:recipeId ")
+    suspend fun getRecipeDetails(recipeId: Int): RecipeDatabase
 
 
 

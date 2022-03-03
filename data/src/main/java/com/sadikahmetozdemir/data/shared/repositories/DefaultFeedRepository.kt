@@ -53,7 +53,7 @@ class DefaultFeedRepository @Inject constructor(
             if (local?.isNotEmpty() == true) {
                 local
             } else {
-                val remote = recipesAPI.editorChoicesRecipesRequest(page).data
+                val remote = recipesAPI.lastAddedRecipesRequest(page).data
                 saveToLocal { recipeDao.insertRecipes(remote.map { it.toLocalDto(isLastAdded = true) }) }
                 remote.map { it.toDomaninModel() }
             }
@@ -62,8 +62,14 @@ class DefaultFeedRepository @Inject constructor(
 
     override suspend fun getRecipeDetail(recipeID: Int): Recipe {
         return execute {
-            recipesAPI.recipeDetailsRequest(recipeID).toDomaninModel()
-
+            val local =
+                fetchFromLocal { recipeDao.getRecipeDetails(recipeID).toDomainModel() }
+            if (local != null) {
+                local
+            } else {
+                val remote = recipesAPI.recipeDetailsRequest(recipeID)
+                remote.toDomaninModel()
+            }
         }
     }
 
@@ -117,7 +123,7 @@ class DefaultFeedRepository @Inject constructor(
             recipesAPI.getRecipeComments(
                 categoryID,
                 page
-            ).data?.map { it.toDomainModel() }!!
+            ).data.map { it.toDomainModel() }
         }
     }
 

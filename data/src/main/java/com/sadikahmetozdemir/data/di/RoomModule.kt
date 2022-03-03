@@ -64,7 +64,6 @@ object RoomModule {
         @ApplicationContext context: Context,
         imageConverter: ImageConverter,
         imageListConverter: ImageListConverter,
-        recipeListConverter: RecipeListConverter,
 
         ): AppDatabase {
         return Room.databaseBuilder(
@@ -72,7 +71,6 @@ object RoomModule {
             AppDatabase::class.java,
             BuildConfig.DBNAME
         ).fallbackToDestructiveMigration()
-            .addTypeConverter(recipeListConverter)
             .addTypeConverter(imageConverter)
             .addTypeConverter(imageListConverter)
             .build()
