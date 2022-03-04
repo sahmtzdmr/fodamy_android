@@ -36,7 +36,7 @@ class EditorChoiceAdapter @Inject constructor() :
             binding.apply {
 
                 binding.foodImage.setOnClickListener {
-                    item.id.let { it1 -> itemClicked?.invoke(it1) }
+                    itemClicked?.invoke(item.id)
                 }
                 tvUsername.text = item.user?.username
                 tvFoodTitle.text = item.title
