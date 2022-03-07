@@ -3,11 +3,9 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.comment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.sadikahmetozdemir.data.shared.repositories.RecipeCommentsPagingSource
 import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
@@ -34,14 +32,12 @@ class RecipeCommentsViewModel @Inject constructor(
     fun getRecipeCommentsItem() {
         sendRequest(
             request = {
-                Pager(config = PAGE_CONFIG, pagingSourceFactory = {
-                    RecipeCommentsPagingSource(feedRepository, recipeID)
-                }).flow
+                feedRepository.getRecipeCommentFromMediator(recipeID)
             }, success = {
-            viewModelScope.launch {
-                it.cachedIn(viewModelScope).collect { recipes.value = it }
+                viewModelScope.launch {
+                    it.cachedIn(viewModelScope).collect { recipes.value = it }
+                }
             }
-        }
         )
     }
 
@@ -78,9 +74,16 @@ class RecipeCommentsViewModel @Inject constructor(
             }, success = { it?.message?.let { it1 -> showMessage(it1) } })
         }
     }
+
     fun toDialog() {
-        navigate(RecipeCommentsFragmentDirections.tocommentDialogFragment(comment.value!!, recipeID))
+        navigate(
+            RecipeCommentsFragmentDirections.tocommentDialogFragment(
+                comment.value!!,
+                recipeID
+            )
+        )
     }
+
     fun toUserProfile(userID: Int) {
         navigate(RecipeCommentsFragmentDirections.toUserProfile(userID))
     }

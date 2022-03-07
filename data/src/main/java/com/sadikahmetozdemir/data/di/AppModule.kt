@@ -2,7 +2,7 @@ package com.sadikahmetozdemir.data.di
 
 
 import com.sadikahmetozdemir.data.BuildConfig
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
+import com.sadikahmetozdemir.data.service.RecipesAPI
 import com.sadikahmetozdemir.data.service.LoginAPI
 import com.sadikahmetozdemir.data.service.UserAPI
 import com.sadikahmetozdemir.data.shared.utils.BASE_URL
@@ -32,7 +32,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFeedService(retrofitClient: Retrofit) =
-        retrofitClient.create(EditorChoiceRecipesAPI::class.java)
+        retrofitClient.create(RecipesAPI::class.java)
 
     @Provides
     @Singleton

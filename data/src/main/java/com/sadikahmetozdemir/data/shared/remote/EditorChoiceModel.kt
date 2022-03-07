@@ -41,11 +41,11 @@ data class EditorChoiceModel(
     @SerializedName("images")
     var images: List<ImagesModel>?,
     @SerializedName("is_liked")
-    var isLiked: Boolean,
+    var haveLiked: Boolean,
     @SerializedName("text")
     var text: String?,
     @SerializedName("language")
-    var language: String,
+    var language: String?,
     @SerializedName("is_top_user_choice")
     var isTopUserChoice: Boolean,
 )

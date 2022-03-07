@@ -6,7 +6,7 @@ import com.sadikahmetozdemir.data.shared.local.User
 
 data class CommentModel(
     @SerializedName("id")
-    var id: Int?,
+    var id: Int,
     @SerializedName("text")
     var text: String?,
     @SerializedName("difference")

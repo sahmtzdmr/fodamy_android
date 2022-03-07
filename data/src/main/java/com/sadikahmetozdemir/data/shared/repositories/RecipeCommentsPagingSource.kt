@@ -2,8 +2,6 @@ package com.sadikahmetozdemir.data.shared.repositories
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.sadikahmetozdemir.data.mappers.toDomainModel
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 

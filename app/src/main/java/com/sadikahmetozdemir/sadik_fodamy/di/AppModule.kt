@@ -2,9 +2,14 @@ package com.sadikahmetozdemir.sadik_fodamy.di
 
 import DefaultFeedRepository
 import android.content.Context
-import com.sadikahmetozdemir.data.service.EditorChoiceRecipesAPI
+import androidx.paging.ExperimentalPagingApi
 import com.sadikahmetozdemir.data.service.LoginAPI
+import com.sadikahmetozdemir.data.service.RecipesAPI
 import com.sadikahmetozdemir.data.service.UserAPI
+import com.sadikahmetozdemir.data.service.dao.CommentDao
+import com.sadikahmetozdemir.data.service.dao.RecipeDao
+import com.sadikahmetozdemir.data.service.dao.UserDao
+import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
 import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
 import com.sadikahmetozdemir.data.utils.DataHelperManager
@@ -36,8 +41,14 @@ object AppModule {
     }
 
     @Provides
-    fun provideFeedRepository(editorChoiceRecipesAPI: EditorChoiceRecipesAPI): FeedRepository {
-        return DefaultFeedRepository(editorChoiceRecipesAPI)
+    @ExperimentalPagingApi
+    fun provideFeedRepository(
+        recipesAPI: RecipesAPI,
+        recipeDao: RecipeDao,
+        commentDao: CommentDao,
+        appDatabase: AppDatabase
+    ): FeedRepository {
+        return DefaultFeedRepository(recipesAPI, recipeDao, commentDao, appDatabase)
     }
 
     @Provides
@@ -52,9 +63,10 @@ object AppModule {
         return CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
 
+
     @Provides
     @Singleton
-    fun provideUserRepository(userAPI: UserAPI): UserRepository {
-        return DefaultUserRepository(userAPI)
+    fun provideUserRepository(userAPI: UserAPI, userDao: UserDao): UserRepository {
+        return DefaultUserRepository(userAPI, userDao)
     }
 }

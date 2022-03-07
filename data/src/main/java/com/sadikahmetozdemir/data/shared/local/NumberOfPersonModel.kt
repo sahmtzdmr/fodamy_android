@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class NumberOfPersonModel(
     @SerializedName("id")
-    var id: Int?,
+    var id: Int,
     @SerializedName("text")
-    var text: String?
+    var text: String
 )

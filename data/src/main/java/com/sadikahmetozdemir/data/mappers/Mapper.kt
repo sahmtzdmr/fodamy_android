@@ -10,6 +10,7 @@ import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CategoryModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.data.shared.remote.LoginRequestModel
 import com.sadikahmetozdemir.data.shared.remote.LoginResponseModel
 import com.sadikahmetozdemir.data.shared.remote.LogoutModel
@@ -47,9 +48,9 @@ fun LoginResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Lo
 
 fun ImagesModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
     com.sadikahmetozdemir.domain.entities.Images(
-        height = this.height,
-        url = this.url,
-        width = this.width
+        height = this.height?:0,
+        url = this.url?:"",
+        width = this.width?:0
 
     )
 
@@ -72,26 +73,26 @@ fun RegisterResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities
 fun NumberOfPersonModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.NumberOfPerson =
     com.sadikahmetozdemir.domain.entities.NumberOfPerson(
         id = this.id,
-        text = this.text
+        text = this.text?:""
     )
 
 fun TimeOfRecipeModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.TimeOfRecipe =
     com.sadikahmetozdemir.domain.entities.TimeOfRecipe(
         id = this.id,
-        text = this.text
+        text = this.text?:""
     )
 
 fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Category =
     com.sadikahmetozdemir.domain.entities.Category(
         id = this.id,
-        name = this.name,
+        name = this.name?:"",
         image = this.image?.toDomainModel(),
         recipes = this.recipes?.map { it.toDomaninModel() }
 
 
     )
 
-fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel(): Recipe =
+fun EditorChoiceModel.toDomaninModel(): Recipe =
     Recipe(
         id = this.id,
         title = this.title ?: "",
@@ -100,11 +101,9 @@ fun com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel.toDomaninModel():
         directions = this.directions ?: "",
         difference = this.difference ?: "",
         isEditorChoice = this.isEditorChoice,
-        haveLiked = this.isLiked,
+        haveLiked = this.haveLiked,
         likeCount = this.likeCount ?: 0,
-        numberOfFavoriteCount = this.numberOfFavoriteCount.toString(),
         commentCount = this.commentCount ?: 0,
-        category = this.categoryModel?.toDomainModel(),
         user = this.user?.toDomainModel(),
         timeOfRecipe = this.timeOfRecipe?.toDomainModel(),
         numberOfPerson = this.numberOfPerson?.toDomainModel(),
@@ -153,7 +152,7 @@ fun PaginationModel.toDomainModel(): Pagination =
 fun CommentResponseModel.toDomainModel(): CommentResponse =
     CommentResponse(
         data = this.data?.map { it.toDomainModel() },
-        pagination = this.pagination?.toDomainModel()!!
+        pagination = this.pagination?.toDomainModel()
     )
 
 fun UserImageModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
