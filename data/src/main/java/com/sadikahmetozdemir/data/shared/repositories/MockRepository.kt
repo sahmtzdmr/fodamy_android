@@ -24,10 +24,11 @@ import javax.inject.Inject
 class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
     AuthRepository,
     FeedRepository,
-    UserRepository {
+    UserRepository, BaseRepository() {
     override suspend fun loginRequest(loginRequest: LoginRequest): LoginResponseModel {
-        val jsonData = jsonReader.readJson(AUTH_LOGIN_SUCCESS)
-        return fromJson<com.sadikahmetozdemir.data.shared.remote.LoginResponseModel>(jsonData).toDomainModel()
+        return execute {
+            val jsonData = jsonReader.readJson(AUTH_LOGIN_SUCCESS)
+             fromJson<com.sadikahmetozdemir.data.shared.remote.LoginResponseModel>(jsonData).toDomainModel() }
     }
 
     override suspend fun registerRequest(registerRequest: RegisterRequest): Auth {
