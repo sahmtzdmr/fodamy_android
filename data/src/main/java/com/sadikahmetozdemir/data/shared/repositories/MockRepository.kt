@@ -2,8 +2,15 @@ package com.sadikahmetozdemir.data.shared.repositories
 
 import androidx.paging.PagingData
 import com.sadikahmetozdemir.data.mappers.toDomainModel
+import com.sadikahmetozdemir.data.mappers.toDomaninModel
 import com.sadikahmetozdemir.data.shared.local.converters.fromJson
+import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
+import com.sadikahmetozdemir.data.shared.remote.LogoutModel
+import com.sadikahmetozdemir.data.shared.remote.RegisterResponseModel
 import com.sadikahmetozdemir.data.shared.utils.AUTH_LOGIN_SUCCESS
+import com.sadikahmetozdemir.data.shared.utils.AUTH_LOGOUT_ERROR
+import com.sadikahmetozdemir.data.shared.utils.AUTH_REGISTER_SUCCESS
+import com.sadikahmetozdemir.data.shared.utils.FEED_RECIPE_SUCCESS
 import com.sadikahmetozdemir.data.utils.JsonReader
 import com.sadikahmetozdemir.domain.entities.Auth
 import com.sadikahmetozdemir.domain.entities.BaseModel
@@ -28,27 +35,43 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
     override suspend fun loginRequest(loginRequest: LoginRequest): LoginResponseModel {
         return execute {
             val jsonData = jsonReader.readJson(AUTH_LOGIN_SUCCESS)
-             fromJson<com.sadikahmetozdemir.data.shared.remote.LoginResponseModel>(jsonData).toDomainModel() }
+            fromJson<com.sadikahmetozdemir.data.shared.remote.LoginResponseModel>(jsonData).toDomainModel()
+        }
     }
 
     override suspend fun registerRequest(registerRequest: RegisterRequest): Auth {
-        TODO("Not yet implemented")
+        return execute {
+            val jsonData = jsonReader.readJson(AUTH_REGISTER_SUCCESS)
+            fromJson<RegisterResponseModel>(jsonData).toDomainModel()
+        }
     }
 
     override suspend fun logoutRequest(): Logout {
-        TODO("Not yet implemented")
+        return execute {
+            val jsonData = jsonReader.readJson(AUTH_LOGOUT_ERROR)
+            fromJson<LogoutModel>(jsonData).toDomainModel()
+        }
     }
 
     override suspend fun feedRequest(page: Int): List<Recipe> {
-        TODO("Not yet implemented")
+        return listOf(execute {
+            val jsonData = jsonReader.readJson(FEED_RECIPE_SUCCESS)
+            fromJson<EditorChoiceModel>(jsonData).toDomaninModel()
+        })
     }
 
     override suspend fun lastAddedRequest(page: Int): List<Recipe> {
-        TODO("Not yet implemented")
+        return listOf(execute {
+            val jsonData = jsonReader.readJson(FEED_RECIPE_SUCCESS)
+            fromJson<EditorChoiceModel>(jsonData).toDomaninModel()
+        })
     }
 
     override suspend fun getRecipeDetail(recipeID: Int): Recipe {
-        TODO("Not yet implemented")
+        return execute {
+            val jsonData=jsonReader.readJson(FEED_RECIPE_SUCCESS)
+            fromJson<EditorChoiceModel>(jsonData).toDomaninModel()
+        }
     }
 
     override suspend fun getRecipeDetailComment(recipeID: Int): Comment {

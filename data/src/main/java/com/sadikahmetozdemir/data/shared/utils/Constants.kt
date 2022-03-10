@@ -1,6 +1,5 @@
 package com.sadikahmetozdemir.data.shared.utils
 
-import android.content.res.AssetManager
 import com.sadikahmetozdemir.data.shared.remote.Result
 
 val ERROR_MESSAGE = Result("unknown", "warning")
@@ -9,3 +8,7 @@ var NETWORK_ERROR_MESSAGE =
 const val BASE_URL = "https://fodamy.mobillium.com/"
 val AUTH_LOGIN_SUCCESS = "auth_login_success.json"
 val AUTH_LOGIN_ERROR = "auth_login_error.json"
+val AUTH_REGISTER_SUCCESS = "auth_login_success.json"
+val AUTH_REGISTER_ERROR = "auth_login_success.json"
+val AUTH_LOGOUT_ERROR = "auth_logout_success.json"
+val FEED_RECIPE_SUCCESS = "feed_recipe_success.json"
