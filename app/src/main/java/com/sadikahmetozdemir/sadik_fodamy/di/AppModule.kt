@@ -12,7 +12,9 @@ import com.sadikahmetozdemir.data.service.dao.UserDao
 import com.sadikahmetozdemir.data.shared.local.database.AppDatabase
 import com.sadikahmetozdemir.data.shared.repositories.DefaultAuthRepository
 import com.sadikahmetozdemir.data.shared.repositories.DefaultUserRepository
+import com.sadikahmetozdemir.data.shared.repositories.MockRepository
 import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.data.utils.JsonReader
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.repositories.UserRepository
@@ -26,6 +28,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
 import javax.inject.Singleton
+
+val mockFlag = false
+
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
@@ -46,9 +51,15 @@ object AppModule {
         recipesAPI: RecipesAPI,
         recipeDao: RecipeDao,
         commentDao: CommentDao,
-        appDatabase: AppDatabase
+        appDatabase: AppDatabase,
+        jsonReader: JsonReader
     ): FeedRepository {
-        return DefaultFeedRepository(recipesAPI, recipeDao, commentDao, appDatabase)
+        if (mockFlag) {
+            return MockRepository(jsonReader)
+        } else {
+            return DefaultFeedRepository(recipesAPI, recipeDao, commentDao, appDatabase)
+        }
+
     }
 
     @Provides
