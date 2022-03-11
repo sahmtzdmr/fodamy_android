@@ -34,7 +34,7 @@ object Dependencies {
         "androidx.datastore:datastore-preferences:${Versions.DATASTORE_PREFERENCES}"
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE_BOM}"
     const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
-    const val FIREBASE_FCM = "com.google.firebase:firebase-messaging:${Versions.FIREBASE_FCM}"
+    const val FIREBASE_FCM = "com.google.firebase:firebase-messaging-ktx"
     const val FIREBASE_CRASHLYTCS = "com.google.firebase:firebase-crashlytics-ktx"
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"

@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -41,7 +42,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     fun createNotification(message: RemoteMessage) {
         val title = message.data[TITLE]
-        val description = message.data[DESCRIPTION]
+        val description = message.data[BODY]
         val notificationId = Random.nextInt()
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.fodamy_logo)
@@ -60,7 +61,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         const val CHANNEL_ID = "FodamyID"
         const val CHANNEL_NAME = "Fodamy"
         const val TITLE = "title"
-        const val DESCRIPTION = "description"
+        const val BODY = "body"
 
 
     }
