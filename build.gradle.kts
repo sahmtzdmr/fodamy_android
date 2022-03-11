@@ -13,6 +13,7 @@ buildscript {
         classpath(Dependencies.KTLINT_GRADLE)
         classpath (Dependencies.GOOGLE_SERVICES)
         classpath (Dependencies.CRASHLYTCS_GRADLE)
+        classpath("com.google.gms:google-services:4.3.3")
 
 
         // NOTE: Do not place your application dependencies here; they belong

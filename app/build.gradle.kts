@@ -8,6 +8,7 @@ plugins {
     id(Plugins.KTLINT)
     id(Plugins.FIREBASE_BOM)
     id(Plugins.FIREBASE_CRASHLYTCS)
+
 }
 
 android {
@@ -66,6 +67,7 @@ dependencies {
     implementation(Dependencies.LIFECYCLE_VIEWMODEL)
     implementation(Dependencies.ACTIVITY_KTX)
     implementation(Dependencies.DAGGER_HILT)
+    implementation(Dependencies.FIREBASE_FCM)
     kapt(Dependencies.DAGGER_HILT_COMPILER)
 //    implementation (Dependencies.HILT_LIFECYCLE_VIEWMODEL)
     implementation(Dependencies.PAGING)
