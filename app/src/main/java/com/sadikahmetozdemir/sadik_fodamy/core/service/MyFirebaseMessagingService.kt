@@ -62,7 +62,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         const val CHANNEL_NAME = "Fodamy"
         const val TITLE = "title"
         const val BODY = "body"
-
-
+        
     }
 }
