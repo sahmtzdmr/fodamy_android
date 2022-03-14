@@ -9,5 +9,6 @@ object Plugins {
     const val ANDROID_LIBRARY = "com.android.library"
     const val FIREBASE_BOM="com.google.gms.google-services"
     const val FIREBASE_CRASHLYTCS="com.google.firebase.crashlytics"
+    const val GOOGLE_SERVICES="com.google.gms.google-services"
 
 }
