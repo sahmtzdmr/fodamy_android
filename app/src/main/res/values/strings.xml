@@ -60,6 +60,9 @@
     <string name="no_follower">0 Takipçi</string>
     <string name="food_title">Makarna Tarifi</string>
     <string name="type_of_food">Hamur işi</string>
+    <string name="title">Başlık</string>
+    <string name="ingredients">Malzemeler</string>
+    <string name="directions">Yapılışı</string>
 
 
 
