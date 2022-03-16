@@ -34,10 +34,10 @@ class RecipeCommentsViewModel @Inject constructor(
             request = {
                 feedRepository.getRecipeCommentFromMediator(recipeID)
             }, success = {
-                viewModelScope.launch {
-                    it.cachedIn(viewModelScope).collect { recipes.value = it }
-                }
+            viewModelScope.launch {
+                it.cachedIn(viewModelScope).collect { recipes.value = it }
             }
+        }
         )
     }
 

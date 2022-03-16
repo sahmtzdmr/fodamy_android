@@ -9,7 +9,6 @@ plugins {
     id(Plugins.FIREBASE_BOM)
     id(Plugins.FIREBASE_CRASHLYTCS)
     id("org.jetbrains.kotlin.android")
-
 }
 
 android {
@@ -47,7 +46,7 @@ android {
         jvmTarget = "1.8"
     }
     packagingOptions {
-      exclude("META-INF/*")
+        exclude("META-INF/*")
     }
 }
 

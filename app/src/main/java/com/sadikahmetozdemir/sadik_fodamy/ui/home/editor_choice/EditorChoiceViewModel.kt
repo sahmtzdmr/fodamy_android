@@ -2,16 +2,12 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.home.editor_choice
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.sadikahmetozdemir.data.shared.repositories.FavoritesPagingSource
-import com.sadikahmetozdemir.data.shared.repositories.RecipePagingSource
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseViewModel
-import com.sadikahmetozdemir.sadik_fodamy.ui.favorites.FavoritesViewModel
 import com.sadikahmetozdemir.sadik_fodamy.ui.home.main.HomeTablayoutFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect

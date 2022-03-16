@@ -46,7 +46,6 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel> construct
         )[viewModelClass]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

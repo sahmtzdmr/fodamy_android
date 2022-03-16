@@ -24,7 +24,6 @@ class PostRecipeViewModel @Inject constructor(
     init {
         getRecipeTime()
         getRecipeNumber()
-
     }
 
     private fun getRecipeTime() {
@@ -32,7 +31,6 @@ class PostRecipeViewModel @Inject constructor(
             request = { feedRepository.getRecipeTime() },
             success = {
                 timeOfRecipes.value = it
-
             }
         )
     }
