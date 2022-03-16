@@ -25,8 +25,10 @@ import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.LoginResponseModel
 import com.sadikahmetozdemir.domain.entities.Logout
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.RegisterRequest
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.entities.UserProfile
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
@@ -157,6 +159,14 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
     }
 
     override suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getRecipeServing(): List<NumberOfPerson> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getRecipeTime(): List<TimeOfRecipe> {
         TODO("Not yet implemented")
     }
 

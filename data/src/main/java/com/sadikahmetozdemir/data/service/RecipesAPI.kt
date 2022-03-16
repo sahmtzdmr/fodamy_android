@@ -78,9 +78,9 @@ interface RecipesAPI {
         @Query("text") text: String
     ): Response<BaseModel>
 
-    @GET("serving")
+    @GET("api/serving")
     suspend fun getRecipeServing(): RecipeServingModel
 
-    @GET("time")
+    @GET("api/time")
     suspend fun getRecipeTimes(): RecipeTimeModel
 }

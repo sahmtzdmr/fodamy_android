@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe.PostRecipeViewModel" />
+
     </data>
 
     <ScrollView
@@ -52,7 +56,7 @@
                     android:ems="10"
                     android:hint="@string/title"
                     android:inputType="text"
-                    android:text="@={vM.username}"
+                    android:text="@={vM.title}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textInputLayoutTitle" />
@@ -80,7 +84,7 @@
                     android:ems="10"
                     android:hint="@string/ingredients"
                     android:inputType="text"
-                    android:text="@={vM.username}"
+                    android:text="@={vM.ingredients}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textInputLayoutIngredients" />
@@ -110,7 +114,7 @@
                     android:ems="10"
                     android:hint="@string/directions"
                     android:inputType="text"
-                    android:text="@={vM.username}"
+                    android:text="@={vM.directions}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textInputLayoutIngredients" />
@@ -120,13 +124,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_height="wrap_content"
                 android:layout_width="0dp"
-                app:layout_constraintHorizontal_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toStartOf="@id/til_number_of_people"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutDirections">
 
@@ -143,11 +147,11 @@
                 android:id="@+id/til_number_of_people"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                app:layout_constraintHorizontal_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toStartOf="@id/til_time_of_recipe"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/til_category"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutDirections">
 
@@ -164,11 +168,11 @@
                 android:id="@+id/til_time_of_recipe"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
-                app:layout_constraintHorizontal_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@id/til_number_of_people"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutDirections">
 

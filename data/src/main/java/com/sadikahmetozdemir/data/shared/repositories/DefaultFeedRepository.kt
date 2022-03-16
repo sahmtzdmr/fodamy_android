@@ -18,6 +18,7 @@ import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -204,8 +205,14 @@ class DefaultFeedRepository @Inject constructor(
     }
 
     override suspend fun getRecipeServing(): List<NumberOfPerson> {
-      return execute {
+        return execute {
             recipesAPI.getRecipeServing().data.map { it.toDomainModel() }
+        }
+    }
+
+    override suspend fun getRecipeTime(): List<TimeOfRecipe> {
+        return execute {
+            recipesAPI.getRecipeTimes().data.map { it.toDomainModel() }
         }
     }
 

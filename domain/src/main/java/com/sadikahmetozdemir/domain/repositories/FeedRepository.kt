@@ -6,6 +6,7 @@ import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import kotlinx.coroutines.flow.Flow
 
 
@@ -29,5 +30,6 @@ interface FeedRepository {
     suspend fun getEditorChoicesFromMediator(): Flow<PagingData<Recipe>>
     suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>>
     suspend fun getRecipeServing(): List<NumberOfPerson>
+    suspend fun getRecipeTime(): List<TimeOfRecipe>
 
 }

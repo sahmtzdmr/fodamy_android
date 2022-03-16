@@ -1,12 +1,11 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import com.sadikahmetozdemir.sadik_fodamy.R
+import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
+import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentPostRecipeBinding
 
-class PostRecipeFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+class PostRecipeFragment :
+    BaseFragment<FragmentPostRecipeBinding, PostRecipeViewModel>(R.layout.fragment_post_recipe) {
+        
 }
