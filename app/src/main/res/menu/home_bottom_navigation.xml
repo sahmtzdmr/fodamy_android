@@ -5,20 +5,18 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_icon"
-        android:title="Home"
-        />
+        android:title="Home" />
     <item
         android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_heart_icon"
-        android:title="Favoriler"
-        /><item
+        android:title="Favoriler" />
+    <item
         android:id="@+id/navigation_user"
         android:icon="@drawable/ic_user_icon"
-        android:title="Kullanıcı"
-        /><item
-        android:id="@+id/menu"
+        android:title="Kullanıcı" />
+    <item
+        android:id="@+id/navigation_post_recipe"
         android:icon="@drawable/ic_menu_icon"
-        android:title="Menü"
-        />
+        android:title="Menü" />
 
 </menu>

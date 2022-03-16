@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_post_recipe"
+    app:startDestination="@id/postRecipeFragment">
+
+    <fragment
+        android:id="@+id/postRecipeFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe.PostRecipeFragment"
+        android:label="PostRecipeFragment" />
+</navigation>
