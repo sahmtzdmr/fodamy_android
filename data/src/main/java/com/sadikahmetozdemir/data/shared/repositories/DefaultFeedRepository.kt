@@ -16,6 +16,7 @@ import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.LastAddedRemo
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
@@ -199,6 +200,12 @@ class DefaultFeedRepository @Inject constructor(
             ).flow.map { pagingData ->
                 pagingData.map { it.toDomainModel() }
             }
+        }
+    }
+
+    override suspend fun getRecipeServing(): List<NumberOfPerson> {
+      return execute {
+            recipesAPI.getRecipeServing().data.map { it.toDomainModel() }
         }
     }
 

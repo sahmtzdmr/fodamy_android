@@ -1,4 +1,7 @@
 package com.sadikahmetozdemir.data.service
+
+import com.sadikahmetozdemir.data.shared.local.RecipeServingModel
+import com.sadikahmetozdemir.data.shared.local.RecipeTimeModel
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
@@ -13,27 +16,30 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface  RecipesAPI {
+interface RecipesAPI {
 
     @GET("api/editor-choices")
-    suspend fun editorChoicesRecipesRequest(@Query("page")pageInt: Int): EditorChoiceResponseModel
+    suspend fun editorChoicesRecipesRequest(@Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/")
     suspend fun lastAddedRecipesRequest(@Query("page") pageInt: Int): EditorChoiceResponseModel
 
     @GET("api/recipe/{recipe_id}")
-    suspend fun recipeDetailsRequest(@Path("recipe_id")recipeID: Int): EditorChoiceModel
+    suspend fun recipeDetailsRequest(@Path("recipe_id") recipeID: Int): EditorChoiceModel
 
     @GET("api/recipe/{recipe_id}/comment")
-    suspend fun recipeDetailsCommentRequest(@Path("recipe_id")recipeID: Int): CommentResponseModel
+    suspend fun recipeDetailsCommentRequest(@Path("recipe_id") recipeID: Int): CommentResponseModel
 
     @GET("api/category-recipes")
 
-    suspend fun favoriteRecipesRequest(@Query("page")pageInt: Int): FavoritesResponseModel
+    suspend fun favoriteRecipesRequest(@Query("page") pageInt: Int): FavoritesResponseModel
 
     @GET("api/category/{category_id}/recipe")
 
-    suspend fun favoriteCategoriesDetailRequest(@Path("category_id")categoryID: Int, @Query("page")pageInt: Int): EditorChoiceResponseModel
+    suspend fun favoriteCategoriesDetailRequest(
+        @Path("category_id") categoryID: Int,
+        @Query("page") pageInt: Int
+    ): EditorChoiceResponseModel
 
     @POST("api/recipe/{recipe_id}/like")
     suspend fun userRecipeLikeRequest(@Path("recipe_id") recipeID: Int): BaseModel
@@ -48,14 +54,33 @@ interface  RecipesAPI {
     suspend fun userUnfollowing(@Path("followedId") followedID: Int): Response<BaseModel>
 
     @GET("api/recipe/{recipe_id}/comment")
-    suspend fun getRecipeComments(@Path("recipe_id") recipeID: Int, @Query("page") pageInt: Int): CommentResponseModel
+    suspend fun getRecipeComments(
+        @Path("recipe_id") recipeID: Int,
+        @Query("page") pageInt: Int
+    ): CommentResponseModel
 
     @POST("api/recipe/{recipe_id}/comment")
-    suspend fun postRecipeComments(@Path("recipe_id") recipeID: Int, @Query("text") text: String): Response<CommentModel>
+    suspend fun postRecipeComments(
+        @Path("recipe_id") recipeID: Int,
+        @Query("text") text: String
+    ): Response<CommentModel>
 
     @DELETE("api/recipe/{recipe_id}/comment/{comment_id}")
-    suspend fun deleteRecipeComments(@Path("recipe_id") recipeID: Int, @Path("comment_id") commentID: Int): Response<BaseModel>
+    suspend fun deleteRecipeComments(
+        @Path("recipe_id") recipeID: Int,
+        @Path("comment_id") commentID: Int
+    ): Response<BaseModel>
 
     @PUT("api/recipe/{recipe_id}/comment/{comment_id}")
-    suspend fun editRecipeComments(@Path("recipe_id")recipeID: Int, @Path("comment_id") commentID: Int, @Query("text") text: String): Response<BaseModel>
+    suspend fun editRecipeComments(
+        @Path("recipe_id") recipeID: Int,
+        @Path("comment_id") commentID: Int,
+        @Query("text") text: String
+    ): Response<BaseModel>
+
+    @GET("serving")
+    suspend fun getRecipeServing(): RecipeServingModel
+
+    @GET("time")
+    suspend fun getRecipeTimes(): RecipeTimeModel
 }

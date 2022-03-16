@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.post.PostRecipeFragment">
+            tools:context=".ui.add_recipe.PostRecipeFragment">
 
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -120,8 +120,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
@@ -141,7 +142,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_number_of_people"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
@@ -161,7 +163,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_time_of_recipe"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                app:layout_constraintHorizontal_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_10"
