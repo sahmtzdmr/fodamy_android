@@ -170,6 +170,10 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
         TODO("Not yet implemented")
     }
 
+    override suspend fun getRecipeCategory(): List<Category> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun userProfileRequest(userID: Int): UserProfile {
         TODO("Not yet implemented")
     }

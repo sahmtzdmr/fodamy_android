@@ -31,5 +31,6 @@ interface FeedRepository {
     suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>>
     suspend fun getRecipeServing(): List<NumberOfPerson>
     suspend fun getRecipeTime(): List<TimeOfRecipe>
+    suspend fun getRecipeCategory():List<Category>
 
 }

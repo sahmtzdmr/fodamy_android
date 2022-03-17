@@ -34,6 +34,14 @@ class PostRecipeFragment :
             )
 
         }
+        viewModel.category.observe(viewLifecycleOwner) { itCategory ->
+            binding.actvCategory.setAdapter(
+                ArrayAdapter(
+                    requireContext(), android.R.layout.simple_spinner_dropdown_item, itCategory
+                )
+            )
+
+        }
 
     }
 }

@@ -15,6 +15,7 @@ import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.EditorChoiceR
 import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.LastAddedRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
+import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
@@ -214,6 +215,13 @@ class DefaultFeedRepository @Inject constructor(
         return execute {
             recipesAPI.getRecipeTimes().data.map { it.toDomainModel() }
         }
+    }
+
+    override suspend fun getRecipeCategory(): List<Category> {
+        return (execute {
+            recipesAPI.getRecipeCategory().data.map { it.toDomainModel() }
+
+        })
     }
 
 

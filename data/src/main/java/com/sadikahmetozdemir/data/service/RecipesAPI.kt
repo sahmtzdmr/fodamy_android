@@ -1,8 +1,10 @@
 package com.sadikahmetozdemir.data.service
 
+import com.sadikahmetozdemir.data.shared.local.RecipeCategoryModel
 import com.sadikahmetozdemir.data.shared.local.RecipeServingModel
 import com.sadikahmetozdemir.data.shared.local.RecipeTimeModel
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
+import com.sadikahmetozdemir.data.shared.remote.CategoryModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
@@ -83,4 +85,7 @@ interface RecipesAPI {
 
     @GET("api/time")
     suspend fun getRecipeTimes(): RecipeTimeModel
+
+    @GET("api/category")
+    suspend fun getRecipeCategory(): RecipeCategoryModel
 }

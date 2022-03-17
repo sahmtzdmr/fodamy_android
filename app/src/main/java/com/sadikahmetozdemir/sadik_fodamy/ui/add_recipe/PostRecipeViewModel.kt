@@ -2,6 +2,7 @@ package com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe
 
 import androidx.lifecycle.MutableLiveData
 import com.sadikahmetozdemir.data.utils.DataHelperManager
+import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
@@ -16,7 +17,7 @@ class PostRecipeViewModel @Inject constructor(
 ) : BaseViewModel() {
     var timeOfRecipes = MutableLiveData<List<TimeOfRecipe>>()
     val numberOfRecipes = MutableLiveData<List<NumberOfPerson>>()
-    val numberOfRecipesText = MutableLiveData<List<String>>()
+    val category = MutableLiveData<List<Category>>()
     val title = MutableLiveData("")
     val ingredients = MutableLiveData("")
     val directions = MutableLiveData("")
@@ -24,6 +25,14 @@ class PostRecipeViewModel @Inject constructor(
     init {
         getRecipeTime()
         getRecipeNumber()
+        getCategoryId()
+    }
+
+    private fun getCategoryId() {
+        sendRequest(request = { feedRepository.getRecipeCategory() },
+            success = {
+                category.value = it
+            })
     }
 
     private fun getRecipeTime() {
