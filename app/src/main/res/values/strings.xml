@@ -63,7 +63,10 @@
     <string name="title">Başlık</string>
     <string name="ingredients">Malzemeler</string>
     <string name="directions">Yapılışı</string>
-
+    <string name="time_title">Süre</string>
+    <string name="number_of_person">- Kişilik</string>
+    <string name="category">Kategori</string>
+    <string name="add_recipe">Tarif Ekle</string>
 
 
 </resources>

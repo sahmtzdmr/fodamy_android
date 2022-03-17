@@ -17,18 +17,23 @@ class PostRecipeFragment :
     }
 
     fun initObservers() {
-        viewModel.numberOfRecipes.observe(viewLifecycleOwner) { itList ->
-//            val list= arrayListOf<String>()
-//            itList.forEach {
-//                it.text?.let { it1 -> list.add(it1) }
-//            }
+        viewModel.numberOfRecipes.observe(viewLifecycleOwner) { itNumber ->
             binding.actvNumberOfPeople.setAdapter(
                 ArrayAdapter(
                     requireContext(),
                     android.R.layout.simple_spinner_dropdown_item,
-                    itList
+                    itNumber
                 )
             )
         }
+        viewModel.timeOfRecipes.observe(viewLifecycleOwner) { itTime ->
+            binding.actvTimeOfRecipe.setAdapter(
+                ArrayAdapter(
+                    requireContext(), android.R.layout.simple_spinner_dropdown_item, itTime
+                )
+            )
+
+        }
+
     }
 }

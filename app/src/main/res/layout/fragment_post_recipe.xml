@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".ui.add_recipe.PostRecipeFragment">
 
 
@@ -29,7 +29,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="37dp"
                 android:layout_marginBottom="227dp"
-                android:src="@drawable/walkthrough_image_first"
+                android:src="@drawable/add_food"
                 app:layout_constraintBottom_toTopOf="@id/textInputLayoutTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +139,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:text="Hamur İşi" />
+                    android:text="@string/category"
+                    android:textSize="@dimen/text_size_14" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,7 +161,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:text="Hamur İşi" />
+                    android:text="@string/time_title"
+
+                    android:textSize="@dimen/text_size_14" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -181,7 +184,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
-                    android:text="Hamur İşi" />
+                    android:text="@string/number_of_person"
+                    android:textSize="@dimen/text_size_14" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -191,7 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_15"
-                android:text="@string/sign_in"
+                android:text="@string/add_recipe"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

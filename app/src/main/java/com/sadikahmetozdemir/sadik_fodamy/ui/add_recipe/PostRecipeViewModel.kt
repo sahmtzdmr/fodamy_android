@@ -40,11 +40,6 @@ class PostRecipeViewModel @Inject constructor(
             request = { feedRepository.getRecipeServing() },
             success = {
                 numberOfRecipes.value = it
-//                val textList = arrayListOf<String>()
-//                it.forEach {
-//                    it.text?.let { it1 -> textList.add(it1) }
-//                }
-//                numberOfRecipesText.value = textList
             }
         )
     }
