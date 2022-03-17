@@ -29,10 +29,12 @@ class PostRecipeViewModel @Inject constructor(
     }
 
     private fun getCategoryId() {
-        sendRequest(request = { feedRepository.getRecipeCategory() },
+        sendRequest(
+            request = { feedRepository.getRecipeCategory() },
             success = {
                 category.value = it
-            })
+            }
+        )
     }
 
     private fun getRecipeTime() {

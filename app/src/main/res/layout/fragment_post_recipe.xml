@@ -81,7 +81,7 @@
                     android:background="@color/cardview_light_background"
                     android:drawableStart="@drawable/ic_food_svgrepo_com"
                     android:drawablePadding="@dimen/padding_10"
-                    
+
                     android:ems="10"
                     android:hint="@string/ingredients"
                     android:inputType="textCapSentences|textMultiLine"
