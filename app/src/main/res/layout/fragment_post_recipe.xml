@@ -23,12 +23,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_food_image"
-                android:layout_width="@dimen/food_image_size"
-                android:layout_height="@dimen/food_image_size"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitCenter"
                 android:layout_marginStart="37dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="37dp"
-                android:layout_marginBottom="227dp"
                 android:src="@drawable/add_food"
                 app:layout_constraintBottom_toTopOf="@id/textInputLayoutTitle"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -47,13 +47,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_15"
-                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_48"
                     android:layout_marginEnd="@dimen/margin_15"
                     android:autofillHints="emailAddress"
                     android:background="@color/cardview_light_background"
                     android:drawableStart="@drawable/ic_baseline_title_"
                     android:drawablePadding="@dimen/padding_10"
-                    android:ems="10"
                     android:hint="@string/title"
                     android:inputType="text"
                     android:text="@={vM.title}"
@@ -74,6 +73,8 @@
                     android:id="@+id/et_food_ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_15"
                     android:layout_marginEnd="@dimen/margin_15"
@@ -81,14 +82,9 @@
                     android:background="@color/cardview_light_background"
                     android:drawableStart="@drawable/ic_food_svgrepo_com"
                     android:drawablePadding="@dimen/padding_10"
-
-                    android:ems="10"
                     android:hint="@string/ingredients"
                     android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="2000"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:lines="5"
                     android:maxLines="10"
                     android:text="@={vM.ingredients}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -117,13 +113,11 @@
                     android:background="@color/cardview_light_background"
                     android:drawableStart="@drawable/ic_chinese_food_svgrepo_com"
                     android:drawablePadding="@dimen/padding_10"
-                    android:ems="10"
                     android:hint="@string/directions"
                     android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="2000"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:lines="5"
                     android:maxLines="10"
                     android:text="@={vM.directions}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +132,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_48"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toStartOf="@id/til_number_of_people"
                 app:layout_constraintHorizontal_weight="1"
@@ -152,7 +146,9 @@
                     android:inputType="none"
                     android:dropDownHeight="@dimen/dropdown_height"
                     android:text="@string/category"
-                    android:textSize="@dimen/text_size_14" />
+                    android:focusable='false'
+                    android:cursorVisible='false'
+                    android:textSize="@dimen/text_size_11" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,7 +157,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_48"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toStartOf="@id/til_time_of_recipe"
                 app:layout_constraintHorizontal_weight="1"
@@ -172,11 +168,12 @@
                     android:id="@+id/actv_number_of_people"
                     android:layout_width="match_parent"
                     android:dropDownHeight="@dimen/dropdown_height"
+                    android:focusable='false'
+                    android:cursorVisible='false'
                     android:layout_height="match_parent"
                     android:inputType="none"
                     android:text="@string/time_title"
-
-                    android:textSize="@dimen/text_size_14" />
+                    android:textSize="@dimen/text_size_11"  />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,7 +182,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_48"
                 android:layout_marginEnd="@dimen/margin_10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
@@ -196,10 +193,13 @@
                     android:id="@+id/actv_time_of_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textSize="@dimen/text_size_11"
                     android:inputType="none"
                     android:text="@string/number_of_person"
+                    android:focusable='false'
+                    android:cursorVisible='false'
                     android:dropDownHeight="@dimen/dropdown_height"
-                    android:textSize="@dimen/text_size_14" />
+                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
