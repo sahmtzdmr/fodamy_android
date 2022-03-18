@@ -67,6 +67,8 @@
     <string name="number_of_person">- Kişilik</string>
     <string name="category">Kategori</string>
     <string name="add_recipe">Tarif Ekle</string>
+    <string name="permission">Permission needed for gallery</string>
+    <string name="give_permission">Give Permission</string>
 
 
 </resources>

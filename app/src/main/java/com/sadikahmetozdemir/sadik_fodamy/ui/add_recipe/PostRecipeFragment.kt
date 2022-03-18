@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentPostRecipeBinding
@@ -73,10 +74,15 @@ class PostRecipeFragment :
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
-//                Snackbar.make(view, "Permission needed for gallery", Snackbar.LENGTH_INDEFINITE).setAction("Give Permission",
-//                    View.OnClickListener {
-//                        permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-//                    }).show()
+                view?.let {
+                    Snackbar.make(it, getString(R.string.permission), Snackbar.LENGTH_INDEFINITE)
+                        .setAction(
+                            getString(R.string.give_permission),
+                            View.OnClickListener {
+                                permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            }
+                        ).show()
+                }
             } else {
                 permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
