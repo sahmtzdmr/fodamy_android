@@ -71,6 +71,7 @@
     <dimen name="margin_23">23dp</dimen>
     <dimen name="margin_68">68dp</dimen>
     <dimen name="margin_64">64dp</dimen>
+    <dimen name="dropdown_height">200dp</dimen>
 
 
 </resources>

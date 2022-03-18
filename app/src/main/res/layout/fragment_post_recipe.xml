@@ -150,6 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="none"
+                    android:dropDownHeight="@dimen/dropdown_height"
                     android:text="@string/category"
                     android:textSize="@dimen/text_size_14" />
 
@@ -170,6 +171,7 @@
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/actv_number_of_people"
                     android:layout_width="match_parent"
+                    android:dropDownHeight="@dimen/dropdown_height"
                     android:layout_height="match_parent"
                     android:inputType="none"
                     android:text="@string/time_title"
@@ -196,6 +198,7 @@
                     android:layout_height="match_parent"
                     android:inputType="none"
                     android:text="@string/number_of_person"
+                    android:dropDownHeight="@dimen/dropdown_height"
                     android:textSize="@dimen/text_size_14" />
 
             </com.google.android.material.textfield.TextInputLayout>
