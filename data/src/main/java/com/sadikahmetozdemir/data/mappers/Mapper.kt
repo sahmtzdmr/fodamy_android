@@ -3,6 +3,7 @@ package com.sadikahmetozdemir.data.mappers
 import com.sadikahmetozdemir.data.shared.local.ImagesModel
 import com.sadikahmetozdemir.data.shared.local.NumberOfPersonModel
 import com.sadikahmetozdemir.data.shared.local.PaginationModel
+import com.sadikahmetozdemir.data.shared.local.PostRecipeModel
 import com.sadikahmetozdemir.data.shared.local.TimeOfRecipeModel
 import com.sadikahmetozdemir.data.shared.local.User
 import com.sadikahmetozdemir.data.shared.local.UserImageModel
@@ -21,6 +22,7 @@ import com.sadikahmetozdemir.domain.entities.CommentResponse
 import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.Logout
 import com.sadikahmetozdemir.domain.entities.Pagination
+import com.sadikahmetozdemir.domain.entities.PostRecipe
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.RegisterRequest
 import com.sadikahmetozdemir.domain.entities.UserProfile
@@ -48,9 +50,9 @@ fun LoginResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Lo
 
 fun ImagesModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Images =
     com.sadikahmetozdemir.domain.entities.Images(
-        height = this.height?:0,
-        url = this.url?:"",
-        width = this.width?:0
+        height = this.height ?: 0,
+        url = this.url ?: "",
+        width = this.width ?: 0
 
     )
 
@@ -73,19 +75,19 @@ fun RegisterResponseModel.toDomainModel(): com.sadikahmetozdemir.domain.entities
 fun NumberOfPersonModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.NumberOfPerson =
     com.sadikahmetozdemir.domain.entities.NumberOfPerson(
         id = this.id,
-        text = this.text?:""
+        text = this.text ?: ""
     )
 
 fun TimeOfRecipeModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.TimeOfRecipe =
     com.sadikahmetozdemir.domain.entities.TimeOfRecipe(
         id = this.id,
-        text = this.text?:""
+        text = this.text ?: ""
     )
 
 fun CategoryModel.toDomainModel(): com.sadikahmetozdemir.domain.entities.Category =
     com.sadikahmetozdemir.domain.entities.Category(
         id = this.id,
-        name = this.name?:"",
+        name = this.name ?: "",
         image = this.image?.toDomainModel(),
         recipes = this.recipes?.map { it.toDomaninModel() }
 
@@ -176,6 +178,19 @@ fun UserProfileModel.toDomainModel(): UserProfile =
         likesCount = this.likesCount,
         recipeCount = this.recipeCount,
         username = this.username
+    )
+
+fun PostRecipeModel.toDomainModel(): PostRecipe =
+    PostRecipe(
+        title = this.title,
+        ingredients = this.ingredients,
+        directions = this.directions,
+        categoryID = this.categoryID.toDomainModel(),
+        numberOfPersonID = this.numberOfPersonID.toDomainModel(),
+        timeOfRecipeID = this.timeOfRecipeID.toDomainModel(),
+        image = this.image
+
+
     )
 
 

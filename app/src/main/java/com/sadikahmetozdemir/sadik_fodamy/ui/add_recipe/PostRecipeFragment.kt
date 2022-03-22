@@ -16,6 +16,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.sadikahmetozdemir.domain.entities.Category
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentPostRecipeBinding
@@ -29,6 +32,24 @@ class PostRecipeFragment :
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         registerLauncher()
+        binding.apply {
+            actvCategory.setOnItemClickListener { parent, _, position, _ ->
+                val item =
+                    parent.getItemAtPosition(position) as Category
+                viewModel.categoryID = item.id
+            }
+            actvNumberOfPeople.setOnItemClickListener { parent, _, position, _ ->
+                val item =
+                    parent.getItemAtPosition(position) as NumberOfPerson
+                viewModel.numberOfPersonID = item.id
+            }
+            actvTimeOfRecipe.setOnItemClickListener { parent, _, position, _ ->
+                val item =
+                    parent.getItemAtPosition(position) as TimeOfRecipe
+                viewModel.timeOfRecipeNumber = item.id
+            }
+
+        }
         binding.ivFoodImage.setOnClickListener {
             selectImage()
         }
@@ -78,7 +99,7 @@ class PostRecipeFragment :
                     Snackbar.make(it, getString(R.string.permission), Snackbar.LENGTH_INDEFINITE)
                         .setAction(
                             getString(R.string.give_permission),
-                            View.OnClickListener {
+                            {
                                 permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                             }
                         ).show()
@@ -101,12 +122,14 @@ class PostRecipeFragment :
                     val intentFromResult = result.data
                     if (intentFromResult != null) {
                         val imageData = intentFromResult.data
+                        viewModel.image = imageData
                         try {
                             if (Build.VERSION.SDK_INT >= 28) {
                                 val source = ImageDecoder.createSource(
                                     requireActivity().contentResolver,
                                     imageData!!
                                 )
+
                                 selectedBitmap = ImageDecoder.decodeBitmap(source)
                                 binding.ivFoodImage.setImageBitmap(selectedBitmap)
                             } else {

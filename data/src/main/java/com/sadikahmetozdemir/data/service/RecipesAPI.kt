@@ -1,10 +1,10 @@
 package com.sadikahmetozdemir.data.service
 
+import com.sadikahmetozdemir.data.shared.local.PostRecipeModel
 import com.sadikahmetozdemir.data.shared.local.RecipeCategoryModel
 import com.sadikahmetozdemir.data.shared.local.RecipeServingModel
 import com.sadikahmetozdemir.data.shared.local.RecipeTimeModel
 import com.sadikahmetozdemir.data.shared.remote.BaseModel
-import com.sadikahmetozdemir.data.shared.remote.CategoryModel
 import com.sadikahmetozdemir.data.shared.remote.CommentModel
 import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
@@ -12,11 +12,16 @@ import com.sadikahmetozdemir.data.shared.remote.EditorChoiceResponseModel
 import com.sadikahmetozdemir.data.shared.remote.FavoritesResponseModel
 import retrofit2.Response
 import retrofit2.http.DELETE
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.io.File
 
 interface RecipesAPI {
 
@@ -88,4 +93,19 @@ interface RecipesAPI {
 
     @GET("api/category")
     suspend fun getRecipeCategory(): RecipeCategoryModel
+
+
+    @Multipart
+    @POST("api/recipe")
+    suspend fun postNewRecipe(
+        @Part("title") title: String,
+        @Part("ingredients") ingredients: String,
+        @Part("directions") direction: String,
+        @Part("category_id") categoryID: Int,
+        @Part("number_of_person_id") numberOfPersonID: Int,
+        @Part("time_of_recipe_id") timeOfRecipeID: Int,
+        @Part("images[0]") image: File
+    ): PostRecipeModel
+
+
 }
