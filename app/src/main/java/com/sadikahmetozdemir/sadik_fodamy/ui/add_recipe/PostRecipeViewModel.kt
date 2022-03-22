@@ -15,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PostRecipeViewModel @Inject constructor(
     private val feedRepository: FeedRepository,
-    private val dataHelperManager: DataHelperManager
 ) : BaseViewModel() {
     var timeOfRecipes = MutableLiveData<List<TimeOfRecipe>>()
     val numberOfRecipes = MutableLiveData<List<NumberOfPerson>>()
