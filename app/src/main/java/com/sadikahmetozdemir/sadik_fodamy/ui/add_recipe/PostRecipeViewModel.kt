@@ -1,8 +1,9 @@
+@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
-import com.sadikahmetozdemir.data.utils.DataHelperManager
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
@@ -60,7 +61,7 @@ class PostRecipeViewModel @Inject constructor(
         )
     }
 
-     fun postNewRecipe() {
+    fun postNewRecipe() {
         sendRequest(request = {
             feedRepository.postNewRecipeRequest(
                 title = title.value.toString(),
@@ -69,7 +70,8 @@ class PostRecipeViewModel @Inject constructor(
                 categoryID = categoryID ?: -1,
                 numberOfPersonID = numberOfPersonID ?: -1,
                 timeOfRecipeID = timeOfRecipeNumber ?: -1,
-                image =File(image?.path)
+                image = File(image?.path),
+
             )
         })
     }

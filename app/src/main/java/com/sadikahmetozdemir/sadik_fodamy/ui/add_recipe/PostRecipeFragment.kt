@@ -48,7 +48,6 @@ class PostRecipeFragment :
                     parent.getItemAtPosition(position) as TimeOfRecipe
                 viewModel.timeOfRecipeNumber = item.id
             }
-
         }
         binding.ivFoodImage.setOnClickListener {
             selectImage()
