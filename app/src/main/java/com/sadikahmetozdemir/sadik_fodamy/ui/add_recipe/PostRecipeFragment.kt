@@ -1,6 +1,7 @@
 package com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ArrayAdapter
@@ -23,7 +25,12 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentPostRecipeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class PostRecipeFragment :
@@ -121,7 +128,6 @@ class PostRecipeFragment :
                     val intentFromResult = result.data
                     if (intentFromResult != null) {
                         val imageData = intentFromResult.data
-                        viewModel.image = imageData
                         try {
                             if (Build.VERSION.SDK_INT >= 28) {
                                 val source = ImageDecoder.createSource(
@@ -130,6 +136,12 @@ class PostRecipeFragment :
                                 )
 
                                 selectedBitmap = ImageDecoder.decodeBitmap(source)
+                                val file=createTempFile()
+                                selectedBitmap?.let {
+                                    convertBitmapToFile(file,it)
+                                    viewModel.image=file
+                                }
+
                                 binding.ivFoodImage.setImageBitmap(selectedBitmap)
                             } else {
                                 selectedBitmap = MediaStore.Images.Media.getBitmap(
@@ -156,5 +168,32 @@ class PostRecipeFragment :
                     // Toast
                 }
             }
+    }
+    private fun convertBitmapToFile(destination: File, bitmap: Bitmap) {
+        // scope
+        destination.createNewFile()
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos)
+        val bitmapData = bos.toByteArray()
+
+        val fos = FileOutputStream(destination)
+        try {
+            fos.write(bitmapData)
+            fos.flush()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        } finally {
+            fos.close()
+        }
+    }
+    @SuppressLint("SimpleDateFormat")
+    private fun createTempFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", // prefix
+            ".jpg", // suffix
+            storageDir // directory
+        )
     }
 }

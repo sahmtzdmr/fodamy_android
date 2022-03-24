@@ -21,7 +21,7 @@ class PostRecipeViewModel @Inject constructor(
     val numberOfRecipes = MutableLiveData<List<NumberOfPerson>>()
     var timeOfRecipeNumber: Int? = null
     var numberOfPersonID: Int? = null
-    var image: Uri? = null
+    var image: File? = null
     var categoryID: Int? = null
     val category = MutableLiveData<List<Category>>()
     val title = MutableLiveData("")
@@ -70,7 +70,7 @@ class PostRecipeViewModel @Inject constructor(
                 categoryID = categoryID ?: -1,
                 numberOfPersonID = numberOfPersonID ?: -1,
                 timeOfRecipeID = timeOfRecipeNumber ?: -1,
-                image = File(),
+                image =image!!,
 
                 )
         }, success = {
