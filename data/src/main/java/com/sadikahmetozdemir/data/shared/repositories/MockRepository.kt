@@ -184,7 +184,7 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
         numberOfPersonID: Int,
         timeOfRecipeID: Int,
         image: File
-    ): PostRecipe {
+    ): Recipe {
         TODO("Not yet implemented")
     }
 

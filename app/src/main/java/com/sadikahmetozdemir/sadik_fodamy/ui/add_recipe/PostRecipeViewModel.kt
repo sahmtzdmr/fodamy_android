@@ -70,9 +70,11 @@ class PostRecipeViewModel @Inject constructor(
                 categoryID = categoryID ?: -1,
                 numberOfPersonID = numberOfPersonID ?: -1,
                 timeOfRecipeID = timeOfRecipeNumber ?: -1,
-                image = File(image?.path),
+                image = File(),
 
-            )
+                )
+        }, success = {
+            it
         })
     }
 }

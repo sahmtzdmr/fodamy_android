@@ -18,7 +18,6 @@ import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
-import com.sadikahmetozdemir.domain.entities.PostRecipe
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
@@ -234,7 +233,7 @@ class DefaultFeedRepository @Inject constructor(
         numberOfPersonID: Int,
         timeOfRecipeID: Int,
         image: File
-    ): PostRecipe {
+    ): Recipe {
         return execute {
             recipesAPI.postNewRecipe(
                 title,
@@ -244,7 +243,7 @@ class DefaultFeedRepository @Inject constructor(
                 numberOfPersonID,
                 timeOfRecipeID,
                 image
-            ).toDomainModel()
+            ).toDomaninModel()
         }
     }
 

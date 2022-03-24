@@ -104,8 +104,8 @@ interface RecipesAPI {
         @Part("category_id") categoryID: Int,
         @Part("number_of_person_id") numberOfPersonID: Int,
         @Part("time_of_recipe_id") timeOfRecipeID: Int,
-        @Part("images[0]") image: File
-    ): PostRecipeModel
+        @Part("images") image: File
+    ): EditorChoiceModel
 
 
 }

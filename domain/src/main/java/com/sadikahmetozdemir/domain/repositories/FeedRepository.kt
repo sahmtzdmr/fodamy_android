@@ -42,6 +42,6 @@ interface FeedRepository {
         numberOfPersonID: Int,
         timeOfRecipeID: Int,
         image: File
-    ): PostRecipe
+    ): Recipe
 
 }
