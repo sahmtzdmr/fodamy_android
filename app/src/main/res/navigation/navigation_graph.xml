@@ -12,10 +12,15 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_introFragment"
-            app:destination="@id/introFragment" />
+            app:destination="@id/introFragment"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@id/toHomeFragment"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_graph"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
