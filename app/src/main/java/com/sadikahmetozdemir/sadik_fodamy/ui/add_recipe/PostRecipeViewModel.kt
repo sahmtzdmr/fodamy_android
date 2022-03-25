@@ -2,7 +2,6 @@
 
 package com.sadikahmetozdemir.sadik_fodamy.ui.add_recipe
 
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
@@ -70,11 +69,11 @@ class PostRecipeViewModel @Inject constructor(
                 categoryID = categoryID ?: -1,
                 numberOfPersonID = numberOfPersonID ?: -1,
                 timeOfRecipeID = timeOfRecipeNumber ?: -1,
-                image =image!!,
+                image = image!!,
 
-                )
+            )
         }, success = {
-            it
+            showMessage(it.title.toString() + " Eklendi.")
         })
     }
 }

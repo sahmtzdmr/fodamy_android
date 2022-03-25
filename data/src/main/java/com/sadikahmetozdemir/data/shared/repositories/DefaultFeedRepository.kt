@@ -23,6 +23,9 @@ import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -236,15 +239,27 @@ class DefaultFeedRepository @Inject constructor(
     ): Recipe {
         return execute {
             recipesAPI.postNewRecipe(
-                title,
-                ingredients,
-                direction,
-                categoryID,
-                numberOfPersonID,
-                timeOfRecipeID,
-                image
+                title = title,
+                ingredients = ingredients,
+                direction = direction,
+                categoryID = categoryID,
+                numberOfPersonID = numberOfPersonID,
+                timeOfRecipeID = timeOfRecipeID,
+                images = getMultipartFiles(image)
             ).toDomaninModel()
         }
+    }
+
+    private fun getMultipartFiles(source: File): MultipartBody.Part {
+        val reqFile =
+            source.asRequestBody("file".toMediaTypeOrNull())
+        val part =
+            MultipartBody.Part.createFormData(
+                "images[0]",
+                source.name,
+                reqFile
+            )
+        return part
     }
 
 

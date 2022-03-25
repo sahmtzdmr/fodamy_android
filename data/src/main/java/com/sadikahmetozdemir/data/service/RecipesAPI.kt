@@ -10,6 +10,7 @@ import com.sadikahmetozdemir.data.shared.remote.CommentResponseModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceModel
 import com.sadikahmetozdemir.data.shared.remote.EditorChoiceResponseModel
 import com.sadikahmetozdemir.data.shared.remote.FavoritesResponseModel
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.Field
@@ -104,7 +105,7 @@ interface RecipesAPI {
         @Part("category_id") categoryID: Int,
         @Part("number_of_person_id") numberOfPersonID: Int,
         @Part("time_of_recipe_id") timeOfRecipeID: Int,
-        @Part("images[0]") image: File
+        @Part images: MultipartBody.Part
     ): EditorChoiceModel
 
 

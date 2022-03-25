@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.NumberOfPerson
@@ -25,12 +26,14 @@ import com.sadikahmetozdemir.sadik_fodamy.R
 import com.sadikahmetozdemir.sadik_fodamy.base.BaseFragment
 import com.sadikahmetozdemir.sadik_fodamy.databinding.FragmentPostRecipeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 @AndroidEntryPoint
 class PostRecipeFragment :
@@ -136,10 +139,10 @@ class PostRecipeFragment :
                                 )
 
                                 selectedBitmap = ImageDecoder.decodeBitmap(source)
-                                val file=createTempFile()
+                                val file = createTempFile()
                                 selectedBitmap?.let {
-                                    convertBitmapToFile(file,it)
-                                    viewModel.image=file
+                                    convertBitmapToFile(file, it)
+                                    viewModel.image = file
                                 }
 
                                 binding.ivFoodImage.setImageBitmap(selectedBitmap)
@@ -169,23 +172,24 @@ class PostRecipeFragment :
                 }
             }
     }
-    private fun convertBitmapToFile(destination: File, bitmap: Bitmap) {
-        // scope
-        destination.createNewFile()
-        val bos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos)
-        val bitmapData = bos.toByteArray()
 
-        val fos = FileOutputStream(destination)
-        try {
-            fos.write(bitmapData)
-            fos.flush()
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        } finally {
-            fos.close()
+    private fun convertBitmapToFile(destination: File, bitmap: Bitmap) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            destination.createNewFile()
+            val bos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos)
+            val bitmapData = bos.toByteArray()
+            try {
+                val fos = FileOutputStream(destination)
+                fos.write(bitmapData)
+                fos.flush()
+                fos.close()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
         }
     }
+
     @SuppressLint("SimpleDateFormat")
     private fun createTempFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
