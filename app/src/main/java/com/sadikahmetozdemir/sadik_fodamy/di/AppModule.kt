@@ -31,7 +31,6 @@ import javax.inject.Singleton
 
 val mockFlag = false
 
-
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class ApplicationScope
@@ -59,7 +58,6 @@ object AppModule {
         } else {
             return DefaultFeedRepository(recipesAPI, recipeDao, commentDao, appDatabase)
         }
-
     }
 
     @Provides
@@ -73,7 +71,6 @@ object AppModule {
     fun provideCoroutineScope(): CoroutineScope {
         return CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
-
 
     @Provides
     @Singleton

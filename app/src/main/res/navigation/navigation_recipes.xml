@@ -5,10 +5,6 @@
     android:id="@+id/navigation_recipes"
     app:startDestination="@id/recipeDetailFragment">
     <include app:graph="@navigation/navigation_auth">
-
-    </include>
-    <include app:graph="@navigation/navigation_user">
-
     </include>
     <fragment
         android:id="@+id/recipeDetailFragment"
@@ -44,15 +40,20 @@
             app:destination="@id/commentDialogFragment" />
         <action
             android:id="@+id/toUserProfile"
-            app:destination="@id/navigation_user">
-            <argument
-                android:name="userId"
-                app:argType="integer" />
+            app:destination="@id/userDetailFragment">
+
         </action>
 
 
     </fragment>
-
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.sadikahmetozdemir.sadik_fodamy.ui.user.UserFragment"
+        android:label="UserFragment" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
     <dialog
         android:id="@+id/commentDialogFragment"
         android:name="com.sadikahmetozdemir.sadik_fodamy.ui.dialog.CommentDialogFragment"

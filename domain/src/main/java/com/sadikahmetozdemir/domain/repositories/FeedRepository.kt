@@ -4,8 +4,12 @@ import androidx.paging.PagingData
 import com.sadikahmetozdemir.domain.entities.BaseModel
 import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
+import com.sadikahmetozdemir.domain.entities.PostRecipe
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 
 
 interface FeedRepository {
@@ -27,5 +31,17 @@ interface FeedRepository {
     suspend fun getLastEditFromMediator(): Flow<PagingData<Recipe>>
     suspend fun getEditorChoicesFromMediator(): Flow<PagingData<Recipe>>
     suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>>
+    suspend fun getRecipeServing(): List<NumberOfPerson>
+    suspend fun getRecipeTime(): List<TimeOfRecipe>
+    suspend fun getRecipeCategory(): List<Category>
+    suspend fun postNewRecipeRequest(
+        title: String,
+        ingredients: String,
+        direction: String,
+        categoryID: Int,
+        numberOfPersonID: Int,
+        timeOfRecipeID: Int,
+        image: File
+    ): Recipe
 
 }

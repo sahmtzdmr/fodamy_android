@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -22,7 +21,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         createNotification(message)
         super.onMessageReceived(message)
     }
-
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
@@ -54,7 +52,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId, builder.build())
         }
-
     }
 
     companion object {
@@ -62,7 +59,5 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         const val CHANNEL_NAME = "Fodamy"
         const val TITLE = "title"
         const val BODY = "body"
-
-
     }
 }

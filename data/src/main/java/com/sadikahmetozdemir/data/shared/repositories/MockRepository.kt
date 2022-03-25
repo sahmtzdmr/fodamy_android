@@ -25,13 +25,17 @@ import com.sadikahmetozdemir.domain.entities.Comment
 import com.sadikahmetozdemir.domain.entities.LoginRequest
 import com.sadikahmetozdemir.domain.entities.LoginResponseModel
 import com.sadikahmetozdemir.domain.entities.Logout
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
+import com.sadikahmetozdemir.domain.entities.PostRecipe
 import com.sadikahmetozdemir.domain.entities.Recipe
 import com.sadikahmetozdemir.domain.entities.RegisterRequest
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.entities.UserProfile
 import com.sadikahmetozdemir.domain.repositories.AuthRepository
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import com.sadikahmetozdemir.domain.repositories.UserRepository
 import kotlinx.coroutines.flow.Flow
+import java.io.File
 import javax.inject.Inject
 
 class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
@@ -157,6 +161,30 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
     }
 
     override suspend fun getRecipeCommentFromMediator(recipeID: Int): Flow<PagingData<Comment>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getRecipeServing(): List<NumberOfPerson> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getRecipeTime(): List<TimeOfRecipe> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getRecipeCategory(): List<Category> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun postNewRecipeRequest(
+        title: String,
+        ingredients: String,
+        direction: String,
+        categoryID: Int,
+        numberOfPersonID: Int,
+        timeOfRecipeID: Int,
+        image: File
+    ): Recipe {
         TODO("Not yet implemented")
     }
 

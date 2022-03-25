@@ -15,11 +15,18 @@ import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.EditorChoiceR
 import com.sadikahmetozdemir.data.shared.local.dto.remotemediators.LastAddedRemoteMediator
 import com.sadikahmetozdemir.data.shared.repositories.BaseRepository
 import com.sadikahmetozdemir.domain.entities.BaseModel
+import com.sadikahmetozdemir.domain.entities.Category
 import com.sadikahmetozdemir.domain.entities.Comment
+import com.sadikahmetozdemir.domain.entities.NumberOfPerson
 import com.sadikahmetozdemir.domain.entities.Recipe
+import com.sadikahmetozdemir.domain.entities.TimeOfRecipe
 import com.sadikahmetozdemir.domain.repositories.FeedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -200,6 +207,59 @@ class DefaultFeedRepository @Inject constructor(
                 pagingData.map { it.toDomainModel() }
             }
         }
+    }
+
+    override suspend fun getRecipeServing(): List<NumberOfPerson> {
+        return execute {
+            recipesAPI.getRecipeServing().data.map { it.toDomainModel() }
+        }
+    }
+
+    override suspend fun getRecipeTime(): List<TimeOfRecipe> {
+        return execute {
+            recipesAPI.getRecipeTimes().data.map { it.toDomainModel() }
+        }
+    }
+
+    override suspend fun getRecipeCategory(): List<Category> {
+        return (execute {
+            recipesAPI.getRecipeCategory().data.map { it.toDomainModel() }
+
+        })
+    }
+
+    override suspend fun postNewRecipeRequest(
+        title: String,
+        ingredients: String,
+        direction: String,
+        categoryID: Int,
+        numberOfPersonID: Int,
+        timeOfRecipeID: Int,
+        image: File
+    ): Recipe {
+        return execute {
+            recipesAPI.postNewRecipe(
+                title = title,
+                ingredients = ingredients,
+                direction = direction,
+                categoryID = categoryID,
+                numberOfPersonID = numberOfPersonID,
+                timeOfRecipeID = timeOfRecipeID,
+                images = getMultipartFiles(image)
+            ).toDomaninModel()
+        }
+    }
+
+    private fun getMultipartFiles(source: File): MultipartBody.Part {
+        val reqFile =
+            source.asRequestBody("file".toMediaTypeOrNull())
+        val part =
+            MultipartBody.Part.createFormData(
+                "images[0]",
+                source.name,
+                reqFile
+            )
+        return part
     }
 
 

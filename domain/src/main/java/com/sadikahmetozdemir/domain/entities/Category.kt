@@ -9,4 +9,8 @@ data class Category(
     val name: String?,
     val image: Images?,
     val recipes: List<Recipe>?
-):Parcelable
+):Parcelable {
+    override fun toString(): String {
+        return name.toString()
+    }
+}
