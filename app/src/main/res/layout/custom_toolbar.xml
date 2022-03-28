@@ -63,13 +63,13 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="@{()->baseVM.backTo()}"
-                    android:paddingStart="@dimen/toolbar_padding"
+                    android:padding="@dimen/margin_5"
                     android:text="@string/Back"
                     android:textColor="@color/cardview_light_background"
                     android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_back"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
                 <ImageView
@@ -92,13 +92,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_extrabold"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textAllCaps="false"
+                    android:layout_marginEnd="@dimen/margin_48"
                     android:textColor="@color/cardview_light_background"
                     android:textSize="@dimen/text_size_13"
                     android:visibility="@{isVisible ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/iv_logout"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_back"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="asdasd" />
