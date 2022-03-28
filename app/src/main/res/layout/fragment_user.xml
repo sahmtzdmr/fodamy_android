@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.user.UserViewModel" />
+
+        <variable
+            name="user"
+            type="com.sadikahmetozdemir.domain.entities.UserProfile" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.user.UserFragment">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_start" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_start" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_user_image"
+                circleImageLoader="@{vM.user.image.url}"
+                android:layout_width="@dimen/user_iv_size"
+                android:layout_height="@dimen/user_iv_size"
+                android:layout_marginTop="@dimen/margin_16"
+                app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/home_user_icon" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview_default_elevation"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@{vM.user.username}"
+                android:textColor="@color/cinder"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/iv_user_image"
+                tools:text="username" />
+
+            <TextView
+                android:id="@+id/tv_follower"
+                followed_count="@{vM.user.followedCount}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintEnd_toStartOf="@id/tv_followed"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"
+                tools:text=" 5 Takipçi" />
+
+            <TextView
+                android:id="@+id/tv_followed"
+                following_count="@{vM.user.followingCount}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_16"
+                android:textSize="@dimen/text_size_16"
+                app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+                app:layout_constraintStart_toEndOf="@id/tv_follower"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"
+                tools:text="10 Takip Edilen" />
+
+            <TextView
+                android:id="@+id/tv_recipes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/recipes"
+                android:textColor="@color/cinder"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/tv_follower" />
+
+            <TextView
+                android:id="@+id/tv_recipe_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(vM.user.recipeCount)}"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/tv_recipes"
+                app:layout_constraintTop_toBottomOf="@id/tv_followed"
+                tools:text="12" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recipes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_likes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_recipes"
+                tools:listitem="@layout/favorites_child_item" />
+
+            <TextView
+                android:id="@+id/tv_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/liked_counts"
+                android:textColor="@color/cinder"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+                app:layout_constraintTop_toBottomOf="@id/rv_recipes" />
+
+            <TextView
+                android:id="@+id/tv_like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(vM.user.likesCount)}"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/tv_likes"
+                app:layout_constraintTop_toBottomOf="@id/rv_recipes"
+                tools:text="12" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_liked_recipes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_likes"
+                tools:listitem="@layout/favorites_child_item" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

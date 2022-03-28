@@ -1,3 +1,74 @@
 <resources>
     <string name="app_name">sadik_fodamy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_page">İlerle</string>
+    <string name="welcome">Welcome to Fodamy Network!</string>
+    <string name="firstInfo"> Fodamy is the best place to find your favorite recipes in all around the world.</string>
+    <string name="title2">Finding recipes were not that easy.</string>
+    <string name="title3">Add new recipe.</string>
+    <string name="button_start">Başla!</string>
+    <string name="title4">Share recipes with others.</string>
+    <string name="register">Üye Ol</string>>
+    <string name="name">Kullanıcı Adı</string>
+    <string name="email">E-mail Adresi</string>
+    <string name="password">Şifre</string>
+    <string name="sign_check">Hesabın mı var?</string>
+    <string name="sign_in">Giriş yap</string>
+    <string name="Repassword">Şifre Sıfırlama</string>
+    <string name="e_mail">E-mail Adresi</string>
+    <string name="repassword">Sıfırla</string>
+    <string name="forgot_password">Şifrenizi mi unuttunuz?</string>
+    <string name="comment">%1$d Yorum</string>
+    <string name="like">%1$d Beğeni</string>
+    <string name="recipe">%1$d Tarif</string>
+    <string name="follower">%1$d Takipçi</string>
+    <string name="Back">Geri</string>
+    <string name="follow">Takip Et</string>
+    <string name="add_comment">Yorum Ekle</string>
+    <string name="time">%1$d dakika önce</string>
+    <string name="ingredients_title"> Malzemeler</string>
+    <string name="see_all">TÜMÜNÜ GÖR</string>
+    <string name="alert_text">Giriş yapmanız gereklidir.</string>
+    <string name="cancel">Vazgeç</string>
+    <string name="following">Takip Ediliyor</string>
+    <string name="text_action">Tamam</string>
+    <string name="unfollow">Takibi Bırak</string>
+    <string name="cancel_bottom_sheet">İptal</string>
+    <string name="add_comments">Bir şey yaz…</string>
+    <string name="comments">YORUMLAR</string>
+    <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="save">Kaydet</string>
+    <string name="description">Yapılışı</string>
+    <string name="dk">dk</string>
+    <string name="comments_lower">Yorumlar</string>
+    <string name="validate_username">Kullanıcı adı kısmı boş bırakılamaz.</string>
+    <string name="validate_email">Email kısmı boş bırakılamaz.</string>
+    <string name="validate_password">Parola kısmı boş bırakılamaz.</string>
+    <string name="editor_choice">EDİTÖR SEÇİMİ</string>
+    <string name="last_added">SON EKLENENLER</string>
+    <string name="comment_added">Yorum Eklendi</string>
+    <string name="username">username</string>
+    <string name="following_count">%1d Takip Edilen</string>
+    <string name="recipes">Tarifler</string>
+    <string name="liked_counts">Beğeniler</string>
+    <string name="child_item_title">Köfte Tarifi</string>
+    <string name="no_comment">0 Yorum</string>
+    <string name="no_like">0 Beğeni</string>
+    <string name="null_recipe">0 Tarif</string>
+    <string name="no_follower">0 Takipçi</string>
+    <string name="food_title">Makarna Tarifi</string>
+    <string name="type_of_food">Hamur işi</string>
+    <string name="title"><font size="35">Başlık</font></string>
+    <string name="ingredients"><font size="35">Malzemeler </font></string>
+    <string name="directions"> <font size="35"> Yapılışı</font></string>
+    <string name="time_title">Pişirme Süresi</string>
+    <string name="number_of_person">Kişi Sayısı</string>
+    <string name="category">Kategori Seçiniz</string>
+    <string name="add_recipe">Tarif Ekle</string>
+    <string name="permission">Permission needed for gallery</string>
+    <string name="give_permission">Give Permission</string>
+
+
 </resources>

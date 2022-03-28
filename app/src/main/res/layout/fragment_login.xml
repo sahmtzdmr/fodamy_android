@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vM"
+            type="com.sadikahmetozdemir.sadik_fodamy.ui.login.LoginViewModel" />
+
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginFragment">
+
+        <TextView
+            android:id="@+id/textSignin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_93"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSignin">
+
+            <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_52"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:autofillHints="emailAddress"
+                android:background="@color/cardview_light_background"
+                android:drawableStart="@drawable/ic_mail_icon"
+                android:drawablePadding="@dimen/padding_10"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textEmailAddress"
+                android:text="@={vM.username}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:autofillHints="emailAddress"
+                android:background="@color/cardview_light_background"
+                android:drawableStart="@drawable/ic_password_icon"
+                android:drawablePadding="@dimen/padding_10"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="@={vM.password}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLogin"
+            style="@style/PrimaryButtonLarge.Fodamy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_15"
+            android:onClick="@{()->vM.sendLoginRequest()}"
+            android:text="@string/sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
+        <TextView
+            android:id="@+id/textForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_9"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/nunito_semibold"
+            android:onClick="@{()->vM.goForgotPassword()}"
+            android:text="@string/forgot_password"
+            android:textSize="@dimen/text_size_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
+
+
+        <TextView
+            android:id="@+id/textSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:text="@string/sign_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/nunito_bold"
+            android:onClick="@{()->vM.goRegister()}"
+            android:text="@string/register"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textSign" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
+
+
+
+

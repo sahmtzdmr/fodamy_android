@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="@dimen/user_image_size"
+        android:layout_height="@dimen/user_image_size"
+        android:background="@color/primary"
+        android:src="@drawable/fodamy_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="@color/cinder"
+        android:textSize="@dimen/text_size_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/iv_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="title" />
+
+    <TextView
+        android:id="@+id/tv_food_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/iv_logo"
+        app:layout_constraintTop_toBottomOf="@id/tv_notification"
+        tools:text="desription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
