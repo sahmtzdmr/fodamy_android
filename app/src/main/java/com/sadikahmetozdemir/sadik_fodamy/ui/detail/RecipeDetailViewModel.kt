@@ -25,22 +25,22 @@ class RecipeDetailViewModel @Inject constructor(
     private var recipeID: Int = savedStateHandle.get(RECIPE_ID) ?: 0
 
     init {
-        getRecipeDetail()
-        getRecipeDetailComment()
+        fetchRecipeDetail()
+        fetchRecipeDetailComment()
     }
 
-    private fun getRecipeDetail() {
+    private fun fetchRecipeDetail() {
         sendRequest(
-            request = { feedRepository.getRecipeDetail(recipeID) },
+            request = { feedRepository.fetchRecipeDetail(recipeID) },
             success = {
                 recipeDetail.postValue(it)
             }
         )
     }
 
-    private fun getRecipeDetailComment() {
+    private fun fetchRecipeDetailComment() {
         sendRequest(
-            request = { feedRepository.getRecipeDetailComment(recipeID) },
+            request = { feedRepository.fetchRecipeDetailComment(recipeID) },
             success = { recipeDetailComment.postValue(it) }
         )
     }
@@ -66,7 +66,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 )
                             }
                         )
-                        getRecipeDetail()
+                        fetchRecipeDetail()
                     }
                 )
             }
@@ -94,7 +94,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 )
                             }
                         )
-                        getRecipeDetail()
+                        fetchRecipeDetail()
                     }
                 )
             }
@@ -108,7 +108,7 @@ class RecipeDetailViewModel @Inject constructor(
             } else {
                 sendRequest(
                     request = { feedRepository.userFollowRequest(followId) },
-                    success = { getRecipeDetail() }
+                    success = { fetchRecipeDetail() }
                 )
             }
         }
@@ -137,7 +137,7 @@ class RecipeDetailViewModel @Inject constructor(
                                 }
                             }
                         )
-                        getRecipeDetail()
+                        fetchRecipeDetail()
                     }
                 )
             }

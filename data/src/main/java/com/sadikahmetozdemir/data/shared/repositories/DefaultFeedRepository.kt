@@ -67,7 +67,7 @@ class DefaultFeedRepository @Inject constructor(
         }
 
 
-    override suspend fun getRecipeDetail(recipeID: Int): Recipe {
+    override suspend fun fetchRecipeDetail(recipeID: Int): Recipe {
         return execute {
             val local =
                 fetchFromLocal { recipeDao.getRecipeDetails(recipeID).toDomainModel() }
@@ -81,7 +81,7 @@ class DefaultFeedRepository @Inject constructor(
     }
 
 
-    override suspend fun getRecipeDetailComment(recipeID: Int): Comment {
+    override suspend fun fetchRecipeDetailComment(recipeID: Int): Comment {
         return execute {
             recipesAPI.recipeDetailsCommentRequest(recipeID)
                 .toDomainModel().data?.get(0)!!

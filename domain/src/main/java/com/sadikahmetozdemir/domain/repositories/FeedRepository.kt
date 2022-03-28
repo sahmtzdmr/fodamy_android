@@ -16,8 +16,8 @@ interface FeedRepository {
 
     suspend fun feedRequest(page: Int = 1): List<Recipe>
     suspend fun lastAddedRequest(page: Int = 1): List<Recipe>
-    suspend fun getRecipeDetail(recipeID: Int): Recipe
-    suspend fun getRecipeDetailComment(recipeID: Int): Comment
+    suspend fun fetchRecipeDetail(recipeID: Int): Recipe
+    suspend fun fetchRecipeDetailComment(recipeID: Int): Comment
     suspend fun favoriteRecipesRequest(page: Int = 1): List<Category>
     suspend fun favoriteCategoriesRequest(categoryID: Int, page: Int = 1): List<Recipe>
     suspend fun userRecipeLikeRequest(recipeID: Int): BaseModel

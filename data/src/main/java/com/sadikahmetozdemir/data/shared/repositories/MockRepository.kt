@@ -77,14 +77,14 @@ class MockRepository @Inject constructor(private val jsonReader: JsonReader) :
         })
     }
 
-    override suspend fun getRecipeDetail(recipeID: Int): Recipe {
+    override suspend fun fetchRecipeDetail(recipeID: Int): Recipe {
         return execute {
             val jsonData = jsonReader.readJson(FEED_RECIPE_SUCCESS)
             fromJson<EditorChoiceModel>(jsonData).toDomaninModel()
         }
     }
 
-    override suspend fun getRecipeDetailComment(recipeID: Int): Comment {
+    override suspend fun fetchRecipeDetailComment(recipeID: Int): Comment {
         return execute {
             val jsonData = jsonReader.readJson(RECIPE_COMMENTS_SUCCESS)
             fromJson<CommentModel>(jsonData).toDomainModel()
