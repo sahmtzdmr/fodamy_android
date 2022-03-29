@@ -14,4 +14,13 @@ A recipes for who needs it.
 I used modular architecture for clean architecture.Also I separated user and background processes using MVVM.
 Inside the data module I have dto and data classes.
 
+## Jetpack Libraries
 
+- Paging 3
+- Retrofit
+- Dagger Hilt
+- Glide
+- Room
+- Navigation Component
+- Material Design
+- Ktlint
