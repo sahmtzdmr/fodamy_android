@@ -15,7 +15,6 @@ I used modular architecture for clean architecture.Also I separated user and bac
 Inside the data module I have dto and data classes.
 
 ## Tech Stack
-==========
 
 List of the technologies that i use in app.
 
