@@ -8,5 +8,5 @@ A recipes for who needs it.
 
 ## Clean Architecture
 
-<img src="images/layers.png" height="500"/>
-<img src="images/mvvm.jpg" height="400" width="500"/>
+<img src="images/architecture_design.png"/>
+
