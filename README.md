@@ -10,3 +10,6 @@ A recipes for who needs it.
 
 <img src="images/architecture_design.png" height="500" width="500"/>
 
+
+I used modular architecture for clean architecture.Also I separated user and background processes using MVVM.
+
