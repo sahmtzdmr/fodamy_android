@@ -38,7 +38,6 @@ Libraries
 - [Retrofit](https://square.github.io/retrofit/)
 - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Glide](https://github.com/bumptech/glide)
-- 
 
 Tools
 -----
