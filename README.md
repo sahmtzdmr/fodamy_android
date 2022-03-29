@@ -12,4 +12,6 @@ A recipes for who needs it.
 
 
 I used modular architecture for clean architecture.Also I separated user and background processes using MVVM.
+Inside the data module I have dto and data classes.
+
 
