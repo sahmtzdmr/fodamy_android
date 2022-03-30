@@ -87,6 +87,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/view_divider"
+            android:paddingBottom="@dimen/margin_11"
             tools:text="asdasdsad" />
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.sadikahmetozdemir.sadik_fodamy.utils.extensions.StringExKt" />
 
         <import type="android.view.View" />
@@ -22,17 +23,16 @@
         android:orientation="vertical">
 
         <include
-            app:title="@{vM.recipeDetail.title}"
             android:id="@+id/toolbar"
             layout="@layout/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:baseVM="@{vM}"
-            app:setIcon="@{false}"
             app:isVisible="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:setIcon="@{false}"
+            app:title="@{vM.recipeDetail.title}" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -221,12 +221,12 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginTop="15dp"
-                            android:layout_marginBottom="@dimen/margin_start"
                             android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="@dimen/margin_start"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/barrier"
                             app:layout_constraintStart_toStartOf="@id/guideline1Left"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             tools:src="@drawable/walkthrough_image_3" />
 
 
@@ -478,6 +478,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+                            android:layout_marginBottom="@dimen/margin_11"
                             android:text="@{vM.recipeDetailComment.text}"
                             app:layout_constraintEnd_toStartOf="@id/guidelineRight"
                             app:layout_constraintHorizontal_bias="0"
@@ -497,8 +498,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_start"
-                    android:text="@string/add_comment"
                     android:onClick="@{()->vM.toCommentsScreen()}"
+                    android:text="@string/add_comment"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/material_cardview_comments" />
 
