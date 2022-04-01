@@ -101,6 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_9"
+            android:layout_marginEnd="@dimen/margin_15"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/nunito_semibold"
