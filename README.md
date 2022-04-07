@@ -28,6 +28,9 @@ Libraries
 
 - [Android Jetpack](https://developer.android.com/jetpack/)
     - Data Binding
+    - [AndroidX](https://developer.android.com/jetpack/androidx)
+    - [Data-Binding](https://developer.android.com/topic/libraries/data-binding)
+    - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
     - Lifecycles
     - LiveData
     - Room
@@ -37,6 +40,8 @@ Libraries
 - [Retrofit](https://square.github.io/retrofit/)
 - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Glide](https://github.com/bumptech/glide)
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
+- [Firebase-Crashlytics](https://firebase.google.com/docs/crashlytics/get-started?platform=android)
 
 Tools
 -----
