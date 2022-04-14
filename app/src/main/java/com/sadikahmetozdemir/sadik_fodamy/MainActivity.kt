@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
             R.id.favoritesCategoriesFragment,
             R.id.favoritesFragment,
             R.id.recipeDetailFragment,
-            R.id.userFragment
+            R.id.userFragment,
+            R.id.postRecipeFragment
+
         ).contains(id)
     }
 }
